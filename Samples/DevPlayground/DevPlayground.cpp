@@ -7,5 +7,5 @@ class DevPlayground : public Phanes::Core::Application::PhanesGame {};
 
 Phanes::Core::Application::PhanesGame* Phanes::Core::Application::CreatePhanesGame()
 {
-	return new DevPlayground();
+  return new DevPlayground();
 }

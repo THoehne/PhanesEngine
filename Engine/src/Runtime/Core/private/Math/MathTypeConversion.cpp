@@ -7,26 +7,26 @@
 
 template<RealType T>
 std::string Phanes::Core::Math::ToString(const Phanes::Core::Math::TVector2<T>& v) {
-	return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ")";
+  return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ")";
 }
 
 template<IntType T>
 std::string Phanes::Core::Math::ToString(const TIntVector2<T>& v)
 {
-	return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ")";
+  return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ")";
 }
 
 template<RealType T>
 std::string Phanes::Core::Math::ToString(const Phanes::Core::Math::TVector3<T>& v) {
-	return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
+  return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
 }
 
 template<IntType T>
 std::string Phanes::Core::Math::ToString(const TIntVector3<T>& v)
 {
-	std::to_string(3);
+  std::to_string(3);
 
-	return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
+  return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
 }
 
 //template<typename T>

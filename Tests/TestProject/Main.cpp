@@ -4,9 +4,9 @@ namespace PMath = Phanes::Core::Math;
 
 int main()
 {
-	float t = 2;
-	PMath::Clamp(t, 2.0f, 4.0f);
+  float t = 2;
+  PMath::Clamp(t, 2.0f, 4.0f);
 
 
-	return 0;
+  return 0;
 }

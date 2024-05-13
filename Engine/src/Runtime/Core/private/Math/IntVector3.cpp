@@ -177,8 +177,6 @@ bool Phanes::Core::Math::operator!=(const TIntVector3<T>& v1, const TIntVector3<
 //   TIntVector3 function implementation   //
 // ======================================= //
 
-
-
 template<IntType T, RealType Rt>
 Rt Phanes::Core::Math::Magnitude(const TIntVector3<T>& v1)
 {

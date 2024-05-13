@@ -21,76 +21,76 @@
 
 namespace Phanes::Core::Math {
 
-	/**
-		* Clamps a value between minimum and maximum
-		*
-		* @param value Value to clamp
-		* @param low Minimum
-		* @param high Maximum
-		*
-		* @return Minimum, if value is to small / Maximum, if value is to large / value, if value is in range.
-		*/
+  /**
+    * Clamps a value between minimum and maximum
+    *
+    * @param value Value to clamp
+    * @param low Minimum
+    * @param high Maximum
+    *
+    * @return Minimum, if value is to small / Maximum, if value is to large / value, if value is in range.
+    */
 
-	template<typename T>
-	T Clamp(T value, T low, T high);
-
-
-	/**
-		* Gets the larger of two values
-		*
-		* @param x
-		* @param y
-		*
-		* @return Larger value
-		*/
-
-	template<typename T>
-	inline T Max(T x, T y);
+  template<typename T>
+  T Clamp(T value, T low, T high);
 
 
-	/**
-		* Gets the smaller of two values
-		* 
-		* @param x
-		* @param y
-		* 
-		* @return Smaller value
-		*/
+  /**
+    * Gets the larger of two values
+    *
+    * @param x
+    * @param y
+    *
+    * @return Larger value
+    */
 
-	template<typename T>
-	inline T Min(T x, T y);
-
-	/**
-		* Swaps the values of two variables
-		* 
-		* @param x 
-		* @param y
-		*/
-
-	template<typename T>	
-	inline void Swap(T& x, T& y);
-
-	/**
-		* Test two numbers for equality
-		* 
-		* @param x 
-		*/
-	template<typename T>
-	bool Equals(T x, T y, T threshold = P_FLT_INAC);
-
-	/**
-		* Calculates the reciprocal of the square root of n using the algorithm of A Quake III
-		* 
-		* @param n Number to calculate
-		* 
-		* @return Inverse square root of n 
-		* 
-		* @note a simple 1.0f / sqrtf(x) is faster than this algorithm. Use for research purpose only.
-		*/
+  template<typename T>
+  inline T Max(T x, T y);
 
 
-	template<typename T>
-	float FastInvSqrt(T n);
+  /**
+    * Gets the smaller of two values
+    * 
+    * @param x
+    * @param y
+    * 
+    * @return Smaller value
+    */
+
+  template<typename T>
+  inline T Min(T x, T y);
+
+  /**
+    * Swaps the values of two variables
+    * 
+    * @param x 
+    * @param y
+    */
+
+  template<typename T>	
+  inline void Swap(T& x, T& y);
+
+  /**
+    * Test two numbers for equality
+    * 
+    * @param x 
+    */
+  template<typename T>
+  bool Equals(T x, T y, T threshold = P_FLT_INAC);
+
+  /**
+    * Calculates the reciprocal of the square root of n using the algorithm of A Quake III
+    * 
+    * @param n Number to calculate
+    * 
+    * @return Inverse square root of n 
+    * 
+    * @note a simple 1.0f / sqrtf(x) is faster than this algorithm. Use for research purpose only.
+    */
+
+
+  template<typename T>
+  float FastInvSqrt(T n);
 
 
 } // phanes

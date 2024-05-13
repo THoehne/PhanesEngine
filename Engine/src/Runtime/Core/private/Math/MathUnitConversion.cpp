@@ -2,6 +2,7 @@
 
 #include "Core/public/Math/MathUnitConversion.h"
 
+
 template<RealType T>
 inline T Phanes::Core::Math::UnitConversion::DegToRad(T deg)
 {

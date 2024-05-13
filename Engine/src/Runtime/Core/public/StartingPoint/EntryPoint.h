@@ -7,11 +7,11 @@ extern Phanes::Core::Application::PhanesGame* Phanes::Core::Application::CreateP
 
 int main(int argc, char** argv)
 {
-	auto phanes_game = Phanes::Core::Application::CreatePhanesGame();
+  auto phanes_game = Phanes::Core::Application::CreatePhanesGame();
 
-	phanes_game->Run();
+  phanes_game->Run();
 
-	delete phanes_game;
+  delete phanes_game;
 }
 
 #endif

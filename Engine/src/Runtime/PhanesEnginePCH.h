@@ -6,22 +6,22 @@
 #define NOMAXMIN
 
 #ifndef PHANES_CORE_PCH_H
-	
+  
 
 
 
-	#include <cmath>
-	#include <stdint.h>
-	#include <vector>	
-	#include <concepts>
-	#include <type_traits>
-	#include <string>
+  #include <cmath>
+  #include <stdint.h>
+  #include <vector>	
+  #include <concepts>
+  #include <type_traits>
+  #include <string>
 
-	#ifdef P_WIN_BUILD 
+  #ifdef P_WIN_BUILD 
 
-		#include <windows.h>
+    #include <windows.h>
 
-	#endif
+  #endif
 
 
 #endif // !PHANES_CORE_PCH_H

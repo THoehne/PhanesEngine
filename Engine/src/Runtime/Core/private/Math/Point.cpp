@@ -12,7 +12,7 @@
 template<RealType T>
 T Phanes::Core::Math::Distance(const TPoint2<T>& p1, const TPoint2<T>& p2)
 {
-	return Magnitude(p2 - p1);
+  return Magnitude(p2 - p1);
 }
 
 
@@ -21,7 +21,7 @@ T Phanes::Core::Math::Distance(const TPoint2<T>& p1, const TPoint2<T>& p2)
 template<RealType T>
 T Phanes::Core::Math::Distance(const TPoint3<T>& p1, const TPoint3<T>& p2)
 {
-	return Magnitude(p2 - p1);
+  return Magnitude(p2 - p1);
 }
 
 

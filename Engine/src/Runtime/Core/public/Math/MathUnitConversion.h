@@ -11,111 +11,111 @@
 namespace Phanes::Core::Math::UnitConversion 
 {
 
-	/**
-		* Converts degrees to radians.
-		*
-		* @param(deg) Angle in degress (°)
-		*
-		* @return Angle in radians
-		*/
+  /**
+    * Converts degrees to radians.
+    *
+    * @param(deg) Angle in degress (°)
+    *
+    * @return Angle in radians
+    */
 
-	template<RealType T>
-	inline T DegToRad(T deg);
+  template<RealType T>
+  inline T DegToRad(T deg);
 
-	/**
-		* Converts radians to degrees.
-		*
-		* @param(rad) Angle in radians (rad)
-		*
-		* @return Angle in degrees
-		*/
+  /**
+    * Converts radians to degrees.
+    *
+    * @param(rad) Angle in radians (rad)
+    *
+    * @return Angle in degrees
+    */
 
-	template<RealType T>
-	inline T RadToDeg(T rad);
+  template<RealType T>
+  inline T RadToDeg(T rad);
 
-	/**
-		* Converts degrees to gradian.
-		*
-		* @param(deg) Angle in degress (°)
-		*
-		* @return Angle in gradian
-		*/
+  /**
+    * Converts degrees to gradian.
+    *
+    * @param(deg) Angle in degress (°)
+    *
+    * @return Angle in gradian
+    */
 
-	template<RealType T>
-	inline T DegToGradian(T deg);
+  template<RealType T>
+  inline T DegToGradian(T deg);
 
-	/**
-		* Converts gradian to degrees.
-		*
-		* @param(rad) Angle in gradians (g)
-		*
-		* @return Angle in degrees
-		*/
+  /**
+    * Converts gradian to degrees.
+    *
+    * @param(rad) Angle in gradians (g)
+    *
+    * @return Angle in degrees
+    */
 
-	template<RealType T>
-	inline T GradianToDeg(T g);
+  template<RealType T>
+  inline T GradianToDeg(T g);
 
-	/**
-		* Converts radians to gradians.
-		*
-		* @param(deg) Angle in radians (rad)
-		*
-		* @return Angle in gradians
-		*/
+  /**
+    * Converts radians to gradians.
+    *
+    * @param(deg) Angle in radians (rad)
+    *
+    * @return Angle in gradians
+    */
 
-	template<RealType T>
-	inline T RadToGradian(T rad);
+  template<RealType T>
+  inline T RadToGradian(T rad);
 
-	/**
-		* Converts gradian to radians.
-		*
-		* @param(rad) Angle in gradians (g)
-		*
-		* @return Angle in radians
-		*/
+  /**
+    * Converts gradian to radians.
+    *
+    * @param(rad) Angle in gradians (g)
+    *
+    * @return Angle in radians
+    */
 
-	template<RealType T>
-	inline T GradianToRad(T g);
+  template<RealType T>
+  inline T GradianToRad(T g);
 
 } // phanes::core::math::typeconversion
 
 
 namespace Phanes::Core::Math::UnitLiterals
 {
-	// ============================================== //
-	//   unit conversion with user-defined literals   //
-	// ============================================== //
+  // ============================================== //
+  //   unit conversion with user-defined literals   //
+  // ============================================== //
 
-	/**
-	 * Convert deg to rad.
-	 *
-	 * @param(_x) Angle in degress
-	 */
+  /**
+   * Convert deg to rad.
+   *
+   * @param(_x) Angle in degress
+   */
 
-	double operator ""_deg(long double _x)
-	{
-		return _x * P_PI_180_FLT;
-	}
+  double operator ""_deg(long double _x)
+  {
+    return _x * P_PI_180_FLT;
+  }
 
-	/**
-	 * Convert rad to rad.
-	 *
-	 * @param(_x) Angle in degress
-	 */
+  /**
+   * Convert rad to rad.
+   *
+   * @param(_x) Angle in degress
+   */
 
-	double operator ""_rad(long double _x)
-	{
-		return _x;
-	}
+  double operator ""_rad(long double _x)
+  {
+    return _x;
+  }
 
-	/**
-	 * Convert gradian to rad.
-	 *
-	 * @param(_x) Angle in degress
-	 */
+  /**
+   * Convert gradian to rad.
+   *
+   * @param(_x) Angle in degress
+   */
 
-	double operator ""_g(long double _x)
-	{
-		return _x * P_PI_FLT / 200;
-	}
+  double operator ""_g(long double _x)
+  {
+    return _x * P_PI_FLT / 200;
+  }
 }

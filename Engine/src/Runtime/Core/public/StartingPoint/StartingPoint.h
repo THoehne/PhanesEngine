@@ -6,26 +6,26 @@
 
 namespace Phanes::Core::Application
 {
-	class PhanesGame
-	{
+  class PhanesGame
+  {
 
-	public:
+  public:
 
-		PhanesGame();
-		virtual ~PhanesGame();
+    PhanesGame();
+    virtual ~PhanesGame();
 
-		/**
-		 * PhanesEngine main loop.
-		 */
-		void Run();
+    /**
+     * PhanesEngine main loop.
+     */
+    void Run();
 
-	};
+  };
 
 
-	/**
-	 * Function to be overwriten by client.
-	 */
+  /**
+   * Function to be overwriten by client.
+   */
 
-	PhanesGame* CreatePhanesGame();
+  PhanesGame* CreatePhanesGame();
 
 }
