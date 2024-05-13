@@ -402,3 +402,11 @@ FodyWeavers.xsd
 *.sln
 *.vcxproj
 *.filters
+
+
+
+
+# Exclude other folders
+
+bin/
+bin-int/
