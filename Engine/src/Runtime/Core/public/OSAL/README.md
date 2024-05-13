@@ -11,4 +11,4 @@ Contains abstraction necessary for cross platform compatability. Including but n
 
 - Testing will only happen for Windows. GCC compatability will be partitally included, but by far not fully. Though support is planed for future versions.
 
-- Minimum SSE4.1 is required. To run the engine.
+- Minimum SSE4.1 is required to compile the engine.
