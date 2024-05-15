@@ -17,6 +17,15 @@
   #include <type_traits>
   #include <string>
 
+  #include<iostream>
+  #include <stdio.h>
+
+
+
+
+  #include <chrono>
+  #include <thread>
+
   #ifdef P_WIN_BUILD 
 
     #include <windows.h>

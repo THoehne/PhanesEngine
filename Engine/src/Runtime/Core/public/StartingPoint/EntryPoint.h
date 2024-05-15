@@ -1,7 +1,7 @@
 #pragma once
 // Entry point for Phanes game 
 
-#ifdef P_WIN_BUILD
+#if defined(P_WIN_BUILD) && defined(P_BUILD_LIB)
 
 extern Phanes::Core::Application::PhanesGame* Phanes::Core::Application::CreatePhanesGame();
 

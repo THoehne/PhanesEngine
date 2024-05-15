@@ -27,5 +27,4 @@ namespace Phanes::Core::Application
    */
 
   PhanesGame* CreatePhanesGame();
-
 }

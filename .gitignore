@@ -410,3 +410,4 @@ FodyWeavers.xsd
 
 bin/
 bin-int/
+external/
