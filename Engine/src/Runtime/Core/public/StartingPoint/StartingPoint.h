@@ -1,23 +1,35 @@
 #pragma once
 
+#include "PhanesEnginePCH.h"
+
 #include "Core/Core.h"
 
 // Entrypoint class for any Phanes game. 
 
 namespace Phanes::Core::Application
 {
-  class PhanesGame
+  class PHANES_CORE PhanesProject
   {
+    
+  private:
+
+    std::string projectName;
 
   public:
 
-    PhanesGame();
-    virtual ~PhanesGame();
+    PhanesProject(std::string _ProjectName);
+    virtual ~PhanesProject();
 
     /**
      * PhanesEngine main loop.
      */
     void Run();
+
+    /**
+     * Getter for project name;
+     */
+
+    FORCEINLINE std::string GetName();
 
   };
 
@@ -26,5 +38,5 @@ namespace Phanes::Core::Application
    * Function to be overwriten by client.
    */
 
-  PhanesGame* CreatePhanesGame();
+  PhanesProject* CreatePhanesGame();
 }

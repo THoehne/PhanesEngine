@@ -1,10 +1,14 @@
 #pragma once
 
+// --- Logging -------------------------------------
+
+#include "Core/public/Logging/Logging.h"
 
 // --- Starting point ------------------------------
-
 #include "Core/public/StartingPoint/StartingPoint.h"
 #include "Core/public/StartingPoint/EntryPoint.h"
+
+
 
 
 // --- OSAL ----------------------------------------
@@ -17,7 +21,5 @@
 
 // Starting point
 namespace PApp                = Phanes::Core::Application;
-
-    using namespace Phanes::Core::Math::UnitLiterals;
 
 #endif

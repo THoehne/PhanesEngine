@@ -8,7 +8,7 @@
 #ifndef PHANES_CORE_PCH_H
   
 
-
+  // STL
 
   #include <cmath>
   #include <stdint.h>
@@ -17,10 +17,8 @@
   #include <type_traits>
   #include <string>
 
-  #include<iostream>
+  #include <iostream>
   #include <stdio.h>
-
-
 
 
   #include <chrono>
@@ -32,6 +30,10 @@
 
   #endif
 
+  // spdlog
+
+  #include <spdlog/sinks/stdout_color_sinks.h>
+  #include <spdlog/spdlog.h>
 
 #endif // !PHANES_CORE_PCH_H
 

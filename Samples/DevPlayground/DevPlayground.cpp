@@ -1,10 +1,13 @@
 #define P_USE_NAMESPACE_ALIAS
 #include <Phanes.h>
 
-class DevPlayground : public PApp::PhanesGame {};
-
-
-PApp::PhanesGame* PApp::CreatePhanesGame()
+class DevPlayground : public PApp::PhanesProject 
 {
-  return new DevPlayground();
+  using PhanesProject::PhanesProject;
+};
+
+
+PApp::PhanesProject* PApp::CreatePhanesGame()
+{
+  return new DevPlayground("DevPlayground");
 }

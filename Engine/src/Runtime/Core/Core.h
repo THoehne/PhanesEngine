@@ -3,6 +3,16 @@
 
 #ifdef P_WIN_BUILD
 
+	#ifdef P_BUILD_LIB
+		
+		#define PHANES_CORE __declspec(dllexport)
+	
+	#else
+		
+		#define PHANES_CORE __declspec(dllimport)
+
+	#endif
+
 	#ifdef P_DEBUG
 	
 		#define P_DEBUGBREAK DebugBreak();
