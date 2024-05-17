@@ -1,12 +1,11 @@
-#include "Core/public/Math/Vector2.h"
-
-namespace PMath = Phanes::Core::Math;
+#include <iostream>
 
 int main()
 {
-  float t = 2;
-  PMath::Clamp(t, 2.0f, 4.0f);
-    
+    int x = 13;
+    x %= 7;
 
-  return 0;
+    std::cout << x;
+   
+    return 0;
 }

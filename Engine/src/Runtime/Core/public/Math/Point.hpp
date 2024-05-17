@@ -2,9 +2,12 @@
 
 #include "Core/public/Misc/Boilerplate.h"
 
-#include "Core/public/Math/MathCommon.h"
+#include "Core/public/Math/MathCommon.hpp"
 #include "Core/public/Math/MathAbstractTypes.h"
 #include "Core/public/Math/MathFwd.h"
+
+#include "Core/public/Math/Vector2.hpp"
+#include "Core/public/Math/Vector3.hpp"
 
 #ifndef P_DEBUG
 #pragma warning(disable : 4244)
@@ -67,7 +70,10 @@ namespace Phanes::Core::Math {
    */
 
   template<RealType T>
-  T Distance(const TPoint2<T>& p1, const TPoint2<T>& p2);
+  T Distance(const TPoint2<T>& p1, const TPoint2<T>& p2)
+  {
+      return Magnitude(p2 - p1);
+  }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -122,7 +128,10 @@ namespace Phanes::Core::Math {
    */
 
   template<RealType T>
-  T Distance(const TPoint3<T>& p1, const TPoint3<T>& p2);
+  T Distance(const TPoint3<T>& p1, const TPoint3<T>& p2)
+  {
+      return Magnitude(p2 - p1);
+  }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
