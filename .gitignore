@@ -7,13 +7,10 @@ external/
 
 # Temporary excludes
 
-Matrix2d.cpp
-Matrix3.cpp
-Matrix4.cpp
-Vector4.cpp
+Core/private/Math/
 
-Matrix3.h
 Matrix4.h
+IntVector4.h
 Vector4.h
 
 ############################################################################################
