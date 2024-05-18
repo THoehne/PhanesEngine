@@ -6,7 +6,7 @@
 
 #include "Core/public/Misc/Boilerplate.h"
 
-#include "Core/public/Math/MathCommon.h"
+#include "Core/public/Math/MathCommon.hpp"
 
 namespace Phanes::Core::Math::UnitConversion 
 {
