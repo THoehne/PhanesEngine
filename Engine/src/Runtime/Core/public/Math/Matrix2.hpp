@@ -30,7 +30,7 @@ namespace Phanes::Core::Math {
 
     TMatrix2(const TMatrix2<T>& m1)
     {
-        memcpy(this->m, m1.m, sizeof(T) * 2);
+        memcpy(this->m, m1.m, sizeof(T) * 4);
     }
 
     /**
@@ -51,8 +51,8 @@ namespace Phanes::Core::Math {
 
     TMatrix2(T fields[2][2])
     {
-        this->m[0][0] = fields[0][0]; this->m[1][0] = fields[0][1];
-        this->m[1][0] = fields[1][0]; this->m[1][1] = fields[1][1];
+        this->m[0][0] = fields[0][0]; this->m[1][0] = fields[1][0];
+        this->m[0][1] = fields[0][1]; this->m[1][1] = fields[1][1];
     }
 
     /**
@@ -66,10 +66,10 @@ namespace Phanes::Core::Math {
      * @note nXY = n[Row][Col]
      */
 
-    TMatrix2(T n00, T n10, T n01, T n11)
+    TMatrix2(T n00, T n01, T n10, T n11)
     {
         this->m[0][0] = n00; this->m[1][0] = n01;
-        this->m[1][0] = n10; this->m[1][1] = n11;
+        this->m[0][1] = n10; this->m[1][1] = n11;
     }
 
     /**
@@ -81,8 +81,8 @@ namespace Phanes::Core::Math {
 
     TMatrix2(const TVector2<T>& v1, const TVector2<T>& v2)
     {
-        this->m[0][0] = v1.x; this->m[1][0] = v1.y;
-        this->m[0][1] = v2.x; this->m[1][1] = v2.y;
+        this->m[0][0] = v1.x; this->m[1][0] = v2.x;
+        this->m[0][1] = v1.y; this->m[1][1] = v2.y;
     }
 
   public:
