@@ -408,13 +408,9 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T> operator- (TVector3<T>& v1)
+    TVector3<T> operator- (const TVector3<T>& v1)
     {
-        v1.x = -v1.x;
-        v1.y = -v1.y;
-        v1.z = -v1.z;
-
-        return v1;
+        return TVector3<T>(-v1.x, -v1.y, -v1.z);
     }
 
     /**

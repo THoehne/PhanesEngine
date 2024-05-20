@@ -391,10 +391,9 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    void operator- (TVector2<T>& v1)
+    TVector2<T> operator- (const TVector2<T>& v1)
     {
-        v1.x = -v1.x;
-        v1.y = -v1.y;
+        return TVector2<T>&(-v1.x, -v1.y);
     }
 
 
