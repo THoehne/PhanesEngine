@@ -5,8 +5,8 @@
 // TODO: ClampToCube
 // TODO: Slerp (using Quaternions)
 
-#include "Core/Core.h"
-#include "Core/public/Misc/Boilerplate.h"
+
+#include "Core/public/Math/Boilerplate.h"
 
 #include "Core/public/Math/MathCommon.hpp"
 #include "Core/public/Math/MathAbstractTypes.h"

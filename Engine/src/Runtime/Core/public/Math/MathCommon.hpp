@@ -14,8 +14,6 @@
 #define P_PI_FLT				3.1415926535897932f			// PI 
 
 
-#include "Core/Core.h"
-
 #ifndef MATH_COMMON_H
 #define MATH_COMMON_H
 
@@ -114,7 +112,7 @@ namespace Phanes::Core::Math {
     template<typename T>
     float FastInvSqrt(T n)
     {
-        Phanes::Core::Types::int32 i = *(int*)&n;
+        int i = *(int*)&n;
         float x2 = n * 0.5f;
 
         i = 0x5f3759df - (i >> 1);

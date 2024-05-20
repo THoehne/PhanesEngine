@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/public/Misc/Boilerplate.h"
+#include "Core/public/Math/Boilerplate.h"
 #include "Core/public/Math/MathFwd.h"
 
 #include "Core/public/Math/Vector3.hpp"

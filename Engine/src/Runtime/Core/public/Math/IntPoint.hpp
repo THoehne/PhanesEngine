@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Core/public/Misc/Boilerplate.h"
+#include "Core/public/Math/Boilerplate.h"
 
-#include "Core/public/Math/MathCommon.h"
+#include "Core/public/Math/MathCommon.hpp"
 #include "Core/public/Math/MathAbstractTypes.h"
 #include "Core/public/Math/MathFwd.h"
 
-#include "Core/public/Math/IntVector2.h"
-#include "Core/public/Math/IntVector3.h"
+#include "Core/public/Math/IntVector2.hpp"
+#include "Core/public/Math/IntVector3.hpp"
 // #include "Core/public/Math/IntVector4.h"
 
 #ifndef P_DEBUG

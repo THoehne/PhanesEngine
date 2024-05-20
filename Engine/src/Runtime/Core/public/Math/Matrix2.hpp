@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Core/Core.h"
-#include "Core/public/Misc/Boilerplate.h"
+#include "Core/public/Math/Boilerplate.h"
 
 #include "Core/public/Math/Vector2.hpp"
 
@@ -96,14 +95,6 @@ namespace Phanes::Core::Math {
         return reinterpret_cast<TVector2*>(this->m[m]);
     }
 
-    FORCEINLINE const T& operator() (int n, int m) const
-    {
-        return this->m[m][n];
-    }
-    FORCEINLINE const TVector2<T>& operator[] (int m) const
-    {
-        return reinterpret_cast<const TVector2*>(this->m[m]);
-    }
   };
 
   // ===================== //
@@ -190,7 +181,7 @@ namespace Phanes::Core::Math {
   TMatrix2<T> operator+ (const TMatrix2<T>& m1, const TMatrix2<T>& m2)
   {
       return TMatrix2<T>(m1(0, 0) + m2(0, 0), m1(0, 1) + m2(0, 1),
-                         m1(1, 0) + m2(1, 0), m1(1, 1) + m2(1, 1);
+                         m1(1, 0) + m2(1, 0), m1(1, 1) + m2(1, 1));
   }
 
   template<RealType T>
@@ -204,7 +195,7 @@ namespace Phanes::Core::Math {
   TMatrix2<T> operator- (const TMatrix2<T>& m1, const TMatrix2<T>& m2)
   {
       return TMatrix2<T>(m1(0, 0) - m2(0, 0), m1(0, 1) - m2(0, 1),
-                         m1(1, 0) - m2(1, 0), m1(1, 1) - m2(1, 1);
+                         m1(1, 0) - m2(1, 0), m1(1, 1) - m2(1, 1));
   }
 
   template<RealType T>

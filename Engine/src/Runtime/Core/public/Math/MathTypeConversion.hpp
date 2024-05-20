@@ -6,8 +6,13 @@
 //	 @ref [FILE]MathUnitConversion				 //
 // ============================================= //
 
-#include "PhanesEnginePCH.h"
-#include "Core/public/Misc/Boilerplate.h"
+#ifdef P_BUILD_LIB
+    #include "PhanesEnginePCH.h"
+#else
+    #include <string>
+#endif
+
+#include "Core/public/Math/Boilerplate.h"
 
 #include "Core/public/Math/MathAbstractTypes.h"
 #include "Core/public/Math/Vector2.hpp"
@@ -16,7 +21,7 @@
 #include "Core/public/Math/Matrix2.hpp"
 //#include "Core/public/Math/Matrix3.h"
 #include "Core/public/Math/IntVector2.hpp"
-#include "Core/public/Math/IntVector3.h"
+#include "Core/public/Math/IntVector3.hpp"
 
 #ifndef MATH_TYPE_CONVERSION_H
 #define MATH_TYPE_CONVERSION_H
@@ -84,7 +89,7 @@ namespace Phanes::Core::Math {
   template<RealType T>
   std::string toString(const TMatrix2<T>& m)
   {
-      return "[[" + ToString(m.m(0, 0)) + " " + ToString(m.m(0, 1)) + "], [" + ToString(m.m(0, 0)) + " " + ToString(m.m(0, 1)) + "]]"
+      return "[[" + ToString(m.m(0, 0)) + " " + ToString(m.m(0, 1)) + "], [" + ToString(m.m(0, 0)) + " " + ToString(m.m(0, 1)) + "]]";
   }
 
   //std::string toString(const Matrix3& v);
