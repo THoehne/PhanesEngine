@@ -3,6 +3,9 @@ bin/
 bin-int/
 external/
 
+# Frequently edited tests
+Tests/TestProject/
+
 # Exclude files
 
 # Temporary excludes
