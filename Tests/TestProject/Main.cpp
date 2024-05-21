@@ -1,4 +1,4 @@
-#include "Core/public/Math/MathPCH.h"
+#include "Core/public/Math/Plane.hpp"
 
 
 #include <iostream>
@@ -12,10 +12,6 @@ namespace PMath = Phanes::Core::Math;
 int main()
 {
 
-    PMath::TMatrix2<float> m1(7.3f,4.3f,
-                              9.4f,2.5f);
-
-    
 
     
     for (int i = 0; i < 10; i++)
