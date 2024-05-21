@@ -38,3 +38,24 @@
 	#error The target system must be defined. (See https://github.com/scorpioblood/PhanesEngine for more information)
 
 #endif // P_WIN_BUILD
+
+
+namespace Phanes
+{
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+
+	template<typename T, typename ...Args>
+	constexpr Ref<T> MakeRef(Args&& ...args)
+	{
+		return std::make_shared<T>(std::forward<Args>(args)...);
+	}
+
+
+}
+
+int test()
+{
+
+}
