@@ -319,7 +319,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    T operator* (const TVector2<T>& v1, const TVector2<T>& v2)
+    inline T operator* (const TVector2<T>& v1, const TVector2<T>& v2)
     {
         return v1.x * v2.x + v1.y * v2.y;
     }
@@ -587,7 +587,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    T DotP(const TVector2<T>& v1, const TVector2<T>& v2)
+    inline T DotP(const TVector2<T>& v1, const TVector2<T>& v2)
     {
         return v1.x * v2.x + v1.y * v2.y;
     }

@@ -277,7 +277,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector3<T> operator* (const TVector3<T>& v1, T s)
     {
-        return TVector3<T>(v1.x * s.v1.y * s, v1.z * s);
+        return TVector3<T>(v1.x * s, v1.y * s, v1.z * s);
     }
 
     /**
@@ -293,7 +293,7 @@ namespace Phanes::Core::Math {
     TVector3<T> operator/ (const TVector3<T>& v1, T s)
     {
         s = (T)1.0 / s;
-        return TVector3<T>(v1.x * s.v1.y * s, v1.z * s);
+        return TVector3<T>(v1.x * s, v1.y * s, v1.z * s);
     }
 
     /**
@@ -336,7 +336,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    T operator* (const TVector3<T>& v1, const TVector3<T>& v2)
+    inline T operator* (const TVector3<T>& v1, const TVector3<T>& v2)
     {
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
@@ -353,7 +353,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector3<T> operator+ (const TVector3<T>& v1, T s)
     {
-        return TVector3<T>(v1.x + s.v1.y + s, v1.z + s);
+        return TVector3<T>(v1.x + s, v1.y + s, v1.z + s);
     }
 
     /**
@@ -383,7 +383,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector3<T> operator- (const TVector3<T>& v1, T s)
     {
-        return TVector3<T>(v1.x - s.v1.y - s, v1.z - s);
+        return TVector3<T>(v1.x - s, v1.y - s, v1.z - s);
     }
 
     /**
@@ -570,7 +570,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    T DotP(const TVector3<T>& v1, const TVector3<T>& v2)
+    inline T DotP(const TVector3<T>& v1, const TVector3<T>& v2)
     {
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
     }
