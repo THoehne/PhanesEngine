@@ -37,7 +37,7 @@
     #include <spdlog/spdlog.h>
 
     // Local PCH
-    #include "Core/public/Math/MathPCH.h"
+    // #include "Core/public/Math/MathPCH.h"
 
 #endif // !PHANES_CORE_PCH_H
 
