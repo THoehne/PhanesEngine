@@ -30,6 +30,7 @@ namespace Phanes::Core::Math {
     template<RealType T>			struct TVector3;
     template<RealType T>			struct TVector4;
     template<RealType T>			struct TRay;
+    template<RealType T>			struct TLine;
     template<RealType T>			struct TPlane;
     template<RealType T>			struct TMatrix2;
     template<RealType T>			struct TMatrix3;
@@ -95,6 +96,15 @@ namespace Phanes::Core::Math {
 
     typedef std::vector<Matrix3>		Matrix3List;
     typedef std::vector<Matrix3d>		Matrix3Listd;
+
+
+    // TPlane
+    typedef TPlane<float>               Plane;
+    typedef TPlane<double>              Planed;
+
+    typedef std::vector<Plane>		    PlaneList;
+    typedef std::vector<Planed>		    PlaneListd;
+    
 
 } // Phanes::Core::Math::coretypes
 
