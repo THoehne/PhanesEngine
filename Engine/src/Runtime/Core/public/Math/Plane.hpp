@@ -7,6 +7,7 @@
 #include "Core/public/Math/MathFwd.h"
 
 #include "Core/public/Math/Line.hpp"
+#include "Core/public/Math/Ray.hpp"
 #include "Core/public/Math/Vector3.hpp"
 
 namespace Phanes::Core::Math {
@@ -758,6 +759,8 @@ namespace Phanes::Core::Math {
     /**
      * Projects vector onto plane
      *
+     * @see [FUNC]PointProjectOntoPlane
+     * 
      * @param(v1) Vector to reject
      * @param(normal) Normal of the plane
      *
@@ -775,6 +778,8 @@ namespace Phanes::Core::Math {
     /**
      * Projects vector onto plane
      *
+     * @see [FUNC]PointProjectOntoPlane
+     * 
      * @param(v1) Vector to reject
      * @param(plane) Plane
      *
@@ -805,6 +810,18 @@ namespace Phanes::Core::Math {
     }
 
 
+    /** Tests whether a point is on a plane
+     * 
+     * @param(pl1) Plane
+     * @param(p1) Point
+     * 
+     * @return True, if p1 on pl1, false if not.
+     */
+    template<RealType T>
+    FORCEINLINE bool IsPointOnPlane(const TPlane<T>& pl1, const TVector3<T>& p1)
+    {
+        return (Equals(DotP(pl1.normal, p1), d));
+    }
 
     /**
      * Tests whether two planes intersect. Sets line to intersection-line if true.
@@ -818,7 +835,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    inline bool PlanesIntersect(const TPlane<T>& pl1, const TPlane<T>& pl2, Ref<TLine<T>> interLine, T threshold = P_FLT_INAC)
+    bool PlanesIntersect2(const TPlane<T>& pl1, const TPlane<T>& pl2, Ref<TLine<T>> interLine, T threshold = P_FLT_INAC)
     {
         TVector3<T> dirLine = CrossP(pl1.normal, pl2.normal);
         T det = SqrMagnitude(dirLine);
@@ -826,6 +843,7 @@ namespace Phanes::Core::Math {
         if (abs(det) > P_FLT_INAC)
         {
             interLine = MakeRef<TLine<T>(dirLine, (CrossP(dirLine, pl2.normal) * pl1.d + CrossP(dirLine, pl1.normal) * pl2.d) / det);
+            NormalizeV(interLine);
             return true;
         }
         
@@ -845,7 +863,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    inline bool PlanesIntersect(const TPlane<T>& pl1, const TPlane<T>& pl2, const TPlane<T>& pl3, Ref<TVector3<T>> interPoint, T threshold = P_FLT_INAC)
+    bool PlanesIntersect3(const TPlane<T>& pl1, const TPlane<T>& pl2, const TPlane<T>& pl3, Ref<TVector3<T>> interPoint, T threshold = P_FLT_INAC)
     {
         T det = DotP(CrossP(pl1.normal, pl2.normal), pl3.normal);
 
@@ -858,6 +876,84 @@ namespace Phanes::Core::Math {
         return false;
     }
 
+    /**
+     * Mirrors a point through plane
+     * 
+     * @param(p1) Point to mirror
+     * @param(pl1) Plane
+     * 
+     * @return Mirrored point.
+     */
+
+    template<RealType T>
+    TVector3<T> PlaneMirrorPoint(const TVector3<T>& p1, const TPlane<T>& pl1)
+    {
+        return p1 - pl1.normal * ((T)2.0 * PointDistance(pl1, p1));
+    }
+
+    /**
+     * Projects point onto plane
+     * 
+     * @param(p1) Point to project
+     * @param(pl1) Plane
+     * 
+     * @return Projected point.
+     */
+
+    template<RealType T>
+    TVector3<T> PointProjectOntoPlane(const TVector3<T>& p1, const TPlane<T>& pl1)
+    {
+        p1 - PointDistance(pl1, p1) * pl1.normal;
+    }
+
+    /**
+     * Calculates the intersection point, of a line with a plane, if there is one
+     *
+     * @param(pl1) Plane
+     * @param(l1) Line
+     * @param(p1) Point
+     * 
+     * @return True, if they intersect, false if not.
+     */
+
+    template<RealType T>
+    bool LineIntersect(const TPlane<T>& pl1, const TLine<T>& l1, Ref<TVector3<T>> p1)
+    {
+        T dotProduct = DotP(l1.normal, pl1.normal);
+
+        if (abs(dotProduct) > P_FLT_INAC)
+        {
+            p1 = MakeRef<TVector3<T>>(l1.base - l1.normal * (DotP(l1.normal * p1.base) / dotProduct));
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Calculates, the intersection point, of a plane and a ray.
+     * 
+     * @param(pl1) Plane
+     * @param(r1) Ray
+     * @param(p1) Intersection point
+     * 
+     * @return True, if they intersect, false if not.
+     */
+
+    template<RealType T>
+    bool RayIntersect(const TPlane<T>& pl1, const TRay<T>& r1, Ref<TVector3<T>> p1)
+    {
+        T pr = DotP(pl1.normal, Normalize(r1.direction));
+        T parameter = DotP((GetOrigin(pl1) - r1.origin), pl1.normal) / pr;
+
+        if (p1 > P_FLT_INAC && parameter >= 0)
+        {
+            p1 = MakeRef<TVector3<T>>(PointAt(r1, parameter));
+            return true;
+        }
+
+        return false;
+    }
 
 } // Phanes::Core::Math
 

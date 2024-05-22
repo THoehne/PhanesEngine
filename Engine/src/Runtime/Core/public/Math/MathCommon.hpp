@@ -87,15 +87,16 @@ namespace Phanes::Core::Math {
     /**
      * Test two numbers for equality
      * 
-     * @param x 
+     * @param(x)
+     * @param(y)
+     * @param(threshold) Allowed inaccuracy
+     * 
+     * @return True, if equal, false if not
      */
     template<typename T>
     bool Equals(T x, T y, T threshold = P_FLT_INAC)
     {
-        if (abs(x - y) < threshold) {
-            return true;
-        }
-        return false;
+        return (abs(x - y) < threshold);
     }
 
     /**
