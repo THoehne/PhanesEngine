@@ -1,8 +1,5 @@
 #pragma once
 
-
-// TODO: BoundToCube
-// TODO: ClampToCube
 // TODO: Slerp (using Quaternions)
 
 
@@ -867,17 +864,6 @@ namespace Phanes::Core::Math {
         return v1;
     }
 
-    /**
-     * Binds vector into cube.
-     * 
-     * @param(v1) Vector to clamp
-     * @param(cubeRadius) Radius of the cube
-     * 
-     * @note result is stored in v1.
-     */
-
-    template<RealType T>
-    TVector3<T> BoundToCubeV(TVector3<T> v1, T cubeRadius) {};
 
     /**
      * Clamps vector into cube.
@@ -889,7 +875,14 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T> ClampToCubeV(TVector3<T> v1, T cubeRadius) {};
+    TVector3<T> ClampToCubeV(TVector3<T> v1, T cubeRadius)
+    {
+        v1.x = Clamp(v1.x, -cubeRadius, cubeRadius);
+        v1.y = Clamp(v1.y, -cubeRadius, cubeRadius);
+        v1.z = Clamp(v1.z, -cubeRadius, cubeRadius);
+
+        return v1;
+    };
 
     /**
      * Reflect by plane
@@ -1302,18 +1295,6 @@ namespace Phanes::Core::Math {
     }
 
     /**
-     * Binds vector into cube.
-     *
-     * @param(v1) Vector to clamp
-     * @param(cubeRadius) Radius of the cube
-     *
-     * @result Vector clamped in cube.
-     */
-
-    template<RealType T>
-    TVector3<T> BoundToCube(const TVector3<T>& v1, T cubeRadius) {};
-
-    /**
      * Clamps vector into cube.
      *
      * @param(v1) Vector to clamp
@@ -1323,7 +1304,14 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T> ClampToCube(const TVector3<T>& v1, T cubeRadius) {};
+    TVector3<T> ClampToCube(const TVector3<T>& v1, T cubeRadius) 
+    {
+        return TVector3<T>(
+            Clamp(v1.x, -cubeRadius, cubeRadius),
+            Clamp(v1.y, -cubeRadius, cubeRadius),
+            Clamp(v1.z, -cubeRadius, cubeRadius),
+        );
+    };
 
     /**
      * Scales vector two specific magnitude.
