@@ -13,11 +13,11 @@ namespace Phanes::Core::Math {
   // Accessed by M[Row][Col].
 
   template<RealType T>
-  struct alignas(4) TMatrix2
+  struct TMatrix2
   {
   public:
 
-    alignas(4) T m[2][2];
+    T m[2][2];
 
   public:
 
