@@ -1,4 +1,5 @@
 #pragma once
+// TODO: Refactor documentation
 
 
 #ifdef P_WIN_BUILD
@@ -43,15 +44,27 @@
 namespace Phanes
 {
 
+	// Alias for shared_ptr
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
 
+	// Alias for make_shared
 	template<typename T, typename ...Args>
 	constexpr Ref<T> MakeRef(Args&& ...args)
 	{
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 
+	// Alias for unique ptr
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	// Alias for make_unique
+	template<typename T, typename ...Args>
+	constexpr Scope<T> MakeScope(Args&& ...args)
+	{
+		return std::make_unique<T>(std::forward<Args>(args)...);
+	}
 
 }
 
