@@ -6,6 +6,8 @@
 
 #include "Core/public/Math/Vector3.hpp"
 
+#include <any>
+
 
 namespace Phanes::Core::Math
 {
@@ -17,36 +19,54 @@ namespace Phanes::Core::Math
     {
     public:
         using Real = T;
-        union
-        {
-            struct
-            {
-                /** X component of line */
-                Real x;
-                
-                /** Y component of line */
-                Real y;
-                
-                /** Z component of line */
-                Real z;
-            };
-            TVector3<Real> normal;
-        };
 
-        /** Moment of line */
+        /** Direction of line */
 
-        Real m;
+        TVector3<Real> direction;
+
+        /** Base point of line */
+
+        TVector3<Real> base;
 
     public:
 
-        /** Construct line from base and normal 
+        /** Construct line from base and direction 
          * 
-         * @param(normal) Normal of line
+         * @param(direction) Direction of line
          * @param(p) Base of line 
          */
 
-        TLine(const TVector3<T>& normal, const TVector3<T>& p) {};
+        TLine(const TVector3<T>& direction, const TVector3<T>& p) : direction(direction), base(p) {};
 
     };
 
+    /** 
+     * Normalizes the direction of the line
+     * 
+     * @param(l1) Line 
+     */
+
+    template<RealType T>
+    TLine<T> NormalizeV(TLine<T>& l1)
+    {
+        std::any
+
+        NormalizeV(l1.direction);
+        return l1;
+    }
+
+
+    /**
+     * Normalizes the direction of the line
+     *
+     * @param(l1) Line
+     * 
+     * @return Line with normalized direction.
+     */
+
+    template<RealType T>
+    TLine<T> NormalizeV(const TLine<T>& l1)
+    {
+        return TLine<T>(Normalize(l1.direction), l1.base);
+    }
 }
