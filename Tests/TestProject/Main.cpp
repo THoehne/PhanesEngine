@@ -1,12 +1,7 @@
-#include "Core/public/Math/Plane.hpp"
-
-
 #include <iostream>
 #include <chrono>
 
-
-
-namespace PMath = Phanes::Core::Math;
+#include <wmmintrin.h>
 
 
 int main()
@@ -20,8 +15,7 @@ int main()
         
         for (size_t i = 0; i < 999999; i++)
         {
-
-        
+                    
         }
         auto end = std::chrono::high_resolution_clock::now();
     
