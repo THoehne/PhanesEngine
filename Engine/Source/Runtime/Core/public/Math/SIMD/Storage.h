@@ -143,37 +143,3 @@ namespace Phanes::Core::SIMD
         typedef Phanes::Core::Types::Vec4x2u32Reg type;
     };
 }
-
-
-struct Vec4
-{
-public:
-    union
-    {
-        struct
-        {
-
-            int x, y, z, w;
-
-        };
-
-        typename Phanes::Core::SIMD::Storage<4, Phanes::Core::Types::int32, true>::type comp;
-    };
-};
-
-struct Vec4x2
-{
-public:
-    union
-    {
-        struct
-        {
-
-            Vec4 v1;
-            Vec4 v2;
-
-        };
-
-        typename Phanes::Core::SIMD::Storage<8, Phanes::Core::Types::int32, true>::type comp;
-    };
-};
