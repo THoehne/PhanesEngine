@@ -2,26 +2,37 @@
 
 #pragma once
 
+
+
 // Set platform MACRO depending on defined build
+
+#define P_PLATFORM_WIN      0
+#define P_PLATFORM_LIN      1
+#define P_PLATFORM_MAC      2
+// #define P_PLATFORM_FBSD  3 -> Is planed for eventual PS5 support
+
 // User defines build platform
 #ifdef P_WIN_BUILD 
-#define P_PLATFORM 0
+#   define P_PLATFORM P_PLATFORM_WIN
 #elif P_LINUX_BUILD
-#define P_PLATFORM 1
-#elif P_APPLE_BUILD
-#define P_PLATFORM 2
-#elif P_PS5_BUILD
-#define P_PLATFORM 3
+#   define P_PLATFORM P_PLATFORM_LIN
+#   error Linux / Unix system is not yet supported.
+#elif P_MAC_BUILD
+#   define P_PLATFORM P_PLATFORM_MAC
+#   error Mac target system is not yet supported.
+#elif P_PS5_BUILD || P_FBSD_BUILD
+#   define P_PLATFORM P_PLATFORM_FBSD
+#   error FreeBSD is not yet supported.
 #else 
-#error Your target system is either not supported, or you have yet to define it.
+#   error Your target system is either not supported, or you have yet to define it.
 #endif
 
 // Set compiler depending on defined compiler 
 
 // Compiler macro definition
 
-// ID's defines like [0-9][0-x]
-// First bracket is compiler, second is the version of the compiler.
+// ID's defined like [0-9][0-x]
+// First bracket defines compiler, second defines the version of the compiler.
 
 // Visual C++
 #define P_COMPILER_VC22         001
@@ -122,7 +133,7 @@
 // Clang
 
 #elif (defined(__clang__))
-
+#   error PhanesEngine only supports MSVC -> Visual Studio
 #   if defined(__apple_build_version__)
 #   
 #	    if (__clang_major__ < 6)
@@ -188,6 +199,7 @@
 
 // G++
 #elif defined(__GNUC__) || defined(__MINGW32__)
+#   error PhanesEngine only supports MSVC -> Visual Studio
 #   if __GNUC__ >= 14
 #		define P_COMPILER P_COMPILER_GCC14
 #	elif __GNUC__ >= 13
@@ -225,3 +237,43 @@
 
 #endif
 
+
+
+
+// Vector instruction sets
+
+
+// Define also supported instruction sets for Visual Studio, as it only defines the latest (e.g. only __AVX__ not __SSE4__ ...).
+
+#ifdef __AVX2__
+#define __AVX__
+#endif
+
+#ifdef __AVX__
+#define __SSE__
+#define P_SSE__ // Defined for Visual C++ -> Does not set __SSE__ automatically 
+#endif
+
+
+#define P_INTRINSICS_FPU    0
+#define P_INTRINSICS_AVX    1
+#define P_INTRINSICS_AVX2   2
+#define P_INTRINSICS_SSE    3
+#define P_INTRINSICS_NEON   4
+
+
+#if defined(P_FORCE_FPU) // Force, that no intrinsics may be used.
+#   define P_INTRINSICS P_INTRINSICS_FPU
+#elif !defined(P_FORCE_INTRINSICS) // If P_FORCE_INTRINSICS is defined, user has to define P_INTRINSICS.
+#   if defined(__AVX__) && !defined(__AVX2__)
+#      define P_INTRINSICS P_INTRINSICS_AVX
+#   elif defined(__AVX2__)
+#      define P_INTRINSICS P_INTRINSICS_AVX2
+#   elif  (defined(__SSE__) || defined(P_SSE__)) && !defined(__AVX__)
+#      define P_INTRINSICS P_INTRINSICS_SSE
+#   elif defined(P_ARM_ARCH)
+#      define P_INTRINSICS P_INTRINSICS_NEON
+#   else
+#       error No SIMD instruction set detected. Use P_FORCE_FPU to disable SIMD extensions.
+#   endif
+#endif
