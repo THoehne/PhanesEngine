@@ -24,28 +24,28 @@ namespace Phanes::Core::Math {
      * Template forward declarations.
      */
 
-    template<RealType T>			struct TColor;
-    template<RealType T>			struct TLinearColor;
-    template<RealType T>			struct TVector2;
-    template<RealType T>			struct TVector3;
-    template<RealType T>			struct TVector4;
-    template<RealType T>			struct TRay;
-    template<RealType T>			struct TLine;
-    template<RealType T>			struct TPlane;
-    template<RealType T>			struct TMatrix2;
-    template<RealType T>			struct TMatrix3;
-    template<RealType T>			struct TMatrix4;
-    template<RealType T>			struct TQuaternion;
-    template<RealType T>			struct TTransform;
-    template<RealType T>			struct TPoint2;
-    template<RealType T>			struct TPoint3;
-    template<RealType T>			struct TPoint4;
-    template<IntType T>				struct TIntVector2;
-    template<IntType T>				struct TIntVector3;
-    template<IntType T>				struct TIntVector4;
-    template<IntType T>				struct TIntPoint2;
-    template<IntType T>				struct TIntPoint3;
-    template<IntType T>				struct TIntPoint4;
+    template<RealType T>			        struct TColor;
+    template<RealType T>			        struct TLinearColor;
+    template<RealType T>			        struct TVector2;
+    template<RealType T>			        struct TVector3;
+    template<RealType T>			        struct TRay;
+    template<RealType T>			        struct TLine;
+    template<RealType T>			        struct TPlane;
+    template<RealType T>			        struct TMatrix2;
+    template<RealType T>			        struct TMatrix3;
+    template<RealType T>			        struct TMatrix4;
+    template<RealType T>			        struct TQuaternion;
+    template<RealType T>			        struct TTransform;
+    template<RealType T>			        struct TPoint2;
+    template<RealType T>			        struct TPoint3;
+    template<RealType T>			        struct TPoint4;
+    template<IntType T>				        struct TIntVector2;
+    template<IntType T>				        struct TIntVector3;
+    template<IntType T>				        struct TIntVector4;
+    template<IntType T>				        struct TIntPoint2;
+    template<IntType T>				        struct TIntPoint3;
+    template<IntType T>				        struct TIntPoint4;
+    template<RealType T, bool IsAligned>	struct TVector4;
 
     /**
      * Specific instantiation of forward declarations.

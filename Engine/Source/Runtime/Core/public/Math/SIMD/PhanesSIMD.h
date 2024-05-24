@@ -3,80 +3,91 @@
 // ARM is not supported.
 
 #include "Core/public/Math/SIMD/Platform.h"
+#include "Core/public/Math/MathTypes.h"
 
 
-
-#include <nmmintrin.h> // SSE4.2
-
-#ifdef __AVX__
-#   include <immintrin.h>
+#if P_INTRINSICS == P_INTRINSICS_AVX2
+#   include "PhanesVectorMathAVX2.hpp"
+#elif P_INTRINSICS == P_INTRINSICS_AVX
+#   include "PhanesVectorMathAVX.hpp"
+#elif P_INTRINSICS == P_INTRINSICS_SSE
+#   include "PhanesVectorMathSSE.hpp"
+#elif P_INTRINSICS == P_INTRINSICS_NEON
+#   include "PhanesVectorMathNeon.hpp"
+#elif P_INTRINSICS == P_INTRINSICS_FPU 
+#   include "PhanesVectorMathFPU.hpp"
 #endif
 
 
-namespace Phanes::Core::Math::SIMD
+// Register aliases
+namespace Phanes::Core::Types
 {
 
-    // XMM Register wrapper for 4x1 floats
+#if P_INTRINSICS >= 1
 
-    struct VectorRegister4f
-    {
-    public:
-        __m128 data;
-    };
+    typedef __m128      Vec4f32Reg;
+    typedef __m128d     Vec2f64Reg;
 
-    typedef VectorRegister4f    VectorRegister4f32;
+    typedef __m128i     Vec4i32Reg;
+    typedef __m128i     Vec2i64Reg;
 
+    typedef __m128i     Vec4u32Reg;
+    typedef __m128i     Vec2u64Reg;
 
+#elif P_INTRINSICS != P_INTRINSICS_NEON
 
-    // XMM Register wrapper for 2x1 doubles
-    struct VectorRegister2d
-    {
-    public:
-        __m128d data;
-    };
+    typedef struct alignas(16) Vec4f32Reg { float data[4]; }                        Vec4f32Reg;
+    typedef struct alignas(16) Vec2f64Reg { double data[2]; }                       Vec2f64Reg;
+    typedef struct alignas(16) Vec4i32Reg { int data[4]; }                          Vec4i32Reg;
+    typedef struct alignas(16) Vec2i64Reg { Phanes::Core::Types::int64 data[2]; }   Vec2i64Reg;
+    typedef struct alignas(16) Vec4u32Reg { unsigned int data[4]; }                 Vec4u32Reg;
+    typedef struct alignas(16) Vec2u64Reg { Phanes::Core::Types::uint64 data[4]; }  Vec2u64Reg;
 
-    typedef VectorRegister2d    VectorRegister2f64;
-
-
-
-    // XMM Register wrapper for 4x1 integers
-    struct VectorRegister4i
-    {
-    public:
-        __m128i data;
-    };
-
-    typedef VectorRegister4i    VectorRegister4i32;
+#endif
 
 
+#if P_INTRINSICS >= 2
 
-#   ifdef __AVX__
+    typedef __m256      Vec4x2f32Reg;
+    typedef __m256      Vec8f32Reg;
+    typedef __m256d     Vec2x2f64Reg;
+    typedef __m256d     Vec4f64Reg;
 
-    // AVX specific types
+#elif P_INTRINSICS != P_INTRINSICS_NEON
 
-    // XMM Register wrapper for 4x1 doubles
-    struct VectorRegister4d
-    {
-    public:
-        __m256d data;
-    };
+    typedef struct alignas(32) Vec4x2f32Reg { float data[8]; }  Vec4x2f32Reg;
+    typedef struct alignas(32) Vec8f32Reg   { float data[8]; }  Vec8f32Reg;
+    typedef struct alignas(32) Vec2x2f64Reg { double data[4]; } Vec2x2f64Reg;
+    typedef struct alignas(32) Vec4f64Reg   { double data[4]; } Vec4f64Reg;
 
-    typedef VectorRegister4d    VectorRegister4f64;
-    
-#   endif
-
-
-#   ifdef __AVX2__
-
-    // AVX2 specific types
-
-    // XMM Register wrapper for 4x1 doubles
-    struct VectorRegister4i64
-    {
-    public:
-        __m256i data;
-    };
+#endif
 
 
-#   endif
+#if P_INTRINSICS == 3
+
+    typedef __m256i     Vec4x2i32Reg;
+    typedef __m256i     Vec8i32Reg;
+    typedef __m256i     Vec2x2i64Reg;
+    typedef __m256i     Vec4i64Reg;
+
+    typedef __m256i     Vec4x2u32Reg;
+    typedef __m256i     Vec8u32Reg;
+    typedef __m256i     Vec2x2u64Reg;
+    typedef __m256i     Vec4u64Reg;
+
+#elif P_INTRINSICS != P_INTRINSICS_NEON
+
+    typedef struct alignas(32) Vec4x2i32Reg { int data[8]; }                         Vec4x2i32Reg;
+    typedef struct alignas(32) Vec8i32Reg   { int data[8]; }                         Vec8i32Reg;
+    typedef struct alignas(32) Vec2x2i64Reg { Phanes::Core::Types::int64 data[4]; }  Vec2x2i64Reg;
+    typedef struct alignas(32) Vec4i64Reg   { Phanes::Core::Types::int64 data[4]; }  Vec4i64Reg;
+
+    typedef struct alignas(32) Vec4x2u32Reg { unsigned int data[8]; }                Vec4x2u32Reg;
+    typedef struct alignas(32) Vec8u32Reg   { unsigned int data[8]; }                Vec8u32Reg;
+    typedef struct alignas(32) Vec2x2u64Reg { Phanes::Core::Types::uint64 data[4]; } Vec2x2u64Reg;
+    typedef struct alignas(32) Vec4u64Reg   { Phanes::Core::Types::uint64 data[4]; } Vec4u64Reg;
+
+#endif
+
+    // NEON ...
 }
