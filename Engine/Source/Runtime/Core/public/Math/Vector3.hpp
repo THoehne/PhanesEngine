@@ -8,6 +8,7 @@
 #include "Core/public/Math/MathCommon.hpp"
 #include "Core/public/Math/MathAbstractTypes.h"
 #include "Core/public/Math/MathFwd.h"
+#include "Core/public/Math/SIMD/Storage.h"
 
 #ifndef P_DEBUG
 #pragma warning(disable : 4244)
@@ -883,21 +884,6 @@ namespace Phanes::Core::Math {
 
         return v1;
     };
-
-    /**
-     * Reflect by plane
-     *
-     * @param(v1) Vector to mirror
-     * @param(plane) Plane to mirror on
-     *
-     * @note result is stored in v1.
-     */
-
-    template<RealType T>
-    FORCEINLINE TVector3<T> ReflectFromPlaneV(TVector3<T>& v1, const TVector3<T>& normal)
-    {
-        return ReflectV(v1, normal);
-    }
 
     /**
      * Rotates vector around axis

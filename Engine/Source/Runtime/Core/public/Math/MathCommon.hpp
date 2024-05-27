@@ -124,6 +124,38 @@ namespace Phanes::Core::Math {
     }
 
 
+
+    template<typename T>
+    FORCEINLINE T Abs(T s)
+    {
+        return abs(s);
+    }
+
+    template<>
+    FORCEINLINE float Abs<float>(float s)
+    {
+        return fabs(s);
+    };
+
+    template<>
+    FORCEINLINE long long Abs<long long>(long long s)
+    {
+        return llabs(s);
+    };
+
+    template<>
+    FORCEINLINE long Abs<long>(long s)
+    {
+        return labs(s);
+    };
+
+    template<>
+    FORCEINLINE double Abs<double>(double s)
+    {
+        return fabsl(s);
+    };
+
+
 } // phanes
 
 #endif // !MATH_COMMON_H

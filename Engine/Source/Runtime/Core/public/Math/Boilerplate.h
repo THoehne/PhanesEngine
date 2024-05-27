@@ -61,7 +61,9 @@ namespace Phanes::Core::Math
     template<typename T>
     concept IntType = std::is_integral_v<T>;
 
-
+    // Typenames with Arithmethic constrain have to be number.
+    template<typename T>
+    concept Arithmethic = std::is_arithmetic_v<T>;
 
 
 

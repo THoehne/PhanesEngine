@@ -67,8 +67,3 @@ namespace Phanes
 	}
 
 }
-
-int test()
-{
-
-}
