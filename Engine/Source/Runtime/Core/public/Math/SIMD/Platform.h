@@ -254,6 +254,11 @@
 
 // Define also supported instruction sets for Visual Studio, as it only defines the latest (e.g. only __AVX__ not __SSE4__ ...).
 
+#define P_AVX2__    0
+#define P_AVX__     0
+#define P_SSE__     0 
+#define P_NEON__    0
+
 #ifdef P_FORCE_INTRINSICS
     
 #   undef __AVX2__
@@ -267,22 +272,22 @@
 #else
 
 #   ifdef __AVX2__
-#       define P_AVX2__
+#       define P_AVX2__ 1
 #   elif defined(__AVX__)
-#       define P_AVX__
+#       define P_AVX__ 1
 #   elif defined(__SSE__)
-#       define P_SSE__
+#       define P_SSE__ 1
 #   endif
 
 
 #endif // !P_FORCE_INTRINSICS
 
 #ifdef P_AVX2__
-#   define P_AVX__
+#   define P_AVX__ 1
 #endif
 
 #ifdef P_AVX__
-#   define P_SSE__ 
+#   define P_SSE__ 1
 #endif
 
 
@@ -300,14 +305,15 @@
 #   undef P_SSE__
 #   undef P_SSE__
 #else
-#   if defined(P_AVX__) && !defined(P_AVX2__)
-#      define P_INTRINSICS P_INTRINSICS_AVX
-#   elif defined(P_AVX2__)
-#      define P_INTRINSICS P_INTRINSICS_AVX2
-#   elif  (defined(__SSE__) || defined(P_SSE__)) && !defined(P_AVX__)
-#      define P_INTRINSICS P_INTRINSICS_SSE
+#   if (P_AVX__ == 1) && (P_AVX2__ == 0)
+#       define P_INTRINSICS P_INTRINSICS_AVX
+#   elif P_AVX2__ == 1
+#       define P_INTRINSICS P_INTRINSICS_AVX2
+#   elif P_SSE__ == 1
+#       define P_INTRINSICS P_INTRINSICS_SSE
 #   elif defined(P_ARM_ARCH)
-#      define P_INTRINSICS P_INTRINSICS_NEON
+#       define P_INTRINSICS P_INTRINSICS_NEON
+#       define P_NEON__ 1
 #   elif !defined(P_FORCE_INTRINSICS)
 #       error No SIMD instruction set detected. Use P_FORCE_FPU to disable SIMD extensions.
 #   endif

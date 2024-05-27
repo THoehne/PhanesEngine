@@ -1,13 +1,13 @@
 // Defines on compile time, whether a xmm register or an array should be used.
 #pragma once
 
-#include "Core/public/Math/SIMD/PhanesSIMD.h"
+#include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
 
 #include "Core/public/Math/MathTypes.h"
 
 namespace Phanes::Core::SIMD
 {
-    template<size_t L, typename T, bool IsAligned>
+    template<size_t L, typename T, bool UseSimd>
     struct Storage;
 
     // General unaligned memory storage
@@ -143,37 +143,3 @@ namespace Phanes::Core::SIMD
         typedef Phanes::Core::Types::Vec4x2u32Reg type;
     };
 }
-
-
-struct Vec4
-{
-public:
-    union
-    {
-        struct
-        {
-
-            int x, y, z, w;
-
-        };
-
-        typename Phanes::Core::SIMD::Storage<4, Phanes::Core::Types::int32, true>::type comp;
-    };
-};
-
-struct Vec4x2
-{
-public:
-    union
-    {
-        struct
-        {
-
-            Vec4 v1;
-            Vec4 v2;
-
-        };
-
-        typename Phanes::Core::SIMD::Storage<8, Phanes::Core::Types::int32, true>::type comp;
-    };
-};
