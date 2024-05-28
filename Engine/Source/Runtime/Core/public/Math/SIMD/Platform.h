@@ -254,11 +254,6 @@
 
 // Define also supported instruction sets for Visual Studio, as it only defines the latest (e.g. only __AVX__ not __SSE4__ ...).
 
-#define P_AVX2__    0
-#define P_AVX__     0
-#define P_SSE__     0 
-#define P_NEON__    0
-
 #ifdef P_FORCE_INTRINSICS
     
 #   undef __AVX2__
@@ -272,7 +267,7 @@
 #else
 
 #   ifdef __AVX2__
-#       define P_AVX2__ 1
+#    define P_AVX2__ 1
 #   elif defined(__AVX__)
 #       define P_AVX__ 1
 #   elif defined(__SSE__)
@@ -290,6 +285,23 @@
 #   define P_SSE__ 1
 #endif
 
+// Deactivate unset SIMD
+#ifndef P_AVX2__
+#   define P_AVX2__ 0
+#endif 
+
+// Deactivate unset SIMD
+#ifndef P_AVX__
+#   define P_AVX__ 0
+#endif 
+
+#ifndef P_SSE__
+#   define P_SSE__ 0
+#endif 
+
+#ifndef P_NEON__
+#   define P_NEON__ 0
+#endif
 
 #define P_INTRINSICS_FPU    0
 #define P_INTRINSICS_SSE    1

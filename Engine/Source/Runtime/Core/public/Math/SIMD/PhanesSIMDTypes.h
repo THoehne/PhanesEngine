@@ -1,3 +1,5 @@
+#pragma once
+
 // This file includes the necessary header for vectorization intrinsics. If no specifics are defined SSE4.2 is used.
 // 
 // ARM is not supported.

@@ -90,13 +90,6 @@ namespace Phanes::Core::Math
         /// <param name="comp">Array of at least 4 components</param>
         TVector4(const Real* comp);
 
-        /// <summary>
-        /// Construct the vector, by calculating the way between two points.
-        /// </summary>
-        /// <param name="start">Starting point of the vector.</param>
-        /// <param name="end">End point of the vector.</param>
-        TVector4(const TPoint4<Real>& start, const TPoint4<Real>& end);
-
     };
 
     // ===================== //
@@ -698,8 +691,5 @@ namespace Phanes::Core::Math
     TVector4<T, A> PrespectiveDivideV(TVector4<T, A>& v1);
 }
 
-// No SIMD
-#include "Core/public/Math/Vector4.inl"
 
-// SIMD
-#include "Core/public/Math/SIMD/SIMDIntrinsics.h"
+#include "Core/public/Math/Vector4.inl"
