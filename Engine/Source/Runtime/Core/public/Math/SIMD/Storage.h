@@ -5,7 +5,7 @@
 
 #include "Core/public/Math/MathTypes.h"
 
-namespace Phanes::Core::SIMD
+namespace Phanes::Core::Math::SIMD
 {
     template<size_t L, typename T, bool UseSimd>
     struct Storage;

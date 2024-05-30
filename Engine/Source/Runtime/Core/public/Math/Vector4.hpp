@@ -24,22 +24,22 @@ namespace Phanes::Core::Math
                 /// <summary>
                 /// X component of vector
                 /// </summary>
-                T x;
+                Real x;
 
                 /// <summary>
                 /// X component of vector
                 /// </summary>
-                T y;
+                Real y;
 
                 /// <summary>
                 /// Z component of vector
                 /// </summary>
-                T z;
+                Real z;
 
                 /// <summary>
                 /// W component of vector
                 /// </summary>
-                T w;
+                Real w;
                 
             };
             /// <summary>
@@ -47,8 +47,8 @@ namespace Phanes::Core::Math
             /// </summary>
             union 
             {
-                typename Phanes::Core::SIMD::Storage<4, T, IsAlgined>::type comp;
-                typename Phanes::Core::SIMD::Storage<4, T, IsAlgined>::type data;
+                typename Phanes::Core::Math::SIMD::Storage<4, Real, SIMD::use_simd<Real, 4, IsAlgined>::value>::type comp;
+                typename Phanes::Core::Math::SIMD::Storage<4, Real, SIMD::use_simd<Real, 4, IsAlgined>::value>::type data;
             };
             
         };

@@ -15,44 +15,35 @@
 namespace Phanes::Core::Math
 {
     template<RealType T, bool A>
-    TVector4<T, A>::TVector4(const TVector4<Real, A>& v) :
-        x(v.x),
-        y(v.y),
-        z(v.z),
-        w(v.w)
-    {}
+    TVector4<T, A>::TVector4(const TVector4<Real, A>& v)
+    {
+        Detail::construct_vec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, v);
+    }
 
     template<RealType T, bool A>
-    TVector4<T, A>::TVector4(Real _x, Real _y, Real _z, Real _w) :
-        x(_x),
-        y(_y),
-        z(_z),
-        w(_w)
-    {}
+    TVector4<T, A>::TVector4(Real _x, Real _y, Real _z, Real _w) 
+    {
+        Detail::construct_vec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, _x, _y, _z, _w);
+    }
 
     template<RealType T, bool A>
-    Phanes::Core::Math::TVector4<T, A>::TVector4(Real s) :
-        x(s),
-        y(s),
-        z(s),
-        w(s)
-    {}
+    Phanes::Core::Math::TVector4<T, A>::TVector4(Real s)
+    {
+        Detail::construct_vec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, s);
+    }
 
     template<RealType T, bool A>
-    Phanes::Core::Math::TVector4<T, A>::TVector4(const TVector2<Real>& v1, const TVector2<Real>& v2) :
-        x(v1.x),
-        y(v1.y),
-        z(v2.x),
-        w(v2.y)
-    {}
+    Phanes::Core::Math::TVector4<T, A>::TVector4(const TVector2<Real>& v1, const TVector2<Real>& v2)
+    {
+        Detail::construct_vec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, v1, v2);
+    }
 
     template<RealType T, bool A>
-    Phanes::Core::Math::TVector4<T, A>::TVector4(const Real* comp) :
-        x(comp[0]),
-        y(comp[1]),
-        z(comp[2]),
-        w(comp[3])
-    {}
+    Phanes::Core::Math::TVector4<T, A>::TVector4(const Real* comp)
+    {
+        Detail::construct_vec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, comp);
+    }
+
 
     template<RealType T, bool A>
     TVector4<T, A> operator+=(TVector4<T, A>& v1, const TVector4<T, A>& v2)
@@ -177,13 +168,13 @@ namespace Phanes::Core::Math
     // Comparision
 
     template<RealType T, bool A>
-    TVector4<T, A> operator==(const TVector4<T, A>& v1, const TVector4<T, A>& v2)
+    bool operator==(const TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
         return Detail::compute_vec4_eq<T, A>::map(v1, v2);
     }
 
     template<RealType T, bool A>
-    TVector4<T, A> operator!=(const TVector4<T, A>& v1, const TVector4<T, A>& v2)
+    bool operator!=(const TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
         return Detail::compute_vec4_ieq<T, A>::map(v1, v2);
     }
@@ -225,50 +216,5 @@ namespace Phanes::Core::Math
     TVector4<T, A>& operator--(TVector4<T, A>& v1, int)
     {
         return --v1;
-    }
-
-
-    // SIMD constructor
-
-    template<>
-    TVector4<float, true>::TVector4(const TVector4<float, true>& v)
-    {
-        this->comp = _mm_load_ps(reinterpret_cast<const float*>(&v));
-    }
-
-    template<>
-    TVector4<float, true>::TVector4(float _x, float _y, float _z, float _w) :
-        x(_x),
-        y(_y),
-        z(_z),
-        w(_w)
-    {
-        this->comp = _mm_load_ps(reinterpret_cast<float*>(&this->x));
-    }
-
-    template<>
-    TVector4<float, true>::TVector4(float s)
-    {
-        this->comp = _mm_load_ps1(&s);
-    }
-
-    template<>
-    TVector4<float, true>::TVector4(const TVector2<float>& v1, const TVector2<float>& v2) :
-        x(v1.x),
-        y(v1.y),
-        z(v2.x),
-        w(v2.y)
-    {
-        this->comp = _mm_load_ps(reinterpret_cast<float*>(&this->x));
-    }
-
-    template<>
-    TVector4<float, true>::TVector4(const float* comp) :
-        x(comp[0]),
-        y(comp[1]),
-        z(comp[2]),
-        w(comp[3])
-    {
-        this->comp = _mm_load_ps(reinterpret_cast<float*>(&this->x));
     }
 }

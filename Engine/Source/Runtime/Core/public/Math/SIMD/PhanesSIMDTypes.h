@@ -31,7 +31,7 @@ namespace Phanes::Core::Math::SIMD
     template<typename T, size_t L, bool IsAligned>
     struct use_simd
     {
-        bool value = false;
+        static const bool value = false;
     };
 
 
@@ -40,37 +40,37 @@ namespace Phanes::Core::Math::SIMD
     template<>
     struct use_simd<float, 4, true>
     {
-        bool value = true && (P_SSE__ || P_NEON__);
+        static const bool value = true && (P_SSE__ || P_NEON__);
     };
 
     template<>
     struct use_simd<float, 3, true>
     {
-        bool value = true && (P_SSE__ || P_NEON__);
+        static const bool value = true && (P_SSE__ || P_NEON__);
     };
 
     template<>
     struct use_simd<int, 4, true>
     {
-        bool value = true && (P_SSE__ || P_NEON__);
+        static const bool value = true && (P_SSE__ || P_NEON__);
     };
 
     template<>
     struct use_simd<int, 3, true>
     {
-        bool value = true && (P_SSE__ || P_NEON__);
+        static const bool value = true && (P_SSE__ || P_NEON__);
     };
 
     template<>
     struct use_simd<unsigned int, 4, true>
     {
-        bool value = true && (P_SSE__ || P_NEON__);
+        static const bool value = true && (P_SSE__ || P_NEON__);
     };
 
     template<>
     struct use_simd<unsigned int, 3, true>
     {
-        bool value = true && (P_SSE__ || P_NEON__);
+        static const bool value = true && (P_SSE__ || P_NEON__);
     };
 
     // SSE
@@ -78,19 +78,19 @@ namespace Phanes::Core::Math::SIMD
     template<>
     struct use_simd<double, 2, true>
     {
-        bool value = true && P_SSE__;
+        static const bool value = true && P_SSE__;
     };
 
     template<>
     struct use_simd<Phanes::Core::Types::int64, 2, true>
     {
-        bool value = true && P_SSE__;
+        static const bool value = true && P_SSE__;
     };
 
     template<>
     struct use_simd<Phanes::Core::Types::uint64, 2, true>
     {
-        bool value = true && P_SSE__;
+        static const bool value = true && P_SSE__;
     };
 
 
@@ -100,19 +100,19 @@ namespace Phanes::Core::Math::SIMD
     template<>
     struct use_simd<double, 4, true>
     {
-        bool value = true && P_AVX__;
+        static const bool value = true && P_AVX__;
     };
 
     template<>
     struct use_simd<double, 3, true>
     {
-        bool value = true && P_AVX__;
+        static const bool value = true && P_AVX__;
     };
 
     template<>
     struct use_simd<float, 8, true>
     {
-        bool value = true && P_AVX__;
+        static const bool value = true && P_AVX__;
     };
 
 
@@ -121,37 +121,37 @@ namespace Phanes::Core::Math::SIMD
     template<>
     struct use_simd<Phanes::Core::Types::int64, 4, true>
     {
-        bool value = true && P_AVX2__;
+        static const bool value = true && P_AVX2__;
     };
 
     template<>
     struct use_simd<Phanes::Core::Types::int64, 3, true>
     {
-        bool value = true && P_AVX2__;
+        static const bool value = true && P_AVX2__;
     };
 
     template<>
     struct use_simd<Phanes::Core::Types::uint64, 4, true>
     {
-        bool value = true && P_AVX2__;
+        static const bool value = true && P_AVX2__;
     };
 
     template<>
     struct use_simd<Phanes::Core::Types::uint64, 3, true>
     {
-        bool value = true && P_AVX2__;
+        static const bool value = true && P_AVX2__;
     };
 
     template<>
     struct use_simd<int, 8, true>
     {
-        bool value = true && P_AVX2__;
+        static const bool value = true && P_AVX2__;
     };
 
     template<>
     struct use_simd<unsigned int, 8, true>
     {
-        bool value = true && P_AVX2__;
+        static const bool value = true && P_AVX2__;
     };
 }
 
