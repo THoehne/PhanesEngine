@@ -17,7 +17,6 @@ namespace Phanes::Core::Math::SIMD
         typedef struct type {
             T data[L];
         } type;
-
     };
 
     template<typename T>

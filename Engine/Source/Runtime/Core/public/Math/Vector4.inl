@@ -5,12 +5,8 @@
 #include "Core/public/Math/Detail/Vector4Decl.inl"
 #include "Core/public/Math/SIMD/SIMDIntrinsics.h"
 
-#include "Core/public/Math/Vector4.hpp"
-
 
 #include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
-
-#include <stdio.h>
 
 namespace Phanes::Core::Math
 {
@@ -48,56 +44,56 @@ namespace Phanes::Core::Math
     template<RealType T, bool A>
     TVector4<T, A> operator+=(TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
-        Detail::compute_vec4_add<T, A>::map(v1, v1, v2);
+        Detail::compute_vec4_add<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
         return v1;
     }
 
     template<RealType T, bool A>
     TVector4<T, A> operator+=(TVector4<T, A>& v1, T s)
     {
-        Detail::compute_vec4_add<T, A>::map(v1, v1, s);
+        Detail::compute_vec4_add<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
         return v1;
     }
 
     template<RealType T, bool A>
     TVector4<T, A> operator-=(TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
-        Detail::compute_vec4_sub<T, A>::map(v1, v1, v2);
+        Detail::compute_vec4_sub<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
         return v1;
     }
 
     template<RealType T, bool A>
     TVector4<T, A> operator-=(TVector4<T, A>& v1, T s)
     {
-        Detail::compute_vec4_sub<T, A>::map(v1, v1, s);
+        Detail::compute_vec4_sub<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
         return v1;
     }
 
     template<RealType T, bool A>
     TVector4<T, A> operator*=(TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
-        Detail::compute_vec4_mul<T, A>::map(v1, v1, v2);
+        Detail::compute_vec4_mul<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
         return v1;
     }
 
     template<RealType T, bool A>
     TVector4<T, A> operator*=(TVector4<T, A>& v1, T s)
     {
-        Detail::compute_vec4_mul<T, A>::map(v1, v1, s);
+        Detail::compute_vec4_mul<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
         return v1;
     }
 
     template<RealType T, bool A>
     TVector4<T, A> operator/=(TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
-        Detail::compute_vec4_div<T, A>::map(v1, v1, v2);
+        Detail::compute_vec4_div<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
         return v1;
     }
 
     template<RealType T, bool A>
     TVector4<T, A> operator/=(TVector4<T, A>& v1, T s)
     {
-        Detail::compute_vec4_div<T, A>::map(v1, v1, s);
+        Detail::compute_vec4_div<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
         return v1;
     }
 
@@ -105,7 +101,7 @@ namespace Phanes::Core::Math
     TVector4<T, A> operator+(TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
         TVector4<T, A> r; 
-        Detail::compute_vec4_add<T, A>::map(r, v1, v2);
+        Detail::compute_vec4_add<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
         return r;
     }
 
@@ -113,7 +109,7 @@ namespace Phanes::Core::Math
     TVector4<T, A> operator+(TVector4<T, A>& v1, T s)
     {
         TVector4<T, A> r;
-        Detail::compute_vec4_add<T, A>::map(r, v1, s);
+        Detail::compute_vec4_add<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
         return r;
     }
 
@@ -121,7 +117,7 @@ namespace Phanes::Core::Math
     TVector4<T, A> operator-(TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
         TVector4<T, A> r;
-        Detail::compute_vec4_sub<T, A>::map(r, v1, v2);
+        Detail::compute_vec4_sub<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
         return r;
     }
 
@@ -129,7 +125,7 @@ namespace Phanes::Core::Math
     TVector4<T, A> operator-(TVector4<T, A>& v1, T s)
     {
         TVector4<T, A> r;
-        Detail::compute_vec4_sub<T, A>::map(r, v1, s);
+        Detail::compute_vec4_sub<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
         return r;
     }
 
@@ -137,7 +133,7 @@ namespace Phanes::Core::Math
     TVector4<T, A> operator*(TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
         TVector4<T, A> r;
-        Detail::compute_vec4_mul<T, A>::map(r, v1, v2);
+        Detail::compute_vec4_mul<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
         return r;
     }
 
@@ -145,7 +141,7 @@ namespace Phanes::Core::Math
     TVector4<T, A> operator*(TVector4<T, A>& v1, T s)
     {
         TVector4<T, A> r;
-        Detail::compute_vec4_mul<T, A>::map(r, v1, s);
+        Detail::compute_vec4_mul<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
         return r;
     }
 
@@ -153,7 +149,7 @@ namespace Phanes::Core::Math
     TVector4<T, A> operator/(TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
         TVector4<T, A> r;
-        Detail::compute_vec4_div<T, A>::map(r, v1, v2);
+        Detail::compute_vec4_div<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
         return r;
     }
 
@@ -161,7 +157,7 @@ namespace Phanes::Core::Math
     TVector4<T, A> operator/(TVector4<T, A>& v1, T s)
     {
         TVector4<T, A> r;
-        Detail::compute_vec4_div<T, A>::map(r, v1, s);
+        Detail::compute_vec4_div<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
         return r;
     }
 
@@ -170,13 +166,13 @@ namespace Phanes::Core::Math
     template<RealType T, bool A>
     bool operator==(const TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
-        return Detail::compute_vec4_eq<T, A>::map(v1, v2);
+        return Detail::compute_vec4_eq<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v2);
     }
 
     template<RealType T, bool A>
     bool operator!=(const TVector4<T, A>& v1, const TVector4<T, A>& v2)
     {
-        return Detail::compute_vec4_ieq<T, A>::map(v1, v2);
+        return Detail::compute_vec4_ieq<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v2);
     }
 
     
@@ -187,22 +183,14 @@ namespace Phanes::Core::Math
     template<RealType T, bool A>
     TVector4<T, A>& operator++(TVector4<T, A>& v1)
     {
-        ++v1.x;
-        ++v1.y;
-        ++v1.z;
-        ++v1.w;
-
+        Detail::compute_vec4_inc<T, SIMD::use_simd<T, 4, A>::value>::map(v1);
         return v1;
     }
 
     template<RealType T, bool A>
     TVector4<T, A>& operator--(TVector4<T, A>& v1)
     {
-        --v1.x;
-        --v1.y;
-        --v1.z;
-        --v1.w;
-
+        Detail::compute_vec4_dec<T, SIMD::use_simd<T, 4, A>::value>::map(v1);
         return v1;
     }
 

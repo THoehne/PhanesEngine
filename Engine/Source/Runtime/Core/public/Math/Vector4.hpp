@@ -7,6 +7,7 @@
 
 #include "Core/public/Math/MathFwd.h"
 
+
 #include "Core/public/Math/Vector2.hpp"
 
 namespace Phanes::Core::Math
@@ -14,7 +15,7 @@ namespace Phanes::Core::Math
 
     /// 4D Vector defined with x, y, z, w. 
     /// Alignment allows for possible simd optimization.
-    template<RealType T, bool IsAlgined = false>
+    template<RealType T, bool IsAligned = false>
     struct TVector4
     {
     public:
@@ -48,8 +49,8 @@ namespace Phanes::Core::Math
             /// </summary>
             union 
             {
-                typename Phanes::Core::Math::SIMD::Storage<4, Real, SIMD::use_simd<Real, 4, IsAlgined>::value>::type comp;
-                typename Phanes::Core::Math::SIMD::Storage<4, Real, SIMD::use_simd<Real, 4, IsAlgined>::value>::type data;
+                typename SIMD::Storage<4, Real, SIMD::use_simd<T, 4, IsAligned>::value>::type comp;
+                typename SIMD::Storage<4, Real, SIMD::use_simd<T, 4, IsAligned>::value>::type data;
             };
             
         };
@@ -58,7 +59,7 @@ namespace Phanes::Core::Math
         TVector4() = default;
 
         /// Copy constructor
-        TVector4(const TVector4<Real, IsAlgined>& v);
+        TVector4(const TVector4<Real, IsAligned>& v);
 
         /// <summary>
         /// Construct vector from one scalar.

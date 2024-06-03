@@ -1,36 +1,34 @@
 #pragma once
 
 #include "Core/public/Math/Boilerplate.h"
-#include "Core/public/Math/MathCommon.hpp"
-#include "Core/public/Math/MathFwd.h"
 
 namespace Phanes::Core::Math::Detail
 {
-    template<RealType T, bool A>
+    template<RealType T, bool S>
     struct construct_vec4 {};
 
-    template<RealType T, bool A>
+    template<RealType T, bool S>
     struct compute_vec4_add {};
 
-    template<RealType T, bool A>
+    template<RealType T, bool S>
     struct compute_vec4_sub {};
 
-    template<RealType T, bool A>
+    template<RealType T, bool S>
     struct compute_vec4_mul {};
 
-    template<RealType T, bool A>
+    template<RealType T, bool S>
     struct compute_vec4_div {};
 
-    template<RealType T, bool A>
-    struct compute_vec4_eq{};
+    template<RealType T, bool S>
+    struct compute_vec4_eq {};
 
-    template<RealType T, bool A>
+    template<RealType T, bool S>
     struct compute_vec4_ieq {};
 
-    template<RealType T, bool A>
+    template<RealType T, bool S>
     struct compute_vec4_inc {};
 
-    template<RealType T, bool A>
+    template<RealType T, bool S>
     struct compute_vec4_dec {};
 
 
