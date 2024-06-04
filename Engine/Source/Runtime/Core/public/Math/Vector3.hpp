@@ -34,40 +34,6 @@ namespace Phanes::Core::Math {
     template<RealType T, bool A>
     struct TVector3 : public TVector4<T, A> {
     public:
-        //using Real = T;
-        //union
-        //{
-        //    struct {
-        //        /// <summary>
-        //        /// X component of vector
-        //        /// </summary>
-        //        Real x;
-
-        //        /// <summary>
-        //        /// X component of vector
-        //        /// </summary>
-        //        Real y;
-
-        //        /// <summary>
-        //        /// Z component of vector
-        //        /// </summary>
-        //        Real z;
-
-        //        /// <summary>
-        //        /// W component of vector
-        //        /// </summary>
-        //        Real w;
-
-        //    };
-        //    /// <summary>
-        //    /// Wraps components in one array / xmm register.
-        //    /// </summary>
-        //    union
-        //    {
-        //        typename SIMD::Storage<4, Real, SIMD::use_simd<T, 3, A>::value>::type comp;
-        //        typename SIMD::Storage<4, Real, SIMD::use_simd<T, 3, A>::value>::type data;
-        //    };
-        //};
 
         using Real = T;
 
@@ -107,7 +73,7 @@ namespace Phanes::Core::Math {
         /// </summary>
         /// <param name="v">Vector</param>
         /// <param name="s">Scalar</param>
-        TVector3(const TVector2<Real>& v, Real s);
+        TVector3(const TVector2<Real, A>& v, Real s);
 
     };
 

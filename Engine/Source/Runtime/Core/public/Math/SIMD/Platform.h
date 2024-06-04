@@ -264,8 +264,7 @@
 #       error P_INTRINSICS must be defined by the user, when P_FORCE_INTRINSICS is used.
 #   endif
 
-#else
-
+#elif !defined(P_FORCE_FPU)
 #   ifdef __AVX2__
 #    define P_AVX2__ 1
 #   elif defined(__AVX__)
@@ -273,7 +272,6 @@
 #   elif defined(__SSE__)
 #       define P_SSE__ 1
 #   endif
-
 
 #endif // !P_FORCE_INTRINSICS
 
@@ -312,10 +310,10 @@
 
 #if defined(P_FORCE_FPU) // Force, that no intrinsics may be used.
 #   define P_INTRINSICS P_INTRINSICS_FPU
-#   undef P_AVX2__
-#   undef P_AVX__
-#   undef P_SSE__
-#   undef P_SSE__
+#   define P_AVX2__ 0
+#   define P_AVX__ 0
+#   define P_SSE__ 0
+#   define P_SSE__ 0
 #else
 #   if (P_AVX__ == 1) && (P_AVX2__ == 0)
 #       define P_INTRINSICS P_INTRINSICS_AVX

@@ -84,7 +84,7 @@ namespace Phanes::Core::Math
         /// </summary>
         /// <param name="v1">TVector2 one</param>
         /// <param name="v2">TVector2 two</param>
-        TVector4(const TVector2<Real>& v1, const TVector2<Real>& v2);
+        TVector4(const TVector2<Real, IsAligned>& v1, const TVector2<Real, IsAligned>& v2);
 
         /// <summary>
         /// Construct vector from array of components

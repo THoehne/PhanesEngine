@@ -30,9 +30,9 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool A>
-    TVector3<T, A>::TVector3(const TVector2<Real>& v1, Real s)
+    TVector3<T, A>::TVector3(const TVector2<Real, A>& v1, Real s)
     {
-        Detail::construct_vec3<T, SIMD::use_simd<T, 3, A>::value>::map(*this, v1.x, v1.y, s);
+        Detail::construct_vec3<T, SIMD::use_simd<T, 3, A>::value>::map(*this, v1, s);
     }
 
     template<RealType T, bool A>

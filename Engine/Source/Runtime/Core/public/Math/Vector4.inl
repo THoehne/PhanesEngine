@@ -29,7 +29,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool A>
-    Phanes::Core::Math::TVector4<T, A>::TVector4(const TVector2<Real>& v1, const TVector2<Real>& v2)
+    Phanes::Core::Math::TVector4<T, A>::TVector4(const TVector2<Real, A>& v1, const TVector2<Real, A>& v2)
     {
         Detail::construct_vec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, v1, v2);
     }

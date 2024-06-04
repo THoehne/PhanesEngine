@@ -5,10 +5,10 @@
 #include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
 #include "Core/public/Math/Boilerplate.h"
 #include "Core/public/Math/MathCommon.hpp"
-// -> For IntelliSense
 
+
+// Required includes
 #include "Core/public/Math/Vector3.hpp"
-
 #include "Core/public/Math/Vector4.hpp"
 
 // ========== //
@@ -110,18 +110,10 @@ namespace Phanes::Core::Math::Detail
             v1.comp = _mm_setr_ps(x, y, z, w);
         }
 
-        /*static constexpr void map(Phanes::Core::Math::TVector4<float, false>& v1, const Phanes::Core::Math::TVector2<float, false>& v2, const Phanes::Core::Math::TVector2<float, false>& v3)
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& v1, const Phanes::Core::Math::TVector2<float, false>& v2, const Phanes::Core::Math::TVector2<float, false>& v3)
         {
             v1.comp = _mm_set_ps(v2.x, v2.y, v3.x, v3.y);
         }
-
-        static constexpr void map(Phanes::Core::Math::TVector4<float, false>& v1, const Phanes::Core::Math::TVector2<float, false>& v2, const Phanes::Core::Math::TVector2<float, false>& v3)
-        {
-            v1.x = v2.x;
-            v1.y = v2.y;
-            v1.z = v3.x;
-            v1.w = v3.y;
-        }*/
 
         static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& v1, const float* s)
         {
@@ -228,9 +220,9 @@ namespace Phanes::Core::Math::Detail
     };
 
 
-    //// ============ //
-    ////   TVector3   //
-    //// ============ //
+    // ============ //
+    //   TVector3   //
+    // ============ //
 
 
     template<>
@@ -252,10 +244,10 @@ namespace Phanes::Core::Math::Detail
             v1.comp = _mm_setr_ps(x, y, z, 0.0f);
         }
 
-        /*static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& v1, const Phanes::Core::Math::TVector2<float, true>& v2, float s)
+        static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& v1, const Phanes::Core::Math::TVector2<float, true>& v2, float s)
         {
-            v1.comp = _mm_set_ps(v2.x, v2.y, v3.x, v3.y);
-        }*/
+            v1.comp = _mm_set_ps(v2.x, v2.y, s, 0.0f);
+        }
 
         static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& v1, const float* s)
         {
@@ -265,24 +257,169 @@ namespace Phanes::Core::Math::Detail
     };
 
 
-    template<> 
-    struct compute_vec3_inc<float, true>
+
+    template<> struct compute_vec3_eq<float, true> : public compute_vec4_eq<float, true>
     {
-        static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& r, const Phanes::Core::Math::TVector3<float, true>& v1)
+        static FORCEINLINE bool map(Phanes::Core::Math::TVector3<float, true>& v1, Phanes::Core::Math::TVector3<float, true>& v2)
         {
-            r.comp = _mm_add_ps(v1.comp, _mm_set_ps(1.0f, 1.0f, 1.0f, 0.0f));
+            v1.comp = _mm_setr_ps(v1.x, v1.y, v1.z, 0.0f);
+            v2.comp = _mm_setr_ps(v2.x, v2.y, v2.z, 0.0f);
+
+            float r;
+            _mm_store_ps1(&r, _mm_cmpeq_ps(v1.comp, v2.comp));
+            return (r == 0xffffffff) ? true : false;
+        }
+    };
+
+    template<> struct compute_vec3_ieq<float, true> : public compute_vec4_ieq<float, true> 
+    {
+        static FORCEINLINE bool map(Phanes::Core::Math::TVector3<float, true>& v1, Phanes::Core::Math::TVector3<float, true>& v2)
+        {
+            v1.comp = _mm_setr_ps(v1.x, v1.y, v1.z, 0.0f);
+            v2.comp = _mm_setr_ps(v2.x, v2.y, v2.z, 0.0f);
+            
+            float r;
+            _mm_store_ps1(&r, _mm_cmpneq_ps(v1.comp, v2.comp));
+            return (r == 0xffffffff) ? true : false;
+        }
+    };
+
+
+    template<> struct compute_vec3_add<float, true> : public compute_vec4_add<float, true> {};
+    template<> struct compute_vec3_sub<float, true> : public compute_vec4_sub<float, true> {};
+    template<> struct compute_vec3_mul<float, true> : public compute_vec4_mul<float, true> {};
+    template<> struct compute_vec3_div<float, true> : public compute_vec4_div<float, true> {};
+    template<> struct compute_vec3_inc<float, true> : public compute_vec4_inc<float, true> {};
+    template<> struct compute_vec3_dec<float, true> : public compute_vec4_dec<float, true> {};
+
+    // ============ //
+    //   TVector2   //
+    // ============ //
+
+
+    template<>
+    struct construct_vec2<double, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& v1, const TVector2<double, true>& v2)
+        {
+            v1.comp = _mm_setr_pd(v2.x, v2.y);
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& v1, double s)
+        {
+            v1.comp = _mm_set_pd1(s);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& v1, double x, double y)
+        {
+            v1.comp = _mm_setr_pd(x, y);
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& v1, const double* s)
+        {
+            v1.comp = _mm_loadu_pd(s);
+
         }
     };
 
 
     template<>
-    struct compute_vec3_dec<float, true>
+    struct compute_vec2_add<double, true>
     {
-        static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& r, const Phanes::Core::Math::TVector3<float, true>& v1)
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, const Phanes::Core::Math::TVector2<double, true>& v2)
         {
-            r.comp = _mm_sub_ps(v1.comp, _mm_set_ps(1.0f, 1.0f, 1.0f, 0.0f));
+            r.comp = _mm_add_pd(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, double s)
+        {
+            r.comp = _mm_add_pd(v1.comp, _mm_set1_pd(s));
         }
     };
 
-    template<> struct compute_vec3_add<float, true> : public compute_vec4_add<float, true> {};
+    template<>
+    struct compute_vec2_sub<double, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, const Phanes::Core::Math::TVector2<double, true>& v2)
+        {
+            r.comp = _mm_sub_pd(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, double s)
+        {
+            r.comp = _mm_sub_pd(v1.comp, _mm_set1_pd(s));
+        }
+    };
+
+    template<>
+    struct compute_vec2_mul<double, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, const Phanes::Core::Math::TVector2<double, true>& v2)
+        {
+            r.comp = _mm_mul_pd(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, double s)
+        {
+            r.comp = _mm_mul_pd(v1.comp, _mm_set1_pd(s));
+        }
+    };
+
+    template<>
+    struct compute_vec2_div<double, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, const Phanes::Core::Math::TVector2<double, true>& v2)
+        {
+            r.comp = _mm_div_pd(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, double s)
+        {
+            r.comp = _mm_div_pd(v1.comp, _mm_set1_pd(s));
+        }
+    };
+
+    template<>
+    struct compute_vec2_inc<double, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1)
+        {
+            r.comp = _mm_add_pd(v1.comp, _mm_set1_pd(1.0f));
+        }
+    };
+
+    template<>
+    struct compute_vec2_dec<double, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1)
+        {
+            r.comp = _mm_sub_pd(v1.comp, _mm_set1_pd(1.0f));
+        }
+    };
+
+    template<>
+    struct compute_vec2_eq<double, true>
+    {
+        static FORCEINLINE bool map(const Phanes::Core::Math::TVector2<double, true>& v1, const Phanes::Core::Math::TVector2<double, true>& v2)
+        {
+            double r;
+            _mm_store1_pd(&r, _mm_cmpeq_pd(v1.comp, v2.comp));
+            return (r == 0xffffffff) ? true : false;
+        }
+    };
+
+    template<>
+    struct compute_vec2_ieq<double, true>
+    {
+        static FORCEINLINE bool map(const Phanes::Core::Math::TVector2<double, true>& v1, const Phanes::Core::Math::TVector2<double, true>& v2)
+        {
+            double r;
+            _mm_store1_pd(&r, _mm_cmpneq_pd(v1.comp, v2.comp));
+            return (r == 0xffffffff) ? true : false;
+        }
+    };
+
+
 }

@@ -61,21 +61,13 @@ namespace Phanes::Core::Math::Detail
             v1.w = (T)0.0;
         }
 
-        /*static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, const Phanes::Core::Math::TVector2<T, false>& v2, const Phanes::Core::Math::TVector2<T, false>& v3)
+        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, const Phanes::Core::Math::TVector2<T, false>& v2, T s)
         {
             v1.x = v2.x;
             v1.y = v2.y;
-            v1.z = v3.x;
-            v1.w = v3.y;
+            v1.z = s;
         }
 
-        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, const Phanes::Core::Math::TVector2<T, false>& v2, const Phanes::Core::Math::TVector2<T, false>& v3)
-        {
-            v1.x = v2.x;
-            v1.y = v2.y;
-            v1.z = v3.x;
-            v1.w = v3.y;
-        }*/
 
         static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, const T* comp)
         {

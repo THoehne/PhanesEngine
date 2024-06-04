@@ -1,4 +1,5 @@
 #pragma once
 
-#include "Core/public/Math/Vector3.hpp"
-#include "Core/public/Math/Vector4.hpp"
+// --- Vectors ------------------------
+
+#include "Core/public/Math/Vector2.hpp" // <-- Includes Vector3/4 automatically

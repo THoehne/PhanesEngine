@@ -26,7 +26,6 @@ namespace Phanes::Core::Math {
 
     template<RealType T>    struct TColor;
     template<RealType T>    struct TLinearColor;
-    template<RealType T>    struct TVector2;
     template<RealType T>    struct TRay;
     template<RealType T>    struct TLine;
     template<RealType T>    struct TPlane;
@@ -44,21 +43,13 @@ namespace Phanes::Core::Math {
     template<IntType T>		struct TIntPoint2;
     template<IntType T>		struct TIntPoint3;
     template<IntType T>		struct TIntPoint4;
+    template<RealType T, bool A>    struct TVector2;
     template<RealType T, bool A>    struct TVector3;
     template<RealType T, bool A>	struct TVector4;
 
     /**
      * Specific instantiation of forward declarations.
      */
-
-    // TVector2 
-    typedef TVector2<float>				Vector2;
-    typedef TVector2<double>			Vector2d;
-
-    typedef std::vector<Vector2>		Vector2List;
-    typedef std::vector<Vector2d>		Vector2Listd;
-
-
 
     // TIntVector2
     typedef TIntVector2<int>			IntVector2;
