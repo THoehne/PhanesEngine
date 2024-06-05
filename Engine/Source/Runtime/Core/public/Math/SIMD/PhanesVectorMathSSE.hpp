@@ -421,5 +421,10 @@ namespace Phanes::Core::Math::Detail
         }
     };
 
+    // =============== //
+    //   TIntVector2   //
+    // =============== //
+
+
 
 }
