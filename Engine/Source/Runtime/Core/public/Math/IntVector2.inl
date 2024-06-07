@@ -7,8 +7,6 @@
 
 #include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
 
-#include "Core/public/Math/IntVector2.hpp"
-
 namespace Phanes::Core::Math
 {
     template<IntType T, bool A>

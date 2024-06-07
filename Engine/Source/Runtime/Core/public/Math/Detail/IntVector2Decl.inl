@@ -153,8 +153,8 @@ namespace Phanes::Core::Math::Detail
         }
     };
 
-    template<IntType T, bool S>
-    struct compute_ivec2_mod 
+    template<IntType T>
+    struct compute_ivec2_mod<T, false>
     {
         static constexpr void map(Phanes::Core::Math::TIntVector2<T, false>& r, const Phanes::Core::Math::TIntVector2<T, false>& v1, const Phanes::Core::Math::TIntVector2<T, false>& v2)
         {
