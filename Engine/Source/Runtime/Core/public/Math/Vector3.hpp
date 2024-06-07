@@ -675,7 +675,7 @@ namespace Phanes::Core::Math {
     {
         T magnitude = Magnitude(v1);
 
-        v1 = (magnitude > P_FLT_INAC) ? v1 / magnitude : PZeroVector3(T);
+        v1 = (magnitude > P_FLT_INAC) ? v1 / magnitude : PZeroVector3(T, false);
 
         Clamp(magnitude, min, max);
 
@@ -933,7 +933,7 @@ namespace Phanes::Core::Math {
     TVector3<T, false> Normalize(const TVector3<T, false>& v1)
     {
         float vecNorm = Magnitude(v1);
-        return (vecNorm < P_FLT_INAC) ? PZeroVector3(T) : v1 / vecNorm;
+        return (vecNorm < P_FLT_INAC) ? PZeroVector3(T, false) : v1 / vecNorm;
     }
 
     /**
@@ -1110,7 +1110,7 @@ namespace Phanes::Core::Math {
     {
         T magnitude = Magnitude(v1);
 
-        const TVector3<T, false> unitVec = (magnitude > P_FLT_INAC) ? v1 / magnitude : PZeroVector3(T);
+        const TVector3<T, false> unitVec = (magnitude > P_FLT_INAC) ? v1 / magnitude : PZeroVector3(T, false);
 
         Clamp(magnitude, min, max);
 

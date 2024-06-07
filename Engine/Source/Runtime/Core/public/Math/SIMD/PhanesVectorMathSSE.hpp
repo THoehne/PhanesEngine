@@ -494,4 +494,152 @@ namespace Phanes::Core::Math::Detail
             r.comp = _mm_srl_epi64(v1.comp, _mm_set1_epi64x(s));
         }
     };
+
+    
+    // =============== //
+    //   TIntVector4   //
+    // =============== //
+
+    template<>
+    struct construct_ivec4<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, const TIntVector4<int, true>& v2)
+        {
+            v1.comp = _mm_setr_epi32(v2.x, v2.y, v2.z, v2.w);
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            v1.comp = _mm_set1_epi32(s);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, int x, int y, int z, int w)
+        {
+            v1.comp = _mm_setr_epi32(x, y, z, w);
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, const int* comp)
+        {
+            v1.comp = _mm_loadu_epi32(comp);
+        }
+    };
+
+    template<>
+    struct compute_ivec4_add<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.comp = _mm_add_epi32(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, T s)
+        {
+            r.comp = _mm_add_epi32(v1.comp, _mm_set1_epi32(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec4_sub<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.comp = _mm_sub_epi32(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, T s)
+        {
+            r.comp = _mm_sub_epi32(v1.comp, _mm_set1_epi32(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec4_inc<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1)
+        {
+            r.comp = _mm_add_epi32(v1.comp, _mm_set1_epi32(1));
+        }
+    };
+
+    template<>
+    struct compute_ivec4_dec<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1)
+        {
+            r.comp = _mm_sub_epi32(v1.comp, _mm_set1_epi32(1));
+        }
+    };
+
+    template<>
+    struct compute_ivec4_and<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.comp = _mm_and_si128(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, T s)
+        {
+            r.comp = _mm_and_si128(v1.comp, _mm_set1_epi32(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec4_or<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.comp = _mm_or_si128(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, T s)
+        {
+            r.comp = _mm_or_si128(v1.comp, _mm_set1_epi32(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec4_xor<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.comp = _mm_xor_si128(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, T s)
+        {
+            r.comp = _mm_xor_si128(v1.comp, _mm_set1_epi32(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec4_left_shift<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.comp = _mm_sll_epi32(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, T s)
+        {
+            r.comp = _mm_sll_epi32(v1.comp, _mm_set1_epi32(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec4_right_shift<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.comp = _mm_srl_epi32(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, T s)
+        {
+            r.comp = _mm_srl_epi32(v1.comp, _mm_set1_epi32(s));
+        }
+    };
+
 }

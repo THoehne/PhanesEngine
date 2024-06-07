@@ -3,8 +3,11 @@
 #include "Core/public/Math/Boilerplate.h"
 
 #include "Core/public/Math/MathCommon.hpp"
-#include "Core/public/Math/MathAbstractTypes.h"
 #include "Core/public/Math/MathFwd.h"
+
+#include "Core/public/Math/SIMD/Storage.h"
+
+#include "Core/public/Math/IntVector4.hpp"
 
 #ifndef P_DEBUG
 #pragma warning(disable : 4244)
@@ -28,54 +31,8 @@ namespace Phanes::Core::Math {
      * A 3D Vector with components x, y and z with integer precision.
      */
 
-    template<IntType T>
-    struct TIntVector3 {
-
-    public:
-
-        // Using in combination with a struct and an array allows us the reflect changes of the x and y variables in the comp array and vise versa.
-
-        union
-        {
-
-            struct
-            {
-                /** X component of Vector
-                 *
-                 * @ref [FIELD]components
-                 * @note x does not hold the component, but is a reference two the second item in the components array. The varibale exists wholly for convenience.
-                 */
-                T x;
-
-                /** Y component of Vector
-                 *
-                 * @ref [FIELD]components
-                 *
-                 * @note y does not hold the component, but is a reference two the second item in the components array. The varibale exists wholly for convenience.
-                 */
-                T y;
-
-                /** Z component of Vector
-                 *
-                 * @ref [FIELD]components
-                 *
-                 * @note Z does not hold the component, but is a reference two the second item in the components array. The varibale exists wholly for convenience.
-                 */
-                T z;
-            };
-
-            /** Components array holding the data
-             *
-             * @ref [FIELD]x
-             * @ref [FIELD]y
-             * @ref [FIELD]z
-             *
-             * @note Components are split into x, y and z. Access and manipulation is possible by these variables.
-             */
-
-            T comp[3];
-
-    };
+    template<IntType T, bool A>
+    struct TIntVector3 : public TIntVector4<T, A> {
 
     public:
 
@@ -96,24 +53,7 @@ namespace Phanes::Core::Math {
         }
 
         /**
-         * Move constructor
-         */
-
-        TIntVector3(TIntVector3<T>&& v)
-        {
-            this->comp = v.comp;
-            v.comp = nullptr;
-        }
-
-        /**
-         * Convert other type of vector
-         */
-
-        template<IntType OtherIntType>
-        explicit TIntVector3(const TIntVector3<OtherIntType>& v) : x((T)v.x), y((T)v.y) {};
-
-        /**
-         * Construct Vector from xy components.
+         * Construct Vector from xyz components.
          *
          * @param(x) X component
          * @param(y) Y component

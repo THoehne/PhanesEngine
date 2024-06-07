@@ -37,28 +37,19 @@ namespace Phanes::Core::Math {
     template<RealType T>    struct TPoint2;
     template<RealType T>    struct TPoint3;
     template<RealType T>    struct TPoint4;
-    template<IntType T>		struct TIntVector3;
-    template<IntType T>		struct TIntVector4;
     template<IntType T>		struct TIntPoint2;
     template<IntType T>		struct TIntPoint3;
     template<IntType T>		struct TIntPoint4;
-    template<IntType T, bool A>		struct TIntVector2;
     template<RealType T, bool A>    struct TVector2;
     template<RealType T, bool A>    struct TVector3;
     template<RealType T, bool A>	struct TVector4;
+    template<IntType T, bool A>		struct TIntVector2;
+    template<IntType T, bool A>		struct TIntVector3;
+    template<IntType T, bool A>		struct TIntVector4;
 
     /**
      * Specific instantiation of forward declarations.
      */
-
-    // TIntVector3
-    typedef TIntVector3<int>			IntVector3;
-    typedef TIntVector3<long>			IntVector3l;
-
-    typedef std::vector<IntVector3>		IntVector3List;
-    typedef std::vector<IntVector3l>	IntVector3Listl;
-
-
 
     // TMatrix2
     typedef TMatrix2<float>				Matrix2;
