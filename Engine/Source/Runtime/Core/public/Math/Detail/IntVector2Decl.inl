@@ -234,6 +234,12 @@ namespace Phanes::Core::Math::Detail
             r.x = v1.x | v2.x;
             r.y = v1.y | v2.y;
         }
+
+        static constexpr void map(Phanes::Core::Math::TIntVector2<T, false>& r, const Phanes::Core::Math::TIntVector2<T, false>& v1, const T s)
+        {
+            r.x = v1.x | s;
+            r.y = v1.y | s;
+        }
     };
 
     template<IntType T>
@@ -243,6 +249,12 @@ namespace Phanes::Core::Math::Detail
         {
             r.x = v1.x ^ v2.x;
             r.y = v1.y ^ v2.y;
+        }
+
+        static constexpr void map(Phanes::Core::Math::TIntVector2<T, false>& r, const Phanes::Core::Math::TIntVector2<T, false>& v1, const T s)
+        {
+            r.x = v1.x ^ s;
+            r.y = v1.y ^ s;
         }
     };
 
@@ -254,6 +266,12 @@ namespace Phanes::Core::Math::Detail
             r.x = v1.x << v2.x;
             r.y = v1.y << v2.y;
         }
+
+        static constexpr void map(Phanes::Core::Math::TIntVector2<T, false>& r, const Phanes::Core::Math::TIntVector2<T, false>& v1, const T s)
+        {
+            r.x = v1.x << s;
+            r.y = v1.y << s;
+        }
     };
 
     template<IntType T>
@@ -263,6 +281,12 @@ namespace Phanes::Core::Math::Detail
         {
             r.x = v1.x >> v2.x;
             r.y = v1.y >> v2.y;
+        }
+
+        static constexpr void map(Phanes::Core::Math::TIntVector2<T, false>& r, const Phanes::Core::Math::TIntVector2<T, false>& v1, const T s)
+        {
+            r.x = v1.x >> s;
+            r.y = v1.y >> s;
         }
     };
 
