@@ -20,11 +20,11 @@
 #ifndef INTVECTOR2_H
 #define INTVECTOR2_H
 
-#define PIntZeroVector2(type)		TIntVector2<##type>(0,0)
-#define PIntVectorSouth2(type)		TIntVector2<##type>(0,-1)
-#define PIntVectorNorth2(type)		TIntVector2<##type>(0,1)
-#define PIntVectorEast2(type)		TIntVector2<##type>(1,0)
-#define PIntVectorWest2(type)		TIntVector2<##type>(-1,0)
+#define PIntZeroVector2(type, aligned)		TIntVector2<##type, ##aligned>(0,0)
+#define PIntVectorSouth2(type, aligned)		TIntVector2<##type, ##aligned>(0,-1)
+#define PIntVectorNorth2(type, aligned)		TIntVector2<##type, ##aligned>(0,1)
+#define PIntVectorEast2(type, aligned)		TIntVector2<##type, ##aligned>(1,0)
+#define PIntVectorWest2(type, aligned)		TIntVector2<##type, ##aligned>(-1,0)
 
 
 namespace Phanes::Core::Math {
@@ -35,8 +35,6 @@ namespace Phanes::Core::Math {
 
     template<IntType T, bool A>
     struct TIntVector2 {
-
-        static_assert(std::is_integral_v<T>, "T must be an integer type.");
 
     public:
 

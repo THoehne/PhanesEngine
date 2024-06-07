@@ -18,13 +18,13 @@
 #ifndef VECTOR3_H
 #define VECTOR3_H
 
-#define PZeroVector3(type)			TVector3<##type>(0,0,0)
-#define PVectorForward3(type)		TVector3<##type>(1,0,0)
-#define PVectorBackward3(type)		TVector3<##type>(-1,0,0)
-#define PVectorEast3(type)			TVector3<##type>(0,1,0)
-#define PVectorWest3(type)			TVector3<##type>(0,-1,0)
-#define PVectorUp3(type)			TVector3<##type>(0,0,1)
-#define PVectorDown3(type)			TVector3<##type>(0,0,-1)
+#define PZeroVector3(type, aligned)			TVector3<##type, ##aligned>(0,0,0)
+#define PVectorForward3(type, aligned)		TVector3<##type, ##aligned>(1,0,0)
+#define PVectorBackward3(type, aligned)		TVector3<##type, ##aligned>(-1,0,0)
+#define PVectorEast3(type, aligned)			TVector3<##type, ##aligned>(0,1,0)
+#define PVectorWest3(type, aligned)			TVector3<##type, ##aligned>(0,-1,0)
+#define PVectorUp3(type, aligned)			TVector3<##type, ##aligned>(0,0,1)
+#define PVectorDown3(type, aligned)			TVector3<##type, ##aligned>(0,0,-1)
 
 namespace Phanes::Core::Math {
 

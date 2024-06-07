@@ -16,11 +16,11 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
-#define PZeroVector2(type)		TVector2<##type>(0,0)
-#define PVectorSouth2(type)		TVector2<##type>(0,-1)
-#define PVectorNorth2(type)		TVector2<##type>(0,1)
-#define PVectorEast2(type)		TVector2<##type>(1,0)
-#define PVectorWest2(type)		TVector2<##type>(-1,0)
+#define PZeroVector2(type, aligned)		TVector2<##type, ##aligned>(0,0)
+#define PVectorSouth2(type, aligned)	TVector2<##type, ##aligned>(0,-1)
+#define PVectorNorth2(type, aligned)	TVector2<##type, ##aligned>(0,1)
+#define PVectorEast2(type, aligned)		TVector2<##type, ##aligned>(1,0)
+#define PVectorWest2(type, aligned)		TVector2<##type, ##aligned>(-1,0)
 
 
 namespace Phanes::Core::Math {
