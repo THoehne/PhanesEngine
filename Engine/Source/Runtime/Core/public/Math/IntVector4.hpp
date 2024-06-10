@@ -435,7 +435,225 @@ namespace Phanes::Core::Math {
 
 
 
+
+    // ========================= //
+    //   TIntVector4 functions   //
+    // ========================= //
+
+    template<IntType T>
+    void Set(TIntVector4<T, false>& v1, TIntVector4<T, false>& v2)
+    {
+        v1.x = v2.x;
+        v1.y = v2.y;
+        v1.z = v2.z;
+        v1.w = v2.w;
+    }
+
+
+    /// <summary>
+    /// Calculates the dot product between two vectors.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="A">Vector is aligned?</typeparam>
+    /// <param name="v1">Vector one</param>
+    /// <param name="v2">Vector two</param>
+    /// <returns>Dot product between vectors.</returns>
+    template<IntType T>
+    T DotP(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    {
+        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w;
+    }
+
+    /// <summary>
+    /// Gets componentwise max of both vectors.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="A">Vector is aligned?</typeparam>
+    /// <param name="v1">Vector one</param>
+    /// <param name="v2">Vector two</param>
+    /// <returns>Vector with componentwise max of both vectors.</returns>
+    template<IntType T>
+    TIntVector4<T, false> Max(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    {
+        return TIntVector4<T, false>(
+            (v1.x > v2.x) ? v1.x : v2.x,
+            (v1.y > v2.y) ? v1.y : v2.y,
+            (v1.z > v2.z) ? v1.z : v2.z,
+            (v1.w > v2.w) ? v1.w : v2.w
+        );
+    }
+
+    /// <summary>
+    /// Gets componentwise max of both vectors.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="A">Vector is aligned?</typeparam>
+    /// <param name="v1">Vector one</param>
+    /// <param name="v2">Vector two</param>
+    /// <returns>Copy of v1.</returns>
+    template<IntType T>
+    TIntVector4<T, false> MaxV(TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    {
+        v1.x = (v1.x > v2.x) ? v1.x : v2.x;
+        v1.y = (v1.y > v2.y) ? v1.y : v2.y;
+        v1.z = (v1.z > v2.z) ? v1.z : v2.z;
+        v1.w = (v1.w > v2.w) ? v1.w : v2.w;
+
+        return v1;
+    }
+
+    /// <summary>
+    /// Gets componentwise min of both vectors.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="A">Vector is aligned?</typeparam>
+    /// <param name="v1">Vector one</param>
+    /// <param name="v2">Vector two</param>
+    /// <returns>Vector with componentwise max of both vectors.</returns>
+    template<IntType T>
+    TIntVector4<T, false> Min(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    {
+        return TIntVector4<T, false>(
+            (v1.x < v2.x) ? v1.x : v2.x,
+            (v1.y < v2.y) ? v1.y : v2.y,
+            (v1.z < v2.z) ? v1.z : v2.z,
+            (v1.w < v2.w) ? v1.w : v2.w
+        );
+    }
+
+    /// <summary>
+    /// Gets componentwise min of both vectors.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="A">Vector is aligned?</typeparam>
+    /// <param name="v1">Vector one</param>
+    /// <param name="v2">Vector two</param>
+    /// <returns>Copy of v1.</returns>
+    template<IntType T>
+    TIntVector4<T, false> MinV(TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    {
+        v1.x = (v1.x < v2.x) ? v1.x : v2.x;
+        v1.y = (v1.y < v2.y) ? v1.y : v2.y;
+        v1.z = (v1.z < v2.z) ? v1.z : v2.z;
+        v1.w = (v1.w < v2.w) ? v1.w : v2.w;
+
+        return v1;
+    }
+
+    /// <summary>
+    /// Inverses vector.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="A">Vector is aligned?</typeparam>
+    /// <param name="v1">Vector</param>
+    /// <returns>Inverted vector</returns>
+    template<IntType T>
+    TIntVector4<T, false> Negate(const TIntVector4<T, false>& v1)
+    {
+        return TIntVector4<T, false>(
+            -v1.x,
+            -v1.y,
+            -v1.z,
+            -v1.w
+        );
+    }
+
+    /// <summary>
+    /// Inverses vector.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="A">Vector is aligned?</typeparam>
+    /// <param name="v1">Vector</param>
+    /// <returns>Copy of v1.</returns>
+    template<IntType T>
+    TIntVector4<T, false> NegateV(TIntVector4<T, false>& v1)
+    {
+        v1.x = -v1.x;
+        v1.y = -v1.y;
+        v1.z = -v1.z;
+        v1.w = -v1.w;
+    }
+    
+    /// <summary>
+    /// Get signs of components.
+    /// <para>
+    /// + -> +1
+    /// </para>
+    /// x -> -1
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="A">Vector is aligned?</typeparam>
+    /// <returns>Vector with signs of components.</returns>
+    template<IntType T>
+    TIntVector4<T, false> SignVector(TIntVector4<T, false>& v1)
+    {
+        return TIntVector4<T, false>(
+            (v1.x > 0) ? 1 : -1,
+            (v1.y > 0) ? 1 : -1,
+            (v1.z > 0) ? 1 : -1,
+            (v1.w > 0) ? 1 : -1,
+        );
+    }
+
+    /// <summary>
+    /// Get signs of components.
+    /// <param>
+    /// + -> +1
+    /// </param>
+    /// x -> -1
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <returns></returns>
+    template<IntType T>
+    TIntVector4<T, false> SignVectorV(TIntVector4<T, false>& v1)
+    {
+        v1.x = (v1.x > 0) ? 1 : -1;
+        v1.y = (v1.y > 0) ? 1 : -1;
+        v1.z = (v1.z > 0) ? 1 : -1;
+        v1.w = (v1.w > 0) ? 1 : -1;
+    }
+
+    /// <summary>
+    /// Test if two vectors are perpendicular.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <param name="v1"></param>
+    /// <param name="v2"></param>
+    /// <returns>True if perpendicular.</returns>
+    template<IntType T>
+    inline bool IsPerpendicular(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    {
+        return (abs(DotP(v1, v2)) = 0);
+    }
+
+    /// <summary>
+    /// Test if two vectors are parallel.
+    /// </summary>
+    /// <typeparam name="T">Type of vector</typeparam>
+    /// <param name="v1"></param>
+    /// <param name="v2"></param>
+    /// <returns>True if parralel.</returns>
+    template<IntType T>
+    inline bool IsParallel(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    {
+        return (abs(DotP(v1, v2)) = 1);
+    }
+
+    /// <summary>
+    /// Test if two vectors are parallel.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="v1"></param>
+    /// <param name="v2"></param>
+    /// <returns></returns>
+    template<IntType T>
+    inline bool IsCoincident(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    {
+        return (DotP(v1, v2) = 1);
+    }
+
 } // phanes::core::math::coretypes
+
 
 #endif // !INTVECTOR3_H
 

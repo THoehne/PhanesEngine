@@ -362,12 +362,10 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    FORCEINLINE TIntVector2<T, A> operator% (const TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
+    inline TIntVector2<T, A> operator% (const TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     template<IntType T, bool A>
-    FORCEINLINE TIntVector2<T, A> operator% (const TIntVector2<T, A>& v1, T s);
-
-
+    inline TIntVector2<T, A> operator% (const TIntVector2<T, A>& v1, T s);
 
     template<IntType T, bool A>
     inline TIntVector2<T, A> operator& (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
@@ -430,9 +428,12 @@ namespace Phanes::Core::Math {
     template<IntType T, bool A>
     bool operator!= (const TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
+
+
     // ============================================== //
     //   TIntVector2 static function implementation	  //
     // ============================================== //
+
 
     template<IntType T>
     TIntVector2<T, false> MaxV(TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
@@ -466,24 +467,6 @@ namespace Phanes::Core::Math {
     {
         v1.x = (v1.x >= 0) ? 1 : -1;
         v1.y = (v1.y >= 0) ? 1 : -1;
-
-        return v1;
-    }
-
-    /**
-     * Component wise multiplication of Vector
-     *
-     * @param(v1) Vector one
-     * @param(v2) Vector two
-     *
-     * @note Stores new Vector to v1
-     */
-
-    template<IntType T>
-    TIntVector2<T, false> ScaleV(TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
-    {
-        v1.x *= v2.x;
-        v1.y *= v2.y;
 
         return v1;
     }
@@ -581,7 +564,7 @@ namespace Phanes::Core::Math {
     template<IntType T>
     inline bool IsCoincident(const TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
     {
-        return (DotP(v1, v2) > 1);
+        return (DotP(v1, v2) = 1);
     }
 
     /**

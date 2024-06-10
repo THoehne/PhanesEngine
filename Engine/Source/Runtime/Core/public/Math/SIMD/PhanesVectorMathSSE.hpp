@@ -524,6 +524,11 @@ namespace Phanes::Core::Math::Detail
         {
             v1.comp = _mm_loadu_epi32(comp);
         }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector2<int, true>& v1, const Phanes::Core::Math::TIntVector2<int, true>& v2)
+        {
+            r.comp = _mm_setr_epi32(v1.x, v1.y, v2.x, v2.y);
+        }
     };
 
     template<>

@@ -137,6 +137,7 @@ namespace Phanes::Core::Math::Detail
             v1.w = s[3];
 
         }
+
     };
 
 

@@ -89,6 +89,14 @@ namespace Phanes::Core::Math::Detail
             v1.z = comp[2];
             v1.w = comp[3];
         }
+
+        static constexpr void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector2<int, true>& v1, const Phanes::Core::Math::TIntVector2<int, true>& v2)
+        {
+            r.x = v1.x;
+            r.y = v1.y;
+            r.x = v2.x;
+            r.y = v2.y;
+        }
     };
 
 
