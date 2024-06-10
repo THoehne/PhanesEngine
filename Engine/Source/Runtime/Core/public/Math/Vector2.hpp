@@ -684,7 +684,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> ReflectV(TVector2<T, false>& v1, const TVector2<T, false>& normal)
     {
-        Set(v1, v1 - (2 * (v1 * normal) * normal));
+        Set(v1, v1 - (2 * DotP(v1, normal) * normal));
 
         return v1;
     }
@@ -855,7 +855,7 @@ namespace Phanes::Core::Math {
 
 
     // ============================================================== //
-    //     TVector2 static function implementation with return values     // 
+    //   TVector2 static function implementation with return values   // 
     // ============================================================== //
 
 
@@ -871,7 +871,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> Reflect(const TVector2<T, false>& v1, const TVector2<T, false>& normal)
     {
-        return TVector2<T, false>(v1 - (2 * (v1 * normal) * normal));
+        return TVector2<T, false>(v1 - (2 * DotP(v1, normal) * normal));
     }
 
     /**

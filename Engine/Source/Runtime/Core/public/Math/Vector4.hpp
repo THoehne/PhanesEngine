@@ -745,7 +745,7 @@ namespace Phanes::Core::Math
     template<RealType T>
     TVector4<T, false> Reflect(const TVector4<T, false>& v1, const TVector4<T, false> normal)
     {
-        return v1 - (2 * (v1 * normal) * normal);
+        return v1 - (2 * DotP(v1, normal) * normal);
     }
 
     /// <summary>
@@ -759,7 +759,7 @@ namespace Phanes::Core::Math
     template<RealType T>
     TVector4<T, false> ReflectV(TVector4<T, false>& v1, const TVector4<T, false> normal)
     {
-        Set(v1, v1 - (2 * (v1 * normal) * normal));
+        Set(v1, v1 - (2 * DotP(v1, normal) * normal));
         return v1;
     }
 
