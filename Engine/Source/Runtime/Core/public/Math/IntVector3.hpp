@@ -73,7 +73,7 @@ namespace Phanes::Core::Math {
 
         TIntVector3(const T* comp);
     
-        TIntVector3(const TIntVector2<T, A>& v1, const T s)
+        TIntVector3(const TIntVector2<T, A>& v1, const T s);
 
     };
 
@@ -732,3 +732,4 @@ namespace Phanes::Core::Math {
 
 #endif // !INTVECTOR3_H
 
+#include "Core/public/Math/IntVector3.inl"

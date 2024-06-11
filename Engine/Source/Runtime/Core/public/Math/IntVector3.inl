@@ -7,7 +7,6 @@
 
 #include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
 
-#include "IntVector3.hpp"
 
 namespace Phanes::Core::Math
 {
@@ -20,7 +19,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool A>
     TIntVector3<T, A>::TIntVector3(const T _x, const T _y, const T _z)
     {
-        Detail::construct_ivec3<T, SIMD::use_simd<T, 3, A>::value>::map(*this, _x, _y, _z, _w);
+        Detail::construct_ivec3<T, SIMD::use_simd<T, 3, A>::value>::map(*this, _x, _y, _z);
     }
 
     template<IntType T, bool A>

@@ -2,8 +2,6 @@
 
 #include "Core/public/Math/Boilerplate.h"
 
-#include "../IntVector3.hpp"
-
 namespace Phanes::Core::Math::Detail
 {
     template<IntType T, bool S>

@@ -495,4 +495,452 @@ namespace Phanes::Core::Math::Detail
     };
 
 
+    // =============== //
+    //   TIntVector4   //
+    // =============== //
+
+    template<>
+    struct construct_ivec4<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, const TIntVector4<int, true>& v2)
+        {
+            v1.x = v2.x;
+            v1.y = v2.y;
+            v1.z = v2.z;
+            v1.w = v2.w;
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            v1.x = s;
+            v1.y = s;
+            v1.z = s;
+            v1.w = s;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, int x, int y, int z, int w)
+        {
+            v1.x = x;
+            v1.y = y;
+            v1.y = z;
+            v1.y = w;
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, const int* comp)
+        {
+            v1.x = comp[0];
+            v1.y = comp[1];
+            v1.z = comp[2];
+            v1.w = comp[3];
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector2<int, true>& v1, const Phanes::Core::Math::TIntVector2<int, true>& v2)
+        {
+            r.x = v1.x;
+            r.y = v1.y;
+            r.x = v2.x;
+            r.y = v2.y;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_add<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.x = v1.x + v2.x;
+            r.y = v1.y + v2.y;
+            r.z = v1.z + v2.z;
+            r.w = v1.w + v2.w;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            r.x = v1.x + s;
+            r.y = v1.y + s;
+            r.z = v1.z + s;
+            r.w = v1.w + s;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_sub<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.x = v1.x - v2.x;
+            r.y = v1.y - v2.y;
+            r.z = v1.z - v2.z;
+            r.w = v1.w - v2.w;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            r.x = v1.x - s;
+            r.y = v1.y - s;
+            r.z = v1.z - s;
+            r.w = v1.w - s;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_mul<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.x = v1.x * v2.x;
+            r.y = v1.y * v2.y;
+            r.z = v1.z * v2.z;
+            r.w = v1.w * v2.w;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            r.x = v1.x * s;
+            r.y = v1.y * s;
+            r.z = v1.z * s;
+            r.w = v1.w * s;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_inc<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1)
+        {
+            r.x = v1.x + 1;
+            r.y = v1.y + 1;
+            r.z = v1.z + 1;
+            r.w = v1.w + 1;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_dec<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1)
+        {
+            r.x = v1.x - 1;
+            r.y = v1.y - 1;
+            r.z = v1.z - 1;
+            r.w = v1.w - 1;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_and<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.x = v1.x & v2.x;
+            r.y = v1.y & v2.y;
+            r.z = v1.z & v2.z;
+            r.w = v1.w & v2.w;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            r.x = v1.x & s;
+            r.y = v1.y & s;
+            r.z = v1.z & s;
+            r.w = v1.w & s;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_or<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.x = v1.x | v2.x;
+            r.y = v1.y | v2.y;
+            r.z = v1.z | v2.z;
+            r.w = v1.w | v2.w;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            r.x = v1.x | s;
+            r.y = v1.y | s;
+            r.z = v1.z | s;
+            r.w = v1.w | s;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_xor<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.x = v1.x ^ v2.x;
+            r.y = v1.y ^ v2.y;
+            r.z = v1.z ^ v2.z;
+            r.w = v1.w ^ v2.w;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            r.x = v1.x ^ s;
+            r.y = v1.y ^ s;
+            r.z = v1.z ^ s;
+            r.w = v1.w ^ s;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_left_shift<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.x = v1.x << v2.x;
+            r.y = v1.y << v2.y;
+            r.z = v1.z << v2.z;
+            r.w = v1.w << v2.w;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            r.x = v1.x << s;
+            r.y = v1.y << s;
+            r.z = v1.z << s;
+            r.w = v1.w << s;
+        }
+    };
+
+    template<>
+    struct compute_ivec4_right_shift<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, const Phanes::Core::Math::TIntVector4<int, true>& v2)
+        {
+            r.x = v1.x >> v2.x;
+            r.y = v1.y >> v2.y;
+            r.z = v1.z >> v2.z;
+            r.w = v1.w >> v2.w;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector4<int, true>& v1, int s)
+        {
+            r.x = v1.x >> s;
+            r.y = v1.y >> s;
+            r.z = v1.z >> s;
+            r.w = v1.w >> s;
+        }
+    };
+
+
+    // =============== //
+    //   TIntVector3   //
+    // =============== //
+
+
+    template<>
+    struct construct_ivec3<int, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector3<int, true>& v1, const TIntVector3<int, true>& v2)
+        {
+            v1.x = v2.x;
+            v1.y = v2.y;
+            v1.z = v2.z;
+            v1.w = (T)0;
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector3<int, true>& v1, int s)
+        {
+            v1.x = s;
+            v1.y = s;
+            v1.z = s;
+            v1.w = (T)0;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector3<int, true>& v1, int x, int y, int z)
+        {
+            v1.x = x;
+            v1.y = y;
+            v1.y = z;
+            v1.w = (T)0;
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector3<int, true>& v1, const int* comp)
+        {
+            v1.x = comp[0];
+            v1.y = comp[1];
+            v1.z = comp[2];
+            v1.w = (T)0;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector3<int, true>& r, const Phanes::Core::Math::TIntVector2<int, true>& v1, const int s)
+        {
+            v1.x = v2.x;
+            v1.y = v2.y;
+            v1.z = s;
+            v1.w = (T)0;
+        }
+    };
+
+
+    template<> struct compute_ivec3_add<int, true> : public compute_ivec4_add<int, true> {};
+    template<> struct compute_ivec3_sub<int, true> : public compute_ivec4_sub<int, true> {};
+    template<> struct compute_ivec3_mul<int, true> : public compute_ivec4_mul<int, true> {};
+    template<> struct compute_ivec3_div<int, true> : public compute_ivec4_div<int, true> {};
+    template<> struct compute_ivec3_inc<int, true> : public compute_ivec4_inc<int, true> {};
+    template<> struct compute_ivec3_dec<int, true> : public compute_ivec4_dec<int, true> {};
+
+
+    template<> struct compute_ivec3_and<int, true> : public compute_ivec4_and<int, true> {};
+    template<> struct compute_ivec3_or<int, true> : public compute_ivec4_or<int, true> {};
+    template<> struct compute_ivec3_xor<int, true> : public compute_ivec4_xor<int, true> {};
+    template<> struct compute_ivec3_left_shift<int, true> : public compute_ivec4_left_shift<int, true> {};
+    template<> struct compute_ivec3_right_shift<int, true> : public compute_ivec4_right_shift<int, true> {};
+
+
+    // =============== //
+    //   TIntVector2   //
+    // =============== //
+
+    template<>
+    struct construct_ivec2<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const TIntVector2<Phanes::Core::Types::int64, true>& v2)
+        {
+            v1.comp = _mm_setr_epi64x(v2.x, v2.y);
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, Phanes::Core::Types::int64 s)
+        {
+            v1.comp = _mm_set1_epi64x(s);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, Phanes::Core::Types::int64 x, Phanes::Core::Types::int64 y)
+        {
+            v1.comp = _mm_setr_epi64x(x, y);
+        }
+
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Types::int64* comp)
+        {
+            v1.comp = _mm_loadu_epi64(comp);
+        }
+    };
+
+    template<>
+    struct compute_ivec2_add<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v2)
+        {
+            r.comp = _mm_add_epi64(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, T s)
+        {
+            r.comp = _mm_add_epi64(v1.comp, _mm_set1_epi64x(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec2_sub<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v2)
+        {
+            r.comp = _mm_sub_epi64(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, T s)
+        {
+            r.comp = _mm_sub_epi64(v1.comp, _mm_set1_epi64x(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec2_inc<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1)
+        {
+            r.comp = _mm_add_epi64(v1.comp, _mm_set1_epi64x(1));
+        }
+    };
+
+    template<>
+    struct compute_ivec2_dec<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1)
+        {
+            r.comp = _mm_sub_epi64(v1.comp, _mm_set1_epi64x(1));
+        }
+    };
+
+    template<>
+    struct compute_ivec2_and<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v2)
+        {
+            r.comp = _mm_and_si128(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, T s)
+        {
+            r.comp = _mm_and_si128(v1.comp, _mm_set1_epi64x(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec2_or<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v2)
+        {
+            r.comp = _mm_or_si128(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, T s)
+        {
+            r.comp = _mm_or_si128(v1.comp, _mm_set1_epi64x(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec2_xor<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v2)
+        {
+            r.comp = _mm_xor_si128(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, T s)
+        {
+            r.comp = _mm_xor_si128(v1.comp, _mm_set1_epi64x(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec2_left_shift<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v2)
+        {
+            r.comp = _mm_sll_epi64(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, T s)
+        {
+            r.comp = _mm_sll_epi64(v1.comp, _mm_set1_epi64x(s));
+        }
+    };
+
+    template<>
+    struct compute_ivec2_right_shift<Phanes::Core::Types::int64, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v2)
+        {
+            r.comp = _mm_srl_epi64(v1.comp, v2.comp);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& r, const Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, T s)
+        {
+            r.comp = _mm_srl_epi64(v1.comp, _mm_set1_epi64x(s));
+        }
+    };
+
 }
