@@ -29,7 +29,6 @@ namespace Phanes::Core::Math {
     template<RealType T>    struct TRay;
     template<RealType T>    struct TLine;
     template<RealType T>    struct TPlane;
-    template<RealType T>    struct TMatrix2;
     template<RealType T>    struct TMatrix3;
     template<RealType T>    struct TMatrix4;
     template<RealType T>    struct TQuaternion;
@@ -40,38 +39,17 @@ namespace Phanes::Core::Math {
     template<IntType T>		struct TIntPoint2;
     template<IntType T>		struct TIntPoint3;
     template<IntType T>		struct TIntPoint4;
-    template<RealType T, bool A>    struct TVector2;
-    template<RealType T, bool A>    struct TVector3;
-    template<RealType T, bool A>	struct TVector4;
-    template<IntType T, bool A>		struct TIntVector2;
-    template<IntType T, bool A>		struct TIntVector3;
-    template<IntType T, bool A>		struct TIntVector4;
+    template<RealType T>    struct TMatrix2;
+    template<RealType T, bool S>    struct TVector2;
+    template<RealType T, bool S>    struct TVector3;
+    template<RealType T, bool S>	struct TVector4;
+    template<IntType T, bool S>		struct TIntVector2;
+    template<IntType T, bool S>		struct TIntVector3;
+    template<IntType T, bool S>		struct TIntVector4;
 
     /**
      * Specific instantiation of forward declarations.
      */
-
-    // TMatrix2
-    typedef TMatrix2<float>				Matrix2;
-    typedef TMatrix2<double>			Matrix2d;
-
-    typedef std::vector<Matrix2>		Matrix2List;
-    typedef std::vector<Matrix2d>		Matrix2Listd;
-
-    // TMatrix3
-    typedef TMatrix3<float>				Matrix3;
-    typedef TMatrix3<double>			Matrix3d;
-
-    typedef std::vector<Matrix3>		Matrix3List;
-    typedef std::vector<Matrix3d>		Matrix3Listd;
-
-
-    // TPlane
-    typedef TPlane<float>               Plane;
-    typedef TPlane<double>              Planed;
-
-    typedef std::vector<Plane>		    PlaneList;
-    typedef std::vector<Planed>		    PlaneListd;
     
 
 } // Phanes::Core::Math::coretypes
