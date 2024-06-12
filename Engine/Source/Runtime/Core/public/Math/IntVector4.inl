@@ -9,187 +9,187 @@
 
 namespace Phanes::Core::Math
 {
-    template<IntType T, bool A>
-    TIntVector4<T, A>::TIntVector4(const TIntVector4<T, A>& v)
+    template<IntType T, bool S>
+    TIntVector4<T, S>::TIntVector4(const TIntVector4<T, S>& v)
     {
-        Detail::construct_ivec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, v);
+        Detail::construct_ivec4<T, S>::map(*this, v);
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A>::TIntVector4(const T _x, const T _y, const T _z, const T _w)
+    template<IntType T, bool S>
+    TIntVector4<T, S>::TIntVector4(const T _x, const T _y, const T _z, const T _w)
     {
-        Detail::construct_ivec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, _x, _y, _z, _w);
+        Detail::construct_ivec4<T, S>::map(*this, _x, _y, _z, _w);
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A>::TIntVector4(const T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S>::TIntVector4(const T s)
     {
-        Detail::construct_ivec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, s);
+        Detail::construct_ivec4<T, S>::map(*this, s);
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A>::TIntVector4(const T* comp)
+    template<IntType T, bool S>
+    TIntVector4<T, S>::TIntVector4(const T* comp)
     {
-        Detail::construct_ivec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, comp);
+        Detail::construct_ivec4<T, S>::map(*this, comp);
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A>::TIntVector4(const TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S>::TIntVector4(const TIntVector2<T, S>& v1, const TIntVector2<T, S>& v2)
     {
-        Detail::construct_ivec4<T, SIMD::use_simd<T, 4, A>::value>::map(*this, v1, v2);
+        Detail::construct_ivec4<T, S>::map(*this, v1, v2);
     }
 
 
 
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator+=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator+=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_add<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_add<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator+=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator+=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_add<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_add<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator-=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator-=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_sub<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_sub<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator-=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator-=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_sub<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_sub<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator*=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator*=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_mul<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_mul<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator*=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator*=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_mul<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_mul<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator/=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator/=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_div<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_div<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator/=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator/=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_div<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_div<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator%=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator%=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_mod<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_mod<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator%=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator%=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_mod<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_mod<T, S>::map(v1, v1, s);
         return v1;
     }
 
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator+(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator+(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_add<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_add<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator+(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator+(TIntVector4<T, S>& v1, T s)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_add<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_add<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator-(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator-(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_sub<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_sub<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator-(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator-(TIntVector4<T, S>& v1, T s)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_sub<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_sub<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator*(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator*(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_mul<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_mul<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator*(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator*(TIntVector4<T, S>& v1, T s)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_mul<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_mul<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator/(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator/(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_div<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_div<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator/(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator/(TIntVector4<T, S>& v1, T s)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_div<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_div<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator%(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator%(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_mod<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_mod<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator%(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator%(TIntVector4<T, S>& v1, T s)
     {
-        TIntVector4<T, A> r;
-        Detail::compute_ivec4_mod<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TIntVector4<T, S> r;
+        Detail::compute_ivec4_mod<T, S>::map(r, v1, s);
         return r;
     }
 
@@ -198,163 +198,163 @@ namespace Phanes::Core::Math
 
     // Bitwise operators
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator&=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator&=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_and<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_and<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator&=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator&=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_and<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_and<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator|=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator|=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_or<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_or<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator|=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator|=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_or<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_or<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator^=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator^=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_xor<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_xor<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator^=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator^=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_xor<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_xor<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator<<=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator<<=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_left_shift<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_left_shift<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator<<=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator<<=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_left_shift<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_left_shift<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator>>=(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator>>=(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        Detail::compute_ivec4_right_shift<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, v2);
+        Detail::compute_ivec4_right_shift<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator>>=(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator>>=(TIntVector4<T, S>& v1, T s)
     {
-        Detail::compute_ivec4_right_shift<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v1, s);
+        Detail::compute_ivec4_right_shift<T, S>::map(v1, v1, s);
         return v1;
     }
 
 
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator&(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator&(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_and<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_and<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator&(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator&(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_and<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_and<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator|(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator|(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_or<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_or<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator|(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator|(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_or<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_or<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator^(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator^(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_xor<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_xor<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator^(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator^(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_xor<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_xor<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator<<(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator<<(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_left_shift<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_left_shift<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator<<(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator<<(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_left_shift<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_left_shift<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator>>(TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator>>(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_right_shift<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_right_shift<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator>>(TIntVector4<T, A>& v1, T s)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator>>(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_right_shift<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_right_shift<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A> operator~(TIntVector4<T, A>& v1)
+    template<IntType T, bool S>
+    TIntVector4<T, S> operator~(TIntVector4<T, S>& v1)
     {
-        TVector2<T, A> r;
-        Detail::compute_ivec4_bnot<T, SIMD::use_simd<T, 4, A>::value>::map(r, v1);
+        TVector2<T, S> r;
+        Detail::compute_ivec4_bnot<T, S>::map(r, v1);
         return r;
     }
 
@@ -362,16 +362,16 @@ namespace Phanes::Core::Math
 
     // Comparision
 
-    template<IntType T, bool A>
-    bool operator==(const TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    bool operator==(const TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        return Detail::compute_ivec4_eq<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v2);
+        return Detail::compute_ivec4_eq<T, S>::map(v1, v2);
     }
 
-    template<IntType T, bool A>
-    bool operator!=(const TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2)
+    template<IntType T, bool S>
+    bool operator!=(const TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        return Detail::compute_ivec4_ieq<T, SIMD::use_simd<T, 4, A>::value>::map(v1, v2);
+        return Detail::compute_ivec4_ieq<T, S>::map(v1, v2);
     }
 
 
@@ -379,28 +379,28 @@ namespace Phanes::Core::Math
     // Inc- / Decrement
 
 
-    template<IntType T, bool A>
-    TIntVector4<T, A>& operator++(TIntVector4<T, A>& v1)
+    template<IntType T, bool S>
+    TIntVector4<T, S>& operator++(TIntVector4<T, S>& v1)
     {
-        Detail::compute_ivec4_inc<T, SIMD::use_simd<T, 4, A>::value>::map(v1);
+        Detail::compute_ivec4_inc<T, S>::map(v1);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A>& operator--(TIntVector4<T, A>& v1)
+    template<IntType T, bool S>
+    TIntVector4<T, S>& operator--(TIntVector4<T, S>& v1)
     {
-        Detail::compute_ivec4_inc<T, SIMD::use_simd<T, 4, A>::value>::map(v1);
+        Detail::compute_ivec4_inc<T, S>::map(v1);
         return v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A>& operator++(TIntVector4<T, A>& v1, int)
+    template<IntType T, bool S>
+    TIntVector4<T, S>& operator++(TIntVector4<T, S>& v1, int)
     {
         return ++v1;
     }
 
-    template<IntType T, bool A>
-    TIntVector4<T, A>& operator--(TIntVector4<T, A>& v1, int)
+    template<IntType T, bool S>
+    TIntVector4<T, S>& operator--(TIntVector4<T, S>& v1, int)
     {
         return --v1;
     }

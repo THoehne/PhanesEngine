@@ -11,7 +11,5 @@
 #   include "PhanesVectorMathSSE.hpp"
 #elif P_INTRINSICS == P_INTRINSICS_NEON
 #   include "PhanesVectorMathNeon.hpp"
-#elif P_INTRINSICS == P_INTRINSICS_FPU 
-#   include "PhanesVectorMathFPU.hpp"
 #endif
 

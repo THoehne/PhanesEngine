@@ -11,165 +11,165 @@
 
 namespace Phanes::Core::Math
 {
-    template<RealType T, bool A>
-    TVector2<T, A>::TVector2(const TVector2<Real, A>& v)
+    template<RealType T, bool S>
+    TVector2<T, S>::TVector2(const TVector2<Real, S>& v)
     {
-        Detail::construct_vec2<T, SIMD::use_simd<T, 2, A>::value>::map(*this, v);
+        Detail::construct_vec2<T, S>::map(*this, v);
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A>::TVector2(Real _x, Real _y)
+    template<RealType T, bool S>
+    TVector2<T, S>::TVector2(Real _x, Real _y)
     {
-        Detail::construct_vec2<T, SIMD::use_simd<T, 2, A>::value>::map(*this, _x, _y);
+        Detail::construct_vec2<T, S>::map(*this, _x, _y);
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A>::TVector2(Real s)
+    template<RealType T, bool S>
+    TVector2<T, S>::TVector2(Real s)
     {
-        Detail::construct_vec2<T, SIMD::use_simd<T, 2, A>::value>::map(*this, s);
+        Detail::construct_vec2<T, S>::map(*this, s);
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A>::TVector2(const Real* comp)
+    template<RealType T, bool S>
+    TVector2<T, S>::TVector2(const Real* comp)
     {
-        Detail::construct_vec2<T, SIMD::use_simd<T, 2, A>::value>::map(*this, comp);
+        Detail::construct_vec2<T, S>::map(*this, comp);
     }
 
 
 
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator+=(TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    TVector2<T, S> operator+=(TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        Detail::compute_vec2_add<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v1, v2);
+        Detail::compute_vec2_add<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator+=(TVector2<T, A>& v1, T s)
+    template<RealType T, bool S>
+    TVector2<T, S> operator+=(TVector2<T, S>& v1, T s)
     {
-        Detail::compute_vec2_add<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v1, s);
+        Detail::compute_vec2_add<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator-=(TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    TVector2<T, S> operator-=(TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        Detail::compute_vec2_sub<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v1, v2);
+        Detail::compute_vec2_sub<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator-=(TVector2<T, A>& v1, T s)
+    template<RealType T, bool S>
+    TVector2<T, S> operator-=(TVector2<T, S>& v1, T s)
     {
-        Detail::compute_vec2_sub<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v1, s);
+        Detail::compute_vec2_sub<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator*=(TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    TVector2<T, S> operator*=(TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        Detail::compute_vec2_mul<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v1, v2);
+        Detail::compute_vec2_mul<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator*=(TVector2<T, A>& v1, T s)
+    template<RealType T, bool S>
+    TVector2<T, S> operator*=(TVector2<T, S>& v1, T s)
     {
-        Detail::compute_vec2_mul<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v1, s);
+        Detail::compute_vec2_mul<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator/=(TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    TVector2<T, S> operator/=(TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        Detail::compute_vec2_div<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v1, v2);
+        Detail::compute_vec2_div<T, S>::map(v1, v1, v2);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator/=(TVector2<T, A>& v1, T s)
+    template<RealType T, bool S>
+    TVector2<T, S> operator/=(TVector2<T, S>& v1, T s)
     {
-        Detail::compute_vec2_div<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v1, s);
+        Detail::compute_vec2_div<T, S>::map(v1, v1, s);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator+(TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    TVector2<T, S> operator+(TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_vec2_add<T, SIMD::use_simd<T, 2, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_vec2_add<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator+(TVector2<T, A>& v1, T s)
+    template<RealType T, bool S>
+    TVector2<T, S> operator+(TVector2<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_vec2_add<T, SIMD::use_simd<T, 2, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_vec2_add<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator-(TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    TVector2<T, S> operator-(TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_vec2_sub<T, SIMD::use_simd<T, 2, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_vec2_sub<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator-(TVector2<T, A>& v1, T s)
+    template<RealType T, bool S>
+    TVector2<T, S> operator-(TVector2<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_vec2_sub<T, SIMD::use_simd<T, 2, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_vec2_sub<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator*(TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    TVector2<T, S> operator*(TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_vec2_mul<T, SIMD::use_simd<T, 2, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_vec2_mul<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator*(TVector2<T, A>& v1, T s)
+    template<RealType T, bool S>
+    TVector2<T, S> operator*(TVector2<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_vec2_mul<T, SIMD::use_simd<T, 2, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_vec2_mul<T, S>::map(r, v1, s);
         return r;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator/(TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    TVector2<T, S> operator/(TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        TVector2<T, A> r;
-        Detail::compute_vec2_div<T, SIMD::use_simd<T, 2, A>::value>::map(r, v1, v2);
+        TVector2<T, S> r;
+        Detail::compute_vec2_div<T, S>::map(r, v1, v2);
         return r;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A> operator/(TVector2<T, A>& v1, T s)
+    template<RealType T, bool S>
+    TVector2<T, S> operator/(TVector2<T, S>& v1, T s)
     {
-        TVector2<T, A> r;
-        Detail::compute_vec2_div<T, SIMD::use_simd<T, 2, A>::value>::map(r, v1, s);
+        TVector2<T, S> r;
+        Detail::compute_vec2_div<T, S>::map(r, v1, s);
         return r;
     }
 
     // Comparision
 
-    template<RealType T, bool A>
-    bool operator==(const TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    bool operator==(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        return Detail::compute_vec2_eq<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v2);
+        return Detail::compute_vec2_eq<T, S>::map(v1, v2);
     }
 
-    template<RealType T, bool A>
-    bool operator!=(const TVector2<T, A>& v1, const TVector2<T, A>& v2)
+    template<RealType T, bool S>
+    bool operator!=(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
-        return Detail::compute_vec2_ieq<T, SIMD::use_simd<T, 2, A>::value>::map(v1, v2);
+        return Detail::compute_vec2_ieq<T, S>::map(v1, v2);
     }
 
 
@@ -177,28 +177,28 @@ namespace Phanes::Core::Math
     // Inc- / Decrement
 
 
-    template<RealType T, bool A>
-    TVector2<T, A>& operator++(TVector2<T, A>& v1)
+    template<RealType T, bool S>
+    TVector2<T, S>& operator++(TVector2<T, S>& v1)
     {
-        Detail::compute_vec2_inc<T, SIMD::use_simd<T, 2, A>::value>::map(v1);
+        Detail::compute_vec2_inc<T, S>::map(v1);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A>& operator--(TVector2<T, A>& v1)
+    template<RealType T, bool S>
+    TVector2<T, S>& operator--(TVector2<T, S>& v1)
     {
-        Detail::compute_vec2_inc<T, SIMD::use_simd<T, 2, A>::value>::map(v1);
+        Detail::compute_vec2_inc<T, S>::map(v1);
         return v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A>& operator++(TVector2<T, A>& v1, int)
+    template<RealType T, bool S>
+    TVector2<T, S>& operator++(TVector2<T, S>& v1, int)
     {
         return ++v1;
     }
 
-    template<RealType T, bool A>
-    TVector2<T, A>& operator--(TVector2<T, A>& v1, int)
+    template<RealType T, bool S>
+    TVector2<T, S>& operator--(TVector2<T, S>& v1, int)
     {
         return --v1;
     }

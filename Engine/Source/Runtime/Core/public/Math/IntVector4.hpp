@@ -7,6 +7,7 @@
 
 #include "Core/public/Math/SIMD/Storage.h"
 
+#include "Core/public/Math/IntVector2.hpp"
 
 #ifndef P_DEBUG
 #pragma warning(disable : 4244)
