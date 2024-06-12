@@ -22,6 +22,19 @@
 
 namespace Phanes::Core::Math::SIMD
 {
+    Phanes::Core::Types::Vec4f32Reg vec4_cross_p(const Phanes::Core::Types::Vec4f32Reg v1, const Phanes::Core::Types::Vec4f32Reg v2)
+    {
+        __m128 tmp0 = _mm_shuffle_ps(v1, v1, _MM_SHUFFLE(3, 0, 2, 1));
+        __m128 tmp1 = _mm_shuffle_ps(v2, v2, _MM_SHUFFLE(3, 1, 0, 2));
+        __m128 tmp2 = _mm_shuffle_ps(v1, v1, _MM_SHUFFLE(3, 1, 0, 2));
+        __m128 tmp3 = _mm_shuffle_ps(v2, v2, _MM_SHUFFLE(3, 0, 2, 1));
+        return _mm_sub_ps(
+            _mm_mul_ps(tmp0, tmp1),
+            _mm_mul_ps(tmp2, tmp3)
+        );
+    }
+
+
     /// <summary>
     /// Adds all scalars of the vector.
     /// </summary>
@@ -246,6 +259,15 @@ namespace Phanes::Core::Math::Detail
     template<> struct compute_vec3_div<float, true> : public compute_vec4_div<float, true> {};
     template<> struct compute_vec3_inc<float, true> : public compute_vec4_inc<float, true> {};
     template<> struct compute_vec3_dec<float, true> : public compute_vec4_dec<float, true> {};
+
+    template<>
+    struct compute_vec3_cross_p<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& r, const Phanes::Core::Math::TVector3<float, true>& v1, const Phanes::Core::Math::TVector3<float, true>& v2)
+        {
+            r.data = Phanes::Core::Math::SIMD::vec4_cross_p(v1.data, v2.data);
+        }
+    };
 
     // ============ //
     //   TVector2   //

@@ -3,6 +3,7 @@
 #include "Core/public/Math/Boilerplate.h"
 
 #include "Core/public/Math/MathAbstractTypes.h"
+#include "Core/public/Math/MathFwd.h"
 #include "Core/public/Math/Vector3.hpp"
 
 #ifndef MATRIX3_H
@@ -14,12 +15,33 @@ namespace Phanes::Core::Math {
     // 3x3 Matrix defined in column-major order.
     // Accessed by M[Row][Col].
 
-    template<RealType T>
+    template<RealType T, bool S>
     struct TMatrix3
     {
     public:
 
-        T m[3][3];
+        union
+        {
+            struct
+            {
+                /// <summary>
+                /// Column one.
+                /// </summary>
+                TVector3<T, S> c0;
+
+                /// <summary>
+                /// Column two.
+                /// </summary>
+                TVector3<T, S> c1;
+
+                /// <summary>
+                /// Column three.
+                /// </summary>
+                TVector3<T, S> c2;
+            };
+        };
+
+        T data[3][3];
 
 
     public:
@@ -30,22 +52,24 @@ namespace Phanes::Core::Math {
          * Copy constructor.
          */
 
-        TMatrix3(const TMatrix3<T>& m1)
+        TMatrix3(const TMatrix3<T, S>& m1)
         {
-            memcpy(this->m, m1.m, sizeof(T) * 9);
+            this->c0 = TVector3<T, S>(m1.c0);
+            this->c1 = TVector3<T, S>(m1.c1);
+            this->c2 = TVector3<T, S>(m1.c2);
         }
 
         /**
          * Construct Matrix from 2d array.
          *
-         * @param(fields) 2D Array with column major order.
+         * @param(fields) 2D Array with row major order.
          */
 
-        TMatrix3(T fields[2][2])
+        TMatrix3(T fields[3][3])
         {
-            this->m[0][0] = fields[0][0]; this->m[1][0] = fields[1][0]; this->m[2][0] = fields[2][0];
-            this->m[0][1] = fields[0][1]; this->m[1][1] = fields[1][1]; this->m[2][1] = fields[2][1];
-            this->m[0][2] = fields[0][2]; this->m[1][2] = fields[1][2]; this->m[2][2] = fields[2][2];
+            this->c0 = TVector3<T, S>(fields[0][0], fields[1][0], fields[2][0]);
+            this->c1 = TVector3<T, S>(fields[0][1], fields[1][1], fields[2][1]);
+            this->c2 = TVector3<T, S>(fields[0][2], fields[1][2], fields[2][2]);
         }
 
         /**
@@ -55,6 +79,7 @@ namespace Phanes::Core::Math {
          * @param(n10) M[1][0]
          * @param(n01) M[0][1]
          * @param(n11) M[1][1]
+         * ...
          *
          * @note nXY = n[Row][Col]
          */
@@ -63,9 +88,9 @@ namespace Phanes::Core::Math {
                  T n10, T n11, T n12,
                  T n20, T n21, T n22)
         {
-            this->m[0][0] = n00; this->m[1][0] = n01; this->m[2][0] = n02;
-            this->m[1][0] = n10; this->m[1][1] = n11; this->m[2][1] = n12;
-            this->m[1][2] = n20; this->m[1][2] = n21; this->m[2][2] = n22;
+            this->c0 = TVector3<T, S>(n00,n10,n20);
+            this->c1 = TVector3<T, S>(n01,n11,n21);
+            this->c2 = TVector3<T, S>(n02,n12,n22);
         }
 
         /**
@@ -75,11 +100,11 @@ namespace Phanes::Core::Math {
          * @param(v2) Column one
          */
 
-        TMatrix3(const TVector3<T>& v1, const TVector3<T>& v2, const TVector3<T> v3)
+        TMatrix3(const TVector3<T, S>& v1, const TVector3<T, S>& v2, const TVector3<T, S> v3)
         {
-            this->m[0][0] = v1.x; this->m[1][0] = v2.x; this->m[2][0] = v3.x;
-            this->m[0][1] = v1.y; this->m[1][1] = v2.y; this->m[2][1] = v3.y;
-            this->m[0][2] = v1.z; this->m[1][2] = v2.z; this->m[2][2] = v3.z;
+            this->c0 = v1;
+            this->c1 = v2;
+            this->c2 = v3;
         }
 
     public:
@@ -99,9 +124,9 @@ namespace Phanes::Core::Math {
             return this->m[m][n];
         }
 
-        FORCEINLINE const TVector3<T>& operator[] (int m) const
+        FORCEINLINE const TVector3<T, S>& operator[] (int m) const
         {
-            return (*reinterpret_cast<TVector3<T>*>(this->m[m]));
+            return (*reinterpret_cast<TVector3<T, S>*>(this->m[m]));
         }
 
     };
@@ -118,12 +143,12 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar
      */
 
-    template<RealType T>
-    TMatrix3<T> operator+= (TMatrix3<T>& m1, T s)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator+= (TMatrix3<T, S>& m1, T s)
     {
-        m1(0, 0) += s; m1(0, 1) += s; m1(0, 2) += s;
-        m1(1, 0) += s; m1(1, 1) += s; m1(1, 2) += s;
-        m1(2, 0) += s; m1(2, 1) += s; m1(2, 2) += s;
+        m1.c0 += s;
+        m1.c1 += s;
+        m1.c2 += s;
 
         return m1;
     }
@@ -135,12 +160,12 @@ namespace Phanes::Core::Math {
      * @param(m2) Matrix
      */
 
-    template<RealType T>
-    TMatrix3<T> operator+= (TMatrix3<T>& m1, const TMatrix3<T>& m2)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator+= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
-        m1(0, 0) += m2(0, 0); m1(0, 1) += m2(0, 1); m1(0, 2) += m2(0, 2);
-        m1(1, 0) += m2(1, 0); m1(1, 1) += m2(1, 1); m1(1, 2) += m2(1, 2);
-        m1(2, 0) += m2(2, 0); m1(2, 1) += m2(2, 1); m1(2, 2) += m2(2, 2);
+        m1.c0 += m2.c0;
+        m1.c1 += m2.c1;
+        m1.c2 += m2.c2;
 
         return m1;
     }
@@ -152,12 +177,12 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar
      */
 
-    template<RealType T>
-    TMatrix3<T> operator-= (TMatrix3<T>& m1, T s)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator-= (TMatrix3<T, S>& m1, T s)
     {
-        m1(0, 0) -= s; m1(0, 1) -= s; m1(0, 2) -= s;
-        m1(1, 0) -= s; m1(1, 1) -= s; m1(1, 2) -= s;
-        m1(2, 0) -= s; m1(2, 1) -= s; m1(2, 2) -= s;
+        m1.c0 -= s;
+        m1.c1 -= s;
+        m1.c2 -= s;
 
         return m1;
     }
@@ -169,12 +194,12 @@ namespace Phanes::Core::Math {
      * @param(m2) Matrix
      */
 
-    template<RealType T>
-    TMatrix3<T> operator-= (TMatrix3<T>& m1, const TMatrix3<T>& m2)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator-= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
-        m1(0, 0) -= m2(0, 0); m1(0, 1) -= m2(0, 1); m1(0, 2) -= m2(0, 2);
-        m1(1, 0) -= m2(1, 0); m1(1, 1) -= m2(1, 1); m1(1, 2) -= m2(1, 2);
-        m1(2, 0) -= m2(2, 0); m1(2, 1) -= m2(2, 1); m1(2, 2) -= m2(2, 2);
+        m1.c0 -= m2.c0;
+        m1.c1 -= m2.c1;
+        m1.c2 -= m2.c2;
 
         return m1;
     }
@@ -186,38 +211,29 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar
      */
 
-    template<RealType T>
-    TMatrix3<T> operator*= (TMatrix3<T>& m1, T s)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator*= (TMatrix3<T, S>& m1, T s)
     {
-        m1(0, 0) *= s; m1(0, 1) *= s; m1(0, 2) *= s;
-        m1(1, 0) *= s; m1(1, 1) *= s; m1(1, 2) *= s;
-        m1(2, 0) *= s; m1(2, 1) *= s; m1(2, 2) *= s;
+        m1.c0 *= ss;
+        m1.c1 *= ss;
+        m1.c2 *= ss;
 
         return m1;
     }
 
     /**
-     * Matrix on matrix multiplication
+     * Matrix on matrix (componentwise)
      *
      * @param(m1) Matrix
      * @param(m2) Matrix
      */
 
-    template<RealType T>
-    TMatrix3<T> operator*= (TMatrix3<T>& m1, const TMatrix3<T>& m2)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator*= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
-        TMatrix3<T> c = m1;
-        m1(0, 0) = c(0, 0) * m2(0, 0) + c(0, 1) * m2(1, 0) + c(0, 2) * m2(2, 0);
-        m1(0, 1) = c(0, 0) * m2(0, 1) + c(0, 1) * m2(1, 1) + c(0, 2) * m2(2, 1);
-        m1(0, 2) = c(0, 0) * m2(0, 2) + c(0, 1) * m2(1, 2) + c(0, 2) * m2(2, 2);
-
-        m1(1, 0) = c(1, 0) * m2(0, 0) + c(1, 1) * m2(1, 0) + c(1, 2) * m2(2, 0);
-        m1(1, 1) = c(1, 0) * m2(0, 1) + c(1, 1) * m2(1, 1) + c(1, 2) * m2(2, 1);
-        m1(1, 2) = c(1, 0) * m2(0, 2) + c(1, 1) * m2(1, 2) + c(1, 2) * m2(2, 2);
-
-        m1(2, 0) = c(2, 0) * m2(0, 0) + c(2, 1) * m2(1, 0) + c(2, 2) * m2(2, 0);
-        m1(2, 1) = c(2, 0) * m2(0, 1) + c(2, 1) * m2(1, 1) + c(2, 2) * m2(2, 1);
-        m1(2, 2) = c(2, 0) * m2(0, 2) + c(2, 1) * m2(1, 2) + c(2, 2) * m2(2, 2);
+        m1.c0 *= m2.c0;
+        m1.c1 *= m2.c1;
+        m1.c2 *= m2.c2;
 
         return m1;
     }
@@ -229,12 +245,12 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar
      */
 
-    template<RealType T>
-    TMatrix3<T> operator+ (const TMatrix3<T>& m, T s)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator+ (const TMatrix3<T, S>& m, T s)
     {
-        return TMatrix3<T>(m(0, 0) + s, m(0, 1) + s, m(0, 2) + s,
-                           m(1, 0) + s, m(1, 1) + s, m(1, 2) + s,
-                           m(2, 0) + s, m(2, 1) + s, m(2, 2) + s);
+        return TMatrix3<T, S>(m.c0 + s,
+                            m.c1 + s,
+                            m.c2 + s);
     }
 
     /**
@@ -244,12 +260,12 @@ namespace Phanes::Core::Math {
      * @param(m2) Matrix
      */
 
-    template<RealType T>
-    TMatrix3<T> operator+ (const TMatrix3<T>& m1, const TMatrix3<T>& m2)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator+ (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
-        return TMatrix2<T>(m1(0, 0) + m2(0, 0), m1(0, 1) + m2(0, 1), m1(0, 2) + m2(0, 2),
-                           m1(1, 0) + m2(1, 0), m1(1, 1) + m2(1, 1), m1(1, 2) + m2(1, 2),
-                           m1(2, 0) + m2(2, 0), m1(2, 1) + m2(2, 1), m1(2, 2) + m2(2, 2));
+        return TMatrix2<T>(m1.c0 + m2.c0,
+                           m1.c1 + m2.c1,
+                           m1.c2 + m2.c2);
     }
 
     /**
@@ -259,12 +275,12 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar
      */
 
-    template<RealType T>
-    TMatrix3<T> operator- (const TMatrix3<T>& m, T s)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator- (const TMatrix3<T, S>& m, T s)
     {
-        return TMatrix3<T>(m(0, 0) - s, m(0, 1) - s, m(0, 2) - s,
-                           m(1, 0) - s, m(1, 1) - s, m(1, 2) - s,
-                           m(2, 0) - s, m(2, 1) - s, m(2, 2) - s);
+        return TMatrix3<T, S>(m1.c0 - s,
+                              m1.c1 - s,
+                              m1.c2 - s);
     }
 
     /**
@@ -274,12 +290,12 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar
      */
 
-    template<RealType T>
-    TMatrix3<T> operator- (const TMatrix3<T>& m1, const TMatrix3<T>& m2)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator- (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
-        return TMatrix3<T>(m1(0, 0) - m2(0, 0), m1(0, 1) - m2(0, 1), m1(0, 2) - m2(0, 2),
-                           m1(1, 0) - m2(1, 0), m1(1, 1) - m2(1, 1), m1(1, 2) - m2(1, 2),
-                           m1(2, 0) - m2(2, 0), m1(2, 1) - m2(2, 1), m1(2, 2) - m2(2, 2));
+        return TMatrix3<T, S>(m1.c0 - m2.c0,
+                              m1.c1 - m2.c1,
+                              m1.c2 - m2.c2);
     }
 
     /**
@@ -289,50 +305,27 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar
      */
 
-    template<RealType T>
-    TMatrix3<T> operator* (const TMatrix3<T>& m, float s)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator* (const TMatrix3<T, S>& m, float s)
     {
-        return TMatrix3<T>(m(0, 0) * s, m(0, 1) * s, m(0, 2) * s,
-                           m(1, 0) * s, m(1, 1) * s, m(1, 2) * s,
-                           m(2, 0) * s, m(2, 1) * s, m(2, 2) * s);
+        return TMatrix3<T, S>(m.c0 * s,
+                              m.c1 * s,
+                              m.c2 * s);
     }
 
     /**
-     * Multiplay matrix by matrix
+     * Multiplay matrix by matrix (componentwise)
      *
      * @param(m1) Matrix
      * @param(m2) Matrix
      */
 
-    template<RealType T>
-    TMatrix3<T> operator* (const TMatrix3<T>& m1, const TMatrix3<T>& m2)
+    template<RealType T, bool S>
+    TMatrix3<T, S> operator* (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
-        return TMatrix3<T>(m1(0, 0) * m2(0, 0) + m1(0, 1) * m2(1, 0) + m1(0, 2) * m2(2, 0),
-                           m1(0, 0) * m2(0, 1) + m1(0, 1) * m2(1, 1) + m1(0, 2) * m2(2, 1),
-                           m1(0, 0) * m2(0, 2) + m1(0, 1) * m2(1, 2) + m1(0, 2) * m2(2, 2),
-
-                           m1(1, 0) * m2(0, 0) + m1(1, 1) * m2(1, 0) + m1(1, 2) * m2(2, 0),
-                           m1(1, 0) * m2(0, 1) + m1(1, 1) * m2(1, 1) + m1(1, 2) * m2(2, 1),
-                           m1(1, 0) * m2(0, 2) + m1(1, 1) * m2(1, 2) + m1(1, 2) * m2(2, 2),
-
-                           m1(2, 0) * m2(0, 0) + m1(2, 1) * m2(1, 0) + m1(2, 2) * m2(2, 0),
-                           m1(2, 0) * m2(0, 1) + m1(2, 1) * m2(1, 1) + m1(2, 2) * m2(2, 1),
-                           m1(2, 0) * m2(0, 2) + m1(2, 1) * m2(1, 2) + m1(2, 2) * m2(2, 2));
-    }
-
-    /**
-     * Add matrix to matrix componentwise
-     *
-     * @param(m1) Matrix
-     * @param(m2) Matrix
-     */
-
-    template<RealType T>
-    TVector3<T> operator* (const TMatrix3<T>& m1, const TVector3<T>& v)
-    {
-        return TVector3<T>(m1(0, 0) * v.x + m1(0, 1) * v.y + m1(0, 2) * v.z,
-                           m1(1, 0) * v.x + m1(1, 1) * v.y + m1(1, 2) * v.z,
-                           m1(2, 0) * v.x + m1(2, 1) * v.y + m1(2, 2) * v.z);
+        return TMatrix3<T, S>(m1.c0 + m2.c0,
+                              m1.c1 + m2.c1,
+                              m1.c2 + m2.c2);
     }
 
     /**
@@ -342,8 +335,8 @@ namespace Phanes::Core::Math {
      * @param(m2) Matrix
      */
 
-    template<RealType T>
-    bool operator== (const TMatrix3<T>& m1, const TMatrix3<T>& m2)
+    template<RealType T, bool S>
+    bool operator== (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
         return (m1[0] == m2[0] && m1[1] == m2[1] && m1[2] == m2[2]);
     }
@@ -355,8 +348,8 @@ namespace Phanes::Core::Math {
      * @param(m2) Matrix
      */
 
-    template<RealType T>
-    bool operator!= (const TMatrix3<T>& m1, const TMatrix3<T>& m2)
+    template<RealType T, bool S>
+    bool operator!= (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
         return (m1[0] != m2[0] || m1[1] != m2[1] || m1[2] != m2[2]);
     }
@@ -372,8 +365,8 @@ namespace Phanes::Core::Math {
      * @param(m1) Matrix
      */
     
-    template<RealType T>
-    T Determinant(const TMatrix3<T>& m1)
+    template<RealType T, bool S>
+    T Determinant(const TMatrix3<T, S>& m1)
     {
         return   m1(0, 0) * (m1(1, 1) * m1(2, 2) - m1(1, 2) * m1(2, 1))
                - m1(0, 1) * (m1(1, 0) * m1(2, 2) - m1(1, 2) * m1(2, 0))
@@ -390,22 +383,22 @@ namespace Phanes::Core::Math {
      * @note Stores result in m1.
      */
 
-    template<RealType T>
-    TMatrix3<T> InverseV(TMatrix3<T>& m1)
+    template<RealType T, bool S>
+    TMatrix3<T, S> InverseV(TMatrix3<T, S>& m1)
     {
-        const TVector3<T>& v0 = m1[0];
-        const TVector3<T>& v1 = m1[1];
-        const TVector3<T>& v2 = m1[2];
+        const TVector3<T, S>& v0 = m1[0];
+        const TVector3<T, S>& v1 = m1[1];
+        const TVector3<T, S>& v2 = m1[2];
 
-        TVector3<T> r0 = CrossP(v1, v2);
-        TVector3<T> r1 = CrossP(v2, v0);
-        TVector3<T> r2 = CrossP(v0, v1);
+        TVector3<T, S> r0 = CrossP(v1, v2);
+        TVector3<T, S> r1 = CrossP(v2, v0);
+        TVector3<T, S> r2 = CrossP(v0, v1);
 
-        T _1_det = (T)1.0 / determinant(m1);
+        T _1_det = (T)1.0 / Determinant(m1);
 
-        m1 = TMatrix3<T>(r0.x, r0.y, r0.z,
-                        r1.x, r1.y, r1.z,
-                        r2.x, r2.y, r2.z);
+        m1 = TMatrix3<T, S>(r0.x, r0.y, r0.z,
+                            r1.x, r1.y, r1.z,
+                            r2.x, r2.y, r2.z);
 
         m1 *= _1_det;
 
@@ -420,8 +413,8 @@ namespace Phanes::Core::Math {
      * @note Result is stored in m1;
      */
 
-    template<RealType T>
-    TMatrix3<T> TransposeV(TMatrix3<T>& m1)
+    template<RealType T, bool S>
+    TMatrix3<T, S> TransposeV(TMatrix3<T, S>& m1)
     {
         Swap(m1(0, 1), m1(1, 0));
         Swap(m1(0, 2), m1(2, 0));
@@ -441,8 +434,8 @@ namespace Phanes::Core::Math {
      * @param(m1) Matrix
      */
 
-    template<RealType T>
-    TMatrix3<T> Inverse(TMatrix3<T>& m1)
+    template<RealType T, bool S>
+    TMatrix3<T, S> Inverse(TMatrix3<T, S>& m1)
     {
         const TVector3<T>& v0 = m1[0];
         const TVector3<T>& v1 = m1[1];
@@ -454,7 +447,7 @@ namespace Phanes::Core::Math {
 
         T _1_det = (T)1.0 / Determinant(m1);
 
-        TMatrix3<T> inverse(r0.x, r0.y, r0.z,
+        TMatrix3<T, S> inverse(r0.x, r0.y, r0.z,
             r1.x, r1.y, r1.z,
             r2.x, r2.y, r2.z);
 
@@ -471,10 +464,10 @@ namespace Phanes::Core::Math {
      * @note Result is stored in m1;
      */
 
-    template<RealType T>
-    TMatrix3<T> Transpose(const TMatrix3<T>& m1)
+    template<RealType T, bool S>
+    TMatrix3<T, S> Transpose(const TMatrix3<T, S>& m1)
     {
-        return TMatrix3<T>(m1(0, 0), m1(1, 0), m1(2, 0),
+        return TMatrix3<T, S>(m1(0, 0), m1(1, 0), m1(2, 0),
                            m1(0, 1), m1(1, 1), m1(2, 1),
                            m1(0, 2), m1(1, 2), m1(2, 2));
     }
@@ -483,12 +476,12 @@ namespace Phanes::Core::Math {
      * Checks if matrix is an identity matrix.
      */
 
-    template<RealType T>
-    bool IsIndentityMatrix(const TMatrix3<T>& m1)
+    template<RealType T, bool S>
+    bool IsIdentityMatrix(const TMatrix3<T, S>& m1)
     {
-        return (abs(m1(0, 0) - (T)1.0) < P_FLT_INAC && abs(m1(0, 1) - (T)1.0) < P_FLT_INAC && abs(m1(0, 2) - (T)1.0) < P_FLT_INAC &&
-                abs(m1(1, 0) - (T)1.0) < P_FLT_INAC && abs(m1(1, 1) - (T)1.0) < P_FLT_INAC && abs(m1(1, 2) - (T)1.0) < P_FLT_INAC &&
-                abs(m1(2, 0) - (T)1.0) < P_FLT_INAC && abs(m1(2, 1) - (T)1.0) < P_FLT_INAC && abs(m1(2, 2) - (T)1.0) < P_FLT_INAC);
+        return (abs(m1(0, 0) - (T)1.0) < P_FLT_INAC && abs(m1(0, 1) - (T)0.0) < P_FLT_INAC && abs(m1(0, 2) - (T)0.0) < P_FLT_INAC &&
+                abs(m1(1, 0) - (T)0.0) < P_FLT_INAC && abs(m1(1, 1) - (T)1.0) < P_FLT_INAC && abs(m1(1, 2) - (T)0.0) < P_FLT_INAC &&
+                abs(m1(2, 0) - (T)0.0) < P_FLT_INAC && abs(m1(2, 1) - (T)0.0) < P_FLT_INAC && abs(m1(2, 2) - (T)1.0) < P_FLT_INAC);
     }
 
 } // Phanes::Core::Math

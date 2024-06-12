@@ -504,18 +504,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T, false> CrossPV(TVector3<T, false>& v1, const TVector3<T, false>& v2)
-    {
-        float x = v1.x;
-        float y = v1.y;
-        float z = v1.z;
-
-        v1.x = (y * v2.z) - (z * v2.y);
-        v1.y = (z * v2.x) - (x * v2.z);
-        v1.z = (x * v2.y) - (y * v2.x);
-
-        return v1;
-    }
+    TVector3<T, false> CrossPV(TVector3<T, false>& v1, const TVector3<T, false>& v2);
 
     /**
      * Gets the componentwise max of both vectors.
@@ -991,12 +980,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T, false> CrossP(const TVector3<T, false>& v1, const TVector3<T, false>& v2)
-    {
-        return TVector3<T, false>((v1.y * v2.z) - (v1.z * v2.y),
-                           (v1.z * v2.x) - (v1.x * v2.z),
-                           (v1.x * v2.y) - (v1.y * v2.x));
-    }
+    TVector3<T, false> CrossP(const TVector3<T, false>& v1, const TVector3<T, false>& v2);
 
     /**
      * Linearly interpolates between two vectors.

@@ -31,6 +31,9 @@ namespace Phanes::Core::Math::Detail
     template<RealType T, bool S>
     struct compute_vec3_dec {};
 
+    template<RealType T, bool S>
+    struct compute_vec3_cross_p {};
+
 
 
     template<RealType T>
@@ -197,6 +200,17 @@ namespace Phanes::Core::Math::Detail
             r.x = v1.x - 1;
             r.y = v1.y - 1;
             r.z = v1.z - 1;
+        }
+    };
+
+    template<RealType T>
+    struct compute_vec3_cross_p<T, false>
+    {
+        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& r, const Phanes::Core::Math::TVector3<T, false>& v1, const Phanes::Core::Math::TVector3<T, false>& v2)
+        {
+            r.x = (v1.y * v2.z) - (v1.z * v2.y);
+            r.y = (v1.z * v2.x) - (v1.x * v2.z);
+            r.z = (v1.x * v2.y) - (v1.y * v2.x);
         }
     };
 }

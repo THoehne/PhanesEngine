@@ -208,4 +208,21 @@ namespace Phanes::Core::Math
     {
         return --v1;
     }
+
+
+    // Other
+
+    template<RealType T, bool S>
+    TVector3<T, S> CrossP(const TVector3<T, S>& v1, const TVector3<T, S>& v2)
+    {
+        TVector3<T, S> r;
+        Detail::compute_vec3_cross_p<T, S>::map(r, v1, v2);
+        return r;
+    }
+
+    template<RealType T, bool S>
+    TVector3<T, S> CrossPV(TVector3<T, S>& v1, const TVector3<T, S>& v2)
+    {
+        Detail::compute_vec3_cross_p<T, S>::map(v1, v1, v2);
+    }
 }

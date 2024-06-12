@@ -94,30 +94,24 @@ namespace Phanes::Core::Math {
         }
 
     public:
-        
-        constexpr GetCol(int n)
-        {
-            switch (n)
-            {
-            case 0:
-                return this->c0;
-            case 1:
-                return this->c1;
-            default:
-                break;
-            }
-        }
+       
 
         FORCEINLINE T operator() (int n, int m) const
         {
             this->data[m][n];
         }
 
-        FORCEINLINE TVector2<T, false>& operator[] (int m) const
+        FORCEINLINE TVector2<T, false> operator[] (int m) const
         {
-            static_assert(m > -1 && m < 2, "(PHANES_CORE::MATH [Matrix2.hpp]): m must be between 0 or 1.");
+            switch (m)
+            {
+            case 0:
+                return this->c0;
+            case 1:
+                return this->c1;
+            }
 
-            return GetCol(m);
+            throw std::invalid_argument("m is outside valid range.");
         }
 
     };
@@ -247,15 +241,13 @@ namespace Phanes::Core::Math {
     template<RealType T>
     bool operator== (const TMatrix2<T>& m1, const TMatrix2<T>& m2)
     {
-            return (abs(m1(0, 0) - m2(0, 0)) < P_FLT_INAC && abs(m1(0, 1) - m2(0, 1)) < P_FLT_INAC &&
-                            abs(m1(1, 0) - m2(1, 0)) < P_FLT_INAC && abs(m1(1, 1) - m2(1, 1)) < P_FLT_INAC);
+            return m1[0] == m2[0] && m1[1] == m2[1];
     }
 
     template<RealType T>
     bool operator!= (const TMatrix2<T>& m1, const TMatrix2<T>& m2)
     {
-            return (abs(m1(0, 0) - m2(0, 0)) > P_FLT_INAC || abs(m1(0, 1) - m2(0, 1)) > P_FLT_INAC ||
-                            abs(m1(1, 0) - m2(1, 0)) > P_FLT_INAC || abs(m1(1, 1) - m2(1, 1)) > P_FLT_INAC);
+            return m1[0] != m2[0] || m1[1] != m2[1];
     }
 
 
