@@ -111,17 +111,17 @@ namespace Phanes::Core::Math {
 
         FORCEINLINE T& operator() (int n, int m)
         {
-            return this->m[m][n];
+            return this->data[m][n];
         }
 
-        FORCEINLINE TVector3<T>& operator[] (int m)
+        FORCEINLINE TVector3<T, S>& operator[] (int m)
         {
-            return (*reinterpret_cast<TVector3<T>*>(this->m[m]));
+            return (*reinterpret_cast<TVector3<T, S>*>(this->m[m]));
         }
 
         FORCEINLINE const T& operator() (int n, int m) const
         {
-            return this->m[m][n];
+            return this->data[m][n];
         }
 
         FORCEINLINE const TVector3<T, S>& operator[] (int m) const
@@ -249,8 +249,8 @@ namespace Phanes::Core::Math {
     TMatrix3<T, S> operator+ (const TMatrix3<T, S>& m, T s)
     {
         return TMatrix3<T, S>(m.c0 + s,
-                            m.c1 + s,
-                            m.c2 + s);
+                              m.c1 + s,
+                              m.c2 + s);
     }
 
     /**
@@ -384,17 +384,18 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> InverseV(TMatrix3<T, S>& m1)
+    bool InverseV(TMatrix3<T, S>& m1)
     {
-        const TVector3<T, S>& v0 = m1[0];
-        const TVector3<T, S>& v1 = m1[1];
-        const TVector3<T, S>& v2 = m1[2];
-
-        TVector3<T, S> r0 = CrossP(v1, v2);
-        TVector3<T, S> r1 = CrossP(v2, v0);
-        TVector3<T, S> r2 = CrossP(v0, v1);
+        TVector3<T, S> r0 = CrossP(m1.c1, m1.c2);
+        TVector3<T, S> r1 = CrossP(m1.c2, m1.c0);
+        TVector3<T, S> r2 = CrossP(m1.c0, m1.c1);
 
         T _1_det = (T)1.0 / Determinant(m1);
+
+        if (_1_det == (T)0.0)
+        {
+            return false;
+        }
 
         m1 = TMatrix3<T, S>(r0.x, r0.y, r0.z,
                             r1.x, r1.y, r1.z,
@@ -402,7 +403,7 @@ namespace Phanes::Core::Math {
 
         m1 *= _1_det;
 
-        return m1;
+        return true;
     }
 
     /**
@@ -414,14 +415,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> TransposeV(TMatrix3<T, S>& m1)
-    {
-        Swap(m1(0, 1), m1(1, 0));
-        Swap(m1(0, 2), m1(2, 0));
-        Swap(m1(1, 2), m1(2, 1));
-
-        return m1;
-    }
+    TMatrix3<T, S> TransposeV(TMatrix3<T, S>& m1);
 
 
     // =============== //
@@ -435,25 +429,26 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> Inverse(TMatrix3<T, S>& m1)
+    bool Inverse(TMatrix3<T, S>& r, const TMatrix3<T, S>& m1)
     {
-        const TVector3<T>& v0 = m1[0];
-        const TVector3<T>& v1 = m1[1];
-        const TVector3<T>& v2 = m1[2];
-
-        TVector3<T> r0 = CrossP(v1, v2);
-        TVector3<T> r1 = CrossP(v2, v0);
-        TVector3<T> r2 = CrossP(v0, v1);
+        TVector3<T, S> r0 = CrossP(m1.c1, m1.c2);
+        TVector3<T, S> r1 = CrossP(m1.c2, m1.c0);
+        TVector3<T, S> r2 = CrossP(m1.c0, m1.c1);
 
         T _1_det = (T)1.0 / Determinant(m1);
 
-        TMatrix3<T, S> inverse(r0.x, r0.y, r0.z,
+        if (_1_det == (T)0.0)
+        {
+            return false;
+        }
+
+        r = TMatrix3<T, S>(r0.x, r0.y, r0.z,
             r1.x, r1.y, r1.z,
             r2.x, r2.y, r2.z);
 
-        inverse *= _1_det;
+        r *= _1_det;
 
-        return inverse;
+        return true;
     }
 
     /**
@@ -465,12 +460,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> Transpose(const TMatrix3<T, S>& m1)
-    {
-        return TMatrix3<T, S>(m1(0, 0), m1(1, 0), m1(2, 0),
-                           m1(0, 1), m1(1, 1), m1(2, 1),
-                           m1(0, 2), m1(1, 2), m1(2, 2));
-    }
+    TMatrix3<T, S> Transpose(const TMatrix3<T, S>& m1);
     
     /**
      * Checks if matrix is an identity matrix.
@@ -488,3 +478,5 @@ namespace Phanes::Core::Math {
 
 
 #endif // !MATRIX3_H
+
+#include "Core/public/Math/Matrix3.inl"

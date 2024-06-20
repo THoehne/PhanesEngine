@@ -38,10 +38,7 @@ namespace Phanes::Core::Math::Detail
     {
         static constexpr void map(Phanes::Core::Math::TVector4<T, false>& v1, const TVector4<T, false>& v2)
         {
-            v1.x = v2.x;
-            v1.y = v2.y;
-            v1.z = v2.z;
-            v1.w = v2.w;
+            memcpy(v1.data, v2.data, 4 * sizeof(T));
         }
 
 
@@ -72,10 +69,7 @@ namespace Phanes::Core::Math::Detail
 
         static constexpr void map(Phanes::Core::Math::TVector4<T, false>& v1, const T* comp)
         {
-            v1.x = comp[0];
-            v1.y = comp[1];
-            v1.z = comp[2];
-            v1.w = comp[3];
+            memcpy(v1.data, comp, 4 * sizeof(T));
         }
     };
 

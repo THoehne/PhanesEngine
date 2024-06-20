@@ -279,7 +279,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TMatrix2<T> TransposeV(TMatrix2<T>& m1)
     {
-            Swap(m1(0, 1), m1(1, 0));
+        Swap(m1(0, 1), m1(1, 0));
     }
 
     // =============== //
@@ -299,7 +299,7 @@ namespace Phanes::Core::Math {
     TMatrix2<T> Transpose(const TMatrix2<T>& m1)
     {
             return TMatrix2<T>(m1(0, 0), m1(1, 0),
-                                                 m1(0, 1), m1(1, 1));
+                               m1(0, 1), m1(1, 1));
     }
 
     template<RealType T>
@@ -313,3 +313,6 @@ namespace Phanes::Core::Math {
 
 
 #endif // !MATRIX2_H
+
+
+#include "Core/public/Math/SIMD/SIMDIntrinsics.h"

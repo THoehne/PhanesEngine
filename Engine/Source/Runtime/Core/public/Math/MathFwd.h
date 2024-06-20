@@ -29,7 +29,6 @@ namespace Phanes::Core::Math {
     template<RealType T>    struct TRay;
     template<RealType T>    struct TLine;
     template<RealType T>    struct TPlane;
-    template<RealType T>    struct TMatrix4;
     template<RealType T>    struct TQuaternion;
     template<RealType T>    struct TTransform;
     template<RealType T>    struct TPoint2;
@@ -40,6 +39,7 @@ namespace Phanes::Core::Math {
     template<IntType T>		struct TIntPoint4;
     template<RealType T>    struct TMatrix2;
     template<RealType T, bool S>    struct TMatrix3;
+    template<RealType T, bool S>    struct TMatrix4; 
     template<RealType T, bool S>    struct TVector2;
     template<RealType T, bool S>    struct TVector3;
     template<RealType T, bool S>	struct TVector4;
