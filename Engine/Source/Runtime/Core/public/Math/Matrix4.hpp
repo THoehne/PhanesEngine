@@ -57,49 +57,196 @@ namespace Phanes::Core::Math {
 	// ==================== //
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator+= (TMatrix4<T, S>& a, T s);
+	TMatrix4<T, S> operator+= (TMatrix4<T, S>& m1, T s)
+	{
+		m1.c0 += s;
+		m1.c1 += s;
+		m1.c2 += s;
+		m1.c3 += s;
+
+		return m1;
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator+= (TMatrix4<T, S>& a, const TMatrix4<T, S>& b);
+	TMatrix4<T, S> operator+= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		m1.c0 += m2.c0;
+		m1.c1 += m2.c1;
+		m1.c2 += m2.c2;
+		m1.c3 += m2.c3;
+
+		return m1;
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator-= (TMatrix4<T, S>& a, T s);
+	TMatrix4<T, S> operator-= (TMatrix4<T, S>& m1, T s)
+	{
+		m1.c0 -= s;
+		m1.c1 -= s;
+		m1.c2 -= s;
+		m1.c3 -= s;
+
+		return m1;
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator-= (TMatrix4<T, S>& a, const TMatrix4<T, S>& b);
+	TMatrix4<T, S> operator-= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		m1.c0 -= m2.c0;
+		m1.c1 -= m2.c1;
+		m1.c2 -= m2.c2;
+		m1.c3 -= m2.c3;
+
+		return m1;
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator*= (TMatrix4<T, S>& a, T s);
+	TMatrix4<T, S> operator*= (TMatrix4<T, S>& m1, T s)
+	{
+		m1.c0 *= s;
+		m1.c1 *= s;
+		m1.c2 *= s;
+		m1.c3 *= s;
+
+		return m1;
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator*= (TMatrix4<T, S>& a, const TMatrix4<T, S>& b);
+	TMatrix4<T, S> operator*= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		m1.c0 *= m2.c0;
+		m1.c1 *= m2.c1;
+		m1.c2 *= m2.c2;
+		m1.c3 *= m2.c3;
+
+		return m1;
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator+ (const TMatrix4<T, S>& a, T s);
+	TMatrix4<T, S> operator/= (TMatrix4<T, S>& m1, T s)
+	{
+		s = (T)1.0 / s;
+		m1.c0 *= s;
+		m1.c1 *= s;
+		m1.c2 *= s;
+		m1.c3 *= s;
+
+		return m1;
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator+ (const TMatrix4<T, S>& a, const TMatrix4<T, S>& b);
+	TMatrix4<T, S> operator/= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		m1.c0 /= m2.c0;
+		m1.c1 /= m2.c1;
+		m1.c2 /= m2.c2;
+		m1.c3 /= m2.c3;
+
+		return m1;
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator- (const TMatrix4<T, S>& a, T s);
+	TMatrix4<T, S> operator+ (const TMatrix4<T, S>& m1, T s)
+	{
+		return TMatrix4<T, S>(m1.c0 + s,
+							  m1.c1 + s,
+							  m1.c2 + s,
+							  m1.c3 + s
+						      );
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator- (const TMatrix4<T, S>& a, const TMatrix4<T, S>& b);
+	TMatrix4<T, S> operator+ (const TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		return TMatrix4<T, S>(m1.c0 + m2.c0,
+							  m1.c1 + m2.c1,
+							  m1.c2 + m2.c2,
+							  m1.c3 + m2.c3
+					);
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator* (const TMatrix4<T, S>& a, T s);
+	TMatrix4<T, S> operator- (const TMatrix4<T, S>& m1, T s)
+	{
+		return TMatrix4<T, S>(m1.c0 - s,
+							  m1.c1 - s,
+							  m1.c2 - s,
+							  m1.c3 - s
+			);
+	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator* (const TMatrix4<T, S>& a, const TMatrix4<T, S>& b);
+	TMatrix4<T, S> operator- (const TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		return TMatrix4<T, S>(m1.c0 - m2.c0,
+							  m1.c1 - m2.c1,
+							  m1.c2 - m2.c2,
+							  m1.c3 - m2.c3
+		);
+	}
 
 	template<RealType T, bool S>
-	TVector4<T, S> operator* (const TMatrix4<T, S>& a, const TVector4<T, S>& v);
+	TMatrix4<T, S> operator* (const TMatrix4<T, S>& m1, T s)
+	{
+		return TMatrix4<T, S>(m1.c0 * s,
+						      m1.c1 * s,
+						      m1.c2 * s,
+						      m1.c3 * s
+						      );
+	}
 
 	template<RealType T, bool S>
-	bool operator== (const TMatrix4<T, S>& a, const TMatrix4<T, S>& b);
+	TMatrix4<T, S> operator* (const TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		return TMatrix4<T, S>(m1.c0 * m2.c0,
+							  m1.c1 * m2.c1,
+							  m1.c2 * m2.c2,
+							  m1.c3 * m2.c3
+		);
+	}
 
 	template<RealType T, bool S>
-	bool operator!= (const TMatrix4<T, S>& a, const TMatrix4<T, S>& b);
+	TMatrix4<T, S> operator/ (const TMatrix4<T, S>& m1, T s)
+	{
+		s = (T)1.0 / s;
+		return TMatrix4<T, S>(m1.c0 * s,
+							  m1.c1 * s,
+							  m1.c2 * s,
+							  m1.c3 * s
+		);
+	}
+
+	template<RealType T, bool S>
+	TMatrix4<T, S> operator/ (const TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		return TMatrix4<T, S>(m1.c0 / m2.c0,
+						      m1.c1 / m2.c1,
+						      m1.c2 / m2.c2,
+						      m1.c3 / m2.c3
+		);
+	}
+
+	template<RealType T, bool S>
+	TVector4<T, S> operator* (const TMatrix4<T, S>& m1, const TVector4<T, S>& v)
+	{
+		return TVector4<T, S>(DotP(m1.c0, v),
+						      DotP(m1.c1, v),
+						      DotP(m1.c2, v),
+						      DotP(m1.c3, v)
+							  );
+	}
+
+	template<RealType T, bool S>
+	bool operator== (const TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		return (m1.c0 == m2.c0 && m1.c1 == m2.c1 && m1.c2 == m2.c2 && m1.c3 == m2.c3);
+	}
+
+	template<RealType T, bool S>
+	bool operator!= (const TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	{
+		return (m1.c0 != m2.c0 || m1.c1 != m2.c1 || m1.c2 != m2.c2 || m1.c3 != m2.c3);
+	}
 
 
 	// ================================ //
@@ -115,6 +262,7 @@ namespace Phanes::Core::Math {
 	template<RealType T, bool S>
 	TMatrix4<T, S> TransposeV(TMatrix4<T, S>& a);
 
+
 	// =============== //
 	//   WITH RETURN   //
 	// =============== //
@@ -127,7 +275,7 @@ namespace Phanes::Core::Math {
 	TMatrix4<T, S> Transpose(const TMatrix4<T, S>& a);
 
 	template<RealType T, bool S>
-	FORCEINLINE bool IsIndentityMatrix(const TMatrix4<T, S>& a)
+	FORCEINLINE bool IsIndentityMatrix(const TMatrix4<T, S>& m1)
 	{
 		return (abs(m1(0, 0) - (T)1.0) < P_FLT_INAC && abs(m1(0, 1) - (T)0.0) < P_FLT_INAC && abs(m1(0, 2) - (T)0.0) < P_FLT_INAC && abs(m1(0, 3) - (T)0.0) < P_FLT_INAC && 
 				abs(m1(1, 0) - (T)0.0) < P_FLT_INAC && abs(m1(1, 1) - (T)1.0) < P_FLT_INAC && abs(m1(1, 2) - (T)0.0) < P_FLT_INAC && abs(m1(1, 3) - (T)0.0) < P_FLT_INAC && 

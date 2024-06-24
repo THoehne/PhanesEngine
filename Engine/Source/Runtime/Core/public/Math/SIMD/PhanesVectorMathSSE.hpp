@@ -97,6 +97,11 @@ namespace Phanes::Core::Math::SIMD
     {
         return vec4_hadd_cvtf32(_mm_mul_ps(v1, v2));
     }
+
+    Phanes::Core::Types::Vec2f64Reg vec2_eq(const Phanes::Core::Types::Vec2f64Reg v1, const Phanes::Core::Types::Vec2f64Reg v2)
+    {
+        return _mm_cmpeq_pd(v1, v2);
+    }
 }
 
 
@@ -378,6 +383,7 @@ namespace Phanes::Core::Math::Detail
             r.comp = _mm_sub_pd(v1.comp, _mm_set1_pd(1.0f));
         }
     };
+
 
     // =============== //
     //   TIntVector4   //

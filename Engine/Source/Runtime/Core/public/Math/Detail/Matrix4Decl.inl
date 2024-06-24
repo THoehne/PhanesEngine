@@ -18,7 +18,7 @@ namespace Phanes::Core::Math::Detail
     template<RealType T>
     struct compute_mat4_det<T, false>
     {
-        static constexpr T map(Phanes::Core::Math::TMatrix4<T, S>& m)
+        static constexpr T map(Phanes::Core::Math::TMatrix4<T, false>& m)
         {
             const TVector3<T, false>& a = reinterpret_cast<TVector3<T, false>&>(m[0]);
             const TVector3<T, false>& b = reinterpret_cast<TVector3<T, false>&>(m[1]);
@@ -87,7 +87,7 @@ namespace Phanes::Core::Math::Detail
     template<RealType T>
     struct compute_mat4_transpose<T, false>
     {
-        static constexpr void map(Phanes::Core::Math::TMatrix4<T, S>& r, const Phanes::Core::Math::TMatrix4<T, S>& m)
+        static constexpr void map(Phanes::Core::Math::TMatrix4<T, false>& r, const Phanes::Core::Math::TMatrix4<T, false>& m)
         {
             r = Phanes::Core::Math::TMatrix4<T, false>(m(0, 0), m(1, 0), m(2, 0), m(3, 0),
                                                        m(0, 1), m(1, 1), m(2, 1), m(3, 1),

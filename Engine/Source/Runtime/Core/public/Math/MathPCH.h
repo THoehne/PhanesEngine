@@ -7,13 +7,16 @@
 #include "Plane.hpp"
 #include "Vector2.hpp"
 #include "Vector3.hpp"
+#include "Vector4.hpp"
 
 #include "IntPoint.hpp"
 #include "IntVector2.hpp"
 #include "IntVector3.hpp"
+#include "IntVector4.hpp"
 
 #include "Matrix2.hpp"
 #include "Matrix3.hpp"
+#include "Matrix4.hpp"
 
 #include "MathCommon.hpp"
 #include "MathTypeConversion.hpp"

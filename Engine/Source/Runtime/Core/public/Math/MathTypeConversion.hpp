@@ -17,11 +17,13 @@
 #include "Core/public/Math/MathAbstractTypes.h"
 #include "Core/public/Math/Vector2.hpp"
 #include "Core/public/Math/Vector3.hpp"
-//#include "Core/public/Math/Vector4.h"
+#include "Core/public/Math/Vector4.hpp"
 #include "Core/public/Math/Matrix2.hpp"
-//#include "Core/public/Math/Matrix3.h"
+#include "Core/public/Math/Matrix3.hpp"
+#include "Core/public/Math/Matrix4.hpp"
 #include "Core/public/Math/IntVector2.hpp"
 #include "Core/public/Math/IntVector3.hpp"
+#include "Core/public/Math/IntVector4.hpp"
 
 #ifndef MATH_TYPE_CONVERSION_H
 #define MATH_TYPE_CONVERSION_H
@@ -60,37 +62,32 @@ namespace Phanes::Core::Math {
   //   ToString   //
   // ============ //
 
-  template<RealType T>
-  std::string ToString(const TVector2<T>& v)
+  template<RealType T, bool S>
+  std::string ToString(const TVector2<T, S>& v)
   {
       return "(" + ToString(v.x) + ", " + ToString(v.y) + ")";
   }
 
-  template<IntType T>
-  std::string ToString(const TIntVector2<T>& v)
+  template<IntType T, bool S>
+  std::string ToString(const TIntVector2<T, S>& v)
   {
       return "(" + ToString(v.x) + ", " + ToString(v.y) + ")";
   }
 
-  template<RealType T>
-  std::string ToString(const TVector3<T>& v)
+  template<RealType T, bool S>
+  std::string ToString(const TVector3<T, S>& v)
   {
       return "(" + ToString(v.x) + ", " + ToString(v.y) + ", " + ToString(v.z) + ")";
   }
 
-  template<IntType T>
-  std::string ToString(const TIntVector3<T>& v)
+  template<IntType T, bool S>
+  std::string ToString(const TIntVector3<T, S>& v)
   {
       return "(" + ToString(v.x) + ", " + ToString(v.y) + ", " + ToString(v.z) + ")";
   }
 
   //std::string toString(const Vector4& v);
 
-  template<RealType T>
-  std::string toString(const TMatrix2<T>& m)
-  {
-      return "[[" + ToString(m.m(0, 0)) + " " + ToString(m.m(0, 1)) + "], [" + ToString(m.m(0, 0)) + " " + ToString(m.m(0, 1)) + "]]";
-  }
 
   //std::string toString(const Matrix3& v);
 

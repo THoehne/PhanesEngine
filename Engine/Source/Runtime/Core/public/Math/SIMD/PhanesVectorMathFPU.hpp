@@ -63,4 +63,12 @@ namespace Phanes::Core::Math::SIMD
     {
         return v1.data[0] * v1.data[0] + v1.data[1] * v2.data[1] + v1.data[2] * v2.data[2] + v1.data[3] * v2.data[3];
     }
+
+    Phanes::Core::Types::Vec2f64Reg vec2_eq(const Phanes::Core::Types::Vec2f64Reg v1, const Phanes::Core::Types::Vec2f64Reg v2)
+    {
+        Phanes::Core::Types::Vec4f64Reg r;
+
+        r.data[0] = (Phanes::Core::Math::Abs(v1.data[0] - v2.data[0]) < P_FLT_INAC) ? 0xFFFFFFFF : 0;
+        r.data[1] = (Phanes::Core::Math::Abs(v1.data[1] - v2.data[1]) < P_FLT_INAC) ? 0xFFFFFFFF : 0;
+    }
 }

@@ -205,4 +205,10 @@ namespace Phanes::Core::Math
     {
         return --v1;
     }
+
+    template<RealType T>
+    T DotP(const TVector4<T, true>& v1, const TVector4<T, true>& v2)
+    {
+        return vec4_dot_cvtf32(v1.data, v2.data);
+    }
 }

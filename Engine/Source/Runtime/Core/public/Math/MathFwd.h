@@ -10,6 +10,7 @@
 #define MATH_FWD_H
 
 #include "Core/public/Math/Boilerplate.h"
+#include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
 
 /**
  * Includes forward declarations, as well as certain useful typedefs.
@@ -50,6 +51,40 @@ namespace Phanes::Core::Math {
     /**
      * Specific instantiation of forward declarations.
      */
+
+    // Vector2
+
+    typedef TVector2<float, false>      Vector2;
+    typedef TVector2<float, false>      Vector2f;
+    typedef TVector2<double, false>     Vector2d;
+
+    typedef TVector2<double, SIMD::use_simd<double, 2, true>::value>        Vector2Regf64;
+    typedef TVector2<double, SIMD::use_simd<double, 2, true>::value>        Vector2Reg;
+    typedef TVector2<double, SIMD::use_simd<double, 2, true>::value>        Vector2Regd;
+
+
+    // Vector3
+
+    typedef TVector3<float, false>      Vector3;
+    typedef TVector3<float, false>      Vector3f;
+    typedef TVector3<double, false>     Vector3d;
+
+    typedef TVector3<float, SIMD::use_simd<float, 3, true>::value>          Vector3Reg;
+    typedef TVector3<float, SIMD::use_simd<float, 3, true>::value>          Vector3Regf32;
+    typedef TVector3<double, SIMD::use_simd<double, 3, true>::value>        Vector3Regd;
+    typedef TVector3<double, SIMD::use_simd<double, 3, true>::value>        Vector3Regf64;
+
+
+    // Vector4
+
+    typedef TVector4<float, false>      Vector4;
+    typedef TVector4<float, false>      Vector4f;
+    typedef TVector4<double, false>     Vector4d;
+
+    typedef TVector4<float, SIMD::use_simd<float, 4, true>::value>          Vector4Reg;
+    typedef TVector4<float, SIMD::use_simd<float, 4, true>::value>          Vector4Regf32;
+    typedef TVector4<double, SIMD::use_simd<double, 4, true>::value>        Vector4Regd;
+    typedef TVector4<double, SIMD::use_simd<double, 4, true>::value>        Vector4Regf64;
     
 
 } // Phanes::Core::Math::coretypes

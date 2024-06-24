@@ -13,7 +13,7 @@
 
 // --- OSAL ----------------------------------------
 
-#include "Core/public/OSAL/PlatformTypes.h"
+#include "Core/public/HAL/PlatformTypes.h"
 
 
 #ifdef P_USE_NAMESPACE_ALIAS
