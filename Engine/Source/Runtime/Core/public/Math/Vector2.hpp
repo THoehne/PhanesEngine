@@ -25,11 +25,11 @@
 
 namespace Phanes::Core::Math {
 
-    /** 
+    /**
      * A 2D Vector with components x and y with floating point precision.
      */
-    
-    
+
+
     template<RealType T, bool A>
     struct TVector2 {
 
@@ -39,9 +39,9 @@ namespace Phanes::Core::Math {
 
         // Using in combination with a struct and an array allows us the reflect changes of the x and y variables in the comp array and vise versa.
 
-        union 
+        union
         {
-        
+
             struct
             {
                 /** X component of Vector
@@ -50,22 +50,22 @@ namespace Phanes::Core::Math {
                  * @note x does not hold the component, but is a reference two the second item in the components array. The varibale exists wholly for convenience.
                  */
                 Real x;
-                    
-                /** Y component of Vector 
-                 * 
+
+                /** Y component of Vector
+                 *
                  * @see [FIELD]components
-                 * 
+                 *
                  * @note y does not hold the component, but is a reference two the second item in the components array. The varibale exists wholly for convenience.
                  */
                 Real y;
             };
 
-            /** Components array holding the data 
-             * 
+            /** Components array holding the data
+             *
              * @see [FIELD]x
              * @see [FIELD]y
-             * 
-             * @note Components are split into x and y. Access and manipulation is possible by these variables. 
+             *
+             * @note Components are split into x and y. Access and manipulation is possible by these variables.
              */
 
             union
@@ -86,7 +86,7 @@ namespace Phanes::Core::Math {
          */
 
         TVector2() = default;
-        
+
         /**
          * Copy constructor
          */
@@ -95,7 +95,7 @@ namespace Phanes::Core::Math {
 
         /**
          * Construct Vector from xy components.
-         * 
+         *
          * @param(x) X component
          * @param(y) Y component
          */
@@ -113,15 +113,15 @@ namespace Phanes::Core::Math {
         /// </summary>
         /// <param name="s">Scalar</param>
         TVector2(Real s);
-    }; 
+    };
 
     // ====================== //
     //   TVector2 operators   //
     // ====================== //
-    
+
     /**
      * Addition operation on same TVector2<T, S> (this) by a floating point value.
-     * 
+     *
      * @param(v1) Vector to add to
      * @param(s) Floating point to add
      */
@@ -160,7 +160,7 @@ namespace Phanes::Core::Math {
     TVector2<T, S> operator-= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
 
     /**
-     * Multiplication of TVector2<T, S> (this) with a floating point. 
+     * Multiplication of TVector2<T, S> (this) with a floating point.
      *
      * @param(v1) Vector to multiply with
      * @param(s Floating point to multiply with
@@ -168,6 +168,17 @@ namespace Phanes::Core::Math {
 
     template<RealType T, bool S>
     TVector2<T, S> operator*= (TVector2<T, S>& v1, T s);
+
+    /// <summary>
+    /// Componentwise multiplication of vector by other vector.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="v1"></param>
+    /// <param name="v2"></param>
+    /// <returns>Copy of v1.</returns>
+    template<RealType T, bool S>
+    TVector2<T, S> operator*= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
 
     /**
      * Devision of Vector (this) by floating point.
@@ -179,72 +190,112 @@ namespace Phanes::Core::Math {
     template<RealType T, bool S>
     TVector2<T, S> operator/= (TVector2<T, S>& v1, T s);
 
+    /// <summary>
+    /// Componentwise division of vector by other vector.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="v1"></param>
+    /// <param name="v2"></param>
+    /// <returns>Copy of v1.</returns>
+    template<RealType T, bool S>
+    TVector2<T, S> operator/= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
+
     /**
      * Scale of Vector by floating point. (> Creates a new TVector2<T, S>)
      *
      * @param(v1) Vector to multiply with
      * @param(s Floating point to multiply with
-     * 
+     *
      * @return Result Vector
      */
 
     template<RealType T, bool S>
     TVector2<T, S> operator* (const TVector2<T, S>& v1, T s);
 
+    /// <summary>
+    /// Componentwise multiplication with vector by vector.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="v1"></param>
+    /// <param name="v2"></param>
+    /// <returns></returns>
+    template<RealType T, bool S>
+    TVector2<T, S> operator* (const TVector2<T, S>& v1, const TVector2<T, S>& v2);
+
     /**
      * Division of Vector by floating point. (> Creates another TVector2<T, S>)
      *
      * @param(v1) Vector to multiply with
      * @param(s Floating point to divide with
-     * 
+     *
      * @return Result Vector
      */
 
     template<RealType T, bool S>
     TVector2<T, S> operator/ (const TVector2<T, S>& v1, T s);
 
+    /// <summary>
+    /// Componentwise multiplication with vector by vector.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="v1"></param>
+    /// <param name="v2"></param>
+    /// <returns></returns>
+    template<RealType T, bool S>
+    TVector2<T, S> operator/ (const TVector2<T, S>& v1, const TVector2<T, S>& v2);
+
     /**
      * Scale of Vector by floating point. (> Creates a new TVector2<T, S>)
      *
      * @param(v1) Vector to multiply with
      * @param(s Floating point to multiply with
-     * 
+     *
      * @return Result Vector
      */
 
     template<RealType T, bool S>
-    inline TVector2<T, S> operator* (T s, const TVector2<T, S>& v1);
+    inline TVector2<T, S> operator* (T s, const TVector2<T, S>& v1)
+    {
+        return v1 * s;
+    }
 
     /**
      * Division of Vector by floating point. (> For convenience not arithmethicaly correct. Works like overloaded counterpart.)
      *
      * @param(v1) Vector to multiply with
      * @param(s Floating point to divide with
-     * 
+     *
      * @return Result Vector
      */
 
+
     template<RealType T, bool S>
-    inline TVector2<T, S> operator/ (T s, const TVector2<T, S>& v1);
+    inline TVector2<T, S> operator/ (T s, const TVector2<T, S>& v1)
+    {
+        return v1 / s;
+    }
 
     /**
-     * Componentwise addition of Vector with floating point. 
+     * Componentwise addition of Vector with floating point.
      *
      * @param(v1) Vector to add to
      * @param(s Floating point to add
-     * 
+     *
      * @return Result Vector
      */
 
     template<RealType T, bool S>
     TVector2<T, S> operator+ (const TVector2<T, S>& v1, T s);
-                
+
     /**
-     * Componentwise addition of Vector with floating point. 
+     * Componentwise addition of Vector with floating point.
      *
      * @param(v1) Vector to add to
      * @param(s Floating point to add
-     * 
+     *
      * @return Result Vector
      */
 
@@ -256,7 +307,7 @@ namespace Phanes::Core::Math {
      *
      * @param(v1) Vector to substract from
      * @param(s Floating point to substract
-     * 
+     *
      * @return Result Vector
      */
 
@@ -268,7 +319,7 @@ namespace Phanes::Core::Math {
      *
      * @param(v1) Vector to substract from
      * @param(s Floating point to substract
-     * 
+     *
      * @return Result Vector
      */
 
@@ -276,22 +327,12 @@ namespace Phanes::Core::Math {
     TVector2<T, S> operator- (const TVector2<T, S>& v1, const TVector2<T, S>& v2);
 
     /**
-     * Negate Vector.
+     * Compare Vector for equality.
      *
-     * @param(v1) Vector to negate
-     */
-
-    template<RealType T, bool S>
-    TVector2<T, S> operator- (const TVector2<T, S>& v1);
-
-
-    /**
-     * Compare Vector for equality. 
-     * 
      * @see [FUNC]Equals
      *
      * @param(v1) Vector to negate
-     * 
+     *
      * @return true if equal, false if inequal
      */
 
@@ -305,12 +346,14 @@ namespace Phanes::Core::Math {
         * @see [FUNC]Equals
         *
         * @param(v1) Vector to negate
-        * 
+        *
         * @return true if inequal, false if equal
         */
 
     template<RealType T, bool S>
     bool operator!= (const TVector2<T, S>& v1, const TVector2<T, S>& v2);
+
+
 
 
     // ============================================ //
@@ -410,7 +453,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     T CosineAngle(const TVector2<T, false>& v1, const TVector2<T, false>& v2)
     {
-        return (v1 * v2) / Magnitude(v1) * Magnitude(v2);
+        return DotP(v1, v2) / (Magnitude(v1) * Magnitude(v2));
     }
 
     /**
@@ -422,8 +465,8 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> SignVectorV(TVector2<T, false>& v1)
     {
-        v1.x = (v1.x >= 0) ? 1 : -1;
-        v1.y = (v1.y >= 0) ? 1 : -1;
+        v1.x = (v1.x >= (T)0.0) ? (T)1.0 : -(T)1.0;
+        v1.y = (v1.y >= (T)0.0) ? (T)1.0 : -(T)1.0;
 
         return v1;
     }
@@ -521,9 +564,9 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> GetPerpendicularV(TVector2<T, false>& v1)
     {
-        T x = v1.x;
+        T x = -v1.x;
         v1.x = v1.y;
-        v1.y = -v1.x;
+        v1.y = x;
 
         return v1;
     }
@@ -543,7 +586,7 @@ namespace Phanes::Core::Math {
     {
         T x = v1.x;
         v1.x = -v1.y;
-        v1.y = v1.x;
+        v1.y = x;
 
         return v1;
     }
@@ -595,7 +638,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> ReflectV(TVector2<T, false>& v1, const TVector2<T, false>& normal)
     {
-        Set(v1, v1 - (2 * DotP(v1, normal) * normal));
+        v1 = (2.0f * DotP(v1, normal) * normal) - v1;
 
         return v1;
     }
@@ -681,6 +724,8 @@ namespace Phanes::Core::Math {
     {
         v1.x = -v1.x;
         v1.y = -v1.y;
+
+        return v1;
     }
 
     /**
@@ -782,7 +827,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> Reflect(const TVector2<T, false>& v1, const TVector2<T, false>& normal)
     {
-        return TVector2<T, false>(v1 - (2 * DotP(v1, normal) * normal));
+        return TVector2<T, false>((2.0f * DotP(v1, normal) * normal) - v1);
     }
 
     /**
@@ -927,7 +972,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> SignVector(const TVector2<T, false>& v1)
     {
-        return TVector2<T, false>((v1.x >= 0) ? 1 : -1, (v1.y >= 0) ? 1 : -1);
+        return TVector2<T, false>((v1.x >= (T)0.0) ? 1 : -1, (v1.y >= (T)0.0) ? (T)1.0 : (T)-1.0);
     }
 
     /**
@@ -981,7 +1026,7 @@ namespace Phanes::Core::Math {
     {
         t = Phanes::Core::Math::Clamp(t, (T)0.0, (T)1.0);
 
-        return (t * destVec) + ((1 - t) * startVec);
+        return ((1 - t) * startVec) + (t * destVec);
     }
 
     /**
@@ -1043,6 +1088,5 @@ namespace Phanes::Core::Math {
 
 #endif // !VECTOR2_H
 
-
-
+// Include operator impl.
 #include "Core/public/Math/Vector2.inl"

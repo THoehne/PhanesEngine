@@ -95,7 +95,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector2<T, S> operator+(TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    TVector2<T, S> operator+(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
         TVector2<T, S> r;
         Detail::compute_vec2_add<T, S>::map(r, v1, v2);
@@ -103,7 +103,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector2<T, S> operator+(TVector2<T, S>& v1, T s)
+    TVector2<T, S> operator+(const TVector2<T, S>& v1, T s)
     {
         TVector2<T, S> r;
         Detail::compute_vec2_add<T, S>::map(r, v1, s);
@@ -111,7 +111,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector2<T, S> operator-(TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    TVector2<T, S> operator-(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
         TVector2<T, S> r;
         Detail::compute_vec2_sub<T, S>::map(r, v1, v2);
@@ -119,7 +119,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector2<T, S> operator-(TVector2<T, S>& v1, T s)
+    TVector2<T, S> operator-(const TVector2<T, S>& v1, T s)
     {
         TVector2<T, S> r;
         Detail::compute_vec2_sub<T, S>::map(r, v1, s);
@@ -127,7 +127,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector2<T, S> operator*(TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    TVector2<T, S> operator*(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
         TVector2<T, S> r;
         Detail::compute_vec2_mul<T, S>::map(r, v1, v2);
@@ -135,7 +135,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector2<T, S> operator*(TVector2<T, S>& v1, T s)
+    TVector2<T, S> operator*(const TVector2<T, S>& v1, T s)
     {
         TVector2<T, S> r;
         Detail::compute_vec2_mul<T, S>::map(r, v1, s);
@@ -143,7 +143,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector2<T, S> operator/(TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    TVector2<T, S> operator/(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
     {
         TVector2<T, S> r;
         Detail::compute_vec2_div<T, S>::map(r, v1, v2);
@@ -151,7 +151,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector2<T, S> operator/(TVector2<T, S>& v1, T s)
+    TVector2<T, S> operator/(const TVector2<T, S>& v1, T s)
     {
         TVector2<T, S> r;
         Detail::compute_vec2_div<T, S>::map(r, v1, s);
