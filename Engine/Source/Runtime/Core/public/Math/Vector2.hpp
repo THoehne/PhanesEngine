@@ -354,7 +354,17 @@ namespace Phanes::Core::Math {
     bool operator!= (const TVector2<T, S>& v1, const TVector2<T, S>& v2);
 
 
+    template<RealType T, bool A>
+    TVector2<T, A>& operator++(TVector2<T, A>& v1);
 
+    template<RealType T, bool A>
+    TVector2<T, A>& operator--(TVector2<T, A>& v1);
+
+    template<RealType T, bool A>
+    TVector2<T, A>& operator++(TVector2<T, A>& v1, int);
+
+    template<RealType T, bool S>
+    TVector2<T, S>& operator--(TVector2<T, S>& v1, int);
 
     // ============================================ //
     //    TVector2 static function implementation	//
