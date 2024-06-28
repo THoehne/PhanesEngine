@@ -160,4 +160,138 @@ namespace VectorTests
         EXPECT_TRUE(PMath::Rotate(v0, (float)30.0_deg) == PMath::Vector2(0.528460969082653f, 3.88467875173176f));
         EXPECT_TRUE(PMath::ClockwiseRotate(v0, (float)30.0_deg) == PMath::Vector2(3.628461f, 1.484679f));
     }
+
+    // --------------
+
+    TEST(Vector3, OperatorTests)
+    {
+        PMath::Vector3 v0(2.4f, 3.1f, 5.6f);
+        PMath::Vector3 v1(5.1f, 2.5f, 7.2f);
+        
+
+        v0 += v1;
+        EXPECT_TRUE(v0 == PMath::Vector3(7.5f, 5.6f, 12.8f));
+
+        v0 -= v1;
+        EXPECT_TRUE(v0 == PMath::Vector3(2.4f, 3.1f, 5.6f));
+
+        v0 *= v1;
+        EXPECT_TRUE(v0 == PMath::Vector3(12.24f, 7.75f, 40.32f));
+
+        v0 /= v1;
+        EXPECT_TRUE(v0 == PMath::Vector3(2.4f, 3.1f, 5.6f));
+
+
+        v0 += 4.0f;
+        EXPECT_TRUE(v0 == PMath::Vector3(6.4f, 7.1f, 9.6f));
+
+        v0 -= 4.0f;
+        EXPECT_TRUE(v0 == PMath::Vector3(2.4f, 3.1f, 5.6f));
+
+        v0 *= 4.0f;
+        EXPECT_TRUE(v0 == PMath::Vector3(9.6f, 12.4f, 22.4f));
+
+        v0 /= 4.0f;
+        EXPECT_TRUE(v0 == PMath::Vector3(2.4f, 3.1f, 5.6f));
+
+        // ------------------------------------------
+
+        PMath::Vector3 r;
+
+        r = v0 + v1;
+        EXPECT_TRUE(r == PMath::Vector3(7.5f, 5.6f, 12.8f));
+
+        r = v0 - v1;
+        EXPECT_TRUE(r == PMath::Vector3(-2.7f, 0.6f, -1.6f));
+
+        r = v0 * v1;
+        EXPECT_TRUE(r == PMath::Vector3(12.24f, 7.75f, 40.32f));
+
+        r = v0 / v1;
+        EXPECT_TRUE(r == PMath::Vector3(0.470588f, 1.24f, 0.777777777777f));
+
+
+
+        r = v0 + 4.0f;
+        EXPECT_TRUE(r == PMath::Vector3(6.4f, 7.1f, 9.6f));
+
+        r = v0 - 4.0f;
+        EXPECT_TRUE(r == PMath::Vector3(-1.6f, -0.9f, 1.6f));
+
+        r = v0 * 4.0f;
+        EXPECT_TRUE(r == PMath::Vector3(9.6f, 12.4f, 22.4f));
+
+        r = v0 / 4.0f;
+        EXPECT_TRUE(r == PMath::Vector3(0.6f, 0.775f, 1.4f));
+
+        // --------------------------------------------
+
+        EXPECT_TRUE(r != PMath::Vector3(0.480588f, 3.24f, 34.5f));
+
+        EXPECT_FALSE(r != PMath::Vector3(0.6f, 0.775f, 1.4f));
+    }
+
+    TEST(Vector3, FunctionTest)
+    {
+        PMath::Vector3 v0(2.4f, 3.1f, 5.6f);
+        PMath::Vector3 v1(5.1f, 2.5f, 7.2f);
+        PMath::Vector3 v2(0.0f, 0.0f, 0.0f);
+        PMath::Vector3 n(0.70710678f, 0.42426406f, 0.56568542f);
+
+        EXPECT_FLOAT_EQ(PMath::Magnitude(v0), 6.835934464f);
+        EXPECT_FLOAT_EQ(PMath::SqrMagnitude(v0), 46.73f);
+        EXPECT_TRUE(PMath::NormalizeV(v0) == PMath::Vector3(0.351086f, 0.453486f, 0.8192f));
+        EXPECT_TRUE(PMath::NormalizeV(v2) == PMath::Vector3(0.0f, 0.0f, 0.0f));
+        EXPECT_TRUE(PMath::IsNormalized(v0));
+        EXPECT_TRUE(PMath::Abs(PMath::Angle(v0, v1) - 15.8372675_deg) < P_FLT_INAC);
+        EXPECT_FLOAT_EQ(PMath::CosineAngle(v0, v1), 0.962040687624f);
+        EXPECT_TRUE(PMath::SignVectorV(v0) == PMath::Vector3(1, 1, 1));
+
+        // Re-init vectors.
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+
+        EXPECT_FLOAT_EQ(PMath::DotP(v0, v1), 60.31f);
+
+        EXPECT_TRUE(PMath::MaxV(v0, v1) == PMath::Vector3(5.1f, 3.1f, 7.2f));
+
+        // Re-init vector
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+
+        EXPECT_TRUE(PMath::MinV(v0, v1) == PMath::Vector3(2.4f, 2.5f, 5.6f));
+
+        EXPECT_TRUE(PMath::ReflectV(v0, n) == PMath::Vector3(5.979999f, 2.5279994f, 1.1039991f));
+        
+        PMath::Vector3 up(PVectorUp3(float, false));
+        PMath::Vector3 right(PVectorEast3(float, false));
+        PMath::Vector3 front(5.4f, 0.0f, 0.0f);
+
+        PMath::Orthogonalize(up, right, front);
+        EXPECT_TRUE(PMath::DotP(up, front) == 0.0f);
+        EXPECT_TRUE(PMath::DotP(right, front) == 0.0f);
+
+        PMath::OrthoNormalize(up, right, front);
+        EXPECT_TRUE(PMath::DotP(up, front) == 0.0f);
+        EXPECT_TRUE(PMath::DotP(right, front) == 0.0f);
+        EXPECT_FLOAT_EQ(PMath::Magnitude(front), 1.0f);
+
+        // Re-init vector
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+
+        EXPECT_TRUE(PMath::PerspectiveDivideV(v0) == PMath::Vector3(0.4285714f, 0.55357142f, 0.0f));
+
+        // Re-init vector
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::CrossPV(v0,v1) == PMath::Vector3(8.32f,11.28,-9.81));
+        EXPECT_TRUE(PMath::NegateV(v0) == PMath::Vector3(-8.32f, -11.28f, 9.81f));
+        EXPECT_TRUE(PMath::ScaleV(v0, v1) == PMath::Vector3(-42.432f, -28.2f, 70.632f));
+
+        // Re-init vector
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::ProjectV(v0, v1) == PMath::Vector3(3.65732461f, 1.7928061f, 5.16328180f));
+
+        EXPECT_TRUE(PMath::IsPerpendicular(PMath::Reject(v0, v1), v1));
+        // std::cerr << PMath::ToString(PMath::Magnitude(v0)) << std::endl;
+        // Re-init vector
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+    }
 }

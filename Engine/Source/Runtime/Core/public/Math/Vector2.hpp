@@ -16,12 +16,12 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
-#define PZeroVector2(type, aligned)		TVector2<##type, ##aligned>(0,0)
-#define PVectorSouth2(type, aligned)	TVector2<##type, ##aligned>(0,-1)
-#define PVectorNorth2(type, aligned)	TVector2<##type, ##aligned>(0,1)
-#define PVectorEast2(type, aligned)		TVector2<##type, ##aligned>(1,0)
-#define PVectorWest2(type, aligned)		TVector2<##type, ##aligned>(-1,0)
 
+#define PZeroVector2(type, aligned)		Phanes::Core::Math::TVector2<##type, ##aligned>(0,0)
+#define PVectorSouth2(type, aligned)	Phanes::Core::Math::TVector2<##type, ##aligned>(0,-1)
+#define PVectorNorth2(type, aligned)	Phanes::Core::Math::TVector2<##type, ##aligned>(0,1)
+#define PVectorEast2(type, aligned)		Phanes::Core::Math::TVector2<##type, ##aligned>(1,0)
+#define PVectorWest2(type, aligned)		Phanes::Core::Math::TVector2<##type, ##aligned>(-1,0)
 
 namespace Phanes::Core::Math {
 
@@ -648,7 +648,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> ReflectV(TVector2<T, false>& v1, const TVector2<T, false>& normal)
     {
-        v1 = (2.0f * DotP(v1, normal) * normal) - v1;
+        v1 = ((T)2.0 * DotP(v1, normal) * normal) - v1;
 
         return v1;
     }
@@ -837,7 +837,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> Reflect(const TVector2<T, false>& v1, const TVector2<T, false>& normal)
     {
-        return TVector2<T, false>((2.0f * DotP(v1, normal) * normal) - v1);
+        return (((T)2.0 * DotP(v1, normal) * normal) - v1);
     }
 
     /**
@@ -982,7 +982,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector2<T, false> SignVector(const TVector2<T, false>& v1)
     {
-        return TVector2<T, false>((v1.x >= (T)0.0) ? 1 : -1, (v1.y >= (T)0.0) ? (T)1.0 : (T)-1.0);
+        return TVector2<T, false>((v1.x >= (T)0.0) ? (T)1.0 : (T)-1.0, (v1.y >= (T)0.0) ? (T)1.0 : (T)-1.0);
     }
 
     /**
