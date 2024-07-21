@@ -155,7 +155,6 @@ namespace VectorTests
         EXPECT_TRUE(PMath::SignVector(v0) == PMath::Vector2(1.0f, 1.0f));
         EXPECT_TRUE(PMath::BindToSquare(v1, 2.0f) == PMath::Vector2(2.0f, 0.9803921568f));
         EXPECT_TRUE(PMath::ClampToSquare(v0, 2.0f) == PMath::Vector2(1.5483870968f, 2.0f));
-        std::cerr << PMath::ToString(PMath::Lerp(v0, v1, 0.7f)) << std::endl;
         EXPECT_TRUE(PMath::Lerp(v0, v1, 0.7f) == PMath::Vector2(4.29f, 2.68f));
         EXPECT_TRUE(PMath::Rotate(v0, (float)30.0_deg) == PMath::Vector2(0.528460969082653f, 3.88467875173176f));
         EXPECT_TRUE(PMath::ClockwiseRotate(v0, (float)30.0_deg) == PMath::Vector2(3.628461f, 1.484679f));
@@ -281,17 +280,67 @@ namespace VectorTests
 
         // Re-init vector
         v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
-        EXPECT_TRUE(PMath::CrossPV(v0,v1) == PMath::Vector3(8.32f,11.28,-9.81));
+        EXPECT_TRUE(PMath::CrossPV(v0,v1) == PMath::Vector3(8.32f,11.28f,-9.81f));
         EXPECT_TRUE(PMath::NegateV(v0) == PMath::Vector3(-8.32f, -11.28f, 9.81f));
-        EXPECT_TRUE(PMath::ScaleV(v0, v1) == PMath::Vector3(-42.432f, -28.2f, 70.632f));
+
+        EXPECT_TRUE(PMath::ScaleV(v0, v1) == PMath::Vector3(-42.431988f, -28.199997f, 70.631996f));
 
         // Re-init vector
         v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
         EXPECT_TRUE(PMath::ProjectV(v0, v1) == PMath::Vector3(3.65732461f, 1.7928061f, 5.16328180f));
 
-        EXPECT_TRUE(PMath::IsPerpendicular(PMath::Reject(v0, v1), v1));
-        // std::cerr << PMath::ToString(PMath::Magnitude(v0)) << std::endl;
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::ClampToMagnitudeV(v0, 5.0f, 6.0f) == PMath::Vector3(2.1065165f, 2.7209172f, 4.91520539f));
+        EXPECT_TRUE(PMath::ClampToMagnitudeV(v0, 5.0f, 7.0f) == PMath::Vector3(2.1065165f, 2.7209172f, 4.91520539f));
+
+        EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector3(1.0f / 2.1065165f, 1.0f / 2.7209172f, 1.0f / 4.91520539f));
+
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::ClampToCubeV(v0, 3.2f) == PMath::Vector3(2.4f, 3.1f, 3.2f));
+
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::RotateAroundAxisV(v0, PMath::Vector3(0.0f, 0.0f, 1.0f), (float)30.0_deg) == PMath::Vector3(3.628461f, 1.484679f, 5.600000f)) << PMath::ToString(PMath::RotateAroundAxisV(v0, PMath::Vector3(0.0f, 0.0f, 1.0f), (float)30.0_deg));
+        
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::ScaleToMagnitudeV(v0, 6.0f) == PMath::Vector3(2.1065165f, 2.7209172f, 4.91520539f));
+
+        EXPECT_TRUE(PMath::SignVectorV(v0) == PMath::Vector3(1.0f, 1.0f, 1.0f));
+
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::VectorTriple(v0, v1, PMath::Vector3(3.5f, 2.6f, 8.7f)) == CrossP(CrossP(v0, v1), PMath::Vector3(3.5f, 2.6f, 8.7f)));
+
+
+        EXPECT_TRUE(PMath::IsPerpendicular(PMath::RejectV(v0, v1), v1));
+
         // Re-init vector
         v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::IsParallel(v0, PMath::Vector3(-12.0f, -15.5f, -28.0f)));
+
+        EXPECT_TRUE(PMath::IsCoincident(v0, PMath::Vector3(12.0f, 15.5f, 28.0f)));
+
+        EXPECT_TRUE(PMath::IsCoplanar(v0, v1, PMath::Vector3(4.08f, 1.8666666f, 13.44f)));
+
+
+
+
+        EXPECT_FLOAT_EQ(PMath::SqrMagnitude(PMath::Normalize(v0)), 1.0f);
+        EXPECT_TRUE(PMath::SignVector(v0) == PMath::Vector3(1, 1, 1));
+        EXPECT_TRUE(PMath::Reflect(v0, n) == PMath::Vector3(6.3399987f, 2.1439996f, 1.3919992f));
+        EXPECT_TRUE(PMath::PerspectiveDivide(v0) == PMath::Vector3(0.428571428f, 0.553571428571f, 0.0f));
+        EXPECT_TRUE(PMath::CrossP(v0, v1) == PMath::Vector3(8.32f, 11.28f, -9.81f));
+        EXPECT_TRUE(PMath::Lerp(v0, v1, 0.7f) == PMath::Vector3(4.29f, 2.68f, 6.72f));
+        EXPECT_TRUE(PMath::Max(v0,v1) == PMath::Vector3(5.1f, 3.1f, 7.2f));
+        EXPECT_TRUE(PMath::Min(v0, v1) == PMath::Vector3(2.4f, 2.5f, 5.6f));
+        EXPECT_TRUE(PMath::Negate(v0) == PMath::Vector3(-2.4f, -3.1f, -5.6f));
+        EXPECT_TRUE(PMath::Scale(v0, v1) == PMath::Vector3(12.24f, 7.75f, 40.32f));
+        EXPECT_TRUE(PMath::ClampToMagnitude(v0, 5.0f, 6.0f) == PMath::Vector3(2.1065165f, 2.7209172f, 4.91520539f));
+        EXPECT_TRUE(PMath::ClampToMagnitude(v0, 5.0f, 7.0f) == v0) << PMath::ToString(PMath::ClampToMagnitude(v0, 5.0f, 6.0f));
+        EXPECT_TRUE(PMath::ClampToCube(v0, 3.2f) == PMath::Vector3(2.4f, 3.1f, 3.2f));
+        EXPECT_TRUE(PMath::ScaleToMagnitude(v0, 6.0f) == PMath::Vector3(2.1065165f, 2.7209172f, 4.91520539f));
+        EXPECT_TRUE(PMath::CompInverse(v0) == PMath::Vector3(1.0f / 2.4f, 1.0f / 3.1f, 1.0f / 5.6f));
+        EXPECT_TRUE(PMath::RotateAroundAxis(v0, PMath::Vector3(0,0,1), (float)30.0_deg) == PMath::Vector3(3.628461f, 1.484679f, 5.600000f));
+        EXPECT_TRUE(PMath::VectorTriple(v0, v1, PMath::Vector3(3.5f,2.6f,8.7f)) == CrossP(CrossP(v0, v1), PMath::Vector3(3.5f, 2.6f, 8.7f)));
+        EXPECT_TRUE(PMath::Project(v0, v1) == PMath::Vector3(3.657324613f, 1.792806183f, 5.163281807f));
+        EXPECT_TRUE(PMath::Reject(v0, v1) == PMath::Vector3(-1.257324613f, 1.307193817f, 0.436718193f));
     }
 }
