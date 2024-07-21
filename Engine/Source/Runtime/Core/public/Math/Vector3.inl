@@ -226,4 +226,5 @@ namespace Phanes::Core::Math
         Detail::compute_vec3_cross_p<T, S>::map(v1, v1, v2);
         return v1;
     }
+
 }

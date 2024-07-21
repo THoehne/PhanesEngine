@@ -10,6 +10,8 @@
 
 #include "Core/public/Math/Vector2.hpp"
 
+#define PZeroVector4(type, aligned)			Phanes::Core::Math::TVector4<##type, ##aligned>(0,0,0)
+
 namespace Phanes::Core::Math
 {
 
@@ -680,11 +682,15 @@ namespace Phanes::Core::Math
     /// <param name="s"></param>
     /// <returns>Vector with magnitude clamped to s.</returns>
     template<RealType T>
-    TVector4<T, false> ClampToMagnitude(const TVector4<T, false>& v1, T s)
+    TVector4<T, false> ClampToMagnitude(const TVector4<T, false>& v1, T min, T max)
     {
-        float vecNorm = Magnitude(v1);
-        TVector4<T, false> newVec = (vecNorm > s) ? v1 : v1 / Magnitude(v1);
-        return newVec;
+        T magnitude = Magnitude(v1);
+
+        const TVector3<T, false> unitVec = (magnitude > P_FLT_INAC) ? v1 / magnitude : PZeroVector3(T, false);
+
+        Clamp(magnitude, min, max);
+
+        return unitVec * magnitude;
     }
 
     /// <summary>
@@ -696,10 +702,14 @@ namespace Phanes::Core::Math
     /// <param name="s">Magnitude</param>
     /// <returns>Copy of v1.</returns>
     template<RealType T>
-    TVector4<T, false> ClampToMagnitudeV(TVector4<T, false>& v1, T s)
+    TVector4<T, false> ClampToMagnitudeV(TVector4<T, false>& v1, T min, T max)
     {
-        float vecNorm = Magnitude(v1);
-        v1 = (vecNorm > s) ? v1 : v1 / Magnitude(v1);
+        T magnitude = Magnitude(v1);
+
+        v1 = (magnitude > P_FLT_INAC) ? v1 / magnitude : PZeroVector3(T, false);
+
+        v1 *= Clamp(magnitude, min, max);
+
         return v1;
     }
 
@@ -714,8 +724,7 @@ namespace Phanes::Core::Math
     template<RealType T>
     TVector4<T, false> ScaleToMagnitude(const TVector4<T, false>& v1, T s)
     {
-        TVector4<T, false> vecDir = v1 / Magnitude(v1);
-        return vecDir * s;
+        return Normalize(v1) * s;
     }
     
     /// <summary>
@@ -729,8 +738,7 @@ namespace Phanes::Core::Math
     template<RealType T>
     TVector4<T, false> ScaleToMagnitudeV(TVector4<T, false>& v1, T s)
     {
-        v1 /= Magnitude(v1);
-        v1 *= s;
+        NormalizeV(v1) *= s;
         return v1;
     }
 

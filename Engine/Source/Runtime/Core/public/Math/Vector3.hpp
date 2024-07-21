@@ -533,14 +533,15 @@ namespace Phanes::Core::Math {
         return v1;
     }
 
-    /**
-     * Calculates the cross product between two vectors.
-     *
-     * @param(v1) Vector one
-     * @param(v2) Vector two
-     * 
-     * @note result is stored in v1.
-     */
+
+    /// <summary>
+    /// Calcualtes cross product of vectors
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="v1"></param>
+    /// <param name="v2"></param>
+    /// <returns>Copy of v1.</returns>
 
     template<RealType T, bool S>
     TVector3<T, S> CrossPV(TVector3<T, S>& v1, const TVector3<T, S>& v2);
@@ -619,6 +620,7 @@ namespace Phanes::Core::Math {
 
         return v1;
     }
+
 
     /**
      * Projects vector v1 onto v2
@@ -701,15 +703,13 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T, false> ClampMagnitudeV(TVector3<T, false>& v1, T min, T max)
+    TVector3<T, false> ClampToMagnitudeV(TVector3<T, false>& v1, T min, T max)
     {
         T magnitude = Magnitude(v1);
 
         v1 = (magnitude > P_FLT_INAC) ? v1 / magnitude : PZeroVector3(T, false);
 
-        Clamp(magnitude, min, max);
-
-        v1 *= magnitude;
+        v1 *= Clamp(magnitude, min, max);
 
         return v1;
     }
@@ -767,8 +767,7 @@ namespace Phanes::Core::Math {
         T sinAngle = sin(angle);
         T cosAngle = cos(angle);
 
-        v1 = ((T)1.0 - cosAngle) * DotP(axisNormal, v1) * axisNormal + cosAngle * v1 + sinAngle * CrossP(axisNormal, v1);
-
+        v1 = (1 - cosAngle) * DotP(axisNormal, v1) * axisNormal + cosAngle * v1 + sinAngle * CrossP(v1, axisNormal);
         return v1;
     }
 
@@ -783,8 +782,8 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector3<T, false> ScaleToMagnitudeV(TVector3<T, false>& v1, T magnitude)
     {
-        NormalizeV(v1) *= magnitude;
-
+        NormalizeV(v1);
+        v1 *= magnitude;
         return v1;
     }
 
@@ -818,7 +817,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     T ScalarTriple(const TVector3<T, false>& v1, const TVector3<T, false>& v2, const TVector3<T, false>& v3)
     {
-        return CrossP(v1, v2) * v3;
+        return DotP(CrossP(v1, v2), v3);
     }
 
     /**
@@ -992,9 +991,9 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector3<T, false> SignVector(const TVector3<T, false>& v1)
     {
-        return TVector3<T, false>((v1.x >= 0) ? 1 : -1,
-            (v1.y >= 0) ? 1 : -1,
-            (v1.z >= 0) ? 1 : -1);
+        return TVector3<T, false>((v1.x >= (T)0) ? (T)1 : (T)-1,
+            (v1.y >= (T)0) ? (T)1 : (T)-1,
+            (v1.z >= (T)0) ? (T)1 : (T)-1);
     }
 
     /**
@@ -1037,8 +1036,8 @@ namespace Phanes::Core::Math {
      * @return Cross product of v1 and v2
      */
 
-    template<RealType T>
-    TVector3<T, false> CrossP(const TVector3<T, false>& v1, const TVector3<T, false>& v2);
+    template<RealType T, bool S>
+    TVector3<T, S> CrossP(const TVector3<T, S>& v1, const TVector3<T, S>& v2);
 
     /**
      * Linearly interpolates between two vectors.
@@ -1053,8 +1052,8 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector3<T, false> Lerp(const TVector3<T, false>& start, const TVector3<T, false>& dest, T t)
     {
-        t = Clamp(t, (T)0.0, (T), 1.0);
-        return (1 - t) * start + t * dest;
+        t = Clamp(t, (T)0.0, (T)1.0);
+        return ((1 - t) * start) + (t * dest);
     }
 
     /**
@@ -1148,7 +1147,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T, false> ClampMagnitude(const TVector3<T, false>& v1, T min, T max)
+    TVector3<T, false> ClampToMagnitude(const TVector3<T, false>& v1, T min, T max)
     {
         T magnitude = Magnitude(v1);
 
@@ -1156,7 +1155,7 @@ namespace Phanes::Core::Math {
 
         Clamp(magnitude, min, max);
 
-        return unitVec * magnitude;
+        return unitVec * Clamp(magnitude, min, max);
     }
 
     /**
