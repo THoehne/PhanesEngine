@@ -86,6 +86,18 @@ namespace Phanes::Core::Math {
       return "(" + ToString(v.x) + ", " + ToString(v.y) + ", " + ToString(v.z) + ")";
   }
 
+  template<RealType T, bool S>
+  std::string ToString(const TVector4<T, S>& v)
+  {
+      return "(" + ToString(v.x) + ", " + ToString(v.y) + ", " + ToString(v.z) + ", " + ToString(v.w) + ")";
+  }
+
+  template<IntType T, bool S>
+  std::string ToString(const TIntVector4<T, S>& v)
+  {
+      return "(" + ToString(v.x) + ", " + ToString(v.y) + ", " + ToString(v.z) + ", " + ToString(v.w) + ")";
+  }
+
   //std::string toString(const Vector4& v);
 
 

@@ -420,7 +420,7 @@ namespace Phanes::Core::Math {
     TVector2<T, false> NormalizeV(TVector2<T, false>& v1)
     {
         float vecNorm = Magnitude(v1);
-        v1 /= (vecNorm < P_FLT_INAC) ? 1 : vecNorm;
+        v1 /= (vecNorm < P_FLT_INAC) ? (T)1.0 : vecNorm;
         return v1;
     }
 
@@ -953,7 +953,7 @@ namespace Phanes::Core::Math {
     TVector2<T, false> Normalize(const TVector2<T, false>& v1)
     {
         float vecNorm = Magnitude(v1);
-        return (vecNorm < P_FLT_INAC) ? PZeroVector2(T, false) : (v1 / vecNorm);
+        return (vecNorm < P_FLT_INAC) ? v1 : (v1 / vecNorm);
     }
 
     /**

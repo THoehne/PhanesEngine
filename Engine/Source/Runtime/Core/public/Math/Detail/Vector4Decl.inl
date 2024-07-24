@@ -38,7 +38,10 @@ namespace Phanes::Core::Math::Detail
     {
         static constexpr void map(Phanes::Core::Math::TVector4<T, false>& v1, const TVector4<T, false>& v2)
         {
-            memcpy(v1.data, v2.data, 4 * sizeof(T));
+            v1.x = v2.x;
+            v1.y = v2.y;
+            v1.z = v2.z;
+            v1.w = v2.w;
         }
 
 

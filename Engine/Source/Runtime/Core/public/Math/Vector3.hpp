@@ -398,7 +398,7 @@ namespace Phanes::Core::Math {
     TVector3<T, false> NormalizeV(TVector3<T, false>& v1)
     {
         float vecNorm = Magnitude(v1);
-        v1 /= (vecNorm < P_FLT_INAC) ? 1 : vecNorm;
+        v1 /= (vecNorm < P_FLT_INAC) ? (T)1.0 : vecNorm;
 
         return v1;
     }
@@ -914,7 +914,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     inline bool IsNormalized(const TVector3<T, false>& v1, T threshold = P_FLT_INAC)
     {
-        return (abs(SqrMagnitude(v1) - 1) < threshold);
+        return (SqrMagnitude(v1) - 1 < threshold);
     }
 
     /**
@@ -962,7 +962,7 @@ namespace Phanes::Core::Math {
     TVector3<T, false> Normalize(const TVector3<T, false>& v1)
     {
         float vecNorm = Magnitude(v1);
-        return (vecNorm < P_FLT_INAC) ? PZeroVector3(T, false) : v1 / vecNorm;
+        return (vecNorm < P_FLT_INAC) ? v1 : v1 / vecNorm;
     }
 
     /**
