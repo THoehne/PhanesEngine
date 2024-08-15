@@ -480,5 +480,92 @@ namespace VectorTests
 
         EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector4(1.0f / 2.4f, 1.0f / 3.1f, 1.0f / 5.6f, 1.0f / -3.7f));
     }
+}
 
+namespace MatrixTests
+{
+    TEST(Matrix2, OperatorTests)
+    {
+
+        PMath::Matrix2 m0 = PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f);
+
+        m0 += 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix2(3.0f, 7.0f, 5.0f, 4.0f));
+
+        m0 -= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f));
+
+        m0 *= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix2(2.0f, 10.0f, 6.0f, 4.0f));
+
+        m0 /= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f));
+
+
+        m0 = m0 + 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix2(3.0f, 7.0f, 5.0f, 4.0f));
+
+        m0 = m0 - 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f));
+
+        m0 = m0 * 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix2(2.0f, 10.0f, 6.0f, 4.0f));
+
+        m0 = m0 / 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f));
+
+        
+
+
+        PMath::Matrix2 m1 = PMath::Matrix2(2.0f, 4.0f, 1.0f, 3.0f);
+        
+        m0 += m1;
+        EXPECT_TRUE(m0 == PMath::Matrix2(3.0f, 9.0f, 4.0f, 5.0f));
+        
+        m0 -= m1;
+        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f));
+        
+        m0 *= m1;
+        EXPECT_TRUE(m0 == PMath::Matrix2(7.0f, 19.0f, 8.0f, 18.0f));
+        
+
+
+        m0 = PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f);
+
+        m0 = m0 + m1;
+        EXPECT_TRUE(m0 == PMath::Matrix2(3.0f, 9.0f, 4.0f, 5.0f));
+
+        m0 = m0 - m1;
+        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f));
+
+        m0 = m0 * m1;
+        EXPECT_TRUE(m0 == PMath::Matrix2(7.0f, 19.0f, 8.0f, 18.0f));
+
+        PMath::Vector2 v = PMath::Vector2(2.0f, 4.0f);
+
+        v = m0 * v;
+        EXPECT_TRUE(v == PMath::Vector2(90.0f, 88.0f)) << PMath::ToString(v);
+
+        EXPECT_TRUE(m0 != m1);
+    }
+
+    TEST(Matrix2, FunctionTest)
+    {
+        PMath::Matrix2 m0 = PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f);
+
+        EXPECT_FLOAT_EQ(PMath::Determinant(m0), -13.0f);
+
+        EXPECT_TRUE(PMath::InverseV(m0) == PMath::Matrix2(-2.0f / 13.0f, 5.0f / 13.0f, 3.0f / 13.0f, -1.0f / 13.0f));
+
+        m0 = PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f);
+        EXPECT_TRUE(PMath::TransposeV(m0) == PMath::Matrix2(1.0f, 3.0f, 5.0f, 2.0f));
+
+
+        m0 = PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f);
+
+        EXPECT_TRUE(PMath::Inverse(m0) == PMath::Matrix2(-2.0f / 13.0f, 5.0f / 13.0f, 3.0f / 13.0f, -1.0f / 13.0f)) << PMath::ToString(PMath::Inverse(m0));
+        EXPECT_TRUE(PMath::Transpose(m0) == PMath::Matrix2(1.0f, 3.0f, 5.0f, 2.0f));
+        EXPECT_FALSE(PMath::IsIdentityMatrix(m0));
+        EXPECT_TRUE(PMath::IsIdentityMatrix(PMath::Matrix2(1.0f, 0.0f, 0.0f, 1.0f)));
+    }
 }
