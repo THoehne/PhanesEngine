@@ -423,7 +423,7 @@ namespace VectorTests
 
         EXPECT_FLOAT_EQ(PMath::SqrMagnitude(v0), 60.42f);
 
-        EXPECT_FLOAT_EQ(PMath::Angle(v0, v1), 46.83191757_deg);
+        EXPECT_FLOAT_EQ(PMath::Angle(v0, v1), (float)46.83191757_deg);
 
         EXPECT_FLOAT_EQ(PMath::CosineAngle(v0, v1), 0.68414091f);
 
@@ -457,21 +457,28 @@ namespace VectorTests
         EXPECT_TRUE(PMath::RejectV(v0, v1) == PMath::Vector4(-0.445245432533f, 1.705271846797271f, 1.583182918776139f, -5.150517279330839f));
 
         v0 = PMath::Vector4(2.4f, 3.1f, 5.6f, -3.7f);
-        EXPECT_TRUE(PMath::PerspectiveDivideV(v0) == PMath::Vector4(1.0f / 2.4f, 1.0f / 3.1f, 1.0f / 5.6f, 1.0f / -3.7f));
+        EXPECT_TRUE(PMath::PerspectiveDivideV(v0) == PMath::Vector4(2.4f / -3.7f, 3.1f / -3.7f, 5.6f / -3.7f, 0.0f));
+
+        EXPECT_TRUE(PMath::IsNormalized(PMath::NormalizeV(v0)));
+
+        EXPECT_TRUE(PMath::IsParallel(v0, v0 * (- 3.0f)));
+        
+        EXPECT_TRUE(PMath::IsCoincident(v0, v0 * 3.0f));
 
 
         v0 = PMath::Vector4(2.4f, 3.1f, 5.6f, -3.7f);
-        // EXPECT_FLOAT_EQ(PMath::SqrMagnitude(PMath::Normalize(v0)), 1.0f);
-        // EXPECT_TRUE(PMath::Max(v0, v1) == PMath::Vector4(5.1f, 3.1f, 7.2f, 2.6f));
-        // EXPECT_TRUE(PMath::Min(v0, v1) == PMath::Vector4(2.4f, 2.5f, 5.6f, -3.7f));
-        // EXPECT_TRUE(PMath::ClampToMagnitude(v0, 6.0f, 7.0f) == PMath::Vector4(2.1613193f, 2.791704135f, 5.043078439f, -3.332034f)) << PMath::ToString(v0);
-        // EXPECT_TRUE(PMath::ScaleToMagnitude(v0, 7.0f) == PMath::Vector4(2.1613193f, 2.791704135f, 5.043078439f, -3.332034f)) << PMath::ToString(v0);
-        // EXPECT_TRUE(PMath::Reflect(v0, n) == PMath::Vector4(3.290488f, -0.310545f, 2.433628f, 6.601034f));
-        // EXPECT_TRUE(PMath::Project(v0, v1) == PMath::Vector4(2.845245432533568f, 1.394728153202729f, 4.016817081223861f, 1.450517279330839f));
-        // EXPECT_TRUE(PMath::Reject(v0, v1) == PMath::Vector4(2.845245432533568f, 1.394728153202729f, 4.016817081223861f, 1.450517279330839f));
-        // EXPECT_TRUE(PMath::PerspectiveDivide(v0) == PMath::Vector4(1.0f / 2.4f, 1.0f / 3.1f, 1.0f / 5.6f, 1.0f / -3.7f));
+        EXPECT_FLOAT_EQ(PMath::SqrMagnitude(PMath::Normalize(v0)), 1.0f);
+        EXPECT_TRUE(PMath::Max(v0, v1) == PMath::Vector4(5.1f, 3.1f, 7.2f, 2.6f));
+        EXPECT_TRUE(PMath::Min(v0, v1) == PMath::Vector4(2.4f, 2.5f, 5.6f, -3.7f));
+        EXPECT_TRUE(PMath::ClampToMagnitude(v0, 6.0f, 7.0f) == PMath::Vector4(2.1613193f, 2.791704135f, 5.043078439f, -3.332034f)) << PMath::ToString(PMath::Magnitude(v0));
+        EXPECT_TRUE(PMath::ScaleToMagnitude(v0, 7.0f) == PMath::Vector4(2.1613193f, 2.791704135f, 5.043078439f, -3.332034f)) << PMath::ToString(v0);
+        EXPECT_TRUE(PMath::Reflect(v0, n) == PMath::Vector4(3.290488f, -0.310545f, 2.433628f, 6.601034f));
+        EXPECT_TRUE(PMath::Project(v0, v1) == PMath::Vector4(2.845245432533568f, 1.394728153202729f, 4.016817081223861f, 1.450517279330839f));
+        EXPECT_FLOAT_EQ(PMath::Angle(PMath::Reject(v0, v1), v1), 1.570796f);
+        EXPECT_TRUE(PMath::PerspectiveDivide(v0) == PMath::Vector4(2.4f / -3.7f, 3.1f / -3.7f, 5.6f / -3.7f, 0.0f));
+        EXPECT_TRUE(PMath::Negate(v0) == PMath::Vector4(-2.4f, -3.1f, -5.6f, 3.7f));
 
-        // EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector4(1.0f / -2.4f, 1.0f / -2.5f, 1.0f / -5.6f, 1.0f / 3.7f));
+        EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector4(1.0f / 2.4f, 1.0f / 3.1f, 1.0f / 5.6f, 1.0f / -3.7f));
     }
 
 }
