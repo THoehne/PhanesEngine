@@ -697,7 +697,7 @@ namespace Phanes::Core::Math
         TVector4<T, false> unitVec;
         unitVec = (magnitude > P_FLT_INAC) ? v1 / magnitude : PZeroVector4(T, false);
 
-        Clamp(magnitude, min, max);
+        magnitude = Clamp(magnitude, min, max);
 
         return unitVec * magnitude;
     }
@@ -888,7 +888,7 @@ namespace Phanes::Core::Math
     /// <param name="threshold">Threshold to vector magnitude of 1.0</param>
     /// <returns>True if vector is normalized, false if not.</returns>
     template<RealType T>
-    FORCEINLINE TVector4<T, false> IsNormalized(const TVector4<T, false>& v1, T threshold = P_FLT_INAC)
+    FORCEINLINE bool IsNormalized(const TVector4<T, false>& v1, T threshold = P_FLT_INAC)
     {
         return (SqrMagnitude(v1) - (T)1.0) < threshold;
     }
@@ -902,7 +902,7 @@ namespace Phanes::Core::Math
     /// <param name="threshold">Allowed T inaccuracy from one (e.g. 0.98f)</param>
     /// <returns>True if parallel, false if not.</returns>
     template<RealType T>
-    inline bool IsParallel(const TVector4<T, false>& v1, const TVector4<T, false>& v2, T threshold = 1.0f - P_FLT_INAC)
+    FORCEINLINE bool IsParallel(const TVector4<T, false>& v1, const TVector4<T, false>& v2, T threshold = 1.0f - P_FLT_INAC)
     {
         return (abs(DotP(v1, v2)) > threshold);
     }
@@ -916,7 +916,7 @@ namespace Phanes::Core::Math
     /// <param name="threshold">Allowed T inaccuracy from one (e.g. 0.98f)</param>
     /// <returns>True if coincident, false if not.</returns>
     template<RealType T>
-    inline bool IsCoincident(const TVector4<T, false>& v1, const TVector4<T, false>& v2, T threshold = 1.0f - P_FLT_INAC)
+    FORCEINLINE bool IsCoincident(const TVector4<T, false>& v1, const TVector4<T, false>& v2, T threshold = 1.0f - P_FLT_INAC)
     {
         return (DotP(v1, v2) > threshold);
     }
