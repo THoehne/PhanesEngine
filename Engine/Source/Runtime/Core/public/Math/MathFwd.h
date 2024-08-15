@@ -86,6 +86,11 @@ namespace Phanes::Core::Math {
     typedef TVector4<double, SIMD::use_simd<double, 4, true>::value>        Vector4Regd;
     typedef TVector4<double, SIMD::use_simd<double, 4, true>::value>        Vector4Regf64;
     
+    // Matrix2 
+    
+    typedef TMatrix2<float>         Matrix2;
+    typedef TMatrix2<float>         Matrix2f;
+    typedef TMatrix2<double>        Matrix2d;
 
 } // Phanes::Core::Math::coretypes
 
