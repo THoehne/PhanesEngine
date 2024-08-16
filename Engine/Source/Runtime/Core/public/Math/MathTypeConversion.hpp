@@ -104,6 +104,12 @@ namespace Phanes::Core::Math {
         return "([" + ToString(m(0, 0)) + ", " + ToString(m(0, 1)) + "], [" + ToString(m(1, 0)) + ", " + ToString(m(1, 1)) + "])";
     }
 
+    template<RealType T, bool S>
+    std::string ToString(const TMatrix3<T, S>& m)
+    {
+        return "([" + ToString(m(0, 0)) + ", " + ToString(m(0, 1)) + ", " + ToString(m(0, 2)) + "], [" + ToString(m(1, 0)) + ", " + ToString(m(1, 1)) + ", " + ToString(m(1, 2)) + "], [" + ToString(m(2, 0)) + ", " + ToString(m(2, 1)) + ", " + ToString(m(2, 2)) + "])";
+    }
+
 
     //std::string toString(const Matrix3& v);
 

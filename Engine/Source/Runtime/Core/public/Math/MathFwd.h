@@ -88,9 +88,31 @@ namespace Phanes::Core::Math {
     
     // Matrix2 
     
-    typedef TMatrix2<float>         Matrix2;
-    typedef TMatrix2<float>         Matrix2f;
-    typedef TMatrix2<double>        Matrix2d;
+    typedef TMatrix2<float>             Matrix2;
+    typedef TMatrix2<float>             Matrix2f;
+    typedef TMatrix2<double>            Matrix2d;
+
+    // Matrix3 
+
+    typedef TMatrix3<float, false>      Matrix3;
+    typedef TMatrix3<float, false>      Matrix3f;
+    typedef TMatrix3<double, false>     Matrix3d;
+
+    typedef TMatrix3<float, SIMD::use_simd<float, 3, true>::value>      Matrix3Reg;
+    typedef TMatrix3<float, SIMD::use_simd<float, 3, true>::value>      Matrix3Regf;
+    typedef TMatrix3<double, SIMD::use_simd<double, 3, true>::value>    Matrix3Regd;
+    typedef TMatrix3<double, SIMD::use_simd<double, 3, false>::value>   Matrix3Regf64;
+
+    // Matrix4 
+
+    typedef TMatrix4<float, false>             Matrix4;
+    typedef TMatrix4<float, false>             Matrix4f;
+    typedef TMatrix4<double, false>            Matrix4d;
+
+    typedef TMatrix3<float, SIMD::use_simd<float, 4, true>::value>      Matrix4Reg;
+    typedef TMatrix3<float, SIMD::use_simd<float, 4, true>::value>      Matrix4Regf;
+    typedef TMatrix3<double, SIMD::use_simd<double, 4, true>::value>    Matrix4Regd;
+    typedef TMatrix3<double, SIMD::use_simd<double, 4, false>::value>   Matrix4Regf64;
 
 } // Phanes::Core::Math::coretypes
 

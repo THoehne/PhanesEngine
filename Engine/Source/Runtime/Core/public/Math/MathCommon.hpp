@@ -134,7 +134,7 @@ namespace Phanes::Core::Math {
     template<>
     FORCEINLINE float Abs<float>(float s)
     {
-        return fabs(s);
+        return (float)fabs(s);
     };
 
     template<>

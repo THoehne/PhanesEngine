@@ -15,6 +15,7 @@ namespace Phanes::Core::Math {
     // 3x3 Matrix defined in column-major order.
     // Accessed by M[Row][Col].
 
+
     template<RealType T, bool S>
     struct TMatrix3
     {
@@ -39,9 +40,10 @@ namespace Phanes::Core::Math {
                 /// </summary>
                 TVector3<T, S> c2;
             };
+            
+            T data[3][4];
         };
 
-        T data[3][3];
 
 
     public:
@@ -76,9 +78,9 @@ namespace Phanes::Core::Math {
          * Construct Matrix from parameters.
          *
          * @param(n00) M[0][0]
-         * @param(n10) M[1][0]
-         * @param(n01) M[0][1]
-         * @param(n11) M[1][1]
+         * @param(n10) M[0][1]
+         * @param(n20) M[0][2]
+         * @param(n01) M[1][0]
          * ...
          *
          * @note nXY = n[Row][Col]
@@ -109,6 +111,11 @@ namespace Phanes::Core::Math {
 
     public:
 
+        FORCEINLINE T operator() (int n, int m) const
+        {
+            return this->data[m][n];
+        }
+
         FORCEINLINE T& operator() (int n, int m)
         {
             return this->data[m][n];
@@ -119,12 +126,7 @@ namespace Phanes::Core::Math {
             return (*reinterpret_cast<TVector3<T, S>*>(this->m[m]));
         }
 
-        FORCEINLINE const T& operator() (int n, int m) const
-        {
-            return this->data[m][n];
-        }
-
-        FORCEINLINE const TVector3<T, S>& operator[] (int m) const
+        FORCEINLINE const TVector3<T, S> operator[] (int m) const
         {
             return (*reinterpret_cast<TVector3<T, S>*>(this->m[m]));
         }
@@ -229,14 +231,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator*= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
-    {
-        m1.c0 *= m2.c0;
-        m1.c1 *= m2.c1;
-        m1.c2 *= m2.c2;
-
-        return m1;
-    }
+    TMatrix3<T, S> operator*= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2);
 
     /**
      * Multiply matrix with scalar
@@ -298,9 +293,9 @@ namespace Phanes::Core::Math {
     template<RealType T, bool S>
     TMatrix3<T, S> operator+ (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
-        return TMatrix2<T>(m1.c0 + m2.c0,
-                           m1.c1 + m2.c1,
-                           m1.c2 + m2.c2);
+        return TMatrix3<T, S>(m1.c0 + m2.c0,
+                              m1.c1 + m2.c1,
+                              m1.c2 + m2.c2);
     }
 
     /**
@@ -349,21 +344,6 @@ namespace Phanes::Core::Math {
     }
 
     /**
-     * Multiplay matrix by matrix (componentwise)
-     *
-     * @param(m1) Matrix
-     * @param(m2) Matrix
-     */
-
-    template<RealType T, bool S>
-    TMatrix3<T, S> operator/ (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
-    {
-        return TMatrix3<T, S>(m1.c0 / m2.c0,
-                              m1.c1 / m2.c1,
-                              m1.c2 / m2.c2);
-    }
-
-    /**
      * Multiply scalar with matrix
      *
      * @param(m) Matrix
@@ -387,12 +367,10 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator* (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
-    {
-        return TMatrix3<T, S>(m1.c0 * m2.c0,
-            m1.c1 * m2.c1,
-            m1.c2 * m2.c2);
-    }
+    TMatrix3<T, S> operator* (const TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2);
+
+    template<RealType T, bool S>
+    TVector3<T, S> operator* (const TMatrix3<T, S>& m1, const TVector3<T, S>& v);
 
     /**
      * Compare matrix with other matrix.
@@ -495,7 +473,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    bool Inverse(TMatrix3<T, S>& r, const TMatrix3<T, S>& m1)
+    bool Inverse(const TMatrix3<T, S>& m1, Ref<TMatrix3<T, S>> r)
     {
         TVector3<T, S> r0 = CrossP(m1.c1, m1.c2);
         TVector3<T, S> r1 = CrossP(m1.c2, m1.c0);

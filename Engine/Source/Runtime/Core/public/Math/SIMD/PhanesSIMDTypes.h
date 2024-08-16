@@ -26,7 +26,6 @@ namespace Phanes::Core::Math::SIMD
     /// </summary>
     /// <typeparam name="T">Type of vector</typeparam>
     /// <typeparam name="L">Length of vector</typeparam>
-    /// <typeparam name="SimdActive">Whether SIMD intrinsics exist, that support the vector type and length.</typeparam>
     /// <typeparam name="IsAligned">Whether the vector is aligned for simd usage.</typeparam>
     template<typename T, size_t L, bool IsAligned>
     struct use_simd

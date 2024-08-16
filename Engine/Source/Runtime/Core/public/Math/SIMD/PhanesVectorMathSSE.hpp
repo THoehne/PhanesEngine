@@ -770,6 +770,45 @@ namespace Phanes::Core::Math::Detail
         }
     };
 
+    template<>
+    struct compute_mat3_mul<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TMatrix3<float, true>& r, const TMatrix3<float, true>& m1, const TMatrix3<float, true>& m2)
+        {
+
+            // First column
+            __m128 tmp0 = _mm_mul_ps(m1.c0.data, m2.c0.data);
+            __m128 tmp1 = _mm_mul_ps(m1.c1.data, m2.c0.data);
+            __m128 tmp2 = _mm_mul_ps(m1.c2.data, m2.c0.data);
+
+            r.c0.data = _mm_add_ps(_mm_add_ps(tmp0, tmp1), tmp2);
+
+
+            // Second column
+            __m128 tmp0 = _mm_mul_ps(m1.c0.data, m2.c1.data);
+            __m128 tmp1 = _mm_mul_ps(m1.c1.data, m2.c1.data);
+            __m128 tmp2 = _mm_mul_ps(m1.c2.data, m2.c1.data);
+
+            r.c1.data = _mm_add_ps(_mm_add_ps(tmp0, tmp1), tmp2);
+
+            // Third column
+            __m128 tmp0 = _mm_mul_ps(m1.c0.data, m2.c2.data);
+            __m128 tmp1 = _mm_mul_ps(m1.c1.data, m2.c2.data);
+            __m128 tmp2 = _mm_mul_ps(m1.c2.data, m2.c2.data);
+
+            r.c2.data = _mm_add_ps(_mm_add_ps(tmp0, tmp1), tmp2);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& r, const TMatrix3<float, true>& m1, const TVector3<float, true>& v)
+        {
+            __m128 tmp0 = _mm_mul_ps(m1.c0.data, v.data);
+            __m128 tmp1 = _mm_mul_ps(m1.c1.data, v.data);
+            __m128 tmp2 = _mm_mul_ps(m1.c2.data, v.data);
+
+            r.data = _mm_add_ps(_mm_add_ps(tmp0, tmp1), tmp2);
+        }
+    };
+
     // =========== //
     //   Matrix4   //
     // =========== // 

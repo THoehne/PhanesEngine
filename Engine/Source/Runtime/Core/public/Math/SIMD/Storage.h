@@ -14,17 +14,13 @@ namespace Phanes::Core::Math::SIMD
     template<size_t L, typename T>
     struct Storage<L, T, false>
     {
-        typedef struct type {
-            T data[L];
-        } type;
+        typedef T type[L];
     };
 
     template<typename T>
     struct Storage<3, T, false>
     {
-        typedef struct type {
-            T data[4];
-        } type;
+        typedef T type[4];
     };
 
 
