@@ -566,6 +566,82 @@ namespace MatrixTests
         EXPECT_TRUE(PMath::Inverse(m0) == PMath::Matrix2(-2.0f / 13.0f, 5.0f / 13.0f, 3.0f / 13.0f, -1.0f / 13.0f)) << PMath::ToString(PMath::Inverse(m0));
         EXPECT_TRUE(PMath::Transpose(m0) == PMath::Matrix2(1.0f, 3.0f, 5.0f, 2.0f));
         EXPECT_FALSE(PMath::IsIdentityMatrix(m0));
-        EXPECT_TRUE(PMath::IsIdentityMatrix(PMath::Matrix2(1.0f, 0.0f, 0.0f, 1.0f)));
+        EXPECT_TRUE(PMath::IsIdentityMatrix(PMath::Matrix2(1.0f, 0.0f, 
+                                                           0.0f, 1.0f)));
+    }
+
+
+    TEST(Matrix3, OperationTests)
+    {
+        PMath::Matrix3 m0 = PMath::Matrix3(1.0f, 5.0f, 3.0f, 
+                                           2.0f, 6.0f, 4.0f, 
+                                           2.0f, -3.0f, 5.0f);
+
+        m0 += 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix3(3.0f, 7.0f, 5.0f, 4.0f, 8.0f, 6.0f, 4.0f, -1.0f, 7.0f));
+
+        m0 -= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix3(1.0f, 5.0f, 3.0f, 2.0f, 6.0f, 4.0f, 2.0f, -3.0f, 5.0f));
+
+        m0 *= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix3(2.0f, 10.0f, 6.0f, 4.0f, 12.0f, 8.0f, 4.0f, -6.0f, 10.0f));
+
+        m0 /= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix3(1.0f, 5.0f, 3.0f, 2.0f, 6.0f, 4.0f, 2.0f, -3.0f, 5.0f));
+
+
+        m0 = m0 + 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix3(3.0f, 7.0f, 5.0f, 4.0f, 8.0f, 6.0f, 4.0f, -1.0f, 7.0f));
+
+        m0 = m0 - 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix3(1.0f, 5.0f, 3.0f, 2.0f, 6.0f, 4.0f, 2.0f, -3.0f, 5.0f));
+
+        m0 = m0 * 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix3(2.0f, 10.0f, 6.0f, 4.0f, 12.0f, 8.0f, 4.0f, -6.0f, 10.0f));
+
+        m0 = m0 / 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix3(1.0f, 5.0f, 3.0f, 2.0f, 6.0f, 4.0f, 2.0f, -3.0f, 5.0f));
+
+
+
+
+        PMath::Matrix3 m1 = PMath::Matrix3(2.0f, 4.0f, 1.0f,
+                                           3.0f, 4.0f, -3.0f,
+                                           1.0f, 6.0f, 3.0f);
+
+        m0 += m1;
+        EXPECT_TRUE(m0 == PMath::Matrix3(3.0f, 9.0f, 4.0f, 5.0f, 10.0f, 1.0f, 3.0f, 3.0f, 8.0f));
+
+        m0 -= m1;
+        EXPECT_TRUE(m0 == PMath::Matrix3(1.0f, 5.0f, 3.0f, 2.0f, 6.0f, 4.0f, 2.0f, -3.0f, 5.0f));
+
+        m0 *= m1;
+        EXPECT_TRUE(m0 == PMath::Matrix3(20.0f, 42.0f, -5.0f, 26.0f, 56.0f, -4.0f, 0.0f, 26.0f, 26.0f)) << PMath::ToString(m0);
+
+
+
+        m0 = PMath::Matrix3(1.0f, 5.0f, 3.0f,
+                            2.0f, 6.0f, 4.0f,
+                            2.0f, -3.0f, 5.0f);
+
+        m0 = m0 + m1;
+        EXPECT_TRUE(m0 == PMath::Matrix3(3.0f, 9.0f, 4.0f, 5.0f, 10.0f, 1.0f, 3.0f, 3.0f, 8.0f));
+
+        m0 = m0 - m1;
+        EXPECT_TRUE(m0 == PMath::Matrix3(1.0f, 5.0f, 3.0f, 2.0f, 6.0f, 4.0f, 2.0f, -3.0f, 5.0f));
+
+        m0 = m0 * m1;
+        EXPECT_TRUE(m0 == PMath::Matrix3(20.0f, 42.0f, -5.0f, 26.0f, 56.0f, -4.0f, 0.0f, 26.0f, 26.0f));
+
+        PMath::Vector3 v = PMath::Vector3(2.0f, 4.0f, 3.0f);
+
+        m0 = PMath::Matrix3(1.0f, 5.0f, 3.0f,
+                            2.0f, 6.0f, 4.0f,
+                            2.0f, -3.0f, 5.0f);
+
+        v = m0 * v;
+        EXPECT_TRUE(v == PMath::Vector3(31.0f, 40.0f, 7.0f)) << PMath::ToString(v);
+
+        EXPECT_TRUE(m0 != m1);
     }
 }
