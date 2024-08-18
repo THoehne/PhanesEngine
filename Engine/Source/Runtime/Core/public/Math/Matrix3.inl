@@ -10,7 +10,7 @@
 namespace Phanes::Core::Math
 {
     template<RealType T, bool S>
-    TMatrix3<T, S> TransposeV(const TMatrix3<T, S>& m)
+    TMatrix3<T, S> TransposeV(TMatrix3<T, S>& m)
     {
         Detail::compute_mat3_transpose<T, S>::map(m, m);
         return m;

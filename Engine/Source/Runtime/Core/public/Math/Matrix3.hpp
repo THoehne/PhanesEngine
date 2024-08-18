@@ -123,12 +123,12 @@ namespace Phanes::Core::Math {
 
         FORCEINLINE TVector3<T, S>& operator[] (int m)
         {
-            return (*reinterpret_cast<TVector3<T, S>*>(this->m[m]));
+            return (*reinterpret_cast<TVector3<T, S>*>(this->data[m]));
         }
 
         FORCEINLINE const TVector3<T, S> operator[] (int m) const
         {
-            return (*reinterpret_cast<TVector3<T, S>*>(this->m[m]));
+            return (*reinterpret_cast<TVector3<T, S>*>(this->data[m]));
         }
 
     };
@@ -430,6 +430,7 @@ namespace Phanes::Core::Math {
     template<RealType T, bool S>
     bool InverseV(TMatrix3<T, S>& m1)
     {
+        // Rows of inversed matrix
         TVector3<T, S> r0 = CrossP(m1.c1, m1.c2);
         TVector3<T, S> r1 = CrossP(m1.c2, m1.c0);
         TVector3<T, S> r2 = CrossP(m1.c0, m1.c1);
@@ -441,6 +442,7 @@ namespace Phanes::Core::Math {
             return false;
         }
 
+        // Store matrix transposed
         m1 = TMatrix3<T, S>(r0.x, r0.y, r0.z,
                             r1.x, r1.y, r1.z,
                             r2.x, r2.y, r2.z);
@@ -475,22 +477,25 @@ namespace Phanes::Core::Math {
     template<RealType T, bool S>
     bool Inverse(const TMatrix3<T, S>& m1, Ref<TMatrix3<T, S>> r)
     {
-        TVector3<T, S> r0 = CrossP(m1.c1, m1.c2);
-        TVector3<T, S> r1 = CrossP(m1.c2, m1.c0);
-        TVector3<T, S> r2 = CrossP(m1.c0, m1.c1);
+        // r is a row-major matrix.
+        TMatrix3<T, S> row;
+        row[0] = CrossP(m1.c1, m1.c2);
+        row[1] = CrossP(m1.c2, m1.c0);
+        row[2] = CrossP(m1.c0, m1.c1);
 
         T _1_det = (T)1.0 / Determinant(m1);
 
-        if (_1_det == (T)0.0)
+        if (Phanes::Core::Math::Equals(_1_det, (T)0.0))
         {
             return false;
         }
 
-        r = TMatrix3<T, S>(r0.x, r0.y, r0.z,
-            r1.x, r1.y, r1.z,
-            r2.x, r2.y, r2.z);
+        row *= _1_det;
 
-        r *= _1_det;
+        // Store matrix transposed.
+        (*r).data[0][0] = row.data[0][0]; (*r).data[1][0] = row.data[0][1]; (*r).data[2][0] = row.data[0][2];
+        (*r).data[0][1] = row.data[1][0]; (*r).data[1][1] = row.data[1][1]; (*r).data[2][1] = row.data[1][2];
+        (*r).data[0][2] = row.data[2][0]; (*r).data[1][2] = row.data[2][1]; (*r).data[2][2] = row.data[2][2];
 
         return true;
     }
@@ -513,9 +518,9 @@ namespace Phanes::Core::Math {
     template<RealType T, bool S>
     bool IsIdentityMatrix(const TMatrix3<T, S>& m1)
     {
-        return (abs(m1(0, 0) - (T)1.0) < P_FLT_INAC && abs(m1(0, 1) - (T)0.0) < P_FLT_INAC && abs(m1(0, 2) - (T)0.0) < P_FLT_INAC &&
-                abs(m1(1, 0) - (T)0.0) < P_FLT_INAC && abs(m1(1, 1) - (T)1.0) < P_FLT_INAC && abs(m1(1, 2) - (T)0.0) < P_FLT_INAC &&
-                abs(m1(2, 0) - (T)0.0) < P_FLT_INAC && abs(m1(2, 1) - (T)0.0) < P_FLT_INAC && abs(m1(2, 2) - (T)1.0) < P_FLT_INAC);
+        return (abs(m1(0, 0) - (T)1.0) < P_FLT_INAC && m1(0, 1) < P_FLT_INAC &&           m1(0, 2) < P_FLT_INAC &&
+                    m1(1, 0) < P_FLT_INAC &&       abs(m1(1, 1) - (T)1.0) < P_FLT_INAC && m1(1, 2) < P_FLT_INAC &&
+                    m1(2, 0) < P_FLT_INAC &&           m1(2, 1) < P_FLT_INAC &&       abs(m1(2, 2) - (T)1.0) < P_FLT_INAC);
     }
 
 } // Phanes::Core::Math
