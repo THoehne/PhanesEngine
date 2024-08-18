@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "Core/public/Math/Include.h"
+#include "Core/Core.h"
 
 namespace PMath = Phanes::Core::Math;
 using namespace Phanes::Core::Math::UnitLiterals;
@@ -643,5 +644,44 @@ namespace MatrixTests
         EXPECT_TRUE(v == PMath::Vector3(31.0f, 40.0f, 7.0f)) << PMath::ToString(v);
 
         EXPECT_TRUE(m0 != m1);
+    }
+
+    TEST(Matrix3, FunctionTest)
+    {
+        PMath::Matrix3 m0 = PMath::Matrix3(1.0f, 5.0f, 3.0f,
+                                           2.0f, 6.0f, 4.0f,
+                                           2.0f, -3.0f, 5.0f);
+
+        EXPECT_FLOAT_EQ(PMath::Determinant(m0), -22.0f);
+
+        PMath::InverseV(m0);
+        EXPECT_TRUE(m0 == PMath::Matrix3(-21.0f/11.0f, 17.0f/11.0f, -1.0f/11.0f,
+                                         1.0f/11.0f, 1.0f/22.0f, -1.0f/11.0f,
+                                         9.0f/11.0f, -13.0f/22.0f, 2.0f/11.0f));
+
+        PMath::TransposeV(m0);
+
+        EXPECT_TRUE(m0 == PMath::Matrix3(-21.0f/11.0f, 1.0f/11.0f, 9.0f/11.0f,
+                                         17.0f/11.0f, 1.0f/22.0f, -13.0f/22.0f,
+                                         -1.0f/11.0f, -1.0f/11.0f, 2.0f/11.0f));
+
+        m0 = PMath::Matrix3(1.0f, 5.0f, 3.0f,
+                            2.0f, 6.0f, 4.0f,
+                            2.0f, -3.0f, 5.0f);
+
+
+        
+        Phanes::Ref<PMath::Matrix3> tmp = Phanes::MakeRef<PMath::Matrix3>();
+        PMath::Inverse(m0, tmp);
+        EXPECT_TRUE(PMath::IsIdentityMatrix(m0 * (*tmp)));
+
+        EXPECT_TRUE(PMath::Transpose(m0) == PMath::Matrix3(1.0f, 2.0f, 2.0f,
+                                                           5.0f, 6.0f, -3.0f,
+                                                           3.0f, 4.0f, 5.0f));
+    }
+
+    TEST(Matrix4, OperationTests)
+    {
+
     }
 }
