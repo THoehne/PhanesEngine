@@ -518,9 +518,9 @@ namespace Phanes::Core::Math {
     template<RealType T, bool S>
     bool IsIdentityMatrix(const TMatrix3<T, S>& m1)
     {
-        return (abs(m1(0, 0) - (T)1.0) < P_FLT_INAC && m1(0, 1) < P_FLT_INAC &&           m1(0, 2) < P_FLT_INAC &&
-                    m1(1, 0) < P_FLT_INAC &&       abs(m1(1, 1) - (T)1.0) < P_FLT_INAC && m1(1, 2) < P_FLT_INAC &&
-                    m1(2, 0) < P_FLT_INAC &&           m1(2, 1) < P_FLT_INAC &&       abs(m1(2, 2) - (T)1.0) < P_FLT_INAC);
+        return (abs(m1(0, 0) - (T)1.0) < P_FLT_INAC &&       abs(m1(0, 1))          < P_FLT_INAC &&       abs(m1(0, 2))          < P_FLT_INAC &&
+                abs(m1(1, 0))          < P_FLT_INAC &&       abs(m1(1, 1) - (T)1.0) < P_FLT_INAC &&       abs(m1(1, 2))          < P_FLT_INAC &&
+                abs(m1(2, 0))          < P_FLT_INAC &&       abs(m1(2, 1))          < P_FLT_INAC &&       abs(m1(2, 2) - (T)1.0) < P_FLT_INAC);
     }
 
 } // Phanes::Core::Math
