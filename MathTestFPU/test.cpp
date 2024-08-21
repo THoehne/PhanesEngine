@@ -682,6 +682,127 @@ namespace MatrixTests
 
     TEST(Matrix4, OperationTests)
     {
+        PMath::Matrix4 m0 = PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f, 
+                                           2.0f, 6.0f, 4.0f, 1.0f, 
+                                           2.0f, -3.0f, 5.0f, 3.0f, 
+                                           8.0f, -4.0f, 6.0f, -2.0f);
 
+        m0 += 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix4(3.0f, 7.0f, 5.0f, 6.0f,
+                                         4.0f, 8.0f, 6.0f, 3.0f, 
+                                         4.0f, -1.0f, 7.0f, 5.0f, 
+                                         10.0f, -2.0f, 8.0f, 0.0f));
+
+        m0 -= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f, 2.0f, 6.0f, 4.0f, 1.0f, 2.0f, -3.0f, 5.0f, 3.0f, 8.0f, -4.0f, 6.0f, -2.0f));
+
+        m0 *= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix4(2.0f, 10.0f, 6.0f, 8.0f, 4.0f, 12.0f, 8.0f, 2.0f, 4.0f, -6.0f, 10.0f, 6.0f, 16.0f, -8.0f, 12.0f, -4.0f));
+
+        m0 /= 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f, 2.0f, 6.0f, 4.0f, 1.0f, 2.0f, -3.0f, 5.0f, 3.0f, 8.0f, -4.0f, 6.0f, -2.0f));
+
+
+        m0 = m0 + 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix4(3.0f, 7.0f, 5.0f, 6.0f,
+                                         4.0f, 8.0f, 6.0f, 3.0f,
+                                         4.0f, -1.0f, 7.0f, 5.0f,
+                                         10.0f, -2.0f, 8.0f, 0.0f)) << PMath::ToString(m0);
+
+        m0 = m0 - 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f, 2.0f, 6.0f, 4.0f, 1.0f, 2.0f, -3.0f, 5.0f, 3.0f, 8.0f, -4.0f, 6.0f, -2.0f));
+
+        m0 = m0 * 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix4(2.0f, 10.0f, 6.0f, 8.0f, 4.0f, 12.0f, 8.0f, 2.0f, 4.0f, -6.0f, 10.0f, 6.0f, 16.0f, -8.0f, 12.0f, -4.0f));
+
+        m0 = m0 / 2.0f;
+        EXPECT_TRUE(m0 == PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f, 2.0f, 6.0f, 4.0f, 1.0f, 2.0f, -3.0f, 5.0f, 3.0f, 8.0f, -4.0f, 6.0f, -2.0f));
+
+
+
+
+        PMath::Matrix4 m1 = PMath::Matrix4(2.0f, 4.0f, 1.0f, 9.0f, 
+                                           3.0f, 4.0f, -3.0f, 2.0f, 
+                                           1.0f, 6.0f, 3.0f, -4.0f, 
+                                           6.0f, 4.0f, 7.0f, 3.0f);
+
+        m0 += m1;
+        EXPECT_TRUE(m0 == PMath::Matrix4(3.0f, 9.0f, 4.0f, 13.0f, 5.0f, 10.0f, 1.0f, 3.0f, 3.0f, 3.0f, 8.0f, -1.0f, 14.0f, 0.0f, 13.0f, 1.0f));
+
+        m0 -= m1;
+        EXPECT_TRUE(m0 == PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f, 2.0f, 6.0f, 4.0f, 1.0f, 2.0f, -3.0f, 5.0f, 3.0f, 8.0f, -4.0f, 6.0f, -2.0f));
+
+        m0 *= m1;
+        EXPECT_TRUE(m0 == PMath::Matrix4(44.0f, 58.0f, 23.0f, 19.0f, 32.0f, 60.0f, 3.0f, 17.0f, 18.0f, 38.0f, 47.0f, 1.0f, -2.0f, 44.0f, 24.0f, 34.0f)) << PMath::ToString(m0);
+
+
+
+        m0 = PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f,
+                            2.0f, 6.0f, 4.0f, 1.0f,
+                            2.0f, -3.0f, 5.0f, 3.0f,
+                            8.0f, -4.0f, 6.0f, -2.0f);
+
+
+        m0 = m0 + m1;
+        EXPECT_TRUE(m0 == PMath::Matrix4(3.0f, 9.0f, 4.0f, 13.0f, 5.0f, 10.0f, 1.0f, 3.0f, 3.0f, 3.0f, 8.0f, -1.0f, 14.0f, 0.0f, 13.0f, 1.0f));
+
+        m0 = m0 - m1;
+        EXPECT_TRUE(m0 == PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f, 2.0f, 6.0f, 4.0f, 1.0f, 2.0f, -3.0f, 5.0f, 3.0f, 8.0f, -4.0f, 6.0f, -2.0f));
+
+        m0 = m0 * m1;
+        EXPECT_TRUE(m0 == PMath::Matrix4(44.0f, 58.0f, 23.0f, 19.0f, 32.0f, 60.0f, 3.0f, 17.0f, 18.0f, 38.0f, 47.0f, 1.0f, -2.0f, 44.0f, 24.0f, 34.0f));
+
+        PMath::Vector4 v = PMath::Vector4(2.0f, 4.0f, 3.0f, 5.0f);
+
+        m0 = PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f,
+                            2.0f, 6.0f, 4.0f, 1.0f,
+                            2.0f, -3.0f, 5.0f, 3.0f,
+                            8.0f, -4.0f, 6.0f, -2.0f);
+
+        v = m0 * v;
+        EXPECT_TRUE(v == PMath::Vector4(51.0f, 45.0f, 22.0f, 8.0f)) << PMath::ToString(v);
+
+        EXPECT_TRUE(m0 != m1);
+    }
+
+    TEST(Matrix4, FunctionTest)
+    {
+        PMath::Matrix4 m0 = PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f,
+                                           2.0f, 6.0f, 4.0f, 1.0f,
+                                           2.0f, -3.0f, 5.0f, 3.0f,
+                                           8.0f, -4.0f, 6.0f, -2.0f);
+
+        EXPECT_FLOAT_EQ(PMath::Determinant(m0), -662.0f);
+
+        PMath::InverseV(m0);
+        EXPECT_TRUE(m0 == PMath::Matrix4(0.359516f, -0.280966f, -0.244712f, 0.211480f,
+                                         0.042296f, 0.084592f, -0.087613f, -0.004531f,
+                                         -0.332326f, 0.335347f, 0.259818f, -0.107250f,
+                                         0.356495f, -0.287009f, -0.024169f, 0.033232f)) << PMath::ToString(m0);
+
+        m0 = PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f,
+                            2.0f, 6.0f, 4.0f, 1.0f,
+                            2.0f, -3.0f, 5.0f, 3.0f,
+                            8.0f, -4.0f, 6.0f, -2.0f);
+
+        PMath::TransposeV(m0);
+
+        EXPECT_TRUE(m0 == PMath::Matrix4(1.0f, 2.0f, 2.0f, 8.0f, 5.0f, 6.0f, -3.0f, -4.0f, 3.0f, 4.0f, 5.0f, 6.0f, 4.0f, 1.0f, 3.0f, -2.0f));
+        
+        m0 = PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f,
+                            2.0f, 6.0f, 4.0f, 1.0f,
+                            2.0f, -3.0f, 5.0f, 3.0f,
+                            8.0f, -4.0f, 6.0f, -2.0f);
+
+
+
+        Phanes::Ref<PMath::Matrix4> tmp = Phanes::MakeRef<PMath::Matrix4>();
+        PMath::Inverse(m0, tmp);
+        EXPECT_TRUE(*tmp == PMath::Matrix4(0.359516f, -0.280966f, -0.244712f, 0.211480f,
+                                           0.042296f, 0.084592f, -0.087613f, -0.004531f,
+                                           -0.332326f, 0.335347f, 0.259818f, -0.107250f,
+                                           0.356495f, -0.287009f, -0.024169f, 0.033232f));
+
+        EXPECT_TRUE(PMath::Transpose(m0) == PMath::Matrix4(1.0f, 2.0f, 2.0f, 8.0f, 5.0f, 6.0f, -3.0f, -4.0f, 3.0f, 4.0f, 5.0f, 6.0f, 4.0f, 1.0f, 3.0f, -2.0f));
     }
 }
