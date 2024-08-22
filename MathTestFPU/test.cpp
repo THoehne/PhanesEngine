@@ -8,6 +8,316 @@ using namespace Phanes::Core::Math::UnitLiterals;
 
 namespace VectorTests
 {
+    TEST(IntVector2, OperatorTests)
+    {
+        PMath::IntVector2 v(3, 5);
+        
+        v += 2;
+        EXPECT_TRUE(v == PMath::IntVector2(5, 7));
+
+        v -= 2;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 5));
+
+        v *= 2;
+        EXPECT_TRUE(v == PMath::IntVector2(6, 10));
+
+        v /= 2;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 5)) << PMath::ToString(v);
+
+
+        PMath::IntVector2 v1(5, 2);
+
+        v += v1;
+        EXPECT_TRUE(v == PMath::IntVector2(8, 7));
+
+        v -= v1;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 5));
+
+        v *= v1;
+        EXPECT_TRUE(v == PMath::IntVector2(15, 10));
+
+        v /= v1;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 5));
+
+
+        v = { 28, 16 };
+        v %= 5;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 1));
+
+        v = { 28, 16 };
+        v &= 19;
+        EXPECT_TRUE(v == PMath::IntVector2(16, 16));
+
+        v = { 28, 16 };
+        v |= 19;
+        EXPECT_TRUE(v == PMath::IntVector2(31, 19));
+
+        v = { 28, 16 };
+        v ^= 19;
+        EXPECT_TRUE(v == PMath::IntVector2(15, 3));
+
+        v = { 28, 17 };
+        v <<= 3;
+        EXPECT_TRUE(v == PMath::IntVector2(224, 136));
+
+        v >>= 3;
+        EXPECT_TRUE(v == PMath::IntVector2(28, 17));
+
+
+
+        v = { 3, 5 };
+
+        v = v + 2;
+        EXPECT_TRUE(v == PMath::IntVector2(5, 7));
+
+        v = v - 2;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 5));
+
+        v = v * 2;
+        EXPECT_TRUE(v == PMath::IntVector2(6, 10));
+
+        v = v / 2;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 5)) << PMath::ToString(v);
+
+
+        v1 = { 5, 2 };
+
+        v = v + v1;
+        EXPECT_TRUE(v == PMath::IntVector2(8, 7));
+
+        v = v - v1;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 5));
+
+        v = v * v1;
+        EXPECT_TRUE(v == PMath::IntVector2(15, 10));
+
+        v = v / v1;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 5));
+
+
+        v = { 28, 16 };
+        v = v % 5;
+        EXPECT_TRUE(v == PMath::IntVector2(3, 1));
+
+        v = { 28, 16 };
+        v = v & 19;
+        EXPECT_TRUE(v == PMath::IntVector2(16, 16));
+
+        v = { 28, 16 };
+        v = v | 19;
+        EXPECT_TRUE(v == PMath::IntVector2(31, 19));
+
+        v = { 28, 16 };
+        v = v ^ 19;
+        EXPECT_TRUE(v == PMath::IntVector2(15, 3));
+
+        v = { 28, 17 };
+        v = v << 3;
+        EXPECT_TRUE(v == PMath::IntVector2(224, 136));
+
+        v = v >> 3;
+        EXPECT_TRUE(v == PMath::IntVector2(28, 17));
+
+
+        v++;
+        EXPECT_TRUE(v == PMath::IntVector2(29, 18));
+
+        v--;
+        EXPECT_TRUE(v == PMath::IntVector2(28, 17)) << PMath::ToString(v);
+    }
+
+    TEST(IntVector2, FunctionTests)
+    {
+        PMath::IntVector2 v(3, 5);
+        PMath::IntVector2 v1(5, 2);
+
+        EXPECT_EQ(DotP(v, v1), 25);
+
+        EXPECT_TRUE(PMath::MaxV(v, v1) == PMath::IntVector2(5, 5));
+
+        v = { 3, 5 };
+        EXPECT_TRUE(PMath::MinV(v, v1) == PMath::IntVector2(3, 2));
+
+        v = { -2, 5 };
+        EXPECT_TRUE(PMath::SignVectorV(v) == PMath::IntVector2(-1, 1));
+
+        v = { -2, 5 };
+        EXPECT_TRUE(PMath::NegateV(v) == PMath::IntVector2(2, -5));
+
+        EXPECT_TRUE(PMath::IsParallel(v, PMath::IntVector2(-2, 5))) << PMath::ToString(v);
+
+        EXPECT_TRUE(PMath::IsCoincident(PMath::IntVector2(-4, 10), PMath::IntVector2(-2, 5)));
+
+        EXPECT_TRUE(PMath::IsPerpendicular(PMath::IntVector2(-5, -2), v));
+
+        v = { 3, 5 };
+        EXPECT_TRUE(PMath::Min(v, v1) == PMath::IntVector2(3, 2));
+        
+        EXPECT_TRUE(PMath::Max(v, v1) == PMath::IntVector2(5, 5));
+
+        EXPECT_TRUE(PMath::Negate(v) == PMath::IntVector2(-3, -5));
+
+        EXPECT_TRUE(PMath::SignVector(v) == PMath::IntVector2(1, 1));
+
+    }
+
+    TEST(IntVector3, OperatorTests)
+    {
+        PMath::IntVector3 v(3, 5, 4);
+
+        v += 2;
+        EXPECT_TRUE(v == PMath::IntVector3(5, 7, 6));
+
+        v -= 2;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 5, 4));
+
+        v *= 2;
+        EXPECT_TRUE(v == PMath::IntVector3(6, 10, 8));
+
+        v /= 2;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 5, 4));
+
+
+        PMath::IntVector3 v1(5, 2, 7);
+
+        v += v1;
+        EXPECT_TRUE(v == PMath::IntVector3(8, 7, 11));
+
+        v -= v1;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 5, 4));
+
+        v *= v1;
+        EXPECT_TRUE(v == PMath::IntVector3(15, 10, 28));
+
+        v /= v1;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 5, 4));
+
+
+        v = { 28, 16, 21};
+        v %= 5;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 1, 1));
+
+        v = { 28, 16, 21 };
+        v &= 19;
+        EXPECT_TRUE(v == PMath::IntVector3(16, 16, 17));
+
+        v = { 28, 16, 21 };
+        v |= 19;
+        EXPECT_TRUE(v == PMath::IntVector3(31, 19, 23));
+
+        v = { 28, 16, 21 };
+        v ^= 19;
+        EXPECT_TRUE(v == PMath::IntVector3(15, 3, 6));
+
+        v = { 28, 17, 21 };
+        v <<= 3;
+        EXPECT_TRUE(v == PMath::IntVector3(224, 136, 168));
+
+        v >>= 3;
+        EXPECT_TRUE(v == PMath::IntVector3(28, 17, 21));
+
+
+
+        v = { 3, 5, 4 };
+
+        v = v + 2;
+        EXPECT_TRUE(v == PMath::IntVector3(5, 7, 6));
+
+        v = v - 2;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 5, 4));
+
+        v = v * 2;
+        EXPECT_TRUE(v == PMath::IntVector3(6, 10, 8));
+
+        v = v / 2;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 5, 4));
+
+
+        v1 = { 5, 2, 7 };
+
+        v = v + v1;
+        EXPECT_TRUE(v == PMath::IntVector3(8, 7, 11));
+
+        v = v - v1;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 5, 4));
+
+        v = v * v1;
+        EXPECT_TRUE(v == PMath::IntVector3(15, 10, 28));
+
+        v = v / v1;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 5, 4));
+
+
+        v = { 28, 16, 21 };
+        v = v % 5;
+        EXPECT_TRUE(v == PMath::IntVector3(3, 1, 1));
+
+        v = { 28, 16, 21 };
+        v = v & 19;
+        EXPECT_TRUE(v == PMath::IntVector3(16, 16, 17));
+
+        v = { 28, 16, 21 };
+        v = v | 19;
+        EXPECT_TRUE(v == PMath::IntVector3(31, 19, 23));
+
+        v = { 28, 16, 21 };
+        v = v ^ 19;
+        EXPECT_TRUE(v == PMath::IntVector3(15, 3, 6));
+
+        v = { 28, 17, 21 };
+        v = v << 3;
+        EXPECT_TRUE(v == PMath::IntVector3(224, 136, 168));
+
+        v = v >> 3;
+        EXPECT_TRUE(v == PMath::IntVector3(28, 17, 21));
+    }
+
+    TEST(IntVector3, FunctionTests)
+    {
+        PMath::IntVector3 v(3, 5, 4);
+        PMath::IntVector3 v1(5, 2, 7);
+        PMath::IntVector3 v2(8, 4, -7);
+
+        EXPECT_EQ(PMath::DotP(v, v1), 53);
+
+        EXPECT_TRUE(PMath::CrossPV(v, v1) == PMath::IntVector3(27, -1, -19));
+
+        v = { 3, 5, 4 };
+
+        EXPECT_EQ(PMath::ScalarTriple(v, v1, v2), 345);
+
+        EXPECT_TRUE(PMath::MaxV(v, v1) == PMath::IntVector3(5, 5, 7));
+
+        v = { 3, 5, 4 };
+        EXPECT_TRUE(PMath::MinV(v, v1) == PMath::IntVector3(3, 2, 4));  
+
+        v = { -2, 5, -7 };
+        EXPECT_TRUE(PMath::SignVectorV(v) == PMath::IntVector3(-1, 1, -1));
+
+        v = { -2, 5, -7 };
+        EXPECT_TRUE(PMath::NegateV(v) == PMath::IntVector3(2, -5, 7));
+
+        v = { 3, 5, 4 };
+        EXPECT_TRUE(PMath::VectorTripleV(v, v1, v2) == PMath::IntVector3(83, 37, 116));
+
+        EXPECT_TRUE(PMath::IsParallel(v, PMath::IntVector3(166, 74, 232)));
+
+        EXPECT_TRUE(PMath::IsCoincident(PMath::IntVector3(-4, 10, 14), PMath::IntVector3(-2, 5, 7)));
+
+        EXPECT_TRUE(PMath::IsPerpendicular(PMath::IntVector3(0, 116, -37), v));
+
+
+        v = { 3, 5, 4 };
+
+        EXPECT_TRUE(PMath::CrossP(v, v1) == PMath::IntVector3(27, -1, -19));
+        EXPECT_TRUE(PMath::Max(v, v1) == PMath::IntVector3(5, 5, 7));
+        EXPECT_TRUE(PMath::Min(v, v1) == PMath::IntVector3(3, 2, 4));
+        EXPECT_TRUE(PMath::Negate(v2) == PMath::IntVector3(-8, -4, 7));
+        EXPECT_TRUE(PMath::SignVector(v2) == PMath::IntVector3(1, 1, -1));
+        EXPECT_TRUE(PMath::VectorTriple(v, v1, v2) == PMath::IntVector3(83, 37, 116));
+
+    }
+
     TEST(Vector2, OperatorTests) 
     {
         PMath::Vector2 v0(2.4f, 3.1f);
@@ -76,7 +386,7 @@ namespace VectorTests
 
     }
 
-    TEST(Vector2, FunctionTest)
+    TEST(Vector2, FunctionTests)
     {
         PMath::Vector2 v0(2.4f, 3.1f);
         PMath::Vector2 v1(5.1f, 2.5f);
@@ -231,7 +541,7 @@ namespace VectorTests
         EXPECT_FALSE(r != PMath::Vector3(0.6f, 0.775f, 1.4f));
     }
 
-    TEST(Vector3, FunctionTest)
+    TEST(Vector3, FunctionTests)
     {
         PMath::Vector3 v0(2.4f, 3.1f, 5.6f);
         PMath::Vector3 v1(5.1f, 2.5f, 7.2f);
@@ -413,7 +723,7 @@ namespace VectorTests
         EXPECT_FALSE(r != PMath::Vector4(0.6f, 0.775f, 1.4f, -0.925f));
     }
 
-    TEST(Vector4, FunctionTest)
+    TEST(Vector4, FunctionTests)
     {
         PMath::Vector4 v0(2.4f, 3.1f, 5.6f, -3.7f);
         PMath::Vector4 v1(5.1f, 2.5f, 7.2f, 2.6f);
@@ -550,7 +860,7 @@ namespace MatrixTests
         EXPECT_TRUE(m0 != m1);
     }
 
-    TEST(Matrix2, FunctionTest)
+    TEST(Matrix2, FunctionTests)
     {
         PMath::Matrix2 m0 = PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f);
 
@@ -646,7 +956,7 @@ namespace MatrixTests
         EXPECT_TRUE(m0 != m1);
     }
 
-    TEST(Matrix3, FunctionTest)
+    TEST(Matrix3, FunctionTests)
     {
         PMath::Matrix3 m0 = PMath::Matrix3(1.0f, 5.0f, 3.0f,
                                            2.0f, 6.0f, 4.0f,
@@ -765,7 +1075,7 @@ namespace MatrixTests
         EXPECT_TRUE(m0 != m1);
     }
 
-    TEST(Matrix4, FunctionTest)
+    TEST(Matrix4, FunctionTests)
     {
         PMath::Matrix4 m0 = PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f,
                                            2.0f, 6.0f, 4.0f, 1.0f,
