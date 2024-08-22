@@ -52,6 +52,20 @@ namespace Phanes::Core::Math {
      * Specific instantiation of forward declarations.
      */
 
+    // IntVetor2
+
+    typedef TIntVector2<int, false>     IntVector2;
+    typedef TIntVector2<int, false>     Vector2i;
+    typedef TIntVector2<long, false>    LongVector2;
+    typedef TIntVector2<long, false>    Vector2l;
+
+    // IntVetor3
+
+    typedef TIntVector3<int, false>     IntVector3;
+    typedef TIntVector3<int, false>     Vector3i;
+    typedef TIntVector3<long, false>    LongVector3;
+    typedef TIntVector3<long, false>    Vector3l;
+
     // Vector2
 
     typedef TVector2<float, false>      Vector2;

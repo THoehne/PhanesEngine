@@ -146,10 +146,8 @@ namespace Phanes::Core::Math::Detail
 
         static constexpr void map(Phanes::Core::Math::TIntVector2<T, false>& r, const Phanes::Core::Math::TIntVector2<T, false>& v1, T s)
         {
-            s = (T)1.0 / s;
-
-            r.x = v1.x * s;
-            r.y = v1.y * s;
+            r.x = v1.x / s;
+            r.y = v1.y / s;
         }
     };
 

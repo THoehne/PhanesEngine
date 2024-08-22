@@ -393,11 +393,11 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    TIntVector3<T, false> CrossPV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
+    TIntVector3<T, false>& CrossPV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
-        float x = v1.x;
-        float y = v1.y;
-        float z = v1.z;
+        T x = v1.x;
+        T y = v1.y;
+        T z = v1.z;
 
         v1.x = (y * v2.z) - (z * v2.y);
         v1.y = (z * v2.x) - (x * v2.z);
@@ -416,7 +416,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    TIntVector3<T, false> MaxV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
+    TIntVector3<T, false>& MaxV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
         v1.x = Phanes::Core::Math::Max(v1.x, v2.x);
         v1.y = Phanes::Core::Math::Max(v1.y, v2.y);
@@ -435,7 +435,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    TIntVector3<T, false> MinV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
+    TIntVector3<T, false>& MinV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
         v1.x = Phanes::Core::Math::Min(v1.x, v2.x);
         v1.y = Phanes::Core::Math::Min(v1.y, v2.y);
@@ -453,30 +453,11 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    TIntVector3<T, false> NegateV(TIntVector3<T, false>& v1)
+    TIntVector3<T, false>& NegateV(TIntVector3<T, false>& v1)
     {
         v1.x = -v1.x;
         v1.y = -v1.y;
         v1.z = -v1.z;
-
-        return v1;
-    }
-
-    /**
-     * Performes componentwise multiplication of two vectors.
-     *
-     * @param(v1) Vector one
-     * @param(v2) Vector two
-     *
-     * @note result is stored in v1.
-     */
-
-    template<IntType T>
-    TIntVector3<T, false> ScaleV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
-    {
-        v1.x *= v2.x;
-        v1.y *= v2.y;
-        v1.z *= v2.z;
 
         return v1;
     }
@@ -489,7 +470,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    TIntVector3<T, false> Set(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
+    TIntVector3<T, false>& Set(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
         v1 = v2;
 
@@ -506,7 +487,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    TIntVector3<T, false> Set(TIntVector3<T, false>& v1, T x, T y, T z)
+    TIntVector3<T, false>& Set(TIntVector3<T, false>& v1, T x, T y, T z)
     {
         v1.x = x;
         v1.y = y;
@@ -522,7 +503,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    TIntVector3<T, false> SignVectorV(TIntVector3<T, false>& v1)
+    TIntVector3<T, false>& SignVectorV(TIntVector3<T, false>& v1)
     {
         v1.x = (v1.x >= 0) ? 1 : -1;
         v1.y = (v1.y >= 0) ? 1 : -1;
@@ -545,7 +526,7 @@ namespace Phanes::Core::Math {
     template<IntType T>
     T ScalarTriple(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2, const TIntVector3<T, false>& v3)
     {
-        return CrossP(v1, v2) * v3;
+        return DotP(CrossP(v1, v2), v3);
     }
 
     /**
@@ -559,7 +540,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    TIntVector3<T, false> VectorTripleV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2, const TIntVector3<T, false>& v3)
+    TIntVector3<T, false>& VectorTripleV(TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2, const TIntVector3<T, false>& v3)
     {
         CrossPV(CrossPV(v1, v2), v3);
 
@@ -593,7 +574,8 @@ namespace Phanes::Core::Math {
     template<IntType T>
     inline bool IsParallel(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
-        return (abs(DotP(v1, v2)) == 1);
+        T tmp = v1.x / v2.x;
+        return (tmp == (v1.y / v2.y) && tmp == (v1.z / v2.z));
     }
 
     /**
@@ -608,7 +590,8 @@ namespace Phanes::Core::Math {
     template<IntType T>
     inline bool IsCoincident(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
-        return (DotP(v1, v2) == 1);
+        T tmp = v1.x / v2.x;
+        return (tmp == (v1.y / v2.y) && tmp == (v1.z / v2.z) && tmp > -1);
     }
 
     /**
@@ -645,8 +628,8 @@ namespace Phanes::Core::Math {
     TIntVector3<T, false> CrossP(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
         return TIntVector3<T, false>((v1.y * v2.z) - (v1.z * v2.y),
-                              (v1.z * v2.x) - (v1.x * v2.z),
-                              (v1.x * v2.y) - (v1.y * v2.x));
+                                     (v1.z * v2.x) - (v1.x * v2.z),
+                                     (v1.x * v2.y) - (v1.y * v2.x));
     }
 
     /**
@@ -662,8 +645,8 @@ namespace Phanes::Core::Math {
     TIntVector3<T, false> Max(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
         return TIntVector3<T, false>((v1.x > v2.x) ? v1.x : v2.x,
-                              (v1.y > v2.y) ? v1.y : v2.y,
-                              (v1.z > v2.z) ? v1.z : v2.z);
+                                     (v1.y > v2.y) ? v1.y : v2.y,
+                                     (v1.z > v2.z) ? v1.z : v2.z);
     }
 
     /**
@@ -679,8 +662,8 @@ namespace Phanes::Core::Math {
     TIntVector3<T, false> Min(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
         return TIntVector3<T, false>((v1.x < v2.x) ? v1.x : v2.x,
-                              (v1.y < v2.y) ? v1.y : v2.y,
-                              (v1.z < v2.z) ? v1.z : v2.z);
+                                     (v1.y < v2.y) ? v1.y : v2.y,
+                                     (v1.z < v2.z) ? v1.z : v2.z);
     }
 
     /**
@@ -698,21 +681,6 @@ namespace Phanes::Core::Math {
     }
 
     /**
-     * Multiplies vector componentwise.
-     *
-     * @param(v1) Vector one
-     * @param(v2) Vector two
-     *
-     * @return Vector with componentwise products
-     */
-
-    template<IntType T>
-    TIntVector3<T, false> Scale(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
-    {
-        return TIntVector3<T, false>(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
-    }
-
-    /**
      * Gets vector triple product ((v1 x v2) x v3).
      *
      * @param(v1) Vector one
@@ -726,6 +694,12 @@ namespace Phanes::Core::Math {
     TIntVector3<T, false> VectorTriple(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2, const TIntVector3<T, false>& v3)
     {
         return CrossP(CrossP(v1, v2), v3);
+    }
+
+    template<IntType T>
+    TIntVector3<T, false> SignVector(const TIntVector3<T, false>& v1)
+    {
+        return TIntVector3<T, false>((v1.x >= 0) ? 1 : -1, (v1.y >= 0) ? 1 : -1, (v1.z >= 0) ? 1 : -1);
     }
 
 } // phanes::core::math::coretypes

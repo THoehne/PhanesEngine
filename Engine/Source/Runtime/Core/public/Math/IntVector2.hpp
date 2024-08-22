@@ -127,10 +127,10 @@ namespace Phanes::Core::Math {
     // ======================== //
         
     /**
-     * Addition operation on same TIntVector2<T, A> (this) by a floating point value.
+     * Addition operation on same TIntVector2<T, A> (this) by a scalar value.
      *
      * @param(v1) Vector to add to
-     * @param(s) Floating point to add
+     * @param(s) Scalar to add
      */
 
     template<IntType T, bool A>
@@ -147,10 +147,10 @@ namespace Phanes::Core::Math {
     TIntVector2<T, A> operator+= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     /**
-     * Substraction operation on same TIntVector2<T, A> (this) by a floating point.
+     * Substraction operation on same TIntVector2<T, A> (this) by a scalar.
      *
      * @param(v1) Vector to substract from
-     * @param(v2) Floating point to substract
+     * @param(v2) Scalar to substract
      */
 
     template<IntType T, bool A>
@@ -168,14 +168,17 @@ namespace Phanes::Core::Math {
     
 
     /**
-     * Multiplication of TIntVector2<T, A> (this) with a floating point.
+     * Multiplication of TIntVector2<T, A> (this) with a scalar.
      *
      * @param(v1) Vector to multiply with
-     * @param(s Floating point to multiply with
+     * @param(s) scalar to multiply with
      */
 
     template<IntType T, bool A>
     TIntVector2<T, A> operator*= (TIntVector2<T, A>& v1, T s);
+
+    template<IntType T, bool A>
+    TIntVector2<T, A> operator*= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     /**
      * Devision of Vector
@@ -183,11 +186,14 @@ namespace Phanes::Core::Math {
      * @param(v1) Vector to divide with
      * @param(s) Scalar to divide with
      * 
-     * @note Result is rounded (obviously)
+     * @note Result is rounded 
      */
 
     template<IntType T, bool A>
     TIntVector2<T, A> operator/= (TIntVector2<T, A>& v1, T s);
+
+    template<IntType T, bool A>
+    TIntVector2<T, A> operator/= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     /**
      * Stores the remainder of division by a scalar.
@@ -434,6 +440,11 @@ namespace Phanes::Core::Math {
     //   TIntVector2 static function implementation	  //
     // ============================================== //
 
+    template<IntType T>
+    T DotP(const TIntVector2<T, false>& v, const TIntVector2<T, false>& v1)
+    {
+        return v.x * v1.x + v.y * v1.y;
+    }
 
     template<IntType T>
     TIntVector2<T, false> MaxV(TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
@@ -462,6 +473,13 @@ namespace Phanes::Core::Math {
         return v1;
     }
 
+    /// <summary>
+    /// Returns signs of numbers (1 / -1). <br>
+    /// Returns 1 for zero.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="v1"></param>
+    /// <returns></returns>
     template<IntType T>
     TIntVector2<T, false> SignVectorV(TIntVector2<T, false>& v1)
     {
@@ -514,6 +532,8 @@ namespace Phanes::Core::Math {
     {
         v1.x = -v1.x;
         v1.y = -v1.y;
+
+        return v1;
     }
 
     /**
@@ -530,7 +550,7 @@ namespace Phanes::Core::Math {
     template<IntType T>
     inline bool IsPerpendicular(const TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
     {
-        return (abs(DotP(v1, v2)) = 0);
+        return (Abs(DotP(v1, v2)) == 0);
     }
 
     /**
@@ -547,7 +567,7 @@ namespace Phanes::Core::Math {
     template<IntType T>
     inline bool IsParallel(const TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
     {
-        return (abs(DotP(v1, v2)) = 1);
+        return ((v1.x / v2.x) == (v1.y / v2.y));
     }
 
     /**
@@ -564,7 +584,8 @@ namespace Phanes::Core::Math {
     template<IntType T>
     inline bool IsCoincident(const TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
     {
-        return (DotP(v1, v2) = 1);
+        T tmp = v1.x / v2.x;
+        return (tmp == (v1.y / v2.y) && tmp > -1);
     }
 
     /**
