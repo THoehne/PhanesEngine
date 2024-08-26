@@ -66,6 +66,14 @@ namespace Phanes::Core::Math {
     typedef TIntVector3<long, false>    LongVector3;
     typedef TIntVector3<long, false>    Vector3l;
 
+
+    // IntVetor4
+
+    typedef TIntVector4<int, false>     IntVector4;
+    typedef TIntVector4<int, false>     Vector4i;
+    typedef TIntVector4<long, false>    LongVector4;
+    typedef TIntVector4<long, false>    Vector4l;
+
     // Vector2
 
     typedef TVector2<float, false>      Vector2;

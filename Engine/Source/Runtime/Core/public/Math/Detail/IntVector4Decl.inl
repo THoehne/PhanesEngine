@@ -77,8 +77,8 @@ namespace Phanes::Core::Math::Detail
         {
             v1.x = x;
             v1.y = y;
-            v1.y = z;
-            v1.y = w;
+            v1.z = z;
+            v1.w = w;
         }
 
 
@@ -176,12 +176,10 @@ namespace Phanes::Core::Math::Detail
 
         static constexpr void map(Phanes::Core::Math::TIntVector4<T, false>& r, const Phanes::Core::Math::TIntVector4<T, false>& v1, T s)
         {
-            s = (T)1.0 / s;
-
-            r.x = v1.x * s;
-            r.y = v1.y * s;
-            r.z = v1.z * s;
-            r.w = v1.w * s;
+            r.x = v1.x / s;
+            r.y = v1.y / s;
+            r.z = v1.z / s;
+            r.w = v1.w / s;
         }
     };
 

@@ -273,7 +273,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator&(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_and<T, S>::map(r, v1, v2);
         return r;
     }
@@ -281,7 +281,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator&(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_and<T, S>::map(r, v1, s);
         return r;
     }
@@ -289,7 +289,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator|(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_or<T, S>::map(r, v1, v2);
         return r;
     }
@@ -297,7 +297,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator|(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_or<T, S>::map(r, v1, s);
         return r;
     }
@@ -305,7 +305,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator^(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_xor<T, S>::map(r, v1, v2);
         return r;
     }
@@ -313,7 +313,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator^(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_xor<T, S>::map(r, v1, s);
         return r;
     }
@@ -321,7 +321,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator<<(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_left_shift<T, S>::map(r, v1, v2);
         return r;
     }
@@ -329,7 +329,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator<<(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_left_shift<T, S>::map(r, v1, s);
         return r;
     }
@@ -337,7 +337,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator>>(TIntVector4<T, S>& v1, const TIntVector4<T, S>& v2)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_right_shift<T, S>::map(r, v1, v2);
         return r;
     }
@@ -345,7 +345,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator>>(TIntVector4<T, S>& v1, T s)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_right_shift<T, S>::map(r, v1, s);
         return r;
     }
@@ -353,7 +353,7 @@ namespace Phanes::Core::Math
     template<IntType T, bool S>
     TIntVector4<T, S> operator~(TIntVector4<T, S>& v1)
     {
-        TVector2<T, S> r;
+        TIntVector4<T, S> r;
         Detail::compute_ivec4_bnot<T, S>::map(r, v1);
         return r;
     }

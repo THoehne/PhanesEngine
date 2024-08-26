@@ -547,6 +547,17 @@ namespace Phanes::Core::Math {
         return v1;
     }
 
+    template<IntType T>
+    TIntVector3<T, false>& GetPerpendicular(TIntVector3<T, false>& v1)
+    {
+        T y = v1.y;
+        v1.x = 0;
+        v1.y = v1.z;
+        v1.z = -y;
+
+        return v1;
+    }
+
     /**
      * Tests whether two vectors are perpendicular.
      *
@@ -560,38 +571,6 @@ namespace Phanes::Core::Math {
     inline bool IsPerpendicular(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
     {
         return (DotP(v1, v2) == 0);
-    }
-
-    /**
-     * Tests whether two vectors are parallel.
-     *
-     * @param(v1) Vector one
-     * @param(v2) Vector two
-     *
-     * @return True if parallel, false if not.
-     */
-
-    template<IntType T>
-    inline bool IsParallel(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
-    {
-        T tmp = v1.x / v2.x;
-        return (tmp == (v1.y / v2.y) && tmp == (v1.z / v2.z));
-    }
-
-    /**
-     * Tests whether two vectors are coincident (Parallel and point in same direction).
-     *
-     * @param(v1) Vector one
-     * @param(v2) Vector two
-     *
-     * @return True if coincident, false if not.
-     */
-
-    template<IntType T>
-    inline bool IsCoincident(const TIntVector3<T, false>& v1, const TIntVector3<T, false>& v2)
-    {
-        T tmp = v1.x / v2.x;
-        return (tmp == (v1.y / v2.y) && tmp == (v1.z / v2.z) && tmp > -1);
     }
 
     /**

@@ -573,6 +573,8 @@ namespace Phanes::Core::Math {
         v1.y = -v1.y;
         v1.z = -v1.z;
         v1.w = -v1.w;
+        
+        return v1;
     }
     
     /// <summary>
@@ -612,6 +614,8 @@ namespace Phanes::Core::Math {
         v1.y = (v1.y > 0) ? 1 : -1;
         v1.z = (v1.z > 0) ? 1 : -1;
         v1.w = (v1.w > 0) ? 1 : -1;
+
+        return v1;
     }
 
     /// <summary>
@@ -624,33 +628,7 @@ namespace Phanes::Core::Math {
     template<IntType T>
     inline bool IsPerpendicular(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
     {
-        return (abs(DotP(v1, v2)) = 0);
-    }
-
-    /// <summary>
-    /// Test if two vectors are parallel.
-    /// </summary>
-    /// <typeparam name="T">Type of vector</typeparam>
-    /// <param name="v1"></param>
-    /// <param name="v2"></param>
-    /// <returns>True if parralel.</returns>
-    template<IntType T>
-    inline bool IsParallel(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
-    {
-        return (abs(DotP(v1, v2)) = 1);
-    }
-
-    /// <summary>
-    /// Test if two vectors are parallel.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="v1"></param>
-    /// <param name="v2"></param>
-    /// <returns></returns>
-    template<IntType T>
-    inline bool IsCoincident(const TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
-    {
-        return (DotP(v1, v2) = 1);
+        return (abs(DotP(v1, v2)) == 0);
     }
 
 } // phanes::core::math::coretypes

@@ -554,41 +554,6 @@ namespace Phanes::Core::Math {
     }
 
     /**
-     * Tests if 2 vectors are parallel to each other. (Angle is close to zero.)
-     *
-     * @param(v1) Vector one
-     * @param(v2) Vector two
-     *
-     * @return true if parallel, false if not
-     *
-     * @note Requires v1 and v2 to be normal vectors.
-     */
-
-    template<IntType T>
-    inline bool IsParallel(const TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
-    {
-        return ((v1.x / v2.x) == (v1.y / v2.y));
-    }
-
-    /**
-     * Tests if 2 vectors are coincident. (Are parallel and point in the same direction.)
-     *
-     * @param(v1) Vector one
-     * @param(v2) Vector two
-     *
-     * @return true if coincident, false if not
-     *
-     * @note Requires v1 and v2 to be normal vectors.
-     */
-
-    template<IntType T>
-    inline bool IsCoincident(const TIntVector2<T, false>& v1, const TIntVector2<T, false>& v2)
-    {
-        T tmp = v1.x / v2.x;
-        return (tmp == (v1.y / v2.y) && tmp > -1);
-    }
-
-    /**
      * Gets outer product of to vectors.
      *
      * @param(v1) Vector one
