@@ -17,12 +17,20 @@
 #include "Core/public/Math/IntVector3.hpp"
 #include "Core/public/Math/IntVector4.hpp"
 
+#include "Core/public/Math/Point.hpp"
+#include "Core/public/Math/IntPoint.hpp"
+
 
 // --- Matrices ------------------------
 
 #include "Core/public/Math/Matrix2.hpp"
 #include "Core/public/Math/Matrix3.hpp"
 #include "Core/public/Math/Matrix4.hpp"
+
+// --- Other Math ----------------------
+
+#include "Core/public/Math/Plane.hpp"   
+#include "Core/public/Math/Line.hpp"   
 
 
 // --- Misc -----------------
