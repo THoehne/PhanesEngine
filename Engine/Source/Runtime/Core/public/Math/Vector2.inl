@@ -1,3 +1,7 @@
+/**
+ * Contains functions, that have separate simd equivalents. 
+ */
+
 #pragma once
 
 #include "Core/public/Math/Boilerplate.h"
@@ -158,6 +162,22 @@ namespace Phanes::Core::Math
         return r;
     }
 
+    template<RealType T, bool S>
+    TVector2<T, S> operator/(T s, const TVector2<T, S>& v1)
+    {
+        TVector2<T, S> r;
+        Detail::compute_vec2_div<T, S>::map(r, s, v1);
+        return r;
+    }
+
+    template<RealType T, bool S>
+    TVector2<T, S> operator-(T s, const TVector2<T, S>& v1)
+    {
+        TVector2<T, S> r;
+        Detail::compute_vec2_sub<T, S>::map(r, s, v1);
+        return r;
+    }
+
     // Comparision
 
     template<RealType T, bool S>
@@ -204,5 +224,58 @@ namespace Phanes::Core::Math
     }
 
 
+    template<RealType T, bool S>
+    T Magnitude(const TVector2<T, S>& v1)
+    {
+        return Detail::compute_vec2_mag<T, S>::map(v1);
+    }
 
+    template<RealType T, bool S>
+    T SqrMagnitude(const TVector2<T, S>& v1)
+    {
+        return Detail::compute_vec2_dotp<T, S>::map(v1, v1);
+    }
+
+    template<RealType T, bool S>
+    inline T DotP(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    {
+        return Detail::compute_vec2_dotp<T, S>::map(v1, v2);
+    }
+
+    template<RealType T, bool S>
+    TVector2<T, S>& MaxV(TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    {
+        Detail::compute_vec2_max<T, S>::map(v1, v1, v2);
+        return v1;
+    }
+
+    template<RealType T, bool S>
+    TVector2<T, S> Max(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    {
+        TVector2<T, S> r;
+        Detail::compute_vec2_max<T, S>::map(r, v1, v2);
+        return r;
+    }
+
+    template<RealType T, bool S>
+    TVector2<T, S>& MinV(TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    {
+        Detail::compute_vec2_min<T, S>::map(v1, v1, v2);
+        return v1;
+    }
+
+    template<RealType T, bool S>
+    TVector2<T, S> Min(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    {
+        TVector2<T, S> r;
+        Detail::compute_vec2_min<T, S>::map(r, v1, v2);
+        return r;
+    }
+
+    template<RealType T, bool S>
+    TVector2<T, S>& Set(TVector2<T, S>& v1, T x, T y)
+    {
+        Detail::compute_vec2_set<T, S>::map(v1, x, y);
+        return v1;
+    }
 }
