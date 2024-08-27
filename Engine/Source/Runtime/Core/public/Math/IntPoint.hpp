@@ -8,7 +8,7 @@
 
 #include "Core/public/Math/IntVector2.hpp"
 #include "Core/public/Math/IntVector3.hpp"
-// #include "Core/public/Math/IntVector4.h"
+#include "Core/public/Math/IntVector4.hpp"
 
 #ifndef P_DEBUG
 #pragma warning(disable : 4244)
@@ -29,9 +29,9 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T>
-    struct TIntPoint2 : public TIntVector2<T> {
+    struct TIntPoint2 : public TIntVector2<T, false> {
 
-        using TIntVector2<T>::TIntVector2;
+        using TIntVector2<T, false>::TIntVector2;
 
         /** 
          * Creates IntPoint2 from IntPoint3's xy
@@ -59,12 +59,6 @@ namespace Phanes::Core::Math {
         //}
     };
 
-    template<IntType T, RealType Rt>
-    Rt Distance(const TIntPoint2<T>& p1, const TIntPoint2<T>& p2)
-    {
-        return Magnitude(p2 - p1);
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -74,9 +68,9 @@ namespace Phanes::Core::Math {
 
 
     template<IntType T>
-    struct TIntPoint3 : public TIntVector3<T> {
+    struct TIntPoint3 : public TIntVector3<T, false> {
 
-        using TIntVector3<T>::TIntVector3;
+        using TIntVector3<T, false>::TIntVector3;
 
         /**
          * Creates IntPoint3 from IntPoint2's xy and zero
@@ -105,12 +99,6 @@ namespace Phanes::Core::Math {
         //}
     };
 
-    template<IntType T, RealType Rt>
-    Rt Distance(const TIntPoint3<T>& p1, const TIntPoint3<T>& p2)
-    {
-        return Magnitude(p2 - p1);
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -119,41 +107,39 @@ namespace Phanes::Core::Math {
      */
 
     
-    //template<typename T>
-    //struct TIntPoint4 : public TIntVector4<T> {
-    //	static_assert(std::is_integral_v(T), "T must be an integer type.");
+    template<IntType T>
+    struct TIntPoint4 : public TIntVector4<T, false> {
 
-    //	using IntVector4<T>::IntVector4;
+    	using TIntVector4<T, false>::TIntVector4;
 
-    //	/**
-    //	 * Creates IntPoint4 from IntPoint2's xy and the last two zero
-    //	 *
-    //	 * @param a IntPoint2 one
-    //	 */
+    	/**
+    	 * Creates IntPoint4 from IntPoint2's xy and the last two zero
+    	 *
+    	 * @param a IntPoint2 one
+    	 */
 
-    //	PHANES_CORE_API IntPoint4(const IntPoint2<T>& a)
-    //	{
-    //		this->components[0] = a.components[0];
-    //		this->components[1] = a.components[1];
-    //		this->components[2] = 0;
-    //		this->components[3] = 0;
-    //	}
+    	TIntPoint4(const TIntPoint2<T>& a)
+    	{
+    		this->data[0] = a.data[0];
+    		this->data[1] = a.data[1];
+    		this->data[2] = 0;
+    		this->data[3] = 0;
+    	}
 
-    //	/**
-    //	 * Creates IntPoint4 from IntPoint3's xyz and zero
-    //	 *
-    //	 * @param a IntPoint3 one
-    //	 */
+    	/**
+    	 * Creates IntPoint4 from IntPoint3's xyz and zero
+    	 *
+    	 * @param a IntPoint3 one
+    	 */
 
-    //	PHANES_CORE_API IntPoint4(const IntPoint3<T>& a)
-    //	{
-    //		this->components[0] = a.components[0];
-    //		this->components[1] = a.components[1];
-    //		this->components[2] = a.components[2];
-    //		this->components[3] = 0;
-    //	}
-    //};
-
+    	TIntPoint4(const TIntPoint3<T>& a)
+    	{
+    		this->data[0] = a.data[0];
+    		this->data[1] = a.data[1];
+    		this->data[2] = a.data[2];
+    		this->data[3] = 0;
+    	}
+    };
 
 } // phanes::core::math::coretypes
 

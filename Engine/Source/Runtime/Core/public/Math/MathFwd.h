@@ -27,9 +27,7 @@ namespace Phanes::Core::Math {
 
     template<RealType T>    struct TColor;
     template<RealType T>    struct TLinearColor;
-    template<RealType T>    struct TRay;
     template<RealType T>    struct TLine;
-    template<RealType T>    struct TPlane;
     template<RealType T>    struct TQuaternion;
     template<RealType T>    struct TTransform;
     template<RealType T>    struct TPoint2;
@@ -47,10 +45,49 @@ namespace Phanes::Core::Math {
     template<IntType T, bool S>		struct TIntVector2;
     template<IntType T, bool S>		struct TIntVector3;
     template<IntType T, bool S>		struct TIntVector4;
+    template<RealType T, bool S>    struct TPlane;
+    template<RealType T, bool S>    struct TRay;
 
     /**
      * Specific instantiation of forward declarations.
      */
+
+    // TPoint2
+
+    typedef TPoint2<float>      Point2;
+    typedef TPoint2<float>      Point2f;
+    typedef TPoint2<double>     Point2d;
+
+    // TPoint3
+
+    typedef TPoint3<float>      Point3;
+    typedef TPoint3<float>      Point3f;
+    typedef TPoint3<double>     Point3d;
+
+    // TPoint4
+
+    typedef TPoint4<float>      Point4;
+    typedef TPoint4<float>      Point4f;
+    typedef TPoint4<double>     Point4d;
+
+
+    // TIntPoint2
+
+    typedef TIntPoint2<int>      IntPoint2;
+    typedef TIntPoint2<int>      IntPoint2i;
+    typedef TIntPoint2<long>     IntPoint2l;
+
+    // TIntPoint3
+
+    typedef TIntPoint3<int>      IntPoint3;
+    typedef TIntPoint3<int>      IntPoint3i;
+    typedef TIntPoint3<long>     IntPoint3l;
+
+    // TIntPoint4
+
+    typedef TIntPoint4<int>      IntPoint4;
+    typedef TIntPoint4<int>      IntPoint4i;
+    typedef TIntPoint4<long>     IntPoint4l;
 
     // IntVetor2
 
@@ -123,7 +160,7 @@ namespace Phanes::Core::Math {
     typedef TMatrix3<float, SIMD::use_simd<float, 3, true>::value>      Matrix3Reg;
     typedef TMatrix3<float, SIMD::use_simd<float, 3, true>::value>      Matrix3Regf;
     typedef TMatrix3<double, SIMD::use_simd<double, 3, true>::value>    Matrix3Regd;
-    typedef TMatrix3<double, SIMD::use_simd<double, 3, false>::value>   Matrix3Regf64;
+    typedef TMatrix3<double, SIMD::use_simd<double, 3, true>::value>   Matrix3Regf64;
 
     // Matrix4 
 
@@ -134,7 +171,19 @@ namespace Phanes::Core::Math {
     typedef TMatrix3<float, SIMD::use_simd<float, 4, true>::value>      Matrix4Reg;
     typedef TMatrix3<float, SIMD::use_simd<float, 4, true>::value>      Matrix4Regf;
     typedef TMatrix3<double, SIMD::use_simd<double, 4, true>::value>    Matrix4Regd;
-    typedef TMatrix3<double, SIMD::use_simd<double, 4, false>::value>   Matrix4Regf64;
+    typedef TMatrix3<double, SIMD::use_simd<double, 4, true>::value>   Matrix4Regf64;
+
+
+
+    // TPlane 
+
+    typedef TPlane<float, false>        Plane;
+    typedef TPlane<float, false>        Planef;
+    typedef TPlane<double, false>       Planed;
+
+    typedef TPlane<float, SIMD::use_simd<float, 4, true>::value>    PlaneReg;
+    typedef TPlane<float, SIMD::use_simd<double, 4, true>::value>   PlaneRegd;
+
 
 } // Phanes::Core::Math::coretypes
 

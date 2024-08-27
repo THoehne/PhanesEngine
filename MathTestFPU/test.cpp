@@ -1247,4 +1247,28 @@ namespace MatrixTests
 
         EXPECT_TRUE(PMath::Transpose(m0) == PMath::Matrix4(1.0f, 2.0f, 2.0f, 8.0f, 5.0f, 6.0f, -3.0f, -4.0f, 3.0f, 4.0f, 5.0f, 6.0f, 4.0f, 1.0f, 3.0f, -2.0f));
     }
+
+}
+
+namespace Misc
+{
+
+    TEST(Point, FloatPoint)
+    {
+        EXPECT_FLOAT_EQ(PMath::Distance(PMath::Point2(7.0f, 3.0f), PMath::Point2(4.0f, -1.0f)), 5.0f);
+        EXPECT_FLOAT_EQ(PMath::Distance(PMath::Point3(7.0f, 3.0f, 4.0f), PMath::Point3(4.0f, -1.0f, 3.0f)), 5.099019f);
+        EXPECT_FLOAT_EQ(PMath::Distance(PMath::Point4(7.0f, 3.0f, 4.0f, 5.0f), PMath::Point4(4.0f, -1.0f, 3.0f, -5.0f)), 11.224972f);
+    }
+}
+
+namespace Plane
+{
+    TEST(Plane, OperatorTests)
+    {
+        PMath::Plane pl1;
+        PMath::Plane pl2;
+
+
+
+    }
 }

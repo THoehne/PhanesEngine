@@ -785,16 +785,16 @@ namespace Phanes::Core::Math::Detail
 
 
             // Second column
-            __m128 tmp0 = _mm_mul_ps(m1.c0.data, m2.c1.data);
-            __m128 tmp1 = _mm_mul_ps(m1.c1.data, m2.c1.data);
-            __m128 tmp2 = _mm_mul_ps(m1.c2.data, m2.c1.data);
+            tmp0 = _mm_mul_ps(m1.c0.data, m2.c1.data);
+            tmp1 = _mm_mul_ps(m1.c1.data, m2.c1.data);
+            tmp2 = _mm_mul_ps(m1.c2.data, m2.c1.data);
 
             r.c1.data = _mm_add_ps(_mm_add_ps(tmp0, tmp1), tmp2);
 
             // Third column
-            __m128 tmp0 = _mm_mul_ps(m1.c0.data, m2.c2.data);
-            __m128 tmp1 = _mm_mul_ps(m1.c1.data, m2.c2.data);
-            __m128 tmp2 = _mm_mul_ps(m1.c2.data, m2.c2.data);
+            tmp0 = _mm_mul_ps(m1.c0.data, m2.c2.data);
+            tmp1 = _mm_mul_ps(m1.c1.data, m2.c2.data);
+            tmp2 = _mm_mul_ps(m1.c2.data, m2.c2.data);
 
             r.c2.data = _mm_add_ps(_mm_add_ps(tmp0, tmp1), tmp2);
         }

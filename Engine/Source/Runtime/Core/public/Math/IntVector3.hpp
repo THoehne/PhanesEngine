@@ -352,6 +352,7 @@ namespace Phanes::Core::Math {
     //   IntVector3 static function implementation	  //
     // ============================================== //
 
+
     /**
      * Dot product of two vectors
      *

@@ -22,11 +22,11 @@ namespace Phanes::Core::Math
 
         /** Direction of line */
 
-        TVector3<Real> direction;
+        TVector3<Real, false> direction;
 
         /** Base point of line */
 
-        TVector3<Real> base;
+        TVector3<Real, false> base;
 
     public:
 
@@ -36,7 +36,7 @@ namespace Phanes::Core::Math
          * @param(p) Base of line 
          */
 
-        TLine(const TVector3<T>& direction, const TVector3<T>& p) : direction(direction), base(p) {};
+        TLine(const TVector3<T, false>& direction, const TVector3<T, false>& p) : direction(direction), base(p) {};
 
     };
 

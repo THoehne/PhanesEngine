@@ -441,6 +441,7 @@ namespace Phanes::Core::Math {
     //   TIntVector4 functions   //
     // ========================= //
 
+
     template<IntType T>
     void Set(TIntVector4<T, false>& v1, TIntVector4<T, false>& v2)
     {

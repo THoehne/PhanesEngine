@@ -10,24 +10,24 @@ namespace Phanes::Core::Math
 
     // Ray with origin and direction (L = p + t * v)
 
-    template<RealType T>
+    template<RealType T, bool S>
     struct TRay
     {
     public:
         using Real = T;
 
-        TVector3<Real> origin;
-        TVector3<Real> direction;
+        TVector3<Real, S> origin;
+        TVector3<Real, S> direction;
 
     public:
         /** Default constructor */
         TRay() = default;
 
         /** Copy constructor */
-        TRay(const TRay<Real>& r) : direction(r.direction), origin(r.origin) {};
+        TRay(const TRay<Real, S>& r) : direction(r.direction), origin(r.origin) {};
 
         /** Move constructor */
-        TRay(TRay<Real>&& r) : direction(std::move(r.direction)), origin(std::move(r.origin)) {};
+        TRay(TRay<Real, S>&& r) : direction(std::move(r.direction)), origin(std::move(r.origin)) {};
 
         /**
          * Construct ray from origin and direction.
@@ -36,7 +36,7 @@ namespace Phanes::Core::Math
          * @param(origin) Origin
          */
 
-        TRay(const TVector3<Real>& direction, const TVector3<Real>& origin) : direction(direction), origin(origin) {};
+        TRay(const TVector3<Real, S>& direction, const TVector3<Real, S>& origin) : direction(direction), origin(origin) {};
 
     };
 
@@ -55,7 +55,7 @@ namespace Phanes::Core::Math
      */
 
     template<RealType T>
-    FORCEINLINE bool operator== (const TRay<T>& r1, const TRay<T>& r2)
+    FORCEINLINE bool operator== (const TRay<T, false>& r1, const TRay<T, false>& r2)
     {
         return (r1.origin == r2.origin && r1.direction == r2.direction);
     }
@@ -70,7 +70,7 @@ namespace Phanes::Core::Math
      */
 
     template<RealType T>
-    FORCEINLINE bool operator== (const TRay<T>& r1, const TRay<T>& r2)
+    FORCEINLINE bool operator!= (const TRay<T, false>& r1, const TRay<T, false>& r2)
     {
         return (r1.origin != r2.origin || r1.direction != r2.direction);
     }
@@ -89,8 +89,8 @@ namespace Phanes::Core::Math
      * @return Point at t
      */
 
-    template<RealType T>
-    TVector3<T> PointAt(const TRay<T>& r1, T t)
+    template<RealType T, bool S>
+    TVector3<T, S> PointAt(const TRay<T, S>& r1, T t)
     {
         return r1.origin + r1.direction * t;
     }
@@ -104,8 +104,8 @@ namespace Phanes::Core::Math
      * @return parameter t
      */
 
-    template<RealType T>
-    TVector3<T> GetParameter(const TRay<T>& r1, const TVector3<T>& p1)
+    template<RealType T, bool S>
+    TVector3<T, S> GetParameter(const TRay<T, S>& r1, const TVector3<T, S>& p1)
     {
         return DotP((p1 - r1.origin), r1.direction);
     }
@@ -119,8 +119,8 @@ namespace Phanes::Core::Math
      * @return True, if both rays point in the same direction, false if not.
      */
 
-    template<RealType T>
-    inline bool SameDirection(const TRay<T>& r1, const TRay<T>& r2)
+    template<RealType T, bool S>
+    inline bool SameDirection(const TRay<T, S>& r1, const TRay<T, S>& r2)
     {
         return (r1.direction == r1.direction);
     }
