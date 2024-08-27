@@ -14,7 +14,7 @@ namespace Phanes::Core::Math {
 
     // Plane in 3D space, defined as:  P: ax + by + cz = d;
 
-    template<RealType T>
+    template<RealType T, bool S>
     struct TPlane
     {
     public:
@@ -24,24 +24,34 @@ namespace Phanes::Core::Math {
         {
             struct
             {
-                /** X Part of the normal. */
-                Real x;
+                union
+                {
+                    struct
+                    {
+                        /** X Part of the normal. */
+                        Real x;
                 
-                /** Y Part of the normal. */
-                Real y;
+                        /** Y Part of the normal. */
+                        Real y;
 
-                /** Z Part of the normal. */
-                Real z;
+                        /** Z Part of the normal. */
+                        Real z;
+                    };
+
+                    TVector3<Real, S> normal;
+
+                };
+
+                /// <summary>
+                /// Scalar component of plane
+                /// </summary>
+                Real d;
             };
 
-            TVector3<Real> normal;
-        };
-
-        /** Scalar component of plane. */
-        union 
-        {
-            Real d;
-            Real w;
+            /// <summary>
+            /// Vector containing all components of vector (x, y, z and d).
+            /// </summary>
+            TVector4<Real, S> comp;
         };
         
     public:
@@ -56,16 +66,13 @@ namespace Phanes::Core::Math {
          * Copy constructor
          */
 
-        TPlane(const TPlane<Real>& plane) : normal(plane.normal), d(plane.d) {};
+        TPlane(const TPlane<Real, S>& plane);
 
         /**
          * Move constructor 
          */
 
-        TPlane(TPlane<Real>&& plane) :
-            normal(std::move(plane.normal)),
-            d(std::move(plane.d))
-        {}
+        TPlane(TPlane<Real, S>&& plane);
 
 
         /**
@@ -77,10 +84,7 @@ namespace Phanes::Core::Math {
          * @note Normal is NOT normalized, make sure to normalize [PARAM]normal, or use [FUNC]CreateFromVector. Otherwise unexpected results may occur using the plane.
          */
         
-        TPlane(const TVector3<Real>& normal, Real d) :
-            normal(normal),
-            d(d)
-        {}
+        TPlane(const TVector3<Real, S>& normal, Real d);
 
         /**
          * Construct plane from normal and base point.
@@ -89,11 +93,7 @@ namespace Phanes::Core::Math {
          * @param(base) Base point
          */
        
-        TPlane(const TVector3<Real>& normal, const TVector3<Real>& base) :
-            normal(normal)
-        {
-            this->d = DotP(this->normal, base);
-        }
+        TPlane(const TVector3<Real, S>& normal, const TVector3<Real, S>& base);
 
         /**
          * Construct plane from coefficients
@@ -104,11 +104,7 @@ namespace Phanes::Core::Math {
          * @param(d) D coefficient
          */
 
-        TPlane(Real x, Real y, Real z, Real d) :
-            d(d)
-        {
-            this->normal = TVector3<Real>(x, y, z);
-        }
+        TPlane(Real x, Real y, Real z, Real d);
 
         /**
          * Construct plane from 3 points
@@ -118,11 +114,7 @@ namespace Phanes::Core::Math {
          * @param(p3) Point three
          */
 
-        TPlane(const TVector3<Real>& p1, const TVector3<Real>& p2, const TVector3<Real>& p3)
-        {
-            this->normal = Normalize(CrossP(p1, p2));
-            this->d = DotP(this->normal, p3);
-        }
+        TPlane(const TVector3<Real, S>& p1, const TVector3<Real, S>& p2, const TVector3<Real, S>& p3);
     };
 
 
@@ -141,13 +133,8 @@ namespace Phanes::Core::Math {
      * @see [FUNC] PlaneNormalizeV
      */
 
-    template<RealType T>
-    TPlane<T> operator+= (TPlane<T>& pl1, const TPlane<T>& pl2)
-    {
-        pl1.normal += pl2.normal; pl1.d += pl2.d;
-
-        return pl1;
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator+= (TPlane<T, S>& pl1, const TPlane<T, S>& pl2);
 
     /**
      * Substracts pl2 from pl1.
@@ -159,13 +146,8 @@ namespace Phanes::Core::Math {
      * @see [FUNC] PlaneNormalizeV
      */
 
-    template<RealType T>
-    TPlane<T> operator-= (TPlane<T>& pl1, const TPlane<T>& pl2)
-    {
-        pl1.normal -= pl2.normal; pl1.d -= pl2.d;
-
-        return pl1;
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator-= (TPlane<T, S>& pl1, const TPlane<T, S>& pl2);
 
     /**
      * Multiplies pl1 with pl2.
@@ -177,13 +159,37 @@ namespace Phanes::Core::Math {
      * @see [FUNC] PlaneNormalizeV
      */
 
-    template<RealType T>
-    TPlane<T> operator*= (TPlane<T>& pl1, const TPlane<T>& pl2)
-    {
-        pl1.x *= pl2.x; pl1.y *= pl2.y; pl1.z *= pl2.z; pl1.d *= pl2.d;
+    template<RealType T, bool S>
+    TPlane<T, S> operator*= (TPlane<T, S>& pl1, const TPlane<T, S>& pl2);
 
-        return pl1;
-    }
+    /// <summary>
+    /// Divides pl1 by pl2
+    /// </summary>
+    /// <param name="pl1"></param>
+    /// <param name="pl2"></param>
+    /// <returns></returns>
+    template<RealType T, bool S>
+    TPlane<T, S> operator/= (TPlane<T, S>& pl1, const TPlane<T, S>& pl2);
+
+    /// <summary>
+    /// Add scalar to plane
+    /// </summary>
+    /// <param name="pl1"></param>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    template<RealType T, bool S>
+    TPlane<T, S> operator+= (TPlane<T, S>& pl1, T s);
+
+    /// <summary>
+    /// Substract scalar from plane
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="pl1"></param>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    template<RealType T, bool S>
+    TPlane<T, S> operator-= (TPlane<T, S>& pl1, T s);
 
     /**
      * Multiplies pl1 with a scalar
@@ -192,13 +198,8 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar to multiply with
      */
 
-    template<RealType T>
-    TPlane<T> operator*= (TPlane<T>& pl1, T s)
-    {
-        pl1.normal *= s; pl1 *= s;
-
-        return pl1;
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator*= (TPlane<T, S>& pl1, T s);
 
     /**
      * Divides pl1 with a scalar
@@ -207,15 +208,8 @@ namespace Phanes::Core::Math {
      * @param(s) Scalar to divide with
      */
 
-    template<RealType T>
-    TPlane<T> operator/= (TPlane<T>& pl1, T s)
-    {
-        T _1_s = (T)1.0 / s;
-
-        pl1.normal *= _1_s; pl1 *= _1_s;
-
-        return pl1;
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator/= (TPlane<T, S>& pl1, T s);
 
 
     /**
@@ -227,11 +221,8 @@ namespace Phanes::Core::Math {
      * @return Sum of planes
      */
 
-    template<RealType T>
-    TPlane<T> operator+ (const TPlane<T>& pl1, const TPlane<T>& pl2)
-    {
-        return TPlane<T>(pl1.normal + pl2.normal, pl1.d + pl2.d);
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator+ (const TPlane<T, S>& pl1, const TPlane<T, S>& pl2);
 
     /**
      * Substracts two planes.
@@ -242,11 +233,8 @@ namespace Phanes::Core::Math {
      * @return Difference of the planes
      */
 
-    template<RealType T>
-    TPlane<T> operator- (const TPlane<T>& pl1, const TPlane<T>& pl2)
-    {
-        return TPlane<T>(pl1.normal - pl2.normal, pl1.d - pl2.d);
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator- (const TPlane<T, S>& pl1, const TPlane<T, S>& pl2);
 
     /**
      * Multiplies two planes.
@@ -257,11 +245,41 @@ namespace Phanes::Core::Math {
      * @return Product of planes
      */
 
-    template<RealType T>
-    TPlane<T> operator* (const TPlane<T>& pl1, const TPlane<T>& pl2)
-    {
-        return TPlane<T>(pl1.x * pl2.x, pl1.y * pl2.y, pl1.z * pl2.z, pl1.d * pl2.d);
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator* (const TPlane<T, S>& pl1, const TPlane<T, S>& pl2);
+
+    /// <summary>
+    /// Divides plane by plane
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="pl1"></param>
+    /// <param name="pl2"></param>
+    /// <returns></returns>
+    template<RealType T, bool S>
+    TPlane<T, S> operator/ (const TPlane<T, S>& pl1, const TPlane<T, S>& pl2);
+
+    /// <summary>
+    /// Add scalar to plane
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="pl1"></param>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    template<RealType T, bool S>
+    TPlane<T, S> operator+ (const TPlane<T, S>& pl1, T s);
+
+    /// <summary>
+    /// Substracts scalar from plane
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="S"></typeparam>
+    /// <param name="pl1"></param>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    template<RealType T, bool S>
+    TPlane<T, S> operator- (const TPlane<T, S>& pl1, T s);
 
     /**
      * Multiplies pl1 with a scalar
@@ -272,11 +290,8 @@ namespace Phanes::Core::Math {
      * @return Product of plane and scalar
      */
 
-    template<RealType T>
-    TPlane<T> operator*= (const TPlane<T>& pl1, T s)
-    {
-        return TPlane<T>(pl1.normal * s, pl1.d * s);
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator* (const TPlane<T, S>& pl1, T s);
 
     /**
      * Divides pl1 with a scalar
@@ -287,13 +302,8 @@ namespace Phanes::Core::Math {
      * @return Quotient of plane and scalar
      */
 
-    template<RealType T>
-    TPlane<T> operator/= (const TPlane<T>& pl1, T s)
-    {
-        T _1_s = (T)1.0 / s;
-
-        return TPlane<T>(pl1.normal * _1_s, pl1.d * _1_s);
-    }
+    template<RealType T, bool S>
+    TPlane<T, S> operator/ (const TPlane<T, S>& pl1, T s);
 
     /**
      * Tests two planes for equality
@@ -307,9 +317,9 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    bool operator== (const TPlane<T>& pl1, const TPlane<T>& pl2)
+    FORCEINLINE bool operator== (const TPlane<T, false>& pl1, const TPlane<T, false>& pl2)
     {
-        return pl1.normal == pl2.normal && abs(pl1.d - pl2.d) < P_FLT_INAC;
+        return pl1.comp == pl2.comp;
     }
 
     /**
@@ -324,17 +334,15 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    bool operator!= (const TPlane<T>& pl1, const TPlane<T>& pl2)
+    FORCEINLINE bool operator!= (const TPlane<T, false>& pl1, const TPlane<T, false>& pl2)
     {
-        return pl1.normal != pl2.normal || abs(pl1.d - pl2.d) >= P_FLT_INAC;
+        return pl1.comp != pl2.comp;
     }
 
 
     // ======================= //
     //   Functions of TPlane   //
     // ======================= //
-
-
 
 
     /**
@@ -348,9 +356,9 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    inline bool IsPerpendicular(const TPlane<T>& pl1, const TPlane<T>& pl2, T threshold = P_FLT_INAC)
+    inline bool IsPerpendicular(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2, T threshold = P_FLT_INAC)
     {
-        return (abs(DotP(pl1.normal, pl2.normal)) < threshold);
+        return (Abs(DotP(pl1.normal, pl2.normal)) < threshold);
     }
 
     /**
@@ -364,9 +372,9 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    inline bool IsParallel(const TPlane<T>& pl1, const TPlane<T>& pl2, T threshold = 1.0f - P_FLT_INAC)
+    inline bool IsParallel(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2, T threshold = 1.0f - P_FLT_INAC)
     {
-        return (abs(DotP(pl1.normal, pl2.normal)) > threshold);
+        return (Abs(DotP(pl1.normal, pl2.normal)) > threshold);
     }
 
     /**
@@ -380,7 +388,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    inline bool IsCoincident(const TPlane<T>& pl1, const TPlane<T>& pl2, T threshold = 1.0f - P_FLT_INAC)
+    inline bool IsCoincident(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2, T threshold = 1.0f - P_FLT_INAC)
     {
         return (DotP(pl1.normal, pl2.normal) > threshold);
     }
@@ -395,7 +403,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    inline bool IsNormalized(const TPlane<T>& pl1, T threshold = P_FLT_INAC)
+    inline bool IsNormalized(const TPlane<T, false>& pl1, T threshold = P_FLT_INAC)
     {
         return (SqrMagnitude(pl1.normal) < threshold);
     }
@@ -414,7 +422,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    inline bool IsSame(const TPlane<T>& pl1, const TPlane<T>& pl2, T threshold = P_FLT_INAC)
+    inline bool IsSame(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2, T threshold = P_FLT_INAC)
     {
 
         return DotP(pl1.normal, pl2.normal) > threshold && abs(pl1.d - pl2.d) < P_FLT_INAC;
@@ -427,7 +435,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TPlane<T> PlaneNormalizeV(TPlane<T>& pl1)
+    TPlane<T, false> PlaneNormalizeV(TPlane<T, false>& pl1)
     {
         T normVec = SqrMagnitude(pl1);
 
@@ -447,13 +455,13 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TPlane<T> PlaneNormalize(TPlane<T>& pl1)
+    TPlane<T, false> PlaneNormalize(TPlane<T, false>& pl1)
     {
         T normVec = SqrMagnitude(pl1);
 
         T scale = (normVec > P_FLT_INAC) ? (T)1.0 / sqrt(normVec) : 1.0f;
 
-        return TPlane<T>(pl1.normal * scale, pl1.d * scale);
+        return TPlane<T, false>(pl1.normal * scale, pl1.d * scale);
     }
 
     /**
@@ -465,7 +473,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TPlane<T> PlaneUnsafeNormalizeV(TPlane<T>& pl1)
+    TPlane<T, false> PlaneUnsafeNormalizeV(TPlane<T, false>& pl1)
     {
         T scale = (T)1.0 / Magnitude(pl1);
 
@@ -485,11 +493,11 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TPlane<T> PlaneUnsafeNormalize(TPlane<T>& pl1)
+    TPlane<T, false> PlaneUnsafeNormalize(TPlane<T, false>& pl1)
     {
         T scale = (T)1.0 / Magnitude(pl1);
 
-        return TPlane<T>(pl1.normal * scale, pl1.d * scale);
+        return TPlane<T, false>(pl1.normal * scale, pl1.d * scale);
     }
 
     /**
@@ -500,7 +508,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE T PlaneDotP(const TPlane<T>& pl1, const TPlane<T>& pl2)
+    FORCEINLINE T PlaneDotP(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2)
     {
         return DotP(pl1.normal, pl2.normal);
     }
@@ -513,7 +521,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE T PlaneAngle(const TPlane<T>& pl1, const TPlane<T>& pl2)
+    FORCEINLINE T PlaneAngle(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2)
     {
         return Angle(pl1.normal, pl2.normal);
     }
@@ -526,7 +534,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE T PlaneCosAngle(const TPlane<T>& pl1, const TPlane<T>& pl2)
+    FORCEINLINE T PlaneCosAngle(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2)
     {
         return CosineAngle(pl1.normal, pl2.normal);
     }
@@ -538,7 +546,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TPlane<T> FlipV(const TPlane<T>& pl1)
+    TPlane<T, false> FlipV(const TPlane<T, false>& pl1)
     {
         pl1.normal = -pl1.normal;
         pl1.d      = -pl1.d;
@@ -554,9 +562,9 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TPlane<T> Flip(const TPlane<T>& pl1)
+    TPlane<T, false> Flip(const TPlane<T, false>& pl1)
     {
-        return TPlane<T>(-pl1.normal, -pl1.d);
+        return TPlane<T, false>(-pl1.normal, -pl1.d);
     }
 
     /**
@@ -567,7 +575,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TPlane<T> TransformV(TPlane<T>& pl, const TTransform<T>& tr)
+    FORCEINLINE TPlane<T, false> TransformV(TPlane<T, false>& pl, const TTransform<T>& tr)
     {
         // TODO: Do with operator*
     }
@@ -583,7 +591,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TPlane<T> Transform(const TPlane<T>& pl, const TTransform<T>& tr)
+    FORCEINLINE TPlane<T, false> Transform(const TPlane<T, false>& pl, const TTransform<T>& tr)
     {
         // TODO: Do with operator*
     }
@@ -599,7 +607,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    T PointDistance(const TPlane<T>& pl1, const TVector3<T>& p1)
+    T PointDistance(const TPlane<T, false>& pl1, const TVector3<T, false>& p1)
     {
         return (pl1.x * p1.x + pl1.y * p1.y + pl1.z * p1.z) - pl1.d;
     }
@@ -613,9 +621,9 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T> GetOrigin(const TPlane<T>& pl1)
+    TVector3<T, false> GetOrigin(const TPlane<T, false>& pl1)
     {
-        return TVector3<T>(pl1.normal * d);
+        return TVector3<T, false>(pl1.normal * pl1.d);
     }
 
     /**
@@ -626,7 +634,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TPlane<T> TranslateV(TPlane<T>& pl1, const TVector3<T>& v1)
+    TPlane<T, false> TranslateV(TPlane<T, false>& pl1, const TVector3<T, false>& v1)
     {
         
         pl1.d = DotP(this->normal, GetOrigin(pl1) + v1);
@@ -642,9 +650,9 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TPlane<T> Translate(TPlane<T>& pl1, const TVector3<T>& v1)
+    TPlane<T, false> Translate(TPlane<T, false>& pl1, const TVector3<T, false>& v1)
     {
-        return TPlane<T>(pl1.normal, GetOrigin(pl1) + v1);
+        return TPlane<T, false>(pl1.normal, GetOrigin(pl1) + v1);
     }
 
     /**
@@ -657,7 +665,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    bool GetSide(const TPlane<T>& pl1, const TVector3<T>& p1)
+    bool GetSide(const TPlane<T, false>& pl1, const TVector3<T, false>& p1)
     {
         return (pl1.d <= DotP(pl1.normal, p1));
     }
@@ -673,7 +681,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TVector3<T> ProjectOntoPlaneV(TVector3<T>& v1, const TPlane<T>& plane)
+    FORCEINLINE TVector3<T, false> ProjectOntoPlaneV(TVector3<T, false>& v1, const TPlane<T, false>& plane)
     {
         return RejectV(v1, plane.normal);
     }
@@ -690,7 +698,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TVector3<T> ProjectOntoPlaneV(TVector3<T>& v1, const TVector3<T>& normal)
+    FORCEINLINE TVector3<T, false> ProjectOntoPlaneV(TVector3<T, false>& v1, const TVector3<T, false>& normal)
     {
         return RejectV(v1, normal);
     }
@@ -705,7 +713,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TVector3<T> ReflectFromPlaneV(TVector3<T>& v1, const TPlane<T>& plane)
+    FORCEINLINE TVector3<T, false> ReflectFromPlaneV(TVector3<T, false>& v1, const TPlane<T, false>& plane)
     {
         return ReflectV(v1, plane.normal);
     }
@@ -720,7 +728,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TVector3<T> ReflectFromPlaneV(TVector3<T>& v1, const TVector3<T>& normal)
+    FORCEINLINE TVector3<T, false> ReflectFromPlaneV(TVector3<T, false>& v1, const TVector3<T, false>& normal)
     {
         return ReflectV(v1, normal);
     }
@@ -736,7 +744,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TVector3<T> ReflectFromPlane(const TVector3<T>& v1, const TPlane<T>& plane)
+    FORCEINLINE TVector3<T, false> ReflectFromPlane(const TVector3<T, false>& v1, const TPlane<T, false>& plane)
     {
         return Reflect(v1, plane.normal);
     }
@@ -751,7 +759,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TVector3<T> ReflectFromPlane(const TVector3<T>& v1, const TVector3<T>& normal)
+    FORCEINLINE TVector3<T, false> ReflectFromPlane(const TVector3<T, false>& v1, const TVector3<T, false>& normal)
     {
         return Reflect(v1, normal);
     }
@@ -769,7 +777,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TVector3<T> ProjectOntoPlane(const TVector3<T>& v1, const TVector3<T>& normal)
+    FORCEINLINE TVector3<T, false> ProjectOntoPlane(const TVector3<T, false>& v1, const TVector3<T, false>& normal)
     {
         return Reject(v1, normal);
     }
@@ -788,7 +796,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    FORCEINLINE TVector3<T> ProjectOntoPlane(const TVector3<T>& v1, const TPlane<T>& plane)
+    FORCEINLINE TVector3<T, false> ProjectOntoPlane(const TVector3<T, false>& v1, const TPlane<T, false>& plane)
     {
         return Reject(v1, plane.normal);
     }
@@ -804,7 +812,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    inline bool Equals(const TPlane<T>& pl1, const TPlane<T>& pl2, T threshold = P_FLT_INAC)
+    inline bool Equals(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2, T threshold = P_FLT_INAC)
     {
         return Equals(pl1.normal, pl2.normal, threshold) && abs(pl1.d - pl2.d) < threshold;
     }
@@ -818,9 +826,9 @@ namespace Phanes::Core::Math {
      * @return True, if p1 on pl1, false if not.
      */
     template<RealType T>
-    FORCEINLINE bool IsPointOnPlane(const TPlane<T>& pl1, const TVector3<T>& p1)
+    FORCEINLINE bool IsPointOnPlane(const TPlane<T, false>& pl1, const TVector3<T, false>& p1)
     {
-        return (Equals(DotP(pl1.normal, p1), d));
+        return (Equals(DotP(pl1.normal, p1), p1.d));
     }
 
     /**
@@ -835,14 +843,14 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    bool PlanesIntersect2(const TPlane<T>& pl1, const TPlane<T>& pl2, Ref<TLine<T>> interLine, T threshold = P_FLT_INAC)
+    bool PlanesIntersect2(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2, Ref<TLine<T>> interLine, T threshold = P_FLT_INAC)
     {
-        TVector3<T> dirLine = CrossP(pl1.normal, pl2.normal);
+        TVector3<T, false> dirLine = CrossP(pl1.normal, pl2.normal);
         T det = SqrMagnitude(dirLine);
 
         if (abs(det) > P_FLT_INAC)
         {
-            interLine = MakeRef<TLine<T>(dirLine, (CrossP(dirLine, pl2.normal) * pl1.d + CrossP(dirLine, pl1.normal) * pl2.d) / det);
+            interLine = MakeRef<TLine<T>>(dirLine, (CrossP(dirLine, pl2.normal) * pl1.d + CrossP(dirLine, pl1.normal) * pl2.d) / det);
             NormalizeV(interLine);
             return true;
         }
@@ -863,13 +871,13 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    bool PlanesIntersect3(const TPlane<T>& pl1, const TPlane<T>& pl2, const TPlane<T>& pl3, Ref<TVector3<T>> interPoint, T threshold = P_FLT_INAC)
+    bool PlanesIntersect3(const TPlane<T, false>& pl1, const TPlane<T, false>& pl2, const TPlane<T, false>& pl3, Ref<TVector3<T, false>> interPoint, T threshold = P_FLT_INAC)
     {
         T det = DotP(CrossP(pl1.normal, pl2.normal), pl3.normal);
 
         if (abs(det) > P_FLT_INAC)
         {
-            interPoint = MakeRef<TVector3<T>>((CrossP(pl3.normal, pl2.normal) * pl1.d + CrossP(pl1.normal, pl3.normal) * pl2.d) / det);
+            interPoint = MakeRef<TVector3<T, false>>((CrossP(pl3.normal, pl2.normal) * pl1.d + CrossP(pl1.normal, pl3.normal) * pl2.d) / det);
             return true;
         }
 
@@ -886,7 +894,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T> PlaneMirrorPoint(const TVector3<T>& p1, const TPlane<T>& pl1)
+    TVector3<T, false> PlaneMirrorPoint(const TVector3<T, false>& p1, const TPlane<T, false>& pl1)
     {
         return p1 - pl1.normal * ((T)2.0 * PointDistance(pl1, p1));
     }
@@ -901,7 +909,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    TVector3<T> PointProjectOntoPlane(const TVector3<T>& p1, const TPlane<T>& pl1)
+    TVector3<T, false> PointProjectOntoPlane(const TVector3<T, false>& p1, const TPlane<T, false>& pl1)
     {
         p1 - PointDistance(pl1, p1) * pl1.normal;
     }
@@ -917,13 +925,13 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    bool LineIntersect(const TPlane<T>& pl1, const TLine<T>& l1, Ref<TVector3<T>> p1)
+    bool LineIntersect(const TPlane<T, false>& pl1, const TLine<T>& l1, Ref<TVector3<T, false>> p1)
     {
         T dotProduct = DotP(l1.normal, pl1.normal);
 
         if (abs(dotProduct) > P_FLT_INAC)
         {
-            p1 = MakeRef<TVector3<T>>(l1.base - l1.normal * (DotP(l1.normal * p1.base) / dotProduct));
+            p1 = MakeRef<TVector3<T, false>>(l1.base - l1.normal * (DotP(l1.normal * p1.base) / dotProduct));
             return true;
         }
 
@@ -941,14 +949,14 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T>
-    bool RayIntersect(const TPlane<T>& pl1, const TRay<T>& r1, Ref<TVector3<T>> p1)
+    bool RayIntersect(const TPlane<T, false>& pl1, const TRay<T, false>& r1, Ref<TVector3<T, false>> p1)
     {
         T pr = DotP(pl1.normal, Normalize(r1.direction));
         T parameter = DotP((GetOrigin(pl1) - r1.origin), pl1.normal) / pr;
 
         if (p1 > P_FLT_INAC && parameter >= 0)
         {
-            p1 = MakeRef<TVector3<T>>(PointAt(r1, parameter));
+            p1 = MakeRef<TVector3<T, false>>(PointAt(r1, parameter));
             return true;
         }
 
@@ -957,4 +965,5 @@ namespace Phanes::Core::Math {
 
 } // Phanes::Core::Math
 
-  
+// Include operator impl.
+#include "Core/public/Math/Plane.inl"
