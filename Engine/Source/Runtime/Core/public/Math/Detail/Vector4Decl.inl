@@ -32,6 +32,30 @@ namespace Phanes::Core::Math::Detail
     struct compute_vec4_dec {};
 
 
+    // Magnitude
+    template<RealType T, bool S>
+    struct compute_vec4_mag {};
+
+    // dot product
+    template<RealType T, bool S>
+    struct compute_vec4_dotp {};
+
+    // set
+    template<RealType T, bool S>
+    struct compute_vec4_set {};
+
+    // max
+    template<RealType T, bool S>
+    struct compute_vec4_max {};
+
+    // min
+    template<RealType T, bool S>
+    struct compute_vec4_min {};
+
+    // perspective divide
+    template<RealType T, bool S>
+    struct compute_vec4_pdiv {};
+
 
     template<RealType T>
     struct construct_vec4<T, false>
@@ -116,6 +140,14 @@ namespace Phanes::Core::Math::Detail
             r.z = v1.z - s;
             r.w = v1.w - s;
         }
+
+        static constexpr void map(Phanes::Core::Math::TVector4<T, false>& r, T s, const Phanes::Core::Math::TVector4<T, false>& v1)
+        {
+            r.x = s - v1.x;
+            r.y = s - v1.y;
+            r.z = s - v1.z;
+            r.w = s - v1.w;
+        }
     };
 
 
@@ -159,6 +191,14 @@ namespace Phanes::Core::Math::Detail
             r.y = v1.y * s;
             r.z = v1.z * s;
             r.w = v1.w * s;
+        }
+
+        static constexpr void map(Phanes::Core::Math::TVector4<T, false>& r, T s, const Phanes::Core::Math::TVector4<T, false>& v1)
+        {
+            r.x = s / v1.x;
+            r.y = s / v1.y;
+            r.z = s / v1.z;
+            r.w = s / v1.w;
         }
     };
 
@@ -207,6 +247,75 @@ namespace Phanes::Core::Math::Detail
             r.y = v1.y - 1;
             r.z = v1.z - 1;
             r.w = v1.w - 1;
+        }
+    };
+
+
+    template<RealType T>
+    struct compute_vec4_mag<T, false>
+    {
+        static constexpr T map(const Phanes::Core::Math::TVector4<T, false>& v1)
+        {
+            return sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z + v1.w * v1.w);
+        }
+    };
+
+    template<RealType T>
+    struct compute_vec4_dotp<T, false>
+    {
+        static constexpr T map(const Phanes::Core::Math::TVector4<T, false>& v1, const Phanes::Core::Math::TVector4<T, false>& v2)
+        {
+            return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w;
+        }
+    };
+
+
+    template<RealType T>
+    struct compute_vec4_set<T, false>
+    {
+        static constexpr void map(Phanes::Core::Math::TVector4<T, false>& v1, T x, T y, T z, T w)
+        {
+            v1.x = x;
+            v1.y = y;
+            v1.z = z;
+            v1.w = w;
+        }
+    };
+
+    template<RealType T>
+    struct compute_vec4_max<T, false>
+    {
+        static constexpr void map(Phanes::Core::Math::TVector4<T, false>& r, const Phanes::Core::Math::TVector4<T, false>& v1, const Phanes::Core::Math::TVector4<T, false>& v2)
+        {
+            r.x = (v1.x > v2.x) ? v1.x : v2.x;
+            r.y = (v1.y > v2.y) ? v1.y : v2.y;
+            r.z = (v1.z > v2.z) ? v1.z : v2.z;
+            r.w = (v1.w > v2.w) ? v1.w : v2.w;
+        }
+    };
+
+    template<RealType T>
+    struct compute_vec4_min<T, false>
+    {
+        static constexpr void map(Phanes::Core::Math::TVector4<T, false>& r, const Phanes::Core::Math::TVector4<T, false>& v1, const Phanes::Core::Math::TVector4<T, false>& v2)
+        {
+            r.x = (v1.x < v2.x) ? v1.x : v2.x;
+            r.y = (v1.y < v2.y) ? v1.y : v2.y;
+            r.z = (v1.z < v2.z) ? v1.z : v2.z;
+            r.w = (v1.w < v2.w) ? v1.w : v2.w;
+        }
+    };
+
+    template<RealType T>
+    struct compute_vec4_pdiv<T, false>
+    {
+        static constexpr void map(Phanes::Core::Math::TVector4<T, false>& r, const Phanes::Core::Math::TVector4<T, false>& v1)
+        {
+            T _1_w = (T)1.0 / v1.w;
+            r.x = v1.x * _1_w;
+            r.y = v1.y * _1_w;
+            r.z = v1.z * _1_w;
+            r.w = (T)0.0;
         }
     };
 }
