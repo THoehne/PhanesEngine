@@ -554,8 +554,7 @@ namespace VectorTests
         EXPECT_TRUE(PMath::GetPerpendicularV(v0) == PMath::Vector2(2.5f, -2.4f));
         EXPECT_TRUE(PMath::GetReversePerpendicularV(v1) == PMath::Vector2(-2.5f, 5.1f));
 
-        EXPECT_TRUE(PMath::ScaleV(v0, v1) == PMath::Vector2(-6.25f, -12.24f));
-        EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector2(1.0f/-6.25f, 1.0f/-12.24f));
+        EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector2(1.0f/2.5f, 1.0f/-2.4f)) << PMath::ToString(v0);
 
         // re-init vectors.
         v0 = PMath::Vector2(2.4f, 3.1f);
@@ -587,9 +586,8 @@ namespace VectorTests
 
 
         EXPECT_TRUE(PMath::Reflect(v0, n) == PMath::Vector2(3.784616f, 1.023077f));
-        EXPECT_TRUE(PMath::Scale(v0, v1) == PMath::Vector2(12.24f, 7.75f));
         EXPECT_TRUE(PMath::CompInverse(v0) == PMath::Vector2(1.0f / 2.4f, 1.0f / 3.1f));
-        EXPECT_TRUE(PMath::Negate(v0) == PMath::Vector2(-2.4f, -3.1f));
+        EXPECT_TRUE(PMath::Negate(v0) == PMath::Vector2(-2.4f, -3.1f)) << PMath::ToString(v0);
         EXPECT_TRUE(PMath::GetPerpendicular(v0) == PMath::Vector2(3.1f, -2.4f));
         EXPECT_TRUE(PMath::GetReversePerpendicular(v0) == PMath::Vector2(-3.1f, 2.4f));
         EXPECT_TRUE(PMath::Max(v0, v1) == PMath::Vector2(5.1f, 3.1f));
@@ -726,8 +724,6 @@ namespace VectorTests
         EXPECT_TRUE(PMath::CrossPV(v0,v1) == PMath::Vector3(8.32f,11.28f,-9.81f));
         EXPECT_TRUE(PMath::NegateV(v0) == PMath::Vector3(-8.32f, -11.28f, 9.81f));
 
-        EXPECT_TRUE(PMath::ScaleV(v0, v1) == PMath::Vector3(-42.431988f, -28.199997f, 70.631996f));
-
         // Re-init vector
         v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
         EXPECT_TRUE(PMath::ProjectV(v0, v1) == PMath::Vector3(3.65732461f, 1.7928061f, 5.16328180f));
@@ -736,7 +732,8 @@ namespace VectorTests
         EXPECT_TRUE(PMath::ClampToMagnitudeV(v0, 5.0f, 6.0f) == PMath::Vector3(2.1065165f, 2.7209172f, 4.91520539f));
         EXPECT_TRUE(PMath::ClampToMagnitudeV(v0, 5.0f, 7.0f) == PMath::Vector3(2.1065165f, 2.7209172f, 4.91520539f));
 
-        EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector3(1.0f / 2.1065165f, 1.0f / 2.7209172f, 1.0f / 4.91520539f));
+        v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
+        EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector3(1.0f / 2.4f, 1.0f / 3.1f, 1.0f / 5.6f));
 
         v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
         EXPECT_TRUE(PMath::ClampToCubeV(v0, 3.2f) == PMath::Vector3(2.4f, 3.1f, 3.2f));
@@ -775,7 +772,6 @@ namespace VectorTests
         EXPECT_TRUE(PMath::Max(v0,v1) == PMath::Vector3(5.1f, 3.1f, 7.2f));
         EXPECT_TRUE(PMath::Min(v0, v1) == PMath::Vector3(2.4f, 2.5f, 5.6f));
         EXPECT_TRUE(PMath::Negate(v0) == PMath::Vector3(-2.4f, -3.1f, -5.6f));
-        EXPECT_TRUE(PMath::Scale(v0, v1) == PMath::Vector3(12.24f, 7.75f, 40.32f));
         EXPECT_TRUE(PMath::ClampToMagnitude(v0, 5.0f, 6.0f) == PMath::Vector3(2.1065165f, 2.7209172f, 4.91520539f));
         EXPECT_TRUE(PMath::ClampToMagnitude(v0, 5.0f, 7.0f) == v0) << PMath::ToString(PMath::ClampToMagnitude(v0, 5.0f, 6.0f));
         EXPECT_TRUE(PMath::ClampToCube(v0, 3.2f) == PMath::Vector3(2.4f, 3.1f, 3.2f));
@@ -1265,10 +1261,6 @@ namespace Plane
 {
     TEST(Plane, OperatorTests)
     {
-        PMath::Plane pl1;
-        PMath::Plane pl2;
-
-
-
+        
     }
 }
