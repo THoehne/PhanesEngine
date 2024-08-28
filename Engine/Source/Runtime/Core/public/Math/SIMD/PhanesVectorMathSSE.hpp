@@ -102,6 +102,16 @@ namespace Phanes::Core::Math::SIMD
     {
         return _mm_cmpeq_pd(v1, v2);
     }
+
+    /// <summary>
+    /// Sets the last component of the register to zero. <br>
+    /// The last component could hold unexpected values.
+    /// </summary>
+    /// <param name="v1"></param>
+    void vec3_fix(Phanes::Core::Types::Vec4f32Reg v1)
+    {
+        v1 = _mm_blend_ps(v1, _mm_setzero_ps(), 0x1);
+    }
 }
 
 
@@ -175,6 +185,11 @@ namespace Phanes::Core::Math::Detail
         {
             r.comp = _mm_sub_ps(v1.comp, _mm_set_ps1(s));
         }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, float s, const Phanes::Core::Math::TVector4<float, true>& v1)
+        {
+            r.comp = _mm_sub_ps(_mm_set_ps1(s), v1.comp);
+        }
     };
 
     template<>
@@ -203,6 +218,11 @@ namespace Phanes::Core::Math::Detail
         {
             r.comp = _mm_div_ps(v1.comp, _mm_set_ps1(s));
         }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, float s, const Phanes::Core::Math::TVector4<float, true>& v1)
+        {
+            r.comp = _mm_div_ps(_mm_set_ps1(s), v1.comp);
+        }
     };
 
     template<>
@@ -220,6 +240,62 @@ namespace Phanes::Core::Math::Detail
         static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, const Phanes::Core::Math::TVector4<float, true>& v1)
         {
             r.comp = _mm_sub_ps(v1.comp, _mm_set_ps1(1.0f));
+        }
+    };
+
+    template<>
+    struct compute_vec4_mag<float, true>
+    {
+        static FORCEINLINE float map(const Phanes::Core::Math::TVector4<float, true>& v1)
+        {
+            __m128 tmp = _mm_mul_ps(v1.data, v1.data);
+            return sqrt(tmp.m128_f32[0] + tmp.m128_f32[1] + tmp.m128_f32[2] + tmp.m128_f32[3]);
+        }
+    };
+
+    template<>
+    struct compute_vec4_dotp<float, true>
+    {
+        static FORCEINLINE float map(const Phanes::Core::Math::TVector4<float, true>& v1, const Phanes::Core::Math::TVector4<float, true>& v2)
+        {
+            return SIMD::vec4_dot_cvtf32(v1.data, v2.data);
+        }
+    };
+
+    template<>
+    struct compute_vec4_set<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& v1, float x, float y, float z, float w)
+        {
+            v1.data = _mm_setr_ps(x, y, z, w);
+        }
+    };
+
+    template<>
+    struct compute_vec4_max<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, const Phanes::Core::Math::TVector4<float, true>& v1, const Phanes::Core::Math::TVector4<float, true>& v2)
+        {
+            r.data = _mm_max_ps(v1.data, v2.data);
+        }
+    };
+
+    template<>
+    struct compute_vec4_min<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, const Phanes::Core::Math::TVector4<float, true>& v1, const Phanes::Core::Math::TVector4<float, true>& v2)
+        {
+            r.data = _mm_min_ps(v1.data, v2.data);
+        }
+    };
+
+    template<>
+    struct compute_vec4_pdiv<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, const Phanes::Core::Math::TVector4<float, true>& v1)
+        {
+            __m128 tmp = _mm_div_ps(v1.data, _mm_set_ps1(v1.w));
+            r.data = _mm_blend_ps(tmp, _mm_setzero_ps(), 0x1);
         }
     };
 
@@ -260,6 +336,14 @@ namespace Phanes::Core::Math::Detail
         }
     };
 
+    template<>
+    struct compute_vec3_set<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& v1, float x, float y, float z)
+        {
+            v1.data = _mm_setr_ps(x, y, z, 0.0f);
+        }
+    };
 
     template<> struct compute_vec3_add<float, true> : public compute_vec4_add<float, true> {};
     template<> struct compute_vec3_sub<float, true> : public compute_vec4_sub<float, true> {};
@@ -267,6 +351,10 @@ namespace Phanes::Core::Math::Detail
     template<> struct compute_vec3_div<float, true> : public compute_vec4_div<float, true> {};
     template<> struct compute_vec3_inc<float, true> : public compute_vec4_inc<float, true> {};
     template<> struct compute_vec3_dec<float, true> : public compute_vec4_dec<float, true> {};
+    template<> struct compute_vec3_mag<float, true> : public compute_vec4_mag<float, true> {};
+    template<> struct compute_vec3_dotp<float, true> : public compute_vec4_dotp<float, true> {};
+    template<> struct compute_vec3_max<float, true> : public compute_vec4_max<float, true> {};
+    template<> struct compute_vec3_min<float, true> : public compute_vec4_min<float, true> {};
 
     template<>
     struct compute_vec3_cross_p<float, true>
@@ -336,6 +424,11 @@ namespace Phanes::Core::Math::Detail
         {
             r.comp = _mm_sub_pd(v1.comp, _mm_set1_pd(s));
         }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, double s, const Phanes::Core::Math::TVector2<double, true>& v1)
+        {
+            r.comp = _mm_sub_pd(_mm_set1_pd(s), v1.comp);
+        }
     };
 
     template<>
@@ -364,6 +457,11 @@ namespace Phanes::Core::Math::Detail
         {
             r.comp = _mm_div_pd(v1.comp, _mm_set1_pd(s));
         }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, double s, const Phanes::Core::Math::TVector2<double, true>& v1)
+        {
+            r.comp = _mm_div_pd(_mm_set1_pd(s), v1.comp);
+        }
     };
 
     template<>
@@ -381,6 +479,58 @@ namespace Phanes::Core::Math::Detail
         static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1)
         {
             r.comp = _mm_sub_pd(v1.comp, _mm_set1_pd(1.0f));
+        }
+    };
+
+    // Magnitude 
+    template<RealType T>
+    struct compute_vec2_mag<T, true>
+    {
+        static FORCEINLINE double map(const Phanes::Core::Math::TVector2<double, true>& v1)
+        {
+            __m128d tmp = _mm_mul_pd(v1.data, v1.data);
+            return sqrt(tmp.m128d_f64[0] + tmp.m128d_f64[1]);
+        }
+    };
+
+    // Dot product 
+    template<>
+    struct compute_vec2_dotp<double, true> 
+    {
+        static FORCEINLINE double map(const Phanes::Core::Math::TVector2<double, true>& v1)
+        {
+            __m128d tmp = _mm_mul_pd(v1.data, v1.data);
+            return tmp.m128d_f64[0] + tmp.m128d_f64[1];
+        }
+    };
+
+    // Max 
+    template<>
+    struct compute_vec2_max<double, true> 
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, const Phanes::Core::Math::TVector2<double, true>& v2)
+        {
+            r.data = _mm_max_pd(v1.data, v2.data);
+        }
+    };
+
+    // Min
+    template<>
+    struct compute_vec2_min<double, true> 
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& r, const Phanes::Core::Math::TVector2<double, true>& v1, const Phanes::Core::Math::TVector2<double, true>& v2)
+        {
+            r.data = _mm_min_pd(v1.data, v2.data);
+        }
+    };
+
+    // Set
+    template<>
+    struct compute_vec2_set<double, true> 
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector2<double, true>& v1, double x, double y)
+        {
+            v1.data = _mm_setr_pd(x, y);
         }
     };
 
