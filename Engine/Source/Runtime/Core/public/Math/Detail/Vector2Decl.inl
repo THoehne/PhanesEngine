@@ -189,7 +189,7 @@ namespace Phanes::Core::Math::Detail
         static constexpr bool map(const Phanes::Core::Math::TVector2<T, S>& v1, const Phanes::Core::Math::TVector2<T, S>& v2)
         {
             return (Phanes::Core::Math::Abs(v1.x - v2.x) > P_FLT_INAC ||
-                Phanes::Core::Math::Abs(v1.y - v2.y) > P_FLT_INAC);
+                    Phanes::Core::Math::Abs(v1.y - v2.y) > P_FLT_INAC);
         }
     };
 

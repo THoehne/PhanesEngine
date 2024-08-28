@@ -127,7 +127,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TVector2<T, S> operator+= (TVector2<T, S>& v1, T s);
+    TVector2<T, S>& operator+= (TVector2<T, S>& v1, T s);
 
     /**
      * Addition operation on same TVector2<T, S> (this) by a another TVector2<T, S>.
@@ -137,7 +137,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TVector2<T, S> operator+= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
+    TVector2<T, S>& operator+= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
 
     /**
      * Substraction operation on same TVector2<T, S> (this) by a floating point.
@@ -147,7 +147,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TVector2<T, S> operator-= (TVector2<T, S>& v1, T s);
+    TVector2<T, S>& operator-= (TVector2<T, S>& v1, T s);
 
     /**
      * Substraction operation on same TVector2<T, S> (this) by a another TVector2<T, S>.
@@ -157,7 +157,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TVector2<T, S> operator-= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
+    TVector2<T, S>& operator-= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
 
     /**
      * Multiplication of TVector2<T, S> (this) with a floating point.
@@ -167,7 +167,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TVector2<T, S> operator*= (TVector2<T, S>& v1, T s);
+    TVector2<T, S>& operator*= (TVector2<T, S>& v1, T s);
 
     /// <summary>
     /// Componentwise multiplication of vector by other vector.
@@ -178,7 +178,7 @@ namespace Phanes::Core::Math {
     /// <param name="v2"></param>
     /// <returns>Copy of v1.</returns>
     template<RealType T, bool S>
-    TVector2<T, S> operator*= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
+    TVector2<T, S>& operator*= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
 
     /**
      * Devision of Vector (this) by floating point.
@@ -188,7 +188,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TVector2<T, S> operator/= (TVector2<T, S>& v1, T s);
+    TVector2<T, S>& operator/= (TVector2<T, S>& v1, T s);
 
     /// <summary>
     /// Componentwise division of vector by other vector.
@@ -199,7 +199,7 @@ namespace Phanes::Core::Math {
     /// <param name="v2"></param>
     /// <returns>Copy of v1.</returns>
     template<RealType T, bool S>
-    TVector2<T, S> operator/= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
+    TVector2<T, S>& operator/= (TVector2<T, S>& v1, const TVector2<T, S>& v2);
 
     /**
      * Scale of Vector by floating point. (> Creates a new TVector2<T, S>)
@@ -236,6 +236,10 @@ namespace Phanes::Core::Math {
     template<RealType T, bool S>
     TVector2<T, S> operator/ (const TVector2<T, S>& v1, T s);
 
+
+    template<RealType T, bool S>
+    inline TVector2<T, S> operator/ (T s, const TVector2<T, S>& v1);
+
     /// <summary>
     /// Componentwise multiplication with vector by vector.
     /// </summary>
@@ -261,24 +265,6 @@ namespace Phanes::Core::Math {
     {
         return v1 * s;
     }
-
-    /**
-     * Division of Vector by floating point. (> For convenience not arithmethicaly correct. Works like overloaded counterpart.)
-     *
-     * @param(v1) Vector to multiply with
-     * @param(s Floating point to divide with
-     *
-     * @return Result Vector
-     */
-
-
-    template<RealType T, bool S>
-    inline TVector2<T, S> operator/ (T s, const TVector2<T, S>& v1);
-
-
-
-    template<RealType T, bool S>
-    inline TVector2<T, S> operator- (T s, const TVector2<T, S>& v1);
 
     /**
      * Componentwise addition of Vector with floating point.
@@ -315,6 +301,10 @@ namespace Phanes::Core::Math {
 
     template<RealType T, bool S>
     TVector2<T, S> operator- (const TVector2<T, S>& v1, T s);
+
+
+    template<RealType T, bool S>
+    inline TVector2<T, S> operator- (T s, const TVector2<T, S>& v1);
 
     /**
      * Componentwise substraction of Vector with Vector.
@@ -354,6 +344,7 @@ namespace Phanes::Core::Math {
 
     template<RealType T, bool S>
     bool operator!= (const TVector2<T, S>& v1, const TVector2<T, S>& v2);
+
 
 
     template<RealType T, bool A>
@@ -812,7 +803,7 @@ namespace Phanes::Core::Math {
     template<RealType T, bool S>
     TVector2<T, S> Negate(const TVector2<T, S>& v1)
     {
-        return ((T)1.0 - v1);
+        return ((T)0.0 - v1);
     }
 
     /**
