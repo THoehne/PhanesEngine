@@ -49,17 +49,14 @@ namespace Phanes::Core::Math {
     public:
 
         TMatrix3() = default;
+        
+        TMatrix3(TMatrix3<T, S>&& m)
+            : c0(std::move(m.c0)), c1(std::move(m.c1)), c2(std::move(m.c2))
+        {};
 
-        /**
-         * Copy constructor.
-         */
-
-        TMatrix3(const TMatrix3<T, S>& m1)
-        {
-            this->c0 = TVector3<T, S>(m1.c0);
-            this->c1 = TVector3<T, S>(m1.c1);
-            this->c2 = TVector3<T, S>(m1.c2);
-        }
+        TMatrix3(const TMatrix3<T, S>& m)
+            : c0(m.c0), c1(m.c1), c2(m.c2)
+        {};
 
         /**
          * Construct Matrix from 2d array.
@@ -107,6 +104,28 @@ namespace Phanes::Core::Math {
             this->c0 = v1;
             this->c1 = v2;
             this->c2 = v3;
+        }
+
+        TMatrix3<T, S>& operator= (TMatrix3<T, S>&& m)
+        {
+            if (this != &m)
+            {
+                this->c0 = std::move(m.c0);
+                this->c1 = std::move(m.c1);
+                this->c2 = std::move(m.c2);
+            }
+            return *this;
+        }
+
+        TMatrix3<T, S>& operator= (const TMatrix3<T, S>& m)
+        {
+            if (this != &m)
+            {
+                this->c0 = m.c0;
+                this->c1 = m.c1;
+                this->c2 = m.c2;
+            }
+            return *this;
         }
 
     public:

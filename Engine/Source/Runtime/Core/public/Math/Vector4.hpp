@@ -4,7 +4,6 @@
 #include "Core/public/Math/Boilerplate.h"
 #include "Core/public/Math/MathCommon.hpp"
 #include "Core/public/Math/SIMD/Storage.h"
-
 #include "Core/public/Math/MathFwd.h"
 
 
@@ -20,6 +19,7 @@ namespace Phanes::Core::Math
     template<RealType T, bool S = false>
     struct TVector4
     {
+
     public:
         using Real = T;
         union
@@ -56,12 +56,10 @@ namespace Phanes::Core::Math
             };
             
         };
-
+    
+    public:
         /// Default constructor
         TVector4() = default;
-
-        /// Copy constructor
-        TVector4(const TVector4<Real, S>& v);
 
         /// <summary>
         /// Construct vector from one scalar.

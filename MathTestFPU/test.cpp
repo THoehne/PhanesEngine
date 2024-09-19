@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "Core/public/Math/Include.h"
+
 #include "Core/Core.h"
 
 namespace PMath = Phanes::Core::Math;

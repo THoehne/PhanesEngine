@@ -132,7 +132,7 @@ namespace Phanes::Core::Math::Detail
     {
         static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& v1, const TVector4<float, true>& v2)
         {
-            v1.comp = _mm_setr_ps(v2.x, v2.y, v2.z, v2.w);
+            v1.comp = v2.comp;
         }
 
 
@@ -154,10 +154,18 @@ namespace Phanes::Core::Math::Detail
         static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& v1, const float* s)
         {
             v1.comp = _mm_loadu_ps(s);
-
         }
     };
 
+    template<>
+    struct move_vec4<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, Phanes::Core::Math::TVector4<float, true>&& v)
+        {
+            r.data = v.data;
+            v.data = _mm_setzero_ps();
+        }
+    };
 
     template<>
     struct compute_vec4_add<float, true>
@@ -333,6 +341,16 @@ namespace Phanes::Core::Math::Detail
         {
             v1.comp = _mm_setr_ps(s[0], s[1], s[2], 0.0f);
 
+        }
+    };
+
+    template<>
+    struct move_vec3<float, true>
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TVector3<float, true>& r, Phanes::Core::Math::TVector3<float, true>&& v)
+        {
+            r.data = v.data;
+            v.data = _mm_setzero_ps();
         }
     };
 

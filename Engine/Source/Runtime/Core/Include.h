@@ -9,17 +9,15 @@
 #include "Core/public/StartingPoint/EntryPoint.h"
 
 
-
-
 // --- OSAL ----------------------------------------
 
 #include "Core/public/HAL/PlatformTypes.h"
 
 
 #ifdef P_USE_NAMESPACE_ALIAS
-
-
-// Starting point
-namespace PApp                = Phanes::Core::Application;
-
+ 
+ 
+    // Starting point
+    namespace PApp                = Phanes::Core::Application;
+ 
 #endif

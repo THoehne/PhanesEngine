@@ -1,7 +1,5 @@
 #pragma once
 
-#include "PhanesEnginePCH.h"
-
 #include "Core/Core.h"
 
 // Entrypoint class for any Phanes game. 

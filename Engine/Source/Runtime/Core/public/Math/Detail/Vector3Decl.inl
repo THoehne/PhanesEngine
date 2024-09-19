@@ -8,6 +8,9 @@ namespace Phanes::Core::Math::Detail
     struct construct_vec3 {};
 
     template<RealType T, bool S>
+    struct move_vec3 {};
+
+    template<RealType T, bool S>
     struct compute_vec3_add {};
 
     template<RealType T, bool S>
@@ -65,48 +68,42 @@ namespace Phanes::Core::Math::Detail
     template<RealType T>
     struct construct_vec3<T, false>
     {
-        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, const TVector3<T, false>& v2)
+        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& r, const TVector3<T, false>& v1)
         {
-            v1.x = v2.x;
-            v1.y = v2.y;
-            v1.z = v2.z;
-            v1.w = (T)0.0;
+            memcpy(r.data, v1.data, 4 * sizeof(T));
+        }
+
+        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& r, T s)
+        {
+            r.x = s;
+            r.y = s;
+            r.z = s;
+            r.w = (T)0.0;
+        }
+
+        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& r, T x, T y, T z)
+        {
+            r.x = x;
+            r.y = y;
+            r.z = z;
+            r.w = (T)0.0;
+        }
+
+        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& r, const Phanes::Core::Math::TVector2<T, false>& v1, T s)
+        {
+            r.x = v1.x;
+            r.y = v1.y;
+            r.z = s;
+            r.w = (T)0.0;
         }
 
 
-        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, T s)
+        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& r, const T* comp)
         {
-            v1.x = s;
-            v1.y = s;
-            v1.z = s;
-            v1.w = (T)0.0;
-        }
-
-        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, T x, T y, T z)
-        {
-            v1.x = x;
-            v1.y = y;
-            v1.z = z;
-            v1.w = (T)0.0;
-        }
-
-        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, const Phanes::Core::Math::TVector2<T, false>& v2, T s)
-        {
-            v1.x = v2.x;
-            v1.y = v2.y;
-            v1.z = s;
-        }
-
-
-        static constexpr void map(Phanes::Core::Math::TVector3<T, false>& v1, const T* comp)
-        {
-            v1.x = comp[0];
-            v1.y = comp[1];
-            v1.z = comp[2];
-            v1.w = (T)0.0;
+            memcpy(r.data, comp, 3 * sizeof(T));
+            r.w = (T)0.0;
         }
     };
-
 
     template<RealType T>
     struct compute_vec3_add<T, false>

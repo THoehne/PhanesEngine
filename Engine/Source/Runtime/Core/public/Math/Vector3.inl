@@ -12,12 +12,6 @@
 namespace Phanes::Core::Math
 {
     template<RealType T, bool S>
-    TVector3<T, S>::TVector3(const TVector3<Real, S>& v)
-    {
-        Detail::construct_vec3<T, S>::map(*this, v);
-    }
-
-    template<RealType T, bool S>
     TVector3<T, S>::TVector3(Real _x, Real _y, Real _z)
     {
         Detail::construct_vec3<T, S>::map(*this, _x, _y, _z);
@@ -38,9 +32,9 @@ namespace Phanes::Core::Math
     template<RealType T, bool S>
     TVector3<T, S>::TVector3(const Real* comp)
     {
+        static_assert(sizeof(comp) >= sizeof(T) * 3, "Size of comp has to be of at least three (3) components.");
         Detail::construct_vec3<T, S>::map(*this, comp);
     }
-
 
 
 

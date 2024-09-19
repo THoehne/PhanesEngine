@@ -43,12 +43,6 @@ namespace Phanes::Core::Math {
         TVector3() = default;
 
         /// <summary>
-        /// Copy constructor.
-        /// </summary>
-        /// <param name="v"></param>
-        TVector3(const TVector3<Real, S>& v);
-
-        /// <summary>
         /// Broadcast s into x, y, z.
         /// </summary>
         /// <param name="s"></param>
@@ -74,7 +68,6 @@ namespace Phanes::Core::Math {
         /// <param name="v">Vector</param>
         /// <param name="s">Scalar</param>
         TVector3(const TVector2<Real, S>& v, Real s);
-
     };
 
 

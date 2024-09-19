@@ -39,16 +39,20 @@ namespace Phanes::Core::Math {
 		TMatrix4() = default;
 
 		/// <summary>
+		/// Move constructor
+		/// </summary>
+		/// <param name="v"></param>
+		TMatrix4(TMatrix4<T, S>&& m)
+			: c0(std::move(m.c0)), c1(std::move(m.c1)), c2(std::move(m.c2)), c3(std::move(m.c3))
+		{};
+
+		/// <summary>
 		/// Copy constructor
 		/// </summary>
 		/// <param name="v"></param>
 		TMatrix4(const TMatrix4<T, S>& m)
-		{
-			this->c0 = m.c0;
-			this->c1 = m.c1;
-			this->c2 = m.c2;
-			this->c3 = m.c3;
-		}
+			: c0(m.c0), c1(m.c1), c2(m.c2), c3(m.c3)
+		{};
 
 		/// <summary>
 		/// Construct matrix with values.
@@ -85,6 +89,30 @@ namespace Phanes::Core::Math {
 			this->c1 = TVector4(field[1]);
 			this->c2 = TVector4(field[2]);
 			this->c3 = TVector4(field[3]);
+		}
+
+		TMatrix4<T, S>& operator= (TMatrix4<T, S>&& m)
+		{
+			if (this != &m)
+			{
+				this->c0 = std::move(m.c0);
+				this->c1 = std::move(m.c1);
+				this->c2 = std::move(m.c2);
+				this->c3 = std::move(m.c3);
+			}
+			return *this;
+		}
+
+		TMatrix4<T, S>& operator= (const TMatrix4<T, S>& m)
+		{
+			if (this != &m)
+			{
+				this->c0 = m.c0;
+				this->c1 = m.c1;
+				this->c2 = m.c2;
+				this->c3 = m.c3;
+			}
+			return *this;
 		}
 
 	public:

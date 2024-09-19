@@ -36,7 +36,7 @@
 
 #else
 
-	#error The target system must be defined. (See https://github.com/scorpioblood/PhanesEngine for more information)
+	#error The target system must be defined. (See https://github.com/thoehne/PhanesEngine for more information)
 
 #endif // P_WIN_BUILD
 
