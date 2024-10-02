@@ -35,6 +35,12 @@ namespace Phanes::Core::Math
         Detail::construct_vec4<T, S>::map(*this, comp);
     }
 
+    template<RealType T, bool S>
+    Phanes::Core::Math::TVector4<T, S>::TVector4(const TVector3<T, S>& v, T w)
+    {
+        Detail::construct_vec4<T, S>::map(*this, v, w);
+    }
+
 
     template<RealType T, bool S>
     TVector4<T, S>& operator+=(TVector4<T, S>& v1, const TVector4<T, S>& v2)

@@ -8,6 +8,7 @@
 
 
 #include "Core/public/Math/Vector2.hpp"
+#include "Core/public/Math/Vector3.hpp"
 
 #define PZeroVector4(type, aligned)			Phanes::Core::Math::TVector4<##type, ##aligned>(0,0,0,0)
 
@@ -85,6 +86,13 @@ namespace Phanes::Core::Math
         /// <param name="v1">TVector2 one</param>
         /// <param name="v2">TVector2 two</param>
         TVector4(const TVector2<Real, S>& v1, const TVector2<Real, S>& v2);
+
+        /// <summary>
+        /// Construct vector from 3d vector (x,y,z) and w
+        /// </summary>
+        /// <param name="v1">TVector3</param>
+        /// <param name="w">W</param>
+        TVector4(const TVector3<Real, S>& v1, Real w);
 
         /// <summary>
         /// Construct vector from array of components
