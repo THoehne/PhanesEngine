@@ -63,19 +63,6 @@ namespace Phanes::Core::Math {
         TPlane() = default;
 
         /**
-         * Copy constructor
-         */
-
-        TPlane(const TPlane<Real, S>& plane);
-
-        /**
-         * Move constructor 
-         */
-
-        TPlane(TPlane<Real, S>&& plane);
-
-
-        /**
          * Construct plane from normal and d 
          * 
          * @param(normal) Normal of plane
@@ -96,7 +83,7 @@ namespace Phanes::Core::Math {
         TPlane(const TVector3<Real, S>& normal, const TVector3<Real, S>& base);
 
         /**
-         * Construct plane from coefficients
+         * Construct plane from coefficients. The components should be normalized.
          * 
          * @param(x) X coefficient
          * @param(y) Y coefficient
@@ -911,7 +898,7 @@ namespace Phanes::Core::Math {
     template<RealType T>
     TVector3<T, false> PointProjectOntoPlane(const TVector3<T, false>& p1, const TPlane<T, false>& pl1)
     {
-        p1 - PointDistance(pl1, p1) * pl1.normal;
+        return p1 - PointDistance(pl1, p1) * pl1.normal;
     }
 
     /**

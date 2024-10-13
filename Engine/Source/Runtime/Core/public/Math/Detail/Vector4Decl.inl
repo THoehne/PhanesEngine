@@ -93,6 +93,13 @@ namespace Phanes::Core::Math::Detail
             r.w = v3.y;
         }
 
+        static constexpr void map(Phanes::Core::Math::TVector4<T, false>& r, const Phanes::Core::Math::TVector3<T, false>& v, T w)
+        {
+            r.x = v.x;
+            r.y = v.y;
+            r.z = v.z;
+            r.w = w;
+        }
 
         static constexpr void map(Phanes::Core::Math::TVector4<T, false>& r, const T* comp)
         {

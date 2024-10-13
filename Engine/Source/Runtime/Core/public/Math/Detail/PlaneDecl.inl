@@ -24,15 +24,6 @@ namespace Phanes::Core::Math::Detail
     template<RealType T>
     struct construct_plane<T, false>
     {
-        static constexpr void map(TPlane<T, false>& r, const TPlane<T, false>& pl1)
-        {
-            r.comp = std::copy(pl1.comp);
-        }
-
-        static constexpr void map(TPlane<T, false>& r, TPlane<T, false>&& pl1)
-        {
-            r.comp = std::move(pl1.comp);
-        }
 
         static constexpr void map(TPlane<T, false>& r, const TVector3<T, false>& normal, T d)
         {

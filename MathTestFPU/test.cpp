@@ -1262,6 +1262,8 @@ namespace Plane
 {
     TEST(Plane, OperatorTests)
     {
-        
+        PMath::Plane pl1(3.0f / 5.4772255750f, -2.0f / 5.4772255750f, -3.0f / 5.4772255750f, 4.0f);
+        PMath::Plane pl2(-0.526316f, -0.442105f, -0.726316f, 6.0f);
+
     }
 }

@@ -12,18 +12,6 @@
 namespace Phanes::Core::Math
 {
     template<RealType T, bool S>
-    TPlane<T, S>::TPlane(const TPlane<T, S>& plane)
-    {
-        Detail::construct_plane<T, S>::map(*this, plane);
-    }
-
-    template<RealType T, bool S>
-    TPlane<T, S>::TPlane(TPlane<T, S>&& plane)
-    {
-        Detail::construct_plane<T, S>::map(*this, plane);
-    }
-
-    template<RealType T, bool S>
     TPlane<T, S>::TPlane(const TVector3<T, S>& normal, Real d)
     {
         Detail::construct_plane<T, S>::map(*this, normal, d);

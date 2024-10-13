@@ -11,12 +11,15 @@
 #include "Core/public/Math/Vector3.hpp"
 #include "Core/public/Math/Vector4.hpp"
 
+#include "Core/public/Math/Plane.hpp"
+
 #include "Core/public/Math/IntVector2.hpp"
 #include "Core/public/Math/IntVector3.hpp"
 #include "Core/public/Math/IntVector4.hpp"
 
 #include "Core/public/Math/Matrix3.hpp"
 #include "Core/public/Math/Matrix4.hpp"
+
 
 
 // ========== //
@@ -110,7 +113,7 @@ namespace Phanes::Core::Math::SIMD
     /// <param name="v1"></param>
     void vec3_fix(Phanes::Core::Types::Vec4f32Reg v1)
     {
-        v1 = _mm_blend_ps(v1, _mm_setzero_ps(), 0x1);
+        v1.m128_f32[3] = 0.0f;
     }
 }
 
@@ -154,6 +157,11 @@ namespace Phanes::Core::Math::Detail
         static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& v1, const float* s)
         {
             v1.comp = _mm_loadu_ps(s);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, const Phanes::Core::Math::TVector3<float, true>& v, float w)
+        {
+            r.comp = _mm_set_ps(w, v.z, v.y, v.x);
         }
     };
 
@@ -302,8 +310,8 @@ namespace Phanes::Core::Math::Detail
     {
         static FORCEINLINE void map(Phanes::Core::Math::TVector4<float, true>& r, const Phanes::Core::Math::TVector4<float, true>& v1)
         {
-            __m128 tmp = _mm_div_ps(v1.data, _mm_set_ps1(v1.w));
-            r.data = _mm_blend_ps(tmp, _mm_setzero_ps(), 0x1);
+            r.data = _mm_div_ps(v1.data, _mm_set_ps1(v1.w));
+            r.w = 0.0f;
         }
     };
 
@@ -552,6 +560,76 @@ namespace Phanes::Core::Math::Detail
         }
     };
 
+
+    // ========= //
+    //   Plane   //
+    // ========= //
+
+    template<>
+    struct construct_plane<float, true> 
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& pl, const TVector3<float, true>& v1, float d)
+        {
+            pl.comp.data = v1.data;
+            pl.comp.w = d;
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& pl, const TVector3<float, true>& normal, const TVector3<float, true>& base)
+        {
+            pl.comp.data = normal.data;
+            pl.comp.w = DotP(normal, base);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& pl, float x, float y, float z, float d)
+        {
+
+            pl.comp.data = _mm_set_ps(x, y, z, d);
+        }
+
+        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& pl, const TVector3<float, true>& v1, const TVector3<float, true>& v2, const TVector3<float, true>& v3)
+        {
+            TVector4<float, false> tmp;
+            
+        }
+        
+                
+    };
+
+    template<>
+    struct compute_plane_add<float, true> 
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& r, Phanes::Core::Math::TPlane<float, true>& pl1, Phanes::Core::Math::TPlane<float, true>& pl2)
+        {
+            r.comp.data = _mm_add_ps(pl1.comp.data, pl2.comp.data);
+        }
+    };
+
+    template<>
+    struct compute_plane_sub<float, true> 
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& r, Phanes::Core::Math::TPlane<float, true>& pl1, Phanes::Core::Math::TPlane<float, true>& pl2)
+        {
+            r.comp.data = _mm_sub_ps(pl1.comp.data, pl2.comp.data);
+        }
+    };
+
+    template<>
+    struct compute_plane_mul<float, true> 
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& r, Phanes::Core::Math::TPlane<float, true>& pl1, Phanes::Core::Math::TPlane<float, true>& pl2)
+        {
+            r.comp.data = _mm_mul_ps(pl1.comp.data, pl2.comp.data);
+        }
+    };
+
+    template<>
+    struct compute_plane_div<float, true> 
+    {
+        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& r, Phanes::Core::Math::TPlane<float, true>& pl1, Phanes::Core::Math::TPlane<float, true>& pl2)
+        {
+            r.comp.data = _mm_div_ps(pl1.comp.data, pl2.comp.data);
+        }
+    };
 
     // =============== //
     //   TIntVector4   //
