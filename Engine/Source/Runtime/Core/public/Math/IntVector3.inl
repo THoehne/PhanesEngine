@@ -44,70 +44,70 @@ namespace Phanes::Core::Math
 
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator+=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator+=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_add<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator+=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator+=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_add<T, S>::map(v1, v1, s);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator-=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator-=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_sub<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator-=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator-=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_sub<T, S>::map(v1, v1, s);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator*=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator*=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_mul<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator*=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator*=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_mul<T, S>::map(v1, v1, s);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator/=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator/=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_div<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator/=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator/=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_div<T, S>::map(v1, v1, s);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator%=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator%=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_mod<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator%=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator%=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_mod<T, S>::map(v1, v1, s);
         return v1;
@@ -200,70 +200,70 @@ namespace Phanes::Core::Math
     // Bitwise operators
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator&=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator&=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_and<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator&=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator&=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_and<T, S>::map(v1, v1, s);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator|=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator|=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_or<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator|=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator|=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_or<T, S>::map(v1, v1, s);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator^=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator^=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_xor<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator^=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator^=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_xor<T, S>::map(v1, v1, s);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator<<=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator<<=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_left_shift<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator<<=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator<<=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_left_shift<T, S>::map(v1, v1, s);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator>>=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
+    TIntVector3<T, S>& operator>>=(TIntVector3<T, S>& v1, const TIntVector3<T, S>& v2)
     {
         Detail::compute_ivec3_right_shift<T, S>::map(v1, v1, v2);
         return v1;
     }
 
     template<IntType T, bool S>
-    TIntVector3<T, S> operator>>=(TIntVector3<T, S>& v1, T s)
+    TIntVector3<T, S>& operator>>=(TIntVector3<T, S>& v1, T s)
     {
         Detail::compute_ivec3_right_shift<T, S>::map(v1, v1, s);
         return v1;

@@ -139,7 +139,7 @@ namespace Phanes::Core::Math {
     // ====================== //
             
     template<RealType T>
-    TMatrix2<T> operator+= (TMatrix2<T>& m1, T s)
+    TMatrix2<T>& operator+= (TMatrix2<T>& m1, T s)
     {
             m1(0, 0) += s;
             m1(0, 1) += s;
@@ -150,7 +150,7 @@ namespace Phanes::Core::Math {
     }
 
     template<RealType T>
-    TMatrix2<T> operator+= (TMatrix2<T>& m1, const TMatrix2<T>& m2)
+    TMatrix2<T>& operator+= (TMatrix2<T>& m1, const TMatrix2<T>& m2)
     {
             m1(0, 0) += m2(0, 0);
             m1(0, 1) += m2(0, 1);
@@ -161,7 +161,7 @@ namespace Phanes::Core::Math {
     }
                 
     template<RealType T>
-    TMatrix2<T> operator-= (TMatrix2<T>& m1, T s)
+    TMatrix2<T>& operator-= (TMatrix2<T>& m1, T s)
     {
             m1(0, 0) -= s;
             m1(0, 1) -= s;
@@ -172,7 +172,7 @@ namespace Phanes::Core::Math {
     }
     
     template<RealType T>
-    TMatrix2<T> operator-= (TMatrix2<T>& m1, const TMatrix2<T>& m2)
+    TMatrix2<T>& operator-= (TMatrix2<T>& m1, const TMatrix2<T>& m2)
     {
             m1(0, 0) -= m2(0, 0);
             m1(0, 1) -= m2(0, 1);
@@ -183,7 +183,7 @@ namespace Phanes::Core::Math {
     }
                 
     template<RealType T>
-    TMatrix2<T> operator*= (TMatrix2<T>& m1, T s)
+    TMatrix2<T>& operator*= (TMatrix2<T>& m1, T s)
     {
             m1.data[0][0] *= s;
             m1.data[0][1] *= s;
@@ -194,7 +194,7 @@ namespace Phanes::Core::Math {
     }
     
     template<RealType T>
-    TMatrix2<T> operator*= (TMatrix2<T>& m1, const TMatrix2<T>& m2)
+    TMatrix2<T>& operator*= (TMatrix2<T>& m1, const TMatrix2<T>& m2)
     {
             TMatrix2<T> c = m1;
 
@@ -208,7 +208,7 @@ namespace Phanes::Core::Math {
     }
 
     template<RealType T>
-    TMatrix2<T> operator/= (TMatrix2<T>& m1, T s)
+    TMatrix2<T>& operator/= (TMatrix2<T>& m1, T s)
     {
         s = (T)1.0 / s;
         m1.data[0][0] *= s;
@@ -300,7 +300,7 @@ namespace Phanes::Core::Math {
     }
 
     template<RealType T>
-    TMatrix2<T> InverseV(TMatrix2<T>& m1)
+    TMatrix2<T>& InverseV(TMatrix2<T>& m1)
     {
         float _1_det = 1.0f / Determinant(m1);
         float m00 = m1(0, 0);
@@ -315,7 +315,7 @@ namespace Phanes::Core::Math {
     }
 
     template<RealType T>
-    TMatrix2<T> TransposeV(TMatrix2<T>& m1)
+    TMatrix2<T>& TransposeV(TMatrix2<T>& m1)
     {
         Swap(m1(0, 1), m1(1, 0));
 

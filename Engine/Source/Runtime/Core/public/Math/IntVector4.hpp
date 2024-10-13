@@ -138,7 +138,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    TIntVector4<T, A> operator+= (TIntVector4<T, A>& v1, T s);
+    TIntVector4<T, A>& operator+= (TIntVector4<T, A>& v1, T s);
 
     /**
      * Addition operation on same TIntVector4<T, A> (this) by a another TIntVector4<T, A>.
@@ -148,7 +148,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    TIntVector4<T, A> operator+= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
+    TIntVector4<T, A>& operator+= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
 
     /**
      * Substraction operation on same TIntVector4<T, A> (this) by a floating point.
@@ -158,7 +158,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    TIntVector4<T, A> operator-= (TIntVector4<T, A>& v1, T s);
+    TIntVector4<T, A>& operator-= (TIntVector4<T, A>& v1, T s);
 
     /**
      * Substraction operation on same TIntVector4<T, A> (this) by a another TIntVector4<T, A>.
@@ -168,7 +168,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    TIntVector4<T, A> operator-= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
+    TIntVector4<T, A>& operator-= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
 
 
     /**
@@ -179,7 +179,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    TIntVector4<T, A> operator*= (TIntVector4<T, A>& v1, T s);
+    TIntVector4<T, A>& operator*= (TIntVector4<T, A>& v1, T s);
 
     /**
      * Devision of Vector
@@ -191,7 +191,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    TIntVector4<T, A> operator/= (TIntVector4<T, A>& v1, T s);
+    TIntVector4<T, A>& operator/= (TIntVector4<T, A>& v1, T s);
 
     /**
      * Stores the remainder of division by a scalar.
@@ -201,40 +201,40 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    TIntVector4<T, A> operator%= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
+    TIntVector4<T, A>& operator%= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
 
     template<IntType T, bool A>
-    TIntVector4<T, A> operator%= (TIntVector4<T, A>& v1, T s);
+    TIntVector4<T, A>& operator%= (TIntVector4<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator&= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
+    inline TIntVector4<T, A>& operator&= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator&= (TIntVector4<T, A>& v1, T s);
+    inline TIntVector4<T, A>& operator&= (TIntVector4<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator|= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
+    inline TIntVector4<T, A>& operator|= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator|= (TIntVector4<T, A>& v1, T s);
+    inline TIntVector4<T, A>& operator|= (TIntVector4<T, A>& v1, T s);
 
     template<IntType T, bool A>
     inline TIntVector4<T, A> operator^= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator^= (TIntVector4<T, A>& v1, T s);
+    inline TIntVector4<T, A>& operator^= (TIntVector4<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator<<= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
+    inline TIntVector4<T, A>& operator<<= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator<<= (TIntVector4<T, A>& v1, T s);
+    inline TIntVector4<T, A>& operator<<= (TIntVector4<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator>>= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
+    inline TIntVector4<T, A>& operator>>= (TIntVector4<T, A>& v1, const TIntVector4<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector4<T, A> operator>>= (TIntVector4<T, A>& v1, T s);
+    inline TIntVector4<T, A>& operator>>= (TIntVector4<T, A>& v1, T s);
 
     /**
      * Scale of Vector by floating point. (> Creates a new TIntVector4<T, A>)
@@ -443,12 +443,14 @@ namespace Phanes::Core::Math {
 
 
     template<IntType T>
-    void Set(TIntVector4<T, false>& v1, TIntVector4<T, false>& v2)
+    TIntVector4<T, false>& Set(TIntVector4<T, false>& v1, TIntVector4<T, false>& v2)
     {
         v1.x = v2.x;
         v1.y = v2.y;
         v1.z = v2.z;
         v1.w = v2.w;
+        
+        return v1;
     }
 
 
@@ -494,7 +496,7 @@ namespace Phanes::Core::Math {
     /// <param name="v2">Vector two</param>
     /// <returns>Copy of v1.</returns>
     template<IntType T>
-    TIntVector4<T, false> MaxV(TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    TIntVector4<T, false>& MaxV(TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
     {
         v1.x = (v1.x > v2.x) ? v1.x : v2.x;
         v1.y = (v1.y > v2.y) ? v1.y : v2.y;
@@ -532,7 +534,7 @@ namespace Phanes::Core::Math {
     /// <param name="v2">Vector two</param>
     /// <returns>Copy of v1.</returns>
     template<IntType T>
-    TIntVector4<T, false> MinV(TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
+    TIntVector4<T, false>& MinV(TIntVector4<T, false>& v1, const TIntVector4<T, false>& v2)
     {
         v1.x = (v1.x < v2.x) ? v1.x : v2.x;
         v1.y = (v1.y < v2.y) ? v1.y : v2.y;
@@ -568,7 +570,7 @@ namespace Phanes::Core::Math {
     /// <param name="v1">Vector</param>
     /// <returns>Copy of v1.</returns>
     template<IntType T>
-    TIntVector4<T, false> NegateV(TIntVector4<T, false>& v1)
+    TIntVector4<T, false>& NegateV(TIntVector4<T, false>& v1)
     {
         v1.x = -v1.x;
         v1.y = -v1.y;
@@ -609,7 +611,7 @@ namespace Phanes::Core::Math {
     /// <typeparam name="T">Type of vector</typeparam>
     /// <returns></returns>
     template<IntType T>
-    TIntVector4<T, false> SignVectorV(TIntVector4<T, false>& v1)
+    TIntVector4<T, false>& SignVectorV(TIntVector4<T, false>& v1)
     {
         v1.x = (v1.x > 0) ? 1 : -1;
         v1.y = (v1.y > 0) ? 1 : -1;

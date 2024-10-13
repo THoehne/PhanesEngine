@@ -141,7 +141,7 @@ namespace Phanes::Core::Math {
 	// ==================== //
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator+= (TMatrix4<T, S>& m1, T s)
+	TMatrix4<T, S>& operator+= (TMatrix4<T, S>& m1, T s)
 	{
 		m1.c0 += s;
 		m1.c1 += s;
@@ -152,7 +152,7 @@ namespace Phanes::Core::Math {
 	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator+= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	TMatrix4<T, S>& operator+= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
 	{
 		m1.c0 += m2.c0;
 		m1.c1 += m2.c1;
@@ -163,7 +163,7 @@ namespace Phanes::Core::Math {
 	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator-= (TMatrix4<T, S>& m1, T s)
+	TMatrix4<T, S>& operator-= (TMatrix4<T, S>& m1, T s)
 	{
 		m1.c0 -= s;
 		m1.c1 -= s;
@@ -174,7 +174,7 @@ namespace Phanes::Core::Math {
 	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator-= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+	TMatrix4<T, S>& operator-= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
 	{
 		m1.c0 -= m2.c0;
 		m1.c1 -= m2.c1;
@@ -185,7 +185,7 @@ namespace Phanes::Core::Math {
 	}
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator*= (TMatrix4<T, S>& m1, T s)
+	TMatrix4<T, S>& operator*= (TMatrix4<T, S>& m1, T s)
 	{
 		m1.c0 *= s;
 		m1.c1 *= s;
@@ -195,11 +195,12 @@ namespace Phanes::Core::Math {
 		return m1;
 	}
 
+	// Matrix multiplication
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator*= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2);
+	TMatrix4<T, S>& operator*= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2);
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> operator/= (TMatrix4<T, S>& m1, T s)
+	TMatrix4<T, S>& operator/= (TMatrix4<T, S>& m1, T s)
 	{
 		s = (T)1.0 / s;
 		m1.c0 *= s;
@@ -301,7 +302,7 @@ namespace Phanes::Core::Math {
 	bool InverseV(TMatrix4<T, S>& a);
 
 	template<RealType T, bool S>
-	TMatrix4<T, S> TransposeV(TMatrix4<T, S>& a);
+	TMatrix4<T, S>& TransposeV(TMatrix4<T, S>& a);
 
 
 	// =============== //

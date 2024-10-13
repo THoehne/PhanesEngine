@@ -91,7 +91,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    inline TIntVector3<T, A> operator+= (TIntVector3<T, A>& v1, T s);
+    inline TIntVector3<T, A>& operator+= (TIntVector3<T, A>& v1, T s);
 
     /**
      * Coponentwise addition of 3D vector to 3D vector
@@ -101,7 +101,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    inline TIntVector3<T, A> operator+= (TIntVector3<T, A>& v1, const TIntVector3<T, A>& v2);
+    inline TIntVector3<T, A>& operator+= (TIntVector3<T, A>& v1, const TIntVector3<T, A>& v2);
 
     /**
      * Coponentwise substraction of scalar of 3D vector
@@ -111,7 +111,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    inline TIntVector3<T, A> operator-= (TIntVector3<T, A>& v1, T s);
+    inline TIntVector3<T, A>& operator-= (TIntVector3<T, A>& v1, T s);
 
     /**
      * Coponentwise substraction of 3D vector to 3D vector
@@ -121,7 +121,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    inline TIntVector3<T, A> operator-= (TIntVector3<T, A>& v1, const TIntVector3<T, A>& v2);
+    inline TIntVector3<T, A>& operator-= (TIntVector3<T, A>& v1, const TIntVector3<T, A>& v2);
 
     /**
      * Dot product between two 3D Vectors
@@ -131,7 +131,7 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    inline TIntVector3<T, A> operator*= (TIntVector3<T, A>& v1, T s);
+    inline TIntVector3<T, A>& operator*= (TIntVector3<T, A>& v1, T s);
 
     /**
      * Division of vector by scalar
@@ -141,44 +141,44 @@ namespace Phanes::Core::Math {
      */
 
     template<IntType T, bool A>
-    inline TIntVector3<T, A> operator/= (TIntVector3<T, A>& v1, T s);
+    inline TIntVector3<T, A>& operator/= (TIntVector3<T, A>& v1, T s);
 
 
     template<IntType T, bool A>
-    TIntVector2<T, A> operator%= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
+    TIntVector2<T, A>& operator%= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     template<IntType T, bool A>
-    TIntVector2<T, A> operator%= (TIntVector2<T, A>& v1, T s);
+    TIntVector2<T, A>& operator%= (TIntVector2<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator&= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
+    inline TIntVector2<T, A>& operator&= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator&= (TIntVector2<T, A>& v1, T s);
+    inline TIntVector2<T, A>& operator&= (TIntVector2<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator|= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
+    inline TIntVector2<T, A>& operator|= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator|= (TIntVector2<T, A>& v1, T s);
+    inline TIntVector2<T, A>& operator|= (TIntVector2<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator^= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
+    inline TIntVector2<T, A>& operator^= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator^= (TIntVector2<T, A>& v1, T s);
+    inline TIntVector2<T, A>& operator^= (TIntVector2<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator<<= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
+    inline TIntVector2<T, A>& operator<<= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator<<= (TIntVector2<T, A>& v1, T s);
+    inline TIntVector2<T, A>& operator<<= (TIntVector2<T, A>& v1, T s);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator>>= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
+    inline TIntVector2<T, A>& operator>>= (TIntVector2<T, A>& v1, const TIntVector2<T, A>& v2);
 
     template<IntType T, bool A>
-    inline TIntVector2<T, A> operator>>= (TIntVector2<T, A>& v1, T s);
+    inline TIntVector2<T, A>& operator>>= (TIntVector2<T, A>& v1, T s);
 
     /**
      * Coponentwise multiplication of 3D Vectors with scalar

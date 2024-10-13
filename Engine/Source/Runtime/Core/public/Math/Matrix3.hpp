@@ -165,7 +165,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator+= (TMatrix3<T, S>& m1, T s)
+    TMatrix3<T, S>& operator+= (TMatrix3<T, S>& m1, T s)
     {
         m1.c0 += s;
         m1.c1 += s;
@@ -182,7 +182,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator+= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
+    TMatrix3<T, S>& operator+= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
         m1.c0 += m2.c0;
         m1.c1 += m2.c1;
@@ -199,7 +199,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator-= (TMatrix3<T, S>& m1, T s)
+    TMatrix3<T, S>& operator-= (TMatrix3<T, S>& m1, T s)
     {
         m1.c0 -= s;
         m1.c1 -= s;
@@ -216,7 +216,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator-= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
+    TMatrix3<T, S>& operator-= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
         m1.c0 -= m2.c0;
         m1.c1 -= m2.c1;
@@ -233,7 +233,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator*= (TMatrix3<T, S>& m1, T s)
+    TMatrix3<T, S>& operator*= (TMatrix3<T, S>& m1, T s)
     {
         m1.c0 *= s;
         m1.c1 *= s;
@@ -250,7 +250,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator*= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2);
+    TMatrix3<T, S>& operator*= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2);
 
     /**
      * Multiply matrix with scalar
@@ -260,7 +260,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator/= (TMatrix3<T, S>& m1, T s)
+    TMatrix3<T, S>& operator/= (TMatrix3<T, S>& m1, T s)
     {
         s = (T)1.0 / s;
         m1.c0 *= s;
@@ -278,7 +278,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator/= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
+    TMatrix3<T, S>& operator/= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
         m1.c0 /= m2.c0;
         m1.c1 /= m2.c1;
