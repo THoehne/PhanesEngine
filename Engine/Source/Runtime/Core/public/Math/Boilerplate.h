@@ -28,9 +28,19 @@
     
     #define FORCEINLINE __forceinline
     
-#elif defined(P_UNIX_BUILD)
+#elif defined(P_LINUX_BUILD)
+
+    #ifdef P_DEBUG
     
-    #error Only Windows is supported at the moment.	
+        #define P_DEBUGBREAK __builtin_trap();
+
+    #else
+
+        #define P_DEBUGBREAK
+
+    #endif // P_DEBUG
+
+    #define FORCEINLINE inline __attribute__((always_inline))
     
 #elif defined(P_ARM_BUILD)
     

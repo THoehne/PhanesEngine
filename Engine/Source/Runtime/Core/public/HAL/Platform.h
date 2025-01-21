@@ -14,9 +14,9 @@
 // User defines build platform
 #ifdef P_WIN_BUILD 
 #   define P_PLATFORM P_PLATFORM_WIN
+#   error Windows system is not yet supported.
 #elif P_LINUX_BUILD
 #   define P_PLATFORM P_PLATFORM_LIN
-#   error Linux / Unix system is not yet supported.
 #elif P_MAC_BUILD
 #   define P_PLATFORM P_PLATFORM_MAC
 #   error Mac target system is not yet supported.
@@ -133,7 +133,6 @@
 // Clang
 
 #elif (defined(__clang__))
-#   error PhanesEngine only supports MSVC -> Visual Studio
 #   if defined(__apple_build_version__)
 #   
 #	    if (__clang_major__ < 6)

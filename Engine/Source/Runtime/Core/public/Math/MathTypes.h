@@ -4,7 +4,6 @@
 #   include "PhanesEnginePCH.h"
 #else
 #   define NOMINMAX
-#   include <Windows.h>
 #   include <stdint.h>
 #endif
 

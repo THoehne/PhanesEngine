@@ -1,29 +1,14 @@
 #pragma once
 
+#include "PhanesEnginePCH.h"
+
 // ============================================= //
 //   Turn os specific types into global types.   //
 // ============================================= // 
 
 
-// TODO: include int128
-
 namespace Phanes::Core::Types
 {
-
-#ifdef P_WIN_BUILD
-
-  // MSCV++ specific types
-
-  typedef FLOAT128			float128;
-
-//#elif P_UNIX_BUILD
-//
-//	// GCC specific types
-//
-//	typedef __float128			float128;
-
-#endif
-
 
   // Specific types size
   // 

@@ -113,7 +113,7 @@ namespace Phanes::Core::Math::SIMD
     /// <param name="v1"></param>
     void vec3_fix(Phanes::Core::Types::Vec4f32Reg v1)
     {
-        v1.m128_f32[3] = 0.0f;
+        v1 = _mm_and_ps(v1, _mm_castsi128_ps(_mm_set_epi32(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000)));
     }
 }
 
@@ -265,7 +265,7 @@ namespace Phanes::Core::Math::Detail
         static FORCEINLINE float map(const Phanes::Core::Math::TVector4<float, true>& v1)
         {
             __m128 tmp = _mm_mul_ps(v1.data, v1.data);
-            return sqrt(tmp.m128_f32[0] + tmp.m128_f32[1] + tmp.m128_f32[2] + tmp.m128_f32[3]);
+            return _mm_cvtss_f32(_mm_sqrt_ps(SIMD::vec4_hadd(tmp)));
         }
     };
 
@@ -515,7 +515,7 @@ namespace Phanes::Core::Math::Detail
         static FORCEINLINE double map(const Phanes::Core::Math::TVector2<double, true>& v1)
         {
             __m128d tmp = _mm_mul_pd(v1.data, v1.data);
-            return sqrt(tmp.m128d_f64[0] + tmp.m128d_f64[1]);
+            return _mm_cvtsd_f64(_mm_sqrt_pd(_mm_hadd_pd(tmp, tmp)));
         }
     };
 
@@ -526,7 +526,7 @@ namespace Phanes::Core::Math::Detail
         static FORCEINLINE double map(const Phanes::Core::Math::TVector2<double, true>& v1)
         {
             __m128d tmp = _mm_mul_pd(v1.data, v1.data);
-            return tmp.m128d_f64[0] + tmp.m128d_f64[1];
+            return _mm_cvtsd_f64(_mm_hadd_pd(tmp, tmp));
         }
     };
 
@@ -657,7 +657,7 @@ namespace Phanes::Core::Math::Detail
 
         static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& v1, const int* comp)
         {
-            v1.comp = _mm_loadu_epi32(comp);
+            v1.comp = _mm_set_epi32(comp[3], comp[2], comp[1], comp[0]);
         }
 
         static FORCEINLINE void map(Phanes::Core::Math::TIntVector4<int, true>& r, const Phanes::Core::Math::TIntVector2<int, true>& v1, const Phanes::Core::Math::TIntVector2<int, true>& v2)
@@ -875,7 +875,7 @@ namespace Phanes::Core::Math::Detail
 
         static FORCEINLINE void map(Phanes::Core::Math::TIntVector2<Phanes::Core::Types::int64, true>& v1, const Phanes::Core::Types::int64* comp)
         {
-            v1.comp = _mm_loadu_epi64(comp);
+            v1.comp = _mm_set_epi64x(comp[1], comp[0]);
         }
     };
 
