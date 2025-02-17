@@ -23,7 +23,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TMatrix4<T, S> TransposeV(TMatrix4<T, S>& a)
+    TMatrix4<T, S>& TransposeV(TMatrix4<T, S>& a)
     {
         Detail::compute_mat4_transpose<T, S>::map(a, a);
         return a;
@@ -44,7 +44,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TMatrix4<T, S> operator*= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
+    TMatrix4<T, S>& operator*= (TMatrix4<T, S>& m1, const TMatrix4<T, S>& m2)
     {
         TMatrix4<T, S> r;
         Detail::compute_mat4_mul<T, S>::map(r, m1, m2);

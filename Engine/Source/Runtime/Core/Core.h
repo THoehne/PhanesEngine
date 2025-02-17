@@ -26,9 +26,17 @@
 
 	#define FORCEINLINE __forceinline
 
-#elif defined(P_UNIX_BUILD)
+#elif defined(P_LINUX_BUILD)
 
-	#error Only Windows is supported at the moment.	
+	#ifdef P_DEBUG
+	
+		#define P_DEBUGBREAK __builtin_trap();
+
+	#else
+
+		#define P_DEBUGBREAK
+
+	#endif
 
 #elif defined(P_ARM_BUILD)
 	
@@ -43,7 +51,6 @@
 
 namespace Phanes
 {
-
 	// Alias for shared_ptr
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
@@ -65,5 +72,4 @@ namespace Phanes
 	{
 		return std::make_unique<T>(std::forward<Args>(args)...);
 	}
-
 }

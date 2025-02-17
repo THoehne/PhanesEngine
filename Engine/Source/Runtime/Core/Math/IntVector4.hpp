@@ -471,7 +471,7 @@ namespace Phanes::Core::Math {
     /// <summary>
     /// Gets componentwise max of both vectors.
     /// </summary>
-    /// <typeparam name="T">Type of vector</typeparam>
+    /// <typeparam name="T">Type of vector</typeparam>				 * @note z does not hold the component, but is a reference two the second item in the components array. The varibale exists wholly for convenience.
     /// <typeparam name="A">Vector is aligned?</typeparam>
     /// <param name="v1">Vector one</param>
     /// <param name="v2">Vector two</param>

@@ -1,22 +1,18 @@
 #pragma once
 
 
-#include "PhanesEnginePCH.h"
+#include "Core/Logging/LoggingPCH.h"
 #include "Core/Core.h"
-
-#ifndef P_DEBUG
-#pragma warning(disable : 4251) // Disable STL dll export warning
-#endif
 
 namespace Phanes::Core::Logging
 {
-	static std::shared_ptr<spdlog::logger> _PEngineLogger;
-	static std::shared_ptr<spdlog::logger> _PAppLogger;
+	static Phanes::Ref<spdlog::logger> _PEngineLogger;
+	static Phanes::Ref<spdlog::logger> _PAppLogger;
 
-	PHANES_CORE void Init();
+	void Init();
 
-	PHANES_CORE inline std::shared_ptr<spdlog::logger>& PEngineLogger() { return _PEngineLogger; };
-	PHANES_CORE inline std::shared_ptr<spdlog::logger>& PAppLogger() { return _PAppLogger; };
+	inline std::shared_ptr<spdlog::logger>& PEngineLogger() { return _PEngineLogger; };
+	inline std::shared_ptr<spdlog::logger>& PAppLogger() { return _PAppLogger; };
 }
 
 

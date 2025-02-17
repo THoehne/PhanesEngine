@@ -1,12 +1,13 @@
 #pragma once
 
+#include "StartingPointPCH.h"
 #include "Core/Core.h"
 
 // Entrypoint class for any Phanes game. 
 
 namespace Phanes::Core::Application
 {
-  class PHANES_CORE PhanesProject
+  class PhanesProject
   {
     
   private:
@@ -27,7 +28,7 @@ namespace Phanes::Core::Application
      * Getter for project name;
      */
 
-    FORCEINLINE std::string GetName();
+    std::string GetName();
 
   };
 

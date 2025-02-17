@@ -1,6 +1,4 @@
-#include "PhanesEnginePCH.h"
-
-#include "Core/public/Logging/Logging.h"
+#include "Core/Logging/Logging.h"
 
 void Phanes::Core::Logging::Init()
 {

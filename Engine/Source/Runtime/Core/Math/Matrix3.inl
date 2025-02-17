@@ -10,7 +10,7 @@
 namespace Phanes::Core::Math
 {
     template<RealType T, bool S>
-    TMatrix3<T, S> TransposeV(TMatrix3<T, S>& m)
+    TMatrix3<T, S>& TransposeV(TMatrix3<T, S>& m)
     {
         Detail::compute_mat3_transpose<T, S>::map(m, m);
         return m;
@@ -26,7 +26,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TMatrix3<T, S> operator*= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
+    TMatrix3<T, S>& operator*= (TMatrix3<T, S>& m1, const TMatrix3<T, S>& m2)
     {
         TMatrix3<T, S> r;
         Detail::compute_mat3_mul<T, S>::map(r, m1, m2);

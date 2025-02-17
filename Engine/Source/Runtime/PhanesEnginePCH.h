@@ -24,12 +24,3 @@
 #       include <windows.h>
 #
 #   endif
-#
-#
-#
-#   // spdlog
-#   include <spdlog/sinks/stdout_color_sinks.h>
-#   include <spdlog/spdlog.h>
-#
-#   // Local PCH
-#   include "Core/public/Math/MathPCH.h"

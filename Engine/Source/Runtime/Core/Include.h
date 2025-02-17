@@ -2,16 +2,11 @@
 
 // --- Logging -------------------------------------
 
-#include "Core/public/Logging/Logging.h"
+#include "Core/Logging/Logging.h"
 
 // --- Starting point ------------------------------
-#include "Core/public/StartingPoint/StartingPoint.h"
-#include "Core/public/StartingPoint/EntryPoint.h"
-
-
-// --- OSAL ----------------------------------------
-
-#include "Core/public/HAL/PlatformTypes.h"
+#include "Core/StartingPoint/StartingPoint.h"
+#include "Core/StartingPoint/EntryPoint.h"
 
 
 #ifdef P_USE_NAMESPACE_ALIAS

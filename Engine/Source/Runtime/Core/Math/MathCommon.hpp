@@ -4,11 +4,11 @@
 #define P_FLT_INAC				0.00001f					// float inaccuracy (1*10^-5);
 #define P_FLT_INAC_SMALL		0.000001f					// small float inaccuracy (1*10^-6);
 
-#define P_180_PI				57.29577951308232			// (double) 180°/pi;
-#define P_180_PI_FLT			57.29577951308232f			// (float) 180°/pi;
+#define P_180_PI				57.29577951308232			// (double) 180ï¿½/pi;
+#define P_180_PI_FLT			57.29577951308232f			// (float) 180ï¿½/pi;
 
-#define P_PI_180				0.0174532925199432			// double pi/180°
-#define P_PI_180_FLT			0.0174532925199432f			// (float) pi/180°
+#define P_PI_180				0.0174532925199432			// double pi/180ï¿½
+#define P_PI_180_FLT			0.0174532925199432f			// (float) pi/180ï¿½
 
 #define P_PI					3.1415926535897932			// PI 
 #define P_PI_FLT				3.1415926535897932f			// PI 
@@ -48,7 +48,7 @@ namespace Phanes::Core::Math {
      */
 
     template<typename T>
-    inline T Max(T x, T y)
+    constexpr T Max(T x, T y)
     {
         return (x > y) ? x : y;
     }
@@ -64,7 +64,7 @@ namespace Phanes::Core::Math {
      */
 
     template<typename T>
-    inline T Min(T x, T y)
+    constexpr T Min(T x, T y)
     {
         return (x < y) ? x : y;
     }
