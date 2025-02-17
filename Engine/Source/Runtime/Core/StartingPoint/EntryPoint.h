@@ -7,14 +7,11 @@ extern Phanes::Core::Application::PhanesProject* Phanes::Core::Application::Crea
 
 int main(int argc, char** argv)
 {
-  Phanes::Core::Logging::Init();
+  Phanes::Core::Logging::Logger::Init();
   PENGINE_LOG_INFO("Logger initialized!");
   PENGINE_LOG_INFO("Welcome to PhanesEngine!");
 
-
   auto phanes_game = Phanes::Core::Application::CreatePhanesGame();
-  
-  PENGINE_LOG_INFO("Loading project {0}...", phanes_game->GetName());
 
   phanes_game->Run();
 

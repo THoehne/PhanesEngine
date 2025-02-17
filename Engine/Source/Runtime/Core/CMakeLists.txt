@@ -22,5 +22,8 @@ ${StartingPointPCH}
 add_compile_definitions(P_LINUX_BUILD)
 add_compile_definitions(P_DEBUG)
 
+# fmt for spdlog. It uses the external module which needs to be linked manually
+find_package(fmt)
+target_link_libraries(PhanesCore fmt::fmt)
 
 target_include_directories(PhanesCore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)

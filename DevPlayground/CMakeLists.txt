@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.15...3.30)
 
 project(DevPlayground)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++") 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++")  
-
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Engine/Source/Runtime ${CMAKE_BINARY_DIR}/Engine)
 
 

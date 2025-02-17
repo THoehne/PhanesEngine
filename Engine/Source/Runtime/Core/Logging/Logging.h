@@ -6,13 +6,19 @@
 
 namespace Phanes::Core::Logging
 {
-	static Phanes::Ref<spdlog::logger> _PEngineLogger;
-	static Phanes::Ref<spdlog::logger> _PAppLogger;
+	class Logger {
 
-	void Init();
+	public:
 
-	inline std::shared_ptr<spdlog::logger>& PEngineLogger() { return _PEngineLogger; };
-	inline std::shared_ptr<spdlog::logger>& PAppLogger() { return _PAppLogger; };
+		static void Init();
+
+		static std::shared_ptr<spdlog::logger>& PEngineLogger() { return _PEngineLogger; }
+		static std::shared_ptr<spdlog::logger>& PAppLogger() { return _PAppLogger; }
+	
+	private:
+		static std::shared_ptr<spdlog::logger> _PEngineLogger;
+		static std::shared_ptr<spdlog::logger> _PAppLogger;
+	};
 }
 
 
@@ -22,18 +28,18 @@ namespace PLog = Phanes::Core::Logging; // User Macros
 
 // Default logger
 
-#define PENGINE_LOG_TRACE(...)			::Phanes::Core::Logging::PEngineLogger()->trace(__VA_ARGS__)
-#define PENGINE_LOG_INFO(...)			::Phanes::Core::Logging::PEngineLogger()->info(__VA_ARGS__)
-#define PENGINE_LOG_WARN(...)			::Phanes::Core::Logging::PEngineLogger()->warn(__VA_ARGS__)
-#define PENGINE_LOG_ERROR(...)			::Phanes::Core::Logging::PEngineLogger()->error(__VA_ARGS__)
-#define PENGINE_LOG_FATAL(...)			::Phanes::Core::Logging::PEngineLogger()->critical(__VA_ARGS__)
+#define PENGINE_LOG_TRACE(...)			::Phanes::Core::Logging::Logger::PEngineLogger()->trace(__VA_ARGS__)
+#define PENGINE_LOG_INFO(...)			::Phanes::Core::Logging::Logger::PEngineLogger()->info(__VA_ARGS__)
+#define PENGINE_LOG_WARN(...)			::Phanes::Core::Logging::Logger::PEngineLogger()->warn(__VA_ARGS__)
+#define PENGINE_LOG_ERROR(...)			::Phanes::Core::Logging::Logger::PEngineLogger()->error(__VA_ARGS__)
+#define PENGINE_LOG_FATAL(...)			::Phanes::Core::Logging::Logger::PEngineLogger()->critical(__VA_ARGS__)
 
 
-#define PAPP_LOG_TRACE(...)				::Phanes::Core::Logging::PAppLogger()->trace(__VA_ARGS__)
-#define PAPP_LOG_INFO(...)				::Phanes::Core::Logging::PAppLogger()->info(__VA_ARGS__)
-#define PAPP_LOG_WARN(...)				::Phanes::Core::Logging::PAppLogger()->warn(__VA_ARGS__)
-#define PAPP_LOG_ERROR(...)				::Phanes::Core::Logging::PAppLogger()->error(__VA_ARGS__)
-#define PAPP_LOG_FATAL(...)				::Phanes::Core::Logging::PAppLogger()->critical(__VA_ARGS__)
+#define PAPP_LOG_TRACE(...)				::Phanes::Core::Logging::Logger::PAppLogger()->trace(__VA_ARGS__)
+#define PAPP_LOG_INFO(...)				::Phanes::Core::Logging::Logger::PAppLogger()->info(__VA_ARGS__)
+#define PAPP_LOG_WARN(...)				::Phanes::Core::Logging::Logger::PAppLogger()->warn(__VA_ARGS__)
+#define PAPP_LOG_ERROR(...)				::Phanes::Core::Logging::Logger::PAppLogger()->error(__VA_ARGS__)
+#define PAPP_LOG_FATAL(...)				::Phanes::Core::Logging::Logger::PAppLogger()->critical(__VA_ARGS__)
 
 #else 
 

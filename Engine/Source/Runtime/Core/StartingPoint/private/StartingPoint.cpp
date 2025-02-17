@@ -1,24 +1,25 @@
 #include "Core/StartingPoint/StartingPoint.h"
+#include "Core/Logging/Logging.h"
 
 static void IdleMsg()
 {
-    std::cout << "\n\nWelcome to PhanesEngine!" << std::endl << std::endl;
+    std::cout << "\nWelcome to PhanesEngine!\n";
     
     std::this_thread::sleep_for(std::chrono::seconds(5));
     
-    std::cout << "It's silent..." << std::endl << std::endl;
+    std::cout << "It's silent...\n";
     
     std::this_thread::sleep_for(std::chrono::seconds(3));
     
-    std::cout << "To silent." << std::endl;
+    std::cout << "To silent.\n";
     
     std::this_thread::sleep_for(std::chrono::seconds(5));
     
-    std::cout << "\nI will go now" << std::endl;
+    std::cout << "I will go now\n";
     
     std::this_thread::sleep_for(std::chrono::seconds(4));
     
-    std::cout << "\nGood by!" << std::endl;
+    std::cout << "Good by!\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
 }
 
@@ -27,11 +28,13 @@ static void IdleMsg()
 
 Phanes::Core::Application::PhanesProject::PhanesProject(std::string _ProjectName)
     : projectName(_ProjectName)
-{};
+{
+    PAPP_LOG_INFO("Loading project: {0}", this->GetName());    
+};
 
 Phanes::Core::Application::PhanesProject::~PhanesProject()
 {
-    this->projectName = "Unnamed Project";
+    PAPP_LOG_INFO("Unloading project: {0}", this->GetName());
 };
 
 std::string Phanes::Core::Application::PhanesProject::GetName()

@@ -1,6 +1,13 @@
 #include "Core/Logging/Logging.h"
 
-void Phanes::Core::Logging::Init()
+namespace Phanes::Core::Logging
+{
+  std::shared_ptr<spdlog::logger> Logger::_PEngineLogger;
+  std::shared_ptr<spdlog::logger> Logger::_PAppLogger;
+} // namespace Phanes::Core::Logging
+
+
+void Phanes::Core::Logging::Logger::Init()
 {
   spdlog::set_pattern("%^[%n][%T][%l]:%$ %v");
 
