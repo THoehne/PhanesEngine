@@ -1,3 +1,6 @@
 [submodule "Engine/Source/ThirdParty/spdlog"]
 	path = Engine/Source/ThirdParty/spdlog
 	url = git@github.com:gabime/spdlog.git
+[submodule "Engine/Source/ThirdParty/googletest"]
+	path = Engine/Source/ThirdParty/googletest
+	url = https://github.com/google/googletest.git
