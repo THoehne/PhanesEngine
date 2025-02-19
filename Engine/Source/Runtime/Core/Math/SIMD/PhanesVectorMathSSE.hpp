@@ -26,6 +26,9 @@
 //   Common   //
 // ========== //
 
+#ifndef PHANES_VECTOR_MATH_SSE_HPP
+#define PHANES_VECTOR_MATH_SSE_HPP
+
 namespace Phanes::Core::Math::SIMD
 {
     Phanes::Core::Types::Vec4f32Reg vec4_cross_p(const Phanes::Core::Types::Vec4f32Reg v1, const Phanes::Core::Types::Vec4f32Reg v2)
@@ -48,10 +51,10 @@ namespace Phanes::Core::Math::SIMD
     /// <returns>Sum stored in v[0:31].</returns>
     Phanes::Core::Types::Vec4f32Reg vec4_hadd(const Phanes::Core::Types::Vec4f32Reg v)
     {
-        __m128 shufl = _mm_movehdup_ps(v);
-        __m128 sum = _mm_add_ps(v, shufl);
-        shufl = _mm_movehl_ps(sum, sum);
-        return _mm_add_ss(sum, shufl);
+        __m128 t = _mm_shuffle_ps(v, v, _MM_SHUFFLE(2, 3, 0, 1));
+        t = _mm_add_ps(t, v);
+        t = _mm_shuffle_ps(t, t, _MM_SHUFFLE(1, 0, 3, 2));
+        return _mm_add_ps(t, v);
     }
 
     /// <summary>
@@ -61,12 +64,11 @@ namespace Phanes::Core::Math::SIMD
     /// <returns>Sum of components.</returns>
     float vec4_hadd_cvtf32(const Phanes::Core::Types::Vec4f32Reg v)
     {
-        __m128 shufl = _mm_movehdup_ps(v);
-        __m128 sum = _mm_add_ps(v, shufl);
-        shufl = _mm_movehl_ps(sum, sum);
-        sum = _mm_add_ss(sum, shufl);
-
-        return _mm_cvtss_f32(sum);
+        __m128 t = _mm_shuffle_ps(v, v, _MM_SHUFFLE(2, 3, 0, 1));
+        t = _mm_add_ps(t, v);
+        t = _mm_shuffle_ps(t, t, _MM_SHUFFLE(1, 0, 3, 2));
+        t = _mm_add_ps(t, v);
+        return _mm_cvtss_f32(t); 
     }
 
     /// <summary>
@@ -586,12 +588,7 @@ namespace Phanes::Core::Math::Detail
             pl.comp.data = _mm_set_ps(x, y, z, d);
         }
 
-        static FORCEINLINE void map(Phanes::Core::Math::TPlane<float, true>& pl, const TVector3<float, true>& v1, const TVector3<float, true>& v2, const TVector3<float, true>& v3)
-        {
-            TVector4<float, false> tmp;
-            
-        }
-        
+        // TODO: Create SSE constructor with 3 Points
                 
     };
 
@@ -1281,7 +1278,7 @@ namespace Phanes::Core::Math::Detail
 
 
     template<>
-    struct compute_mat4_inv<float, false>
+    struct compute_mat4_inv<float, true>
     {
         // From: GLM: https://github.com/g-truc/glm/blob/master/glm/simd/matrix.h (MIT License)
         static FORCEINLINE bool map(Phanes::Core::Math::TMatrix4<float, true>& r, const Phanes::Core::Math::TMatrix4<float, true>& m1)
@@ -1503,6 +1500,10 @@ namespace Phanes::Core::Math::Detail
             r.c1.data = _mm_mul_ps(Inv1, Rcp0);
             r.c2.data = _mm_mul_ps(Inv2, Rcp0);
             r.c3.data = _mm_mul_ps(Inv3, Rcp0);
+
+            return true;
         }
     };
 }
+
+#endif
