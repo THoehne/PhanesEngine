@@ -38,7 +38,7 @@
 
 	#endif
 
-	#define FORCEINLINE __attribute__((always_inline))
+	#define FORCEINLINE inline
 
 #elif defined(P_ARM_BUILD)
 	

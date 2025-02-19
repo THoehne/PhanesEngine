@@ -9,11 +9,6 @@
 #include "Core/Math/IntVector2.hpp"
 #include "Core/Math/IntVector3.hpp"
 #include "Core/Math/IntVector4.hpp"
-
-#ifndef P_DEBUG
-#pragma warning(disable : 4244)
-#endif
-
 /** 
  * General annonation: The Point is the same as a vector. The type exists, to ensure a
  * easy differentiation between the two.

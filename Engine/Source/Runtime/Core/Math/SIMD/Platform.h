@@ -207,7 +207,6 @@
 
 // G++
 #elif defined(__GNUC__) || defined(__MINGW32__)
-#   error PhanesEngine only supports MSVC -> Visual Studio
 #   if __GNUC__ >= 14
 #		define P_COMPILER P_COMPILER_GCC14
 #	elif __GNUC__ >= 13
@@ -311,7 +310,6 @@
 #   define P_INTRINSICS P_INTRINSICS_FPU
 #   define P_AVX2__ 0
 #   define P_AVX__ 0
-#   define P_SSE__ 0
 #   define P_SSE__ 0
 #else
 #   if (P_AVX__ == 1) && (P_AVX2__ == 0)

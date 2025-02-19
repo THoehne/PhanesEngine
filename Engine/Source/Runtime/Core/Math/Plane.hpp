@@ -624,7 +624,7 @@ namespace Phanes::Core::Math {
     TPlane<T, false> TranslateV(TPlane<T, false>& pl1, const TVector3<T, false>& v1)
     {
         
-        pl1.d = DotP(this->normal, GetOrigin(pl1) + v1);
+        pl1.d = DotP(pl1.normal, GetOrigin(pl1) + v1);
 
         return pl1;
     }

@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef P_DEBUG
-#pragma warning(disable : 4244)
-#endif
-
 #include "Core/Math/MathFwd.h"
 
 

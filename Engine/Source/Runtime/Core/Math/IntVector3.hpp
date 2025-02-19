@@ -9,11 +9,6 @@
 
 #include "Core/Math/IntVector4.hpp"
 
-#ifndef P_DEBUG
-#pragma warning(disable : 4244)
-#endif
-
-
 #ifndef INTVECTOR3_H
 #define INTVECTOR3_H
 

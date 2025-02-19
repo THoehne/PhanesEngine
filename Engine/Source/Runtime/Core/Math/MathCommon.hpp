@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Core/Math/MathPCH.h"
+
 #define P_FLT_INAC_LARGE		0.0001f						// large float inaccuracy (1*10^-4);
 #define P_FLT_INAC				0.00001f					// float inaccuracy (1*10^-5);
 #define P_FLT_INAC_SMALL		0.000001f					// small float inaccuracy (1*10^-6);
@@ -129,6 +131,12 @@ namespace Phanes::Core::Math {
     inline T Abs(T s)
     {
         return abs(s);
+    }
+
+    template<typename T>
+    inline T Sqrt(T s)
+    {
+        return sqrt(s);
     }
 
 

@@ -123,7 +123,7 @@ namespace Phanes::Core::Math {
 		}
 		FORCEINLINE TVector4<T, S>& operator[] (int m)
 		{
-			return (*reinterpret_cast<TVector4<T, S>*>(this->m[m]));
+			return (*reinterpret_cast<TVector4<T, S>*>(this->data[m]));
 		}
 
 		FORCEINLINE const T& operator() (int n, int m) const

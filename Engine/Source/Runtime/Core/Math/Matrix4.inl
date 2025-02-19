@@ -7,6 +7,8 @@
 
 #include "Core/Math/SIMD/PhanesSIMDTypes.h"
 
+#include <iostream>
+
 
 namespace Phanes::Core::Math
 {

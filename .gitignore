@@ -1,28 +1,14 @@
 # Exclude folders
 bin/
-bin-int/
+int/
 external/
 
 # Frequently edited tests
 Tests/TestProject/
 
-# CMake Build Files
-CMakeLists.txt.user
-CMakeCache.txt
-CMakeFiles/
-CMakeScripts/
-Testing/
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-_deps/
-CMakeUserPresets.json
+# Premake Build Files
 build/
-
-
-# Exclude files
+Makefile
 
 # C++
 # Prerequisites

@@ -46,6 +46,7 @@ namespace Phanes::Core::Math::Detail
     {
         static constexpr bool map(Phanes::Core::Math::TMatrix4<T, false>& r, const Phanes::Core::Math::TMatrix4<T, false>& m)
         {
+
             const TVector3<T, false>& a = reinterpret_cast<const TVector3<T, false>&>(m[0]);
             const TVector3<T, false>& b = reinterpret_cast<const TVector3<T, false>&>(m[1]);
             const TVector3<T, false>& c = reinterpret_cast<const TVector3<T, false>&>(m[2]);

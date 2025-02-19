@@ -7,21 +7,15 @@
 
 #include "Core/Math/SIMD/Storage.h"
 
-#ifndef P_DEBUG
-#pragma warning(disable : 4244)
-#endif
-
-#pragma warning(disable: 4661)
-
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
 
-#define PZeroVector2(type, aligned)		Phanes::Core::Math::TVector2<##type, ##aligned>(0,0)
-#define PVectorSouth2(type, aligned)	Phanes::Core::Math::TVector2<##type, ##aligned>(0,-1)
-#define PVectorNorth2(type, aligned)	Phanes::Core::Math::TVector2<##type, ##aligned>(0,1)
-#define PVectorEast2(type, aligned)		Phanes::Core::Math::TVector2<##type, ##aligned>(1,0)
-#define PVectorWest2(type, aligned)		Phanes::Core::Math::TVector2<##type, ##aligned>(-1,0)
+#define PZeroVector2(type, aligned)		Phanes::Core::Math::TVector2<type, aligned>(0,0)
+#define PVectorSouth2(type, aligned)	Phanes::Core::Math::TVector2<type, aligned>(0,-1)
+#define PVectorNorth2(type, aligned)	Phanes::Core::Math::TVector2<type, aligned>(0,1)
+#define PVectorEast2(type, aligned)		Phanes::Core::Math::TVector2<type, aligned>(1,0)
+#define PVectorWest2(type, aligned)		Phanes::Core::Math::TVector2<type, aligned>(-1,0)
 
 namespace Phanes::Core::Math {
 
@@ -464,6 +458,12 @@ namespace Phanes::Core::Math {
         v1.y = (v1.y >= (T)0.0) ? (T)1.0 : -(T)1.0;
 
         return v1;
+    }
+
+    template<RealType T, bool S>
+    T Distance(const TVector2<T, S>& v1, const TVector2<T, S>& v2)
+    {
+        return Magnitude(v2 - v1);
     }
 
     /**

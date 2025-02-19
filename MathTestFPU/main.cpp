@@ -1,12 +1,21 @@
 #include <iostream>
-
 #include "Core/Math/Include.h"
 
-int main(int argc, char **argv)  {
-    Phanes::Core::Math::Vector3 v1(1.0f, 2.0f, 3.0f);
-    Phanes::Core::Math::Vector3 v2(1.0f, 2.0f, 3.0f);
+namespace PMath = Phanes::Core::Math;
 
-    Phanes::Core::Math::Vector3 v3 = v1 + v2;
+int main() 
+{
+    PMath::Matrix4 m0 = PMath::Matrix4(1.0f, 5.0f, 3.0f, 4.0f,
+                                           2.0f, 6.0f, 4.0f, 1.0f,
+                                           2.0f, -3.0f, 5.0f, 3.0f,
+                                           8.0f, -4.0f, 6.0f, -2.0f);
 
-    std::cout << "v3: " << Phanes::Core::Math::ToString(v3) << std::endl;
+
+    PMath::Matrix4 m2;
+
+    std::cout << std::to_string(PMath::InverseV<float, false>(m0)) << std::endl;
+
+    std::cout << PMath::ToString(m0) << std::endl;
+
+    return 0;
 }

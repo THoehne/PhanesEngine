@@ -7,10 +7,6 @@
 
 #include "Core/Math/SIMD/Storage.h"
 
-#ifndef P_DEBUG
-#pragma warning(disable : 4244)
-#endif
-
 /**
  * Note: Some function are deleted, because, their unusable with int types, except very specific cases. 
  * To keep the library verbose, these functions are explicitly marked as deleted.

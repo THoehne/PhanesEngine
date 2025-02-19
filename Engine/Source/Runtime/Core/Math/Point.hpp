@@ -9,10 +9,6 @@
 #include "Core/Math/Vector2.hpp"
 #include "Core/Math/Vector3.hpp"
 
-#ifndef P_DEBUG
-#pragma warning(disable : 4244)
-#endif
-
 /**
  * The Point is the same as a vector. The type exists, to ensure
  * differentiation between the two types.
@@ -44,6 +40,14 @@ namespace Phanes::Core::Math {
     {
       this->x = p.x;
       this->y = p.y;
+    }
+
+    /// @brief Creates Point2 from Vector2
+    /// @param v
+    TPoint2(const TVector2<T, false>& v)
+    {
+      this->x = v.x;
+      this->y = v.y;
     }
 
     /**
@@ -100,6 +104,15 @@ namespace Phanes::Core::Math {
       this->x = p.x;
       this->y = p.y;
       this->z = 0;
+    }
+
+    /// @brief Creates Point3 from Vector3
+    /// @param v 
+    TPoint3(const TVector3<T, false>& v)
+    {
+      this->x = v.x;
+      this->y = v.y;
+      this->z = v.z;
     }
 
     /**
@@ -171,7 +184,16 @@ namespace Phanes::Core::Math {
     		this->z = p.z;
     		this->w = 0;
     	}
+      
+      TPoint4(const TVector4<T, false>& v)
+      {
+          this->x = v.x;
+          this->y = v.y;
+          this->z = v.z;
+          this->w = v.w;
+      }
     };
+
 
     /**
      * Calculates distance between two points.

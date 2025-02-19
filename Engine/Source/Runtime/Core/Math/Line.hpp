@@ -47,8 +47,6 @@ namespace Phanes::Core::Math
     template<RealType T>
     TLine<T>& NormalizeV(TLine<T>& l1)
     {
-        std::any
-
         NormalizeV(l1.direction);
         return l1;
     }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Math/Boilerplate.h"
+#include "Core/Math/MathCommon.hpp"
 
 namespace Phanes::Core::Math::Detail
 {
@@ -259,7 +260,7 @@ namespace Phanes::Core::Math::Detail
     {
         static constexpr T map(const Phanes::Core::Math::TVector3<T, false>& v1)
         {
-            return sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
+            return Phanes::Core::Math::Sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
         }
     };
 

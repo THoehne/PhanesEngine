@@ -1,11 +1,6 @@
 #pragma once
 
-#ifdef P_BUILD_LIB
-#   include "PhanesEnginePCH.h"
-#else
-#   define NOMINMAX
-#   include <stdint.h>
-#endif
+#include "Core/Math/MathPCH.h"
 
 // ============================================= //
 //   Turn os specific types into global types.   //
@@ -22,6 +17,12 @@ namespace Phanes::Core::Types
     // MSVC specific types
 
     typedef _FLOAT128			float128;
+
+#elif defined(P_LINUX_BUILD)
+
+    // Linux specific types
+
+    typedef __float128			float128;
 
 #endif
 

@@ -10,7 +10,9 @@
 #include "Core/Math/Vector2.hpp"
 #include "Core/Math/Vector3.hpp"
 
-#define PZeroVector4(type, aligned)			Phanes::Core::Math::TVector4<##type, ##aligned>(0,0,0,0)
+
+
+#define PZeroVector4(type, aligned)			Phanes::Core::Math::TVector4<type, aligned>(0,0,0,0)
 
 namespace Phanes::Core::Math
 {
@@ -741,6 +743,12 @@ namespace Phanes::Core::Math
         return v1;
     }
 
+    template<RealType T, bool S>
+    T Distance(const TVector4<T, S>& v1, const TVector4<T, S>& v2)
+    {
+        return Magnitude(v1 - v2);
+    }
+
     /// <summary>
     /// Project vector v1 onto v2.
     /// </summary>
@@ -862,6 +870,5 @@ namespace Phanes::Core::Math
         return (DotP(v1, v2) > threshold);
     }
 }
-
 
 #include "Core/Math/Vector4.inl"

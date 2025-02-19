@@ -11,20 +11,16 @@
 
 #include "Core/Math/Vector4.hpp"
 
-#ifndef P_DEBUG
-#pragma warning(disable : 4244)
-#endif
-
 #ifndef VECTOR3_H
 #define VECTOR3_H
 
-#define PZeroVector3(type, aligned)			Phanes::Core::Math::TVector3<##type, ##aligned>(0,0,0)
-#define PVectorForward3(type, aligned)		Phanes::Core::Math::TVector3<##type, ##aligned>(1,0,0)
-#define PVectorBackward3(type, aligned)		Phanes::Core::Math::TVector3<##type, ##aligned>(-1,0,0)
-#define PVectorEast3(type, aligned)			Phanes::Core::Math::TVector3<##type, ##aligned>(0,1,0)
-#define PVectorWest3(type, aligned)			Phanes::Core::Math::TVector3<##type, ##aligned>(0,-1,0)
-#define PVectorUp3(type, aligned)			Phanes::Core::Math::TVector3<##type, ##aligned>(0,0,1)
-#define PVectorDown3(type, aligned)			Phanes::Core::Math::TVector3<##type, ##aligned>(0,0,-1)
+#define PZeroVector3(type, aligned)			Phanes::Core::Math::TVector3<type, aligned>(0,0,0)
+#define PVectorForward3(type, aligned)		Phanes::Core::Math::TVector3<type, aligned>(1,0,0)
+#define PVectorBackward3(type, aligned)		Phanes::Core::Math::TVector3<type, aligned>(-1,0,0)
+#define PVectorEast3(type, aligned)			Phanes::Core::Math::TVector3<type, aligned>(0,1,0)
+#define PVectorWest3(type, aligned)			Phanes::Core::Math::TVector3<type, aligned>(0,-1,0)
+#define PVectorUp3(type, aligned)			Phanes::Core::Math::TVector3<type, aligned>(0,0,1)
+#define PVectorDown3(type, aligned)			Phanes::Core::Math::TVector3<type, aligned>(0,0,-1)
 
 namespace Phanes::Core::Math {
 
@@ -411,6 +407,46 @@ namespace Phanes::Core::Math {
         v1 = ((T)2.0 * DotP(v1, normal) * normal) - v1;
 
         return v1;
+    }
+
+
+    /**
+     * Refracts a vector
+     *
+     * @param(v1) Vector one
+     * @param(normal) Normal of surface
+     * @param(eta) Refraction index
+     */
+    template<RealType T, bool S>
+    TVector3<T, S>& RefractV(TVector3<T, S>& v1, const TVector3<T, S>& normal, T eta)
+    {
+        T dot = DotP(v1, normal);
+        T k = 1.0f - eta * eta * (1.0f - dot * dot);
+
+        if (k < 0.0f)
+        {
+            v1 = PZeroVector3(T, false);
+        }
+        else
+        {
+            v1 = eta * v1 - (eta * dot + sqrt(k)) * normal;
+        }
+
+        return v1;
+    }
+
+    /**
+     * Gets distance between two vectors
+     *
+     * @param(v1) Vector one
+     * @param(v2) Vector two
+     *
+     * @return Distance between vectors
+     */
+    template<RealType T, bool S>
+    T Distance(const TVector3<T, S>& v1, const TVector3<T, S>& v2)
+    {
+        return Magnitude(v2 - v1);
     }
 
     /**
@@ -918,6 +954,31 @@ namespace Phanes::Core::Math {
     TVector3<T, S> Reflect(const TVector3<T, S>& v1, const TVector3<T, S>& normal)
     {
         return (2 * DotP(v1, normal) * normal) - v1;
+    }
+
+    /**
+     * Refracts a vector
+     * 
+     * @param (v1) Vector one
+     * @param (normal) Normal of surface
+     * @param (eta) Refraction index
+     * 
+     * @return Refracted vector
+     */
+    template<RealType T, bool S>
+    TVector3<T, S> Refract(const TVector3<T, S>& v1, const TVector3<T, S>& normal, T eta)
+    {
+        T dot = DotP(v1, normal);
+        T k = 1.0f - eta * eta * (1.0f - dot * dot);
+
+        if (k < 0.0f)
+        {
+            return PZeroVector3(T, false);
+        }
+        else
+        {
+            return eta * v1 - (eta * dot + sqrt(k)) * normal;
+        }
     }
 
 

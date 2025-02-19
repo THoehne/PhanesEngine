@@ -5,7 +5,6 @@
 #include "Core/Math/Detail/Vector4Decl.inl"
 #include "Core/Math/SIMD/SIMDIntrinsics.h"
 
-
 #include "Core/Math/SIMD/PhanesSIMDTypes.h"
 
 namespace Phanes::Core::Math

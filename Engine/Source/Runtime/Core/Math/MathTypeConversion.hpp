@@ -6,13 +6,9 @@
 //	 @ref [FILE]MathUnitConversion				 //
 // ============================================= //
 
-#ifdef P_BUILD_LIB
-        #include "PhanesEnginePCH.h"
-#else
-        #include <string>
-#endif
 
 #include "Core/Math/Boilerplate.h"
+#include "Core/Math/MathPCH.h"
 
 #include "Core/Math/MathAbstractTypes.h"
 #include "Core/Math/Vector2.hpp"
