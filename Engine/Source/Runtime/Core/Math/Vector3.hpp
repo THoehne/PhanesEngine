@@ -707,7 +707,7 @@ namespace Phanes::Core::Math {
      */
 
     template<RealType T, bool S>
-    TVector3<T, S>& ClampToCubeV(TVector3<T, S> v1, T cubeRadius);
+    TVector3<T, S>& ClampToCubeV(TVector3<T, S>& v1, T cubeRadius);
 
     /**
      * Rotates vector around axis

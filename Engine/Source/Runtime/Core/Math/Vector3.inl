@@ -292,7 +292,7 @@ namespace Phanes::Core::Math
     }
 
     template<RealType T, bool S>
-    TVector3<T, S>& ClampToCubeV(TVector3<T, S> v1, T cubeRadius)
+    TVector3<T, S>& ClampToCubeV(TVector3<T, S>& v1, T cubeRadius)
     {
         Detail::compute_vec3_clamp<T, S>::map(v1, v1, cubeRadius);
         return v1;

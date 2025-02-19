@@ -740,7 +740,8 @@ namespace VectorTests
         EXPECT_TRUE(PMath::CompInverseV(v0) == PMath::Vector3(1.0f / 2.4f, 1.0f / 3.1f, 1.0f / 5.6f));
 
         v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
-        EXPECT_TRUE(PMath::ClampToCubeV(v0, 3.2f) == PMath::Vector3(2.4f, 3.1f, 3.2f));
+        PMath::Vector3 test = PMath::ClampToCubeV(v0, 3.2f);
+        EXPECT_TRUE(test == PMath::Vector3(2.4f, 3.1f, 3.2f));
 
         v0 = PMath::Vector3(2.4f, 3.1f, 5.6f);
         EXPECT_TRUE(PMath::RotateAroundAxisV(v0, PMath::Vector3(0.0f, 0.0f, 1.0f), (float)30.0_deg) == PMath::Vector3(3.628461f, 1.484679f, 5.600000f)) << PMath::ToString(PMath::RotateAroundAxisV(v0, PMath::Vector3(0.0f, 0.0f, 1.0f), (float)30.0_deg));
@@ -933,16 +934,16 @@ namespace MatrixTests
         PMath::Matrix2 m0 = PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f);
 
         m0 += 2.0f;
-        EXPECT_TRUE(m0 == PMath::Matrix2(3.0f, 7.0f, 5.0f, 4.0f));
+        EXPECT_TRUE(m0 == PMath::Matrix2(3.0f, 7.0f, 5.0f, 4.0f)) << PMath::ToString(m0);
 
         m0 -= 2.0f;
-        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f));
+        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f)) << PMath::ToString(m0);
 
         m0 *= 2.0f;
-        EXPECT_TRUE(m0 == PMath::Matrix2(2.0f, 10.0f, 6.0f, 4.0f));
+        EXPECT_TRUE(m0 == PMath::Matrix2(2.0f, 10.0f, 6.0f, 4.0f)) << PMath::ToString(m0);
 
         m0 /= 2.0f;
-        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f));
+        EXPECT_TRUE(m0 == PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f)) << PMath::ToString(m0);
 
 
         m0 = m0 + 2.0f;
@@ -998,7 +999,7 @@ namespace MatrixTests
 
         EXPECT_FLOAT_EQ(PMath::Determinant(m0), -13.0f);
 
-        EXPECT_TRUE(PMath::InverseV(m0) == PMath::Matrix2(-2.0f / 13.0f, 5.0f / 13.0f, 3.0f / 13.0f, -1.0f / 13.0f));
+        EXPECT_TRUE(PMath::InverseV(m0) == PMath::Matrix2(-2.0f / 13.0f, 5.0f / 13.0f, 3.0f / 13.0f, -1.0f / 13.0f)) << PMath::ToString(m0);
 
         m0 = PMath::Matrix2(1.0f, 5.0f, 3.0f, 2.0f);
         EXPECT_TRUE(PMath::TransposeV(m0) == PMath::Matrix2(1.0f, 3.0f, 5.0f, 2.0f));
@@ -1269,4 +1270,11 @@ namespace Plane
         PMath::Plane pl2 = PMath::Plane(-0.526316f, -0.442105f, -0.726316f, 6.0f);
 
     }
+}
+
+
+int main(int argc, char** argv)
+{
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
