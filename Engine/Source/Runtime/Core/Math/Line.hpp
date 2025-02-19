@@ -1,12 +1,10 @@
 #pragma once
 
 
-#include "Core/public/Math/Boilerplate.h"
-#include "Core/public/Math/MathFwd.h"
+#include "Core/Math/Boilerplate.h"
+#include "Core/Math/MathFwd.h"
 
-#include "Core/public/Math/Vector3.hpp"
-
-#include <any>
+#include "Core/Math/Vector3.hpp"
 
 
 namespace Phanes::Core::Math

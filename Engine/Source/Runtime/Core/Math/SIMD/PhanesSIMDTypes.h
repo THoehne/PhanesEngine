@@ -4,8 +4,8 @@
 // 
 // ARM is not supported.
 
-#include "Core/public/Math/SIMD/Platform.h"
-#include "Core/public/Math/MathTypes.h"
+#include "Core/Math/SIMD/Platform.h"
+#include "Core/Math/MathTypes.h"
 
 #if P_INTRINSICS == P_INTRINSICS_AVX2
 #   include <immintrin.h>

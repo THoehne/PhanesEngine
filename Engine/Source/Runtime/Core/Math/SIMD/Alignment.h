@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
 
 namespace Phanes::Core::Math::SIMD

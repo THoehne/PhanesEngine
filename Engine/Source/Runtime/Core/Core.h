@@ -38,6 +38,8 @@
 
 	#endif
 
+	#define FORCEINLINE __attribute__((always_inline))
+
 #elif defined(P_ARM_BUILD)
 	
 	#error Only Windows is supported at the moment.

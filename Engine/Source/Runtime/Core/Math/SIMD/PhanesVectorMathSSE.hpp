@@ -2,23 +2,23 @@
 
 #include <nmmintrin.h> 
 
-#include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
-#include "Core/public/Math/Boilerplate.h"
-#include "Core/public/Math/MathCommon.hpp"
+#include "Core/Math/SIMD/PhanesSIMDTypes.h"
+#include "Core/Math/Boilerplate.h"
+#include "Core/Math/MathCommon.hpp"
 
 
-#include "Core/public/Math/Vector2.hpp"
-#include "Core/public/Math/Vector3.hpp"
-#include "Core/public/Math/Vector4.hpp"
+#include "Core/Math/Vector2.hpp"
+#include "Core/Math/Vector3.hpp"
+#include "Core/Math/Vector4.hpp"
 
-#include "Core/public/Math/Plane.hpp"
+#include "Core/Math/Plane.hpp"
 
-#include "Core/public/Math/IntVector2.hpp"
-#include "Core/public/Math/IntVector3.hpp"
-#include "Core/public/Math/IntVector4.hpp"
+#include "Core/Math/IntVector2.hpp"
+#include "Core/Math/IntVector3.hpp"
+#include "Core/Math/IntVector4.hpp"
 
-#include "Core/public/Math/Matrix3.hpp"
-#include "Core/public/Math/Matrix4.hpp"
+#include "Core/Math/Matrix3.hpp"
+#include "Core/Math/Matrix4.hpp"
 
 
 

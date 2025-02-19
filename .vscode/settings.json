@@ -101,5 +101,5 @@
         "P_LINUX_BUILD",
         "__SSE__",
     ],
-    "cmake.sourceDirectory": "/home/morthaine/Development/PhanesEngine/DevPlayground",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
 }

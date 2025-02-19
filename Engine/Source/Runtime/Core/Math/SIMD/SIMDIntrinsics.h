@@ -1,15 +1,15 @@
 #pragma once
 
 
-#include "Core/public/Math/SIMD/Platform.h"
+#include "Core/Math/SIMD/Platform.h"
 
 #if P_INTRINSICS == P_INTRINSICS_AVX2
-#   include "PhanesVectorMathAVX2.hpp"
+#   include "Core/Math/SIMD/PhanesVectorMathAVX2.hpp"
 #elif P_INTRINSICS == P_INTRINSICS_AVX
-#   include "PhanesVectorMathAVX.hpp"
+#   include "Core/Math/SIMD/PhanesVectorMathAVX.hpp"
 #elif P_INTRINSICS == P_INTRINSICS_SSE
-#   include "PhanesVectorMathSSE.hpp"
+#   include "Core/Math/SIMD/PhanesVectorMathSSE.hpp"
 #elif P_INTRINSICS == P_INTRINSICS_NEON
-#   include "PhanesVectorMathNeon.hpp"
+#   include "Core/Math/SIMD/PhanesVectorMathNeon.hpp"
 #endif
 

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
-#include "Core/public/Math/MathCommon.hpp"
-#include "Core/public/Math/MathFwd.h"
+#include "Core/Math/MathCommon.hpp"
+#include "Core/Math/MathFwd.h"
 
-#include "Core/public/Math/SIMD/Storage.h"
+#include "Core/Math/SIMD/Storage.h"
 
-#include "Core/public/Math/IntVector2.hpp"
+#include "Core/Math/IntVector2.hpp"
 
 #ifndef P_DEBUG
 #pragma warning(disable : 4244)
@@ -640,4 +640,4 @@ namespace Phanes::Core::Math {
 #endif // !INTVECTOR3_H
 
 
-#include "Core/public/Math/IntVector4.inl"
+#include "Core/Math/IntVector4.inl"

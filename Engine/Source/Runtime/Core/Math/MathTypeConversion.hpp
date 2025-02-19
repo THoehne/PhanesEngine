@@ -12,18 +12,18 @@
         #include <string>
 #endif
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
-#include "Core/public/Math/MathAbstractTypes.h"
-#include "Core/public/Math/Vector2.hpp"
-#include "Core/public/Math/Vector3.hpp"
-#include "Core/public/Math/Vector4.hpp"
-#include "Core/public/Math/Matrix2.hpp"
-#include "Core/public/Math/Matrix3.hpp"
-#include "Core/public/Math/Matrix4.hpp"
-#include "Core/public/Math/IntVector2.hpp"
-#include "Core/public/Math/IntVector3.hpp"
-#include "Core/public/Math/IntVector4.hpp"
+#include "Core/Math/MathAbstractTypes.h"
+#include "Core/Math/Vector2.hpp"
+#include "Core/Math/Vector3.hpp"
+#include "Core/Math/Vector4.hpp"
+#include "Core/Math/Matrix2.hpp"
+#include "Core/Math/Matrix3.hpp"
+#include "Core/Math/Matrix4.hpp"
+#include "Core/Math/IntVector2.hpp"
+#include "Core/Math/IntVector3.hpp"
+#include "Core/Math/IntVector4.hpp"
 
 #ifndef MATH_TYPE_CONVERSION_H
 #define MATH_TYPE_CONVERSION_H

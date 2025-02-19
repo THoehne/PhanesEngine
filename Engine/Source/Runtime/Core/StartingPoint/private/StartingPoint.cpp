@@ -24,8 +24,6 @@ static void IdleMsg()
 }
 
 
-
-
 Phanes::Core::Application::PhanesProject::PhanesProject(std::string _ProjectName)
     : projectName(_ProjectName)
 {

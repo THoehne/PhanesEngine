@@ -4,12 +4,12 @@
 
 #pragma once
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
-#include "Core/public/Math/Detail/Vector2Decl.inl"
-#include "Core/public/Math/SIMD/SIMDIntrinsics.h"
+#include "Core/Math/Detail/Vector2Decl.inl"
+#include "Core/Math/SIMD/SIMDIntrinsics.h"
 
-#include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
+#include "Core/Math/SIMD/PhanesSIMDTypes.h"
 
 
 

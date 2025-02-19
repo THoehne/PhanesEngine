@@ -1,14 +1,14 @@
 #pragma once
 
 
-#include "Core/public/Math/Boilerplate.h"
-#include "Core/public/Math/MathCommon.hpp"
-#include "Core/public/Math/SIMD/Storage.h"
-#include "Core/public/Math/MathFwd.h"
+#include "Core/Math/Boilerplate.h"
+#include "Core/Math/MathCommon.hpp"
+#include "Core/Math/SIMD/Storage.h"
+#include "Core/Math/MathFwd.h"
 
 
-#include "Core/public/Math/Vector2.hpp"
-#include "Core/public/Math/Vector3.hpp"
+#include "Core/Math/Vector2.hpp"
+#include "Core/Math/Vector3.hpp"
 
 #define PZeroVector4(type, aligned)			Phanes::Core::Math::TVector4<##type, ##aligned>(0,0,0,0)
 
@@ -864,4 +864,4 @@ namespace Phanes::Core::Math
 }
 
 
-#include "Core/public/Math/Vector4.inl"
+#include "Core/Math/Vector4.inl"

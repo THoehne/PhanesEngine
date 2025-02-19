@@ -3,12 +3,12 @@
 
 // TODO: Transform
 
-#include "Core/public/Math/Boilerplate.h"
-#include "Core/public/Math/MathFwd.h"
+#include "Core/Math/Boilerplate.h"
+#include "Core/Math/MathFwd.h"
 
-#include "Core/public/Math/Line.hpp"
-#include "Core/public/Math/Ray.hpp"
-#include "Core/public/Math/Vector3.hpp"
+#include "Core/Math/Line.hpp"
+#include "Core/Math/Ray.hpp"
+#include "Core/Math/Vector3.hpp"
 
 namespace Phanes::Core::Math {
 
@@ -953,4 +953,4 @@ namespace Phanes::Core::Math {
 } // Phanes::Core::Math
 
 // Include operator impl.
-#include "Core/public/Math/Plane.inl"
+#include "Core/Math/Plane.inl"

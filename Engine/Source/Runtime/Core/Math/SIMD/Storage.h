@@ -1,9 +1,9 @@
 // Defines on compile time, whether a xmm register or an array should be used.
 #pragma once
 
-#include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
+#include "Core/Math/SIMD/PhanesSIMDTypes.h"
 
-#include "Core/public/Math/MathTypes.h"
+#include "Core/Math/MathTypes.h"
 
 namespace Phanes::Core::Math::SIMD
 {

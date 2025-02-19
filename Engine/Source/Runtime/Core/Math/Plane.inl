@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
-#include "Core/public/Math/Detail/PlaneDecl.inl"
-#include "Core/public/Math/SIMD/SIMDIntrinsics.h"
+#include "Core/Math/Detail/PlaneDecl.inl"
+#include "Core/Math/SIMD/SIMDIntrinsics.h"
 
-#include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
+#include "Core/Math/SIMD/PhanesSIMDTypes.h"
 
 
 

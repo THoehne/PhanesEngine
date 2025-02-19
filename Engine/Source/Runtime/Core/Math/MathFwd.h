@@ -9,8 +9,8 @@
 #ifndef MATH_FWD_H
 #define MATH_FWD_H
 
-#include "Core/public/Math/Boilerplate.h"
-#include "Core/public/Math/SIMD/PhanesSIMDTypes.h"
+#include "Core/Math/Boilerplate.h"
+#include "Core/Math/SIMD/PhanesSIMDTypes.h"
 
 /**
  * Includes forward declarations, as well as certain useful typedefs.

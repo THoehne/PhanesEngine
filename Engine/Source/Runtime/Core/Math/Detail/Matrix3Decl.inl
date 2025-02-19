@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/public/Math/Boilerplate.h"
-#include "Core/public/Math/MathCommon.hpp"
+#include "Core/Math/Boilerplate.h"
+#include "Core/Math/MathCommon.hpp"
 
 namespace Phanes::Core::Math::Detail
 {

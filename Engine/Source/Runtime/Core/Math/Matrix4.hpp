@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
-#include "Core/public/Math/MathAbstractTypes.h"
-#include "Core/public/Math/MathFwd.h"
-#include "Core/public/Math/Vector4.hpp"
+#include "Core/Math/MathAbstractTypes.h"
+#include "Core/Math/MathFwd.h"
+#include "Core/Math/Vector4.hpp"
 
 #ifndef MATRIX4_H
 #define MATRIX4_H
@@ -331,4 +331,4 @@ namespace Phanes::Core::Math {
 
 #endif // !MATRIX4_H
 
-#include "Core/public/Math/Matrix4.inl"
+#include "Core/Math/Matrix4.inl"

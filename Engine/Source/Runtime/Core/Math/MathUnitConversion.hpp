@@ -4,9 +4,9 @@
 //   Contains functions to convert units   //
 // ======================================= //
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
-#include "Core/public/Math/MathCommon.hpp"
+#include "Core/Math/MathCommon.hpp"
 
 namespace Phanes::Core::Math::UnitConversion 
 {
@@ -14,7 +14,7 @@ namespace Phanes::Core::Math::UnitConversion
     /**
       * Converts degrees to radians.
       *
-      * @param(deg) Angle in degress (°)
+      * @param(deg) Angle in degress (ï¿½)
       *
       * @return Angle in radians
       */
@@ -42,7 +42,7 @@ namespace Phanes::Core::Math::UnitConversion
     /**
       * Converts degrees to gradian.
       *
-      * @param(deg) Angle in degress (°)
+      * @param(deg) Angle in degress (ï¿½)
       *
       * @return Angle in gradian
       */

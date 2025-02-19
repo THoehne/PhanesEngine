@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
-#include "Core/public/Math/MathCommon.hpp"
-#include "Core/public/Math/MathAbstractTypes.h"
-#include "Core/public/Math/MathFwd.h"
+#include "Core/Math/MathCommon.hpp"
+#include "Core/Math/MathAbstractTypes.h"
+#include "Core/Math/MathFwd.h"
 
-#include "Core/public/Math/Vector2.hpp"
-#include "Core/public/Math/Vector3.hpp"
+#include "Core/Math/Vector2.hpp"
+#include "Core/Math/Vector3.hpp"
 
 #ifndef P_DEBUG
 #pragma warning(disable : 4244)

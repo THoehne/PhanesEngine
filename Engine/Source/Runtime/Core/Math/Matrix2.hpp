@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core/public/Math/Boilerplate.h"
+#include "Core/Math/Boilerplate.h"
 
-#include "Core/public/Math/MathFwd.h"
+#include "Core/Math/MathFwd.h"
 
-#include "Core/public/Math/Vector2.hpp"
+#include "Core/Math/Vector2.hpp"
 
 #ifndef MATRIX2_H
 #define MATRIX2_H
@@ -355,4 +355,4 @@ namespace Phanes::Core::Math {
 #endif // !MATRIX2_H
 
 
-#include "Core/public/Math/SIMD/SIMDIntrinsics.h"
+#include "Core/Math/SIMD/SIMDIntrinsics.h"
