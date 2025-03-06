@@ -1,3 +1,6 @@
+# vscode
+.premake/
+
 # Exclude folders
 bin/
 int/
