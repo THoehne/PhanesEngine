@@ -1,0 +1,109 @@
+[
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/PhanesCore",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/Logging/private/Logging.cpp",
+            "command": "cc -MD -MP -DP_LINUX_BUILD -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime -m64 -g -Wall -Wextra -Werror -Wno-unused-parameter -fms-extensions -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/Logging.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/Logging.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/Logging/private/Logging.cpp"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/PhanesCore",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/Logging/private/LoggingPCH.cpp",
+            "command": "cc -MD -MP -DP_LINUX_BUILD -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime -m64 -g -Wall -Wextra -Werror -Wno-unused-parameter -fms-extensions -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/LoggingPCH.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/LoggingPCH.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/Logging/private/LoggingPCH.cpp"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/PhanesCore",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/StartingPoint/private/EntryPoint.cpp",
+            "command": "cc -MD -MP -DP_LINUX_BUILD -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime -m64 -g -Wall -Wextra -Werror -Wno-unused-parameter -fms-extensions -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/EntryPoint.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/EntryPoint.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/StartingPoint/private/EntryPoint.cpp"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/PhanesCore",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/StartingPoint/private/StartingPoint.cpp",
+            "command": "cc -MD -MP -DP_LINUX_BUILD -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime -m64 -g -Wall -Wextra -Werror -Wno-unused-parameter -fms-extensions -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/StartingPoint.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/StartingPoint.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/StartingPoint/private/StartingPoint.cpp"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/PhanesCore",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/StartingPoint/private/StartingPointPCH.cpp",
+            "command": "cc -MD -MP -DP_LINUX_BUILD -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime -m64 -g -Wall -Wextra -Werror -Wno-unused-parameter -fms-extensions -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/StartingPointPCH.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/PhanesCore/StartingPointPCH.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/StartingPoint/private/StartingPointPCH.cpp"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/DevPlayground",
+            "file": "/home/morthaine/Development/PhanesEngine/DevPlayground/DevPlayground.cpp",
+            "command": "cc -MD -MP -DP_LINUX_BUILD -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime -m64 -g -Wall -Wextra -Werror -Wno-unused-parameter -fms-extensions -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/DevPlayground/DevPlayground.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/DevPlayground/DevPlayground.d -c /home/morthaine/Development/PhanesEngine/DevPlayground/DevPlayground.cpp"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-all.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-all.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-all.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-all.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-assertion-result.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-assertion-result.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-assertion-result.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-assertion-result.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-death-test.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-death-test.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-death-test.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-death-test.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-filepath.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-filepath.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-filepath.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-filepath.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-matchers.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-matchers.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-matchers.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-matchers.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-port.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-port.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-port.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-port.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-printers.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-printers.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-printers.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-printers.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-test-part.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-test-part.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-test-part.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-test-part.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-typed-test.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-typed-test.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest-typed-test.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest-typed-test.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/gtest",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest_main.cc",
+            "command": "cc -MD -MP -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include/gtest -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest -m64 -g -Wall -Wextra -Werror -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest_main.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/gtest/gtest_main.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/src/gtest_main.cc"
+          }
+,
+          {
+            "directory": "/home/morthaine/Development/PhanesEngine/build/MathTestFPU",
+            "file": "/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/Tests/Math/MathTestFPU/test.cpp",
+            "command": "cc -MD -MP -DP_LINUX_BUILD -DDEBUG -DTRACE -DP_DEBUG -I/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/Tests/Math/MathTestFPU -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty/googletest/googletest/include -I/home/morthaine/Development/PhanesEngine/Engine/Source/ThirdParty -I/home/morthaine/Development/PhanesEngine/Engine/Source/Runtime -m64 -g -Wall -Wextra -Werror -Wno-unused-parameter -fms-extensions -Wno-unused-variable -w -fpermissive -o /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/MathTestFPU/test.o -MF /home/morthaine/Development/PhanesEngine/.int/1.0.0/Debug/MathTestFPU/test.d -c /home/morthaine/Development/PhanesEngine/Engine/Source/Runtime/Core/Tests/Math/MathTestFPU/test.cpp"
+          }
+]
