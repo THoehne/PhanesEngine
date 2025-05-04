@@ -83,7 +83,7 @@ namespace Phanes::Core::Math {
 		/// Construct matrix from field of values.
 		/// </summary>
 		/// <param name="field"></param>
-		TMatrix4(T field[4][4])
+		explicit TMatrix4(T field[4][4])
 		{
 			this->c0 = TVector4(field[0]);
 			this->c1 = TVector4(field[1]);
