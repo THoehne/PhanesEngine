@@ -68,11 +68,11 @@ namespace Phanes::Core::Math
          * Construct Matrix from parameters.
          *
          * @param(n00) M[0][0]
-         * @param(n10) M[1][0]
-         * @param(n01) M[0][1]
+         * @param(n01) M[1][0]
+         * @param(n10) M[0][1]
          * @param(n11) M[1][1]
          * 
-         * @note nXY = n[Row][Col]
+         * @note nXY = n[Col][Row]
          */
 
 		TMatrix2(T n00, T n01, T n10, T n11)
