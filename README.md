@@ -28,7 +28,7 @@ build the test applications (currently only MathTestFPU) as well as gtet.
 
     make MathTestFPU
 
-They depend on the gtest library so the should not be required to build it manually. If for some reason this doesn't
+They depend on the gtest library so it should not be required to build it manually. If for some reason this doesn't
 work gtest can be build via:
 
     make gtest
