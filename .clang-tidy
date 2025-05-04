@@ -21,7 +21,9 @@ clang-analyzer-*,
 -modernize-avoid-c-arrays,
 -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
 -readability-named-parameter,
--cert-env33-c
+-cert-env33-c,
+-readability-identifier-length,
+-cppcoreguidelines-pro-type-union-access
 '
 
 

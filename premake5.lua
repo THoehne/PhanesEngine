@@ -63,17 +63,19 @@ function boilerplate()
 		buildoptions({ "-Wno-unused-parameter", "-fms-extensions" })
 	end
 
+	buildoptions({"-fno-fast-math"})
+
 	filter("configurations:Debug")
-	defines({ "DEBUG", "TRACE", "P_DEBUG" })
-	symbols("On")
-	buildmessage("Building %{prj.name} in debug mode")
+		defines({ "DEBUG", "TRACE", "P_DEBUG" })
+		symbols("On")
+		buildmessage("Building %{prj.name} in debug mode")
 
 	filter("configurations:Release")
-	defines({ "NDEBUG", "P_RELEASE" })
-	linktimeoptimization("On")
-	optimize("On")
-	intrinsics("On")
-	buildmessage("Building %{prj.name} in release mode")
+		defines({ "NDEBUG", "P_RELEASE" })
+		linktimeoptimization("On")
+		optimize("On")
+		intrinsics("On")
+		buildmessage("Building %{prj.name} in release mode")
 
 	filter({})
 end
